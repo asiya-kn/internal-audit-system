@@ -27,6 +27,14 @@ model User {
 
   userRoles UserRole[]
 
+  ownedAuditEntities   AuditUniverse[] @relation("AuditUniverseOwner")
+  createdAuditEntities AuditUniverse[] @relation("AuditUniverseCreator")
+  updatedAuditEntities AuditUniverse[] @relation("AuditUniverseUpdater")
+
+  ownedAuditEntities       AuditUniverse[] @relation("AuditUniverseOwner")
+  createdAuditEntities     AuditUniverse[] @relation("AuditUniverseCreator")
+  updatedAuditEntities     AuditUniverse[] @relation("AuditUniverseUpdater")
+
   @@index([email])
   @@index([isActive])
 }
@@ -92,8 +100,116 @@ model AuditLog {
   metadata  Json?
   success   Boolean  @default(true)
   createdAt DateTime @default(now())
+}
+
+// ---- Audit Universe ----
+
+enum AuditEntityType {
+  ORGANIZATION
+  DIVISION
+  DEPARTMENT
+  PROCESS
+  SUB_PROCESS
+  SYSTEM
+  PROJECT
+  THIRD_PARTY
+  LOCATION
+}
+
+enum AuditEntityStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+model AuditUniverse {
+  id              String   @id @default(uuid()) @db.Uuid
+  code            String   @unique
+  name            String
+  description     String?
+  entityType      AuditEntityType
+  status          AuditEntityStatus @default(ACTIVE)
+  parentId        String?  @db.Uuid
+  businessProcess String?
+  department      String?
+  riskRating      String?
+  notes           String?
+
+  ownerId         String?  @db.Uuid
+  createdById     String?  @db.Uuid
+  updatedById     String?  @db.Uuid
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  parent          AuditUniverse?  @relation("AuditUniverseHierarchy", fields: [parentId], references: [id], onDelete: Restrict)
+  children        AuditUniverse[] @relation("AuditUniverseHierarchy")
+
+  owner           User?   @relation("AuditUniverseOwner", fields: [ownerId], references: [id], onDelete: SetNull)
+  createdBy       User?   @relation("AuditUniverseCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy       User?   @relation("AuditUniverseUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
+
+  @@index([parentId])
+  @@index([entityType])
+  @@index([status])
+  @@index([name])
+  @@index([ownerId])
 
   @@index([userId])
   @@index([category])
   @@index([createdAt])
+}
+
+// ---- Audit Universe ----
+
+enum AuditEntityType {
+  ORGANIZATION
+  DIVISION
+  DEPARTMENT
+  PROCESS
+  SUB_PROCESS
+  SYSTEM
+  PROJECT
+  THIRD_PARTY
+  LOCATION
+}
+
+enum AuditEntityStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+model AuditUniverse {
+  id              String   @id @default(uuid()) @db.Uuid
+  code            String   @unique
+  name            String
+  description     String?
+  entityType      AuditEntityType
+  status          AuditEntityStatus @default(ACTIVE)
+  parentId        String?  @db.Uuid
+  businessProcess String?
+  department      String?
+  riskRating      String?
+  notes           String?
+
+  ownerId         String?  @db.Uuid
+  createdById     String?  @db.Uuid
+  updatedById     String?  @db.Uuid
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  parent          AuditUniverse?  @relation("AuditUniverseHierarchy", fields: [parentId], references: [id], onDelete: Restrict)
+  children        AuditUniverse[] @relation("AuditUniverseHierarchy")
+
+  owner           User?   @relation("AuditUniverseOwner", fields: [ownerId], references: [id], onDelete: SetNull)
+  createdBy       User?   @relation("AuditUniverseCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy       User?   @relation("AuditUniverseUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
+
+  @@index([parentId])
+  @@index([entityType])
+  @@index([status])
+  @@index([name])
+  @@index([ownerId])
 }

@@ -142,3 +142,113 @@ export interface DashboardMetricsResponse {
     statuses: string[];
   };
 }
+
+// ---- Audit Universe ----
+
+export type AuditEntityType =
+  | 'ORGANIZATION'
+  | 'DIVISION'
+  | 'DEPARTMENT'
+  | 'PROCESS'
+  | 'SUB_PROCESS'
+  | 'SYSTEM'
+  | 'PROJECT'
+  | 'THIRD_PARTY'
+  | 'LOCATION';
+
+export type AuditEntityStatus = 'ACTIVE' | 'INACTIVE' | 'ARCHIVED';
+
+export const AUDIT_ENTITY_TYPES: AuditEntityType[] = [
+  'ORGANIZATION',
+  'DIVISION',
+  'DEPARTMENT',
+  'PROCESS',
+  'SUB_PROCESS',
+  'SYSTEM',
+  'PROJECT',
+  'THIRD_PARTY',
+  'LOCATION',
+];
+
+export const AUDIT_ENTITY_STATUSES: AuditEntityStatus[] = [
+  'ACTIVE',
+  'INACTIVE',
+  'ARCHIVED',
+];
+
+export interface AuditUniverseSummaryDto {
+  id: string;
+  code: string;
+  name: string;
+  entityType: AuditEntityType;
+  status: AuditEntityStatus;
+  department: string | null;
+  parentId: string | null;
+  parentName: string | null;
+  ownerId: string | null;
+  ownerName: string | null;
+  childCount: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface AuditUniverseDetailDto extends AuditUniverseSummaryDto {
+  description: string | null;
+  businessProcess: string | null;
+  riskRating: string | null;
+  notes: string | null;
+  children: AuditUniverseSummaryDto[];
+}
+
+export interface CreateAuditUniverseRequest {
+  code: string;
+  name: string;
+  description?: string;
+  entityType: AuditEntityType;
+  status?: AuditEntityStatus;
+  parentId?: string | null;
+  businessProcess?: string;
+  department?: string;
+  riskRating?: string;
+  notes?: string;
+  ownerId?: string | null;
+}
+
+export interface UpdateAuditUniverseRequest {
+  code?: string;
+  name?: string;
+  description?: string | null;
+  entityType?: AuditEntityType;
+  status?: AuditEntityStatus;
+  parentId?: string | null;
+  businessProcess?: string | null;
+  department?: string | null;
+  riskRating?: string | null;
+  notes?: string | null;
+  ownerId?: string | null;
+}
+
+export interface AuditUniverseFilters {
+  search?: string;
+  entityType?: AuditEntityType;
+  status?: AuditEntityStatus;
+  parentId?: string;
+  ownerId?: string;
+  department?: string;
+  page?: number;
+  pageSize?: number;
+  sortBy?: string;
+  sortOrder?: 'asc' | 'desc';
+  includeArchived?: boolean;
+}
+
+export interface AuditUniverseListResponse {
+  items: AuditUniverseSummaryDto[];
+  total: number;
+  page: number;
+  pageSize: number;
+}
+
+export type CreateAuditUniverseInput = CreateAuditUniverseRequest;
+export type UpdateAuditUniverseInput = UpdateAuditUniverseRequest;
+export type ListAuditUniverseInput = AuditUniverseFilters;

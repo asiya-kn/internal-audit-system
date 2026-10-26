@@ -174,6 +174,25 @@ exports.Prisma.AuditLogScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.AuditUniverseScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  description: 'description',
+  entityType: 'entityType',
+  status: 'status',
+  parentId: 'parentId',
+  businessProcess: 'businessProcess',
+  department: 'department',
+  riskRating: 'riskRating',
+  notes: 'notes',
+  ownerId: 'ownerId',
+  createdById: 'createdById',
+  updatedById: 'updatedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -199,7 +218,23 @@ exports.Prisma.JsonNullValueFilter = {
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
 };
+exports.AuditEntityType = exports.$Enums.AuditEntityType = {
+  ORGANIZATION: 'ORGANIZATION',
+  DIVISION: 'DIVISION',
+  DEPARTMENT: 'DEPARTMENT',
+  PROCESS: 'PROCESS',
+  SUB_PROCESS: 'SUB_PROCESS',
+  SYSTEM: 'SYSTEM',
+  PROJECT: 'PROJECT',
+  THIRD_PARTY: 'THIRD_PARTY',
+  LOCATION: 'LOCATION'
+};
 
+exports.AuditEntityStatus = exports.$Enums.AuditEntityStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  ARCHIVED: 'ARCHIVED'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',
@@ -207,7 +242,8 @@ exports.Prisma.ModelName = {
   Permission: 'Permission',
   UserRole: 'UserRole',
   RolePermission: 'RolePermission',
-  AuditLog: 'AuditLog'
+  AuditLog: 'AuditLog',
+  AuditUniverse: 'AuditUniverse'
 };
 
 /**
