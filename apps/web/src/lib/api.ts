@@ -11,6 +11,15 @@ import type {
   UpdateAuditUniverseRequest,
   AuditUniverseFilters,
   AuditEntityStatus,
+  RiskListResponse,
+  RiskDetailDto,
+  RiskDashboardDto,
+  RiskActionDto,
+  RiskFilters,
+  CreateRiskRequest,
+  UpdateRiskRequest,
+  CreateRiskActionRequest,
+  UpdateRiskActionRequest,
 } from '@iams/shared';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? '/api';
@@ -101,4 +110,37 @@ export const api = {
     }),
   deleteAuditUniverse: (id: string) =>
     request<{ message: string }>(`/audit-universe/${id}`, { method: 'DELETE' }),
+
+  // ---- Risk Assessment ----
+
+  listRisks: (filters: RiskFilters = {}) => {
+    const params = new URLSearchParams();
+    if (filters.search) params.set('search', filters.search);
+    if (filters.auditEntityId) params.set('auditEntityId', filters.auditEntityId);
+    if (filters.status) params.set('status', filters.status);
+    if (filters.inherentLevel) params.set('inherentLevel', filters.inherentLevel);
+    if (filters.residualLevel) params.set('residualLevel', filters.residualLevel);
+    if (filters.ownerId) params.set('ownerId', filters.ownerId);
+    if (filters.riskCategory) params.set('riskCategory', filters.riskCategory);
+    if (filters.page) params.set('page', String(filters.page));
+    if (filters.pageSize) params.set('pageSize', String(filters.pageSize));
+    if (filters.sortBy) params.set('sortBy', filters.sortBy);
+    if (filters.sortOrder) params.set('sortOrder', filters.sortOrder);
+    const qs = params.toString();
+    return request<RiskListResponse>(`/risks${qs ? `?${qs}` : ''}`);
+  },
+  getRisk: (id: string) => request<RiskDetailDto>(`/risks/${id}`),
+  getRiskDashboard: () => request<RiskDashboardDto>('/risks/dashboard'),
+  createRisk: (data: CreateRiskRequest) =>
+    request<RiskDetailDto>('/risks', { method: 'POST', body: JSON.stringify(data) }),
+  updateRisk: (id: string, data: UpdateRiskRequest) =>
+    request<RiskDetailDto>(`/risks/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  deleteRisk: (id: string) =>
+    request<{ message: string }>(`/risks/${id}`, { method: 'DELETE' }),
+  createRiskAction: (riskId: string, data: CreateRiskActionRequest) =>
+    request<RiskActionDto>(`/risks/${riskId}/actions`, { method: 'POST', body: JSON.stringify(data) }),
+  updateRiskAction: (riskId: string, actionId: string, data: UpdateRiskActionRequest) =>
+    request<RiskActionDto>(`/risks/${riskId}/actions/${actionId}`, { method: 'PUT', body: JSON.stringify(data) }),
+  deleteRiskAction: (riskId: string, actionId: string) =>
+    request<{ message: string }>(`/risks/${riskId}/actions/${actionId}`, { method: 'DELETE' }),
 };

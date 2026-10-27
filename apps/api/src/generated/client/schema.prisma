@@ -31,9 +31,10 @@ model User {
   createdAuditEntities AuditUniverse[] @relation("AuditUniverseCreator")
   updatedAuditEntities AuditUniverse[] @relation("AuditUniverseUpdater")
 
-  ownedAuditEntities   AuditUniverse[] @relation("AuditUniverseOwner")
-  createdAuditEntities AuditUniverse[] @relation("AuditUniverseCreator")
-  updatedAuditEntities AuditUniverse[] @relation("AuditUniverseUpdater")
+  ownedRisks      Risk[]       @relation("RiskOwner")
+  createdRisks    Risk[]       @relation("RiskCreator")
+  updatedRisks    Risk[]       @relation("RiskUpdater")
+  assignedActions RiskAction[] @relation("RiskActionAssignee")
 
   @@index([email])
   @@index([isActive])
@@ -101,60 +102,6 @@ model AuditLog {
   success   Boolean  @default(true)
   createdAt DateTime @default(now())
 
-
-// ---- Audit Universe ----
-
-enum AuditEntityType {
-  ORGANIZATION
-  DIVISION
-  DEPARTMENT
-  PROCESS
-  SUB_PROCESS
-  SYSTEM
-  PROJECT
-  THIRD_PARTY
-  LOCATION
-}
-
-enum AuditEntityStatus {
-  ACTIVE
-  INACTIVE
-  ARCHIVED
-}
-
-model AuditUniverse {
-  id              String            @id @default(uuid()) @db.Uuid
-  code            String            @unique
-  name            String
-  description     String?
-  entityType      AuditEntityType
-  status          AuditEntityStatus @default(ACTIVE)
-  parentId        String?           @db.Uuid
-  businessProcess String?
-  department      String?
-  riskRating      String?
-  notes           String?
-
-  ownerId     String? @db.Uuid
-  createdById String? @db.Uuid
-  updatedById String? @db.Uuid
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  parent   AuditUniverse?  @relation("AuditUniverseHierarchy", fields: [parentId], references: [id], onDelete: Restrict)
-  children AuditUniverse[] @relation("AuditUniverseHierarchy")
-
-  owner     User? @relation("AuditUniverseOwner", fields: [ownerId], references: [id], onDelete: SetNull)
-  createdBy User? @relation("AuditUniverseCreator", fields: [createdById], references: [id], onDelete: SetNull)
-  updatedBy User? @relation("AuditUniverseUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
-
-  @@index([parentId])
-  @@index([entityType])
-  @@index([status])
-  @@index([name])
-  @@index([ownerId])
-}
   @@index([userId])
   @@index([category])
   @@index([createdAt])
@@ -207,9 +154,103 @@ model AuditUniverse {
   createdBy User? @relation("AuditUniverseCreator", fields: [createdById], references: [id], onDelete: SetNull)
   updatedBy User? @relation("AuditUniverseUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
 
+  risks Risk[]
+
   @@index([parentId])
   @@index([entityType])
   @@index([status])
   @@index([name])
   @@index([ownerId])
+}
+
+// ---- Risk Assessment ----
+
+enum RiskLevel {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum RiskStatus {
+  OPEN
+  MITIGATING
+  MONITORING
+  CLOSED
+}
+
+enum ActionStatus {
+  OPEN
+  IN_PROGRESS
+  COMPLETED
+  OVERDUE
+  CANCELLED
+}
+
+model Risk {
+  id            String  @id @default(uuid()) @db.Uuid
+  title         String
+  description   String?
+  auditEntityId String  @db.Uuid
+
+  // Inherent risk assessment
+  inherentLikelihood Int       @default(1) // 1-5 scale
+  inherentImpact     Int       @default(1) // 1-5 scale
+  inherentScore      Int       @default(1) // likelihood * impact
+  inherentLevel      RiskLevel @default(LOW)
+
+  // Existing controls assessment
+  existingControls     String?
+  controlEffectiveness Int     @default(0) // 0-100 percentage
+
+  // Residual risk (calculated)
+  residualScore Int       @default(1)
+  residualLevel RiskLevel @default(LOW)
+
+  status       RiskStatus @default(OPEN)
+  riskCategory String?
+  notes        String?
+
+  ownerId     String? @db.Uuid
+  createdById String? @db.Uuid
+  updatedById String? @db.Uuid
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  auditEntity AuditUniverse @relation(fields: [auditEntityId], references: [id], onDelete: Cascade)
+  owner       User?         @relation("RiskOwner", fields: [ownerId], references: [id], onDelete: SetNull)
+  createdBy   User?         @relation("RiskCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy   User?         @relation("RiskUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
+
+  actions RiskAction[]
+
+  @@index([auditEntityId])
+  @@index([status])
+  @@index([inherentLevel])
+  @@index([residualLevel])
+  @@index([ownerId])
+  @@index([title])
+}
+
+model RiskAction {
+  id          String       @id @default(uuid()) @db.Uuid
+  riskId      String       @db.Uuid
+  title       String
+  description String?
+  assigneeId  String?      @db.Uuid
+  dueDate     DateTime?
+  completedAt DateTime?
+  status      ActionStatus @default(OPEN)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  risk     Risk  @relation(fields: [riskId], references: [id], onDelete: Cascade)
+  assignee User? @relation("RiskActionAssignee", fields: [assigneeId], references: [id], onDelete: SetNull)
+
+  @@index([riskId])
+  @@index([status])
+  @@index([dueDate])
+  @@index([assigneeId])
 }

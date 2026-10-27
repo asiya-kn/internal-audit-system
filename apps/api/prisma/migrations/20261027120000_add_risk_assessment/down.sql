@@ -1,0 +1,11 @@
+ALTER TABLE "Risk" DROP CONSTRAINT IF EXISTS "Risk_auditEntityId_fkey";
+ALTER TABLE "Risk" DROP CONSTRAINT IF EXISTS "Risk_ownerId_fkey";
+ALTER TABLE "Risk" DROP CONSTRAINT IF EXISTS "Risk_createdById_fkey";
+ALTER TABLE "Risk" DROP CONSTRAINT IF EXISTS "Risk_updatedById_fkey";
+ALTER TABLE "RiskAction" DROP CONSTRAINT IF EXISTS "RiskAction_riskId_fkey";
+ALTER TABLE "RiskAction" DROP CONSTRAINT IF EXISTS "RiskAction_assigneeId_fkey";
+DROP TABLE IF EXISTS "RiskAction";
+DROP TABLE IF EXISTS "Risk";
+DROP TYPE IF EXISTS "ActionStatus";
+DROP TYPE IF EXISTS "RiskStatus";
+DROP TYPE IF EXISTS "RiskLevel";

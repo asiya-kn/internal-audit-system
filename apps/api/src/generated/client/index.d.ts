@@ -48,6 +48,16 @@ export type AuditLog = $Result.DefaultSelection<Prisma.$AuditLogPayload>
  * 
  */
 export type AuditUniverse = $Result.DefaultSelection<Prisma.$AuditUniversePayload>
+/**
+ * Model Risk
+ * 
+ */
+export type Risk = $Result.DefaultSelection<Prisma.$RiskPayload>
+/**
+ * Model RiskAction
+ * 
+ */
+export type RiskAction = $Result.DefaultSelection<Prisma.$RiskActionPayload>
 
 /**
  * Enums
@@ -76,6 +86,37 @@ export const AuditEntityStatus: {
 
 export type AuditEntityStatus = (typeof AuditEntityStatus)[keyof typeof AuditEntityStatus]
 
+
+export const RiskLevel: {
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH',
+  CRITICAL: 'CRITICAL'
+};
+
+export type RiskLevel = (typeof RiskLevel)[keyof typeof RiskLevel]
+
+
+export const RiskStatus: {
+  OPEN: 'OPEN',
+  MITIGATING: 'MITIGATING',
+  MONITORING: 'MONITORING',
+  CLOSED: 'CLOSED'
+};
+
+export type RiskStatus = (typeof RiskStatus)[keyof typeof RiskStatus]
+
+
+export const ActionStatus: {
+  OPEN: 'OPEN',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  OVERDUE: 'OVERDUE',
+  CANCELLED: 'CANCELLED'
+};
+
+export type ActionStatus = (typeof ActionStatus)[keyof typeof ActionStatus]
+
 }
 
 export type AuditEntityType = $Enums.AuditEntityType
@@ -85,6 +126,18 @@ export const AuditEntityType: typeof $Enums.AuditEntityType
 export type AuditEntityStatus = $Enums.AuditEntityStatus
 
 export const AuditEntityStatus: typeof $Enums.AuditEntityStatus
+
+export type RiskLevel = $Enums.RiskLevel
+
+export const RiskLevel: typeof $Enums.RiskLevel
+
+export type RiskStatus = $Enums.RiskStatus
+
+export const RiskStatus: typeof $Enums.RiskStatus
+
+export type ActionStatus = $Enums.ActionStatus
+
+export const ActionStatus: typeof $Enums.ActionStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -278,6 +331,26 @@ export class PrismaClient<
     * ```
     */
   get auditUniverse(): Prisma.AuditUniverseDelegate<ExtArgs>;
+
+  /**
+   * `prisma.risk`: Exposes CRUD operations for the **Risk** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Risks
+    * const risks = await prisma.risk.findMany()
+    * ```
+    */
+  get risk(): Prisma.RiskDelegate<ExtArgs>;
+
+  /**
+   * `prisma.riskAction`: Exposes CRUD operations for the **RiskAction** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RiskActions
+    * const riskActions = await prisma.riskAction.findMany()
+    * ```
+    */
+  get riskAction(): Prisma.RiskActionDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -725,7 +798,9 @@ export namespace Prisma {
     UserRole: 'UserRole',
     RolePermission: 'RolePermission',
     AuditLog: 'AuditLog',
-    AuditUniverse: 'AuditUniverse'
+    AuditUniverse: 'AuditUniverse',
+    Risk: 'Risk',
+    RiskAction: 'RiskAction'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -741,7 +816,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "role" | "permission" | "userRole" | "rolePermission" | "auditLog" | "auditUniverse"
+      modelProps: "user" | "role" | "permission" | "userRole" | "rolePermission" | "auditLog" | "auditUniverse" | "risk" | "riskAction"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1235,6 +1310,146 @@ export namespace Prisma {
           }
         }
       }
+      Risk: {
+        payload: Prisma.$RiskPayload<ExtArgs>
+        fields: Prisma.RiskFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RiskFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RiskPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RiskFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RiskPayload>
+          }
+          findFirst: {
+            args: Prisma.RiskFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RiskPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RiskFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RiskPayload>
+          }
+          findMany: {
+            args: Prisma.RiskFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RiskPayload>[]
+          }
+          create: {
+            args: Prisma.RiskCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RiskPayload>
+          }
+          createMany: {
+            args: Prisma.RiskCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RiskCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RiskPayload>[]
+          }
+          delete: {
+            args: Prisma.RiskDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RiskPayload>
+          }
+          update: {
+            args: Prisma.RiskUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RiskPayload>
+          }
+          deleteMany: {
+            args: Prisma.RiskDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RiskUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.RiskUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RiskPayload>
+          }
+          aggregate: {
+            args: Prisma.RiskAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRisk>
+          }
+          groupBy: {
+            args: Prisma.RiskGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RiskGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RiskCountArgs<ExtArgs>
+            result: $Utils.Optional<RiskCountAggregateOutputType> | number
+          }
+        }
+      }
+      RiskAction: {
+        payload: Prisma.$RiskActionPayload<ExtArgs>
+        fields: Prisma.RiskActionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RiskActionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RiskActionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RiskActionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RiskActionPayload>
+          }
+          findFirst: {
+            args: Prisma.RiskActionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RiskActionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RiskActionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RiskActionPayload>
+          }
+          findMany: {
+            args: Prisma.RiskActionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RiskActionPayload>[]
+          }
+          create: {
+            args: Prisma.RiskActionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RiskActionPayload>
+          }
+          createMany: {
+            args: Prisma.RiskActionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RiskActionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RiskActionPayload>[]
+          }
+          delete: {
+            args: Prisma.RiskActionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RiskActionPayload>
+          }
+          update: {
+            args: Prisma.RiskActionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RiskActionPayload>
+          }
+          deleteMany: {
+            args: Prisma.RiskActionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RiskActionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.RiskActionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RiskActionPayload>
+          }
+          aggregate: {
+            args: Prisma.RiskActionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRiskAction>
+          }
+          groupBy: {
+            args: Prisma.RiskActionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RiskActionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RiskActionCountArgs<ExtArgs>
+            result: $Utils.Optional<RiskActionCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1400,6 +1615,10 @@ export namespace Prisma {
     ownedAuditEntities: number
     createdAuditEntities: number
     updatedAuditEntities: number
+    ownedRisks: number
+    createdRisks: number
+    updatedRisks: number
+    assignedActions: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1407,6 +1626,10 @@ export namespace Prisma {
     ownedAuditEntities?: boolean | UserCountOutputTypeCountOwnedAuditEntitiesArgs
     createdAuditEntities?: boolean | UserCountOutputTypeCountCreatedAuditEntitiesArgs
     updatedAuditEntities?: boolean | UserCountOutputTypeCountUpdatedAuditEntitiesArgs
+    ownedRisks?: boolean | UserCountOutputTypeCountOwnedRisksArgs
+    createdRisks?: boolean | UserCountOutputTypeCountCreatedRisksArgs
+    updatedRisks?: boolean | UserCountOutputTypeCountUpdatedRisksArgs
+    assignedActions?: boolean | UserCountOutputTypeCountAssignedActionsArgs
   }
 
   // Custom InputTypes
@@ -1446,6 +1669,34 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountUpdatedAuditEntitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AuditUniverseWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountOwnedRisksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RiskWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCreatedRisksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RiskWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountUpdatedRisksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RiskWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountAssignedActionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RiskActionWhereInput
   }
 
 
@@ -1526,10 +1777,12 @@ export namespace Prisma {
 
   export type AuditUniverseCountOutputType = {
     children: number
+    risks: number
   }
 
   export type AuditUniverseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     children?: boolean | AuditUniverseCountOutputTypeCountChildrenArgs
+    risks?: boolean | AuditUniverseCountOutputTypeCountRisksArgs
   }
 
   // Custom InputTypes
@@ -1548,6 +1801,44 @@ export namespace Prisma {
    */
   export type AuditUniverseCountOutputTypeCountChildrenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AuditUniverseWhereInput
+  }
+
+  /**
+   * AuditUniverseCountOutputType without action
+   */
+  export type AuditUniverseCountOutputTypeCountRisksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RiskWhereInput
+  }
+
+
+  /**
+   * Count Type RiskCountOutputType
+   */
+
+  export type RiskCountOutputType = {
+    actions: number
+  }
+
+  export type RiskCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    actions?: boolean | RiskCountOutputTypeCountActionsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * RiskCountOutputType without action
+   */
+  export type RiskCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RiskCountOutputType
+     */
+    select?: RiskCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * RiskCountOutputType without action
+   */
+  export type RiskCountOutputTypeCountActionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RiskActionWhereInput
   }
 
 
@@ -1755,6 +2046,10 @@ export namespace Prisma {
     ownedAuditEntities?: boolean | User$ownedAuditEntitiesArgs<ExtArgs>
     createdAuditEntities?: boolean | User$createdAuditEntitiesArgs<ExtArgs>
     updatedAuditEntities?: boolean | User$updatedAuditEntitiesArgs<ExtArgs>
+    ownedRisks?: boolean | User$ownedRisksArgs<ExtArgs>
+    createdRisks?: boolean | User$createdRisksArgs<ExtArgs>
+    updatedRisks?: boolean | User$updatedRisksArgs<ExtArgs>
+    assignedActions?: boolean | User$assignedActionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1787,6 +2082,10 @@ export namespace Prisma {
     ownedAuditEntities?: boolean | User$ownedAuditEntitiesArgs<ExtArgs>
     createdAuditEntities?: boolean | User$createdAuditEntitiesArgs<ExtArgs>
     updatedAuditEntities?: boolean | User$updatedAuditEntitiesArgs<ExtArgs>
+    ownedRisks?: boolean | User$ownedRisksArgs<ExtArgs>
+    createdRisks?: boolean | User$createdRisksArgs<ExtArgs>
+    updatedRisks?: boolean | User$updatedRisksArgs<ExtArgs>
+    assignedActions?: boolean | User$assignedActionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1798,6 +2097,10 @@ export namespace Prisma {
       ownedAuditEntities: Prisma.$AuditUniversePayload<ExtArgs>[]
       createdAuditEntities: Prisma.$AuditUniversePayload<ExtArgs>[]
       updatedAuditEntities: Prisma.$AuditUniversePayload<ExtArgs>[]
+      ownedRisks: Prisma.$RiskPayload<ExtArgs>[]
+      createdRisks: Prisma.$RiskPayload<ExtArgs>[]
+      updatedRisks: Prisma.$RiskPayload<ExtArgs>[]
+      assignedActions: Prisma.$RiskActionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2177,6 +2480,10 @@ export namespace Prisma {
     ownedAuditEntities<T extends User$ownedAuditEntitiesArgs<ExtArgs> = {}>(args?: Subset<T, User$ownedAuditEntitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditUniversePayload<ExtArgs>, T, "findMany"> | Null>
     createdAuditEntities<T extends User$createdAuditEntitiesArgs<ExtArgs> = {}>(args?: Subset<T, User$createdAuditEntitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditUniversePayload<ExtArgs>, T, "findMany"> | Null>
     updatedAuditEntities<T extends User$updatedAuditEntitiesArgs<ExtArgs> = {}>(args?: Subset<T, User$updatedAuditEntitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditUniversePayload<ExtArgs>, T, "findMany"> | Null>
+    ownedRisks<T extends User$ownedRisksArgs<ExtArgs> = {}>(args?: Subset<T, User$ownedRisksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "findMany"> | Null>
+    createdRisks<T extends User$createdRisksArgs<ExtArgs> = {}>(args?: Subset<T, User$createdRisksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "findMany"> | Null>
+    updatedRisks<T extends User$updatedRisksArgs<ExtArgs> = {}>(args?: Subset<T, User$updatedRisksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "findMany"> | Null>
+    assignedActions<T extends User$assignedActionsArgs<ExtArgs> = {}>(args?: Subset<T, User$assignedActionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RiskActionPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2606,6 +2913,86 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AuditUniverseScalarFieldEnum | AuditUniverseScalarFieldEnum[]
+  }
+
+  /**
+   * User.ownedRisks
+   */
+  export type User$ownedRisksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Risk
+     */
+    select?: RiskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskInclude<ExtArgs> | null
+    where?: RiskWhereInput
+    orderBy?: RiskOrderByWithRelationInput | RiskOrderByWithRelationInput[]
+    cursor?: RiskWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RiskScalarFieldEnum | RiskScalarFieldEnum[]
+  }
+
+  /**
+   * User.createdRisks
+   */
+  export type User$createdRisksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Risk
+     */
+    select?: RiskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskInclude<ExtArgs> | null
+    where?: RiskWhereInput
+    orderBy?: RiskOrderByWithRelationInput | RiskOrderByWithRelationInput[]
+    cursor?: RiskWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RiskScalarFieldEnum | RiskScalarFieldEnum[]
+  }
+
+  /**
+   * User.updatedRisks
+   */
+  export type User$updatedRisksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Risk
+     */
+    select?: RiskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskInclude<ExtArgs> | null
+    where?: RiskWhereInput
+    orderBy?: RiskOrderByWithRelationInput | RiskOrderByWithRelationInput[]
+    cursor?: RiskWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RiskScalarFieldEnum | RiskScalarFieldEnum[]
+  }
+
+  /**
+   * User.assignedActions
+   */
+  export type User$assignedActionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RiskAction
+     */
+    select?: RiskActionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskActionInclude<ExtArgs> | null
+    where?: RiskActionWhereInput
+    orderBy?: RiskActionOrderByWithRelationInput | RiskActionOrderByWithRelationInput[]
+    cursor?: RiskActionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RiskActionScalarFieldEnum | RiskActionScalarFieldEnum[]
   }
 
   /**
@@ -7552,6 +7939,7 @@ export namespace Prisma {
     owner?: boolean | AuditUniverse$ownerArgs<ExtArgs>
     createdBy?: boolean | AuditUniverse$createdByArgs<ExtArgs>
     updatedBy?: boolean | AuditUniverse$updatedByArgs<ExtArgs>
+    risks?: boolean | AuditUniverse$risksArgs<ExtArgs>
     _count?: boolean | AuditUniverseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["auditUniverse"]>
 
@@ -7603,6 +7991,7 @@ export namespace Prisma {
     owner?: boolean | AuditUniverse$ownerArgs<ExtArgs>
     createdBy?: boolean | AuditUniverse$createdByArgs<ExtArgs>
     updatedBy?: boolean | AuditUniverse$updatedByArgs<ExtArgs>
+    risks?: boolean | AuditUniverse$risksArgs<ExtArgs>
     _count?: boolean | AuditUniverseCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AuditUniverseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7620,6 +8009,7 @@ export namespace Prisma {
       owner: Prisma.$UserPayload<ExtArgs> | null
       createdBy: Prisma.$UserPayload<ExtArgs> | null
       updatedBy: Prisma.$UserPayload<ExtArgs> | null
+      risks: Prisma.$RiskPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -8007,6 +8397,7 @@ export namespace Prisma {
     owner<T extends AuditUniverse$ownerArgs<ExtArgs> = {}>(args?: Subset<T, AuditUniverse$ownerArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     createdBy<T extends AuditUniverse$createdByArgs<ExtArgs> = {}>(args?: Subset<T, AuditUniverse$createdByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     updatedBy<T extends AuditUniverse$updatedByArgs<ExtArgs> = {}>(args?: Subset<T, AuditUniverse$updatedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    risks<T extends AuditUniverse$risksArgs<ExtArgs> = {}>(args?: Subset<T, AuditUniverse$risksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8450,6 +8841,26 @@ export namespace Prisma {
   }
 
   /**
+   * AuditUniverse.risks
+   */
+  export type AuditUniverse$risksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Risk
+     */
+    select?: RiskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskInclude<ExtArgs> | null
+    where?: RiskWhereInput
+    orderBy?: RiskOrderByWithRelationInput | RiskOrderByWithRelationInput[]
+    cursor?: RiskWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RiskScalarFieldEnum | RiskScalarFieldEnum[]
+  }
+
+  /**
    * AuditUniverse without action
    */
   export type AuditUniverseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8461,6 +8872,2272 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: AuditUniverseInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Risk
+   */
+
+  export type AggregateRisk = {
+    _count: RiskCountAggregateOutputType | null
+    _avg: RiskAvgAggregateOutputType | null
+    _sum: RiskSumAggregateOutputType | null
+    _min: RiskMinAggregateOutputType | null
+    _max: RiskMaxAggregateOutputType | null
+  }
+
+  export type RiskAvgAggregateOutputType = {
+    inherentLikelihood: number | null
+    inherentImpact: number | null
+    inherentScore: number | null
+    controlEffectiveness: number | null
+    residualScore: number | null
+  }
+
+  export type RiskSumAggregateOutputType = {
+    inherentLikelihood: number | null
+    inherentImpact: number | null
+    inherentScore: number | null
+    controlEffectiveness: number | null
+    residualScore: number | null
+  }
+
+  export type RiskMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    auditEntityId: string | null
+    inherentLikelihood: number | null
+    inherentImpact: number | null
+    inherentScore: number | null
+    inherentLevel: $Enums.RiskLevel | null
+    existingControls: string | null
+    controlEffectiveness: number | null
+    residualScore: number | null
+    residualLevel: $Enums.RiskLevel | null
+    status: $Enums.RiskStatus | null
+    riskCategory: string | null
+    notes: string | null
+    ownerId: string | null
+    createdById: string | null
+    updatedById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type RiskMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    auditEntityId: string | null
+    inherentLikelihood: number | null
+    inherentImpact: number | null
+    inherentScore: number | null
+    inherentLevel: $Enums.RiskLevel | null
+    existingControls: string | null
+    controlEffectiveness: number | null
+    residualScore: number | null
+    residualLevel: $Enums.RiskLevel | null
+    status: $Enums.RiskStatus | null
+    riskCategory: string | null
+    notes: string | null
+    ownerId: string | null
+    createdById: string | null
+    updatedById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type RiskCountAggregateOutputType = {
+    id: number
+    title: number
+    description: number
+    auditEntityId: number
+    inherentLikelihood: number
+    inherentImpact: number
+    inherentScore: number
+    inherentLevel: number
+    existingControls: number
+    controlEffectiveness: number
+    residualScore: number
+    residualLevel: number
+    status: number
+    riskCategory: number
+    notes: number
+    ownerId: number
+    createdById: number
+    updatedById: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type RiskAvgAggregateInputType = {
+    inherentLikelihood?: true
+    inherentImpact?: true
+    inherentScore?: true
+    controlEffectiveness?: true
+    residualScore?: true
+  }
+
+  export type RiskSumAggregateInputType = {
+    inherentLikelihood?: true
+    inherentImpact?: true
+    inherentScore?: true
+    controlEffectiveness?: true
+    residualScore?: true
+  }
+
+  export type RiskMinAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    auditEntityId?: true
+    inherentLikelihood?: true
+    inherentImpact?: true
+    inherentScore?: true
+    inherentLevel?: true
+    existingControls?: true
+    controlEffectiveness?: true
+    residualScore?: true
+    residualLevel?: true
+    status?: true
+    riskCategory?: true
+    notes?: true
+    ownerId?: true
+    createdById?: true
+    updatedById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type RiskMaxAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    auditEntityId?: true
+    inherentLikelihood?: true
+    inherentImpact?: true
+    inherentScore?: true
+    inherentLevel?: true
+    existingControls?: true
+    controlEffectiveness?: true
+    residualScore?: true
+    residualLevel?: true
+    status?: true
+    riskCategory?: true
+    notes?: true
+    ownerId?: true
+    createdById?: true
+    updatedById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type RiskCountAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    auditEntityId?: true
+    inherentLikelihood?: true
+    inherentImpact?: true
+    inherentScore?: true
+    inherentLevel?: true
+    existingControls?: true
+    controlEffectiveness?: true
+    residualScore?: true
+    residualLevel?: true
+    status?: true
+    riskCategory?: true
+    notes?: true
+    ownerId?: true
+    createdById?: true
+    updatedById?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type RiskAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Risk to aggregate.
+     */
+    where?: RiskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Risks to fetch.
+     */
+    orderBy?: RiskOrderByWithRelationInput | RiskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RiskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Risks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Risks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Risks
+    **/
+    _count?: true | RiskCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: RiskAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RiskSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RiskMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RiskMaxAggregateInputType
+  }
+
+  export type GetRiskAggregateType<T extends RiskAggregateArgs> = {
+        [P in keyof T & keyof AggregateRisk]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRisk[P]>
+      : GetScalarType<T[P], AggregateRisk[P]>
+  }
+
+
+
+
+  export type RiskGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RiskWhereInput
+    orderBy?: RiskOrderByWithAggregationInput | RiskOrderByWithAggregationInput[]
+    by: RiskScalarFieldEnum[] | RiskScalarFieldEnum
+    having?: RiskScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RiskCountAggregateInputType | true
+    _avg?: RiskAvgAggregateInputType
+    _sum?: RiskSumAggregateInputType
+    _min?: RiskMinAggregateInputType
+    _max?: RiskMaxAggregateInputType
+  }
+
+  export type RiskGroupByOutputType = {
+    id: string
+    title: string
+    description: string | null
+    auditEntityId: string
+    inherentLikelihood: number
+    inherentImpact: number
+    inherentScore: number
+    inherentLevel: $Enums.RiskLevel
+    existingControls: string | null
+    controlEffectiveness: number
+    residualScore: number
+    residualLevel: $Enums.RiskLevel
+    status: $Enums.RiskStatus
+    riskCategory: string | null
+    notes: string | null
+    ownerId: string | null
+    createdById: string | null
+    updatedById: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: RiskCountAggregateOutputType | null
+    _avg: RiskAvgAggregateOutputType | null
+    _sum: RiskSumAggregateOutputType | null
+    _min: RiskMinAggregateOutputType | null
+    _max: RiskMaxAggregateOutputType | null
+  }
+
+  type GetRiskGroupByPayload<T extends RiskGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RiskGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RiskGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RiskGroupByOutputType[P]>
+            : GetScalarType<T[P], RiskGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RiskSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    auditEntityId?: boolean
+    inherentLikelihood?: boolean
+    inherentImpact?: boolean
+    inherentScore?: boolean
+    inherentLevel?: boolean
+    existingControls?: boolean
+    controlEffectiveness?: boolean
+    residualScore?: boolean
+    residualLevel?: boolean
+    status?: boolean
+    riskCategory?: boolean
+    notes?: boolean
+    ownerId?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    auditEntity?: boolean | AuditUniverseDefaultArgs<ExtArgs>
+    owner?: boolean | Risk$ownerArgs<ExtArgs>
+    createdBy?: boolean | Risk$createdByArgs<ExtArgs>
+    updatedBy?: boolean | Risk$updatedByArgs<ExtArgs>
+    actions?: boolean | Risk$actionsArgs<ExtArgs>
+    _count?: boolean | RiskCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["risk"]>
+
+  export type RiskSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    auditEntityId?: boolean
+    inherentLikelihood?: boolean
+    inherentImpact?: boolean
+    inherentScore?: boolean
+    inherentLevel?: boolean
+    existingControls?: boolean
+    controlEffectiveness?: boolean
+    residualScore?: boolean
+    residualLevel?: boolean
+    status?: boolean
+    riskCategory?: boolean
+    notes?: boolean
+    ownerId?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    auditEntity?: boolean | AuditUniverseDefaultArgs<ExtArgs>
+    owner?: boolean | Risk$ownerArgs<ExtArgs>
+    createdBy?: boolean | Risk$createdByArgs<ExtArgs>
+    updatedBy?: boolean | Risk$updatedByArgs<ExtArgs>
+  }, ExtArgs["result"]["risk"]>
+
+  export type RiskSelectScalar = {
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    auditEntityId?: boolean
+    inherentLikelihood?: boolean
+    inherentImpact?: boolean
+    inherentScore?: boolean
+    inherentLevel?: boolean
+    existingControls?: boolean
+    controlEffectiveness?: boolean
+    residualScore?: boolean
+    residualLevel?: boolean
+    status?: boolean
+    riskCategory?: boolean
+    notes?: boolean
+    ownerId?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type RiskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    auditEntity?: boolean | AuditUniverseDefaultArgs<ExtArgs>
+    owner?: boolean | Risk$ownerArgs<ExtArgs>
+    createdBy?: boolean | Risk$createdByArgs<ExtArgs>
+    updatedBy?: boolean | Risk$updatedByArgs<ExtArgs>
+    actions?: boolean | Risk$actionsArgs<ExtArgs>
+    _count?: boolean | RiskCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type RiskIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    auditEntity?: boolean | AuditUniverseDefaultArgs<ExtArgs>
+    owner?: boolean | Risk$ownerArgs<ExtArgs>
+    createdBy?: boolean | Risk$createdByArgs<ExtArgs>
+    updatedBy?: boolean | Risk$updatedByArgs<ExtArgs>
+  }
+
+  export type $RiskPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Risk"
+    objects: {
+      auditEntity: Prisma.$AuditUniversePayload<ExtArgs>
+      owner: Prisma.$UserPayload<ExtArgs> | null
+      createdBy: Prisma.$UserPayload<ExtArgs> | null
+      updatedBy: Prisma.$UserPayload<ExtArgs> | null
+      actions: Prisma.$RiskActionPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      description: string | null
+      auditEntityId: string
+      inherentLikelihood: number
+      inherentImpact: number
+      inherentScore: number
+      inherentLevel: $Enums.RiskLevel
+      existingControls: string | null
+      controlEffectiveness: number
+      residualScore: number
+      residualLevel: $Enums.RiskLevel
+      status: $Enums.RiskStatus
+      riskCategory: string | null
+      notes: string | null
+      ownerId: string | null
+      createdById: string | null
+      updatedById: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["risk"]>
+    composites: {}
+  }
+
+  type RiskGetPayload<S extends boolean | null | undefined | RiskDefaultArgs> = $Result.GetResult<Prisma.$RiskPayload, S>
+
+  type RiskCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<RiskFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: RiskCountAggregateInputType | true
+    }
+
+  export interface RiskDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Risk'], meta: { name: 'Risk' } }
+    /**
+     * Find zero or one Risk that matches the filter.
+     * @param {RiskFindUniqueArgs} args - Arguments to find a Risk
+     * @example
+     * // Get one Risk
+     * const risk = await prisma.risk.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RiskFindUniqueArgs>(args: SelectSubset<T, RiskFindUniqueArgs<ExtArgs>>): Prisma__RiskClient<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Risk that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {RiskFindUniqueOrThrowArgs} args - Arguments to find a Risk
+     * @example
+     * // Get one Risk
+     * const risk = await prisma.risk.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RiskFindUniqueOrThrowArgs>(args: SelectSubset<T, RiskFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RiskClient<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Risk that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RiskFindFirstArgs} args - Arguments to find a Risk
+     * @example
+     * // Get one Risk
+     * const risk = await prisma.risk.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RiskFindFirstArgs>(args?: SelectSubset<T, RiskFindFirstArgs<ExtArgs>>): Prisma__RiskClient<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Risk that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RiskFindFirstOrThrowArgs} args - Arguments to find a Risk
+     * @example
+     * // Get one Risk
+     * const risk = await prisma.risk.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RiskFindFirstOrThrowArgs>(args?: SelectSubset<T, RiskFindFirstOrThrowArgs<ExtArgs>>): Prisma__RiskClient<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Risks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RiskFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Risks
+     * const risks = await prisma.risk.findMany()
+     * 
+     * // Get first 10 Risks
+     * const risks = await prisma.risk.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const riskWithIdOnly = await prisma.risk.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RiskFindManyArgs>(args?: SelectSubset<T, RiskFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Risk.
+     * @param {RiskCreateArgs} args - Arguments to create a Risk.
+     * @example
+     * // Create one Risk
+     * const Risk = await prisma.risk.create({
+     *   data: {
+     *     // ... data to create a Risk
+     *   }
+     * })
+     * 
+     */
+    create<T extends RiskCreateArgs>(args: SelectSubset<T, RiskCreateArgs<ExtArgs>>): Prisma__RiskClient<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Risks.
+     * @param {RiskCreateManyArgs} args - Arguments to create many Risks.
+     * @example
+     * // Create many Risks
+     * const risk = await prisma.risk.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RiskCreateManyArgs>(args?: SelectSubset<T, RiskCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Risks and returns the data saved in the database.
+     * @param {RiskCreateManyAndReturnArgs} args - Arguments to create many Risks.
+     * @example
+     * // Create many Risks
+     * const risk = await prisma.risk.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Risks and only return the `id`
+     * const riskWithIdOnly = await prisma.risk.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RiskCreateManyAndReturnArgs>(args?: SelectSubset<T, RiskCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Risk.
+     * @param {RiskDeleteArgs} args - Arguments to delete one Risk.
+     * @example
+     * // Delete one Risk
+     * const Risk = await prisma.risk.delete({
+     *   where: {
+     *     // ... filter to delete one Risk
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RiskDeleteArgs>(args: SelectSubset<T, RiskDeleteArgs<ExtArgs>>): Prisma__RiskClient<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Risk.
+     * @param {RiskUpdateArgs} args - Arguments to update one Risk.
+     * @example
+     * // Update one Risk
+     * const risk = await prisma.risk.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RiskUpdateArgs>(args: SelectSubset<T, RiskUpdateArgs<ExtArgs>>): Prisma__RiskClient<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Risks.
+     * @param {RiskDeleteManyArgs} args - Arguments to filter Risks to delete.
+     * @example
+     * // Delete a few Risks
+     * const { count } = await prisma.risk.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RiskDeleteManyArgs>(args?: SelectSubset<T, RiskDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Risks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RiskUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Risks
+     * const risk = await prisma.risk.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RiskUpdateManyArgs>(args: SelectSubset<T, RiskUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Risk.
+     * @param {RiskUpsertArgs} args - Arguments to update or create a Risk.
+     * @example
+     * // Update or create a Risk
+     * const risk = await prisma.risk.upsert({
+     *   create: {
+     *     // ... data to create a Risk
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Risk we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RiskUpsertArgs>(args: SelectSubset<T, RiskUpsertArgs<ExtArgs>>): Prisma__RiskClient<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Risks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RiskCountArgs} args - Arguments to filter Risks to count.
+     * @example
+     * // Count the number of Risks
+     * const count = await prisma.risk.count({
+     *   where: {
+     *     // ... the filter for the Risks we want to count
+     *   }
+     * })
+    **/
+    count<T extends RiskCountArgs>(
+      args?: Subset<T, RiskCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RiskCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Risk.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RiskAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RiskAggregateArgs>(args: Subset<T, RiskAggregateArgs>): Prisma.PrismaPromise<GetRiskAggregateType<T>>
+
+    /**
+     * Group by Risk.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RiskGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RiskGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RiskGroupByArgs['orderBy'] }
+        : { orderBy?: RiskGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RiskGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRiskGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Risk model
+   */
+  readonly fields: RiskFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Risk.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RiskClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    auditEntity<T extends AuditUniverseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AuditUniverseDefaultArgs<ExtArgs>>): Prisma__AuditUniverseClient<$Result.GetResult<Prisma.$AuditUniversePayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    owner<T extends Risk$ownerArgs<ExtArgs> = {}>(args?: Subset<T, Risk$ownerArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    createdBy<T extends Risk$createdByArgs<ExtArgs> = {}>(args?: Subset<T, Risk$createdByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    updatedBy<T extends Risk$updatedByArgs<ExtArgs> = {}>(args?: Subset<T, Risk$updatedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    actions<T extends Risk$actionsArgs<ExtArgs> = {}>(args?: Subset<T, Risk$actionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RiskActionPayload<ExtArgs>, T, "findMany"> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Risk model
+   */ 
+  interface RiskFieldRefs {
+    readonly id: FieldRef<"Risk", 'String'>
+    readonly title: FieldRef<"Risk", 'String'>
+    readonly description: FieldRef<"Risk", 'String'>
+    readonly auditEntityId: FieldRef<"Risk", 'String'>
+    readonly inherentLikelihood: FieldRef<"Risk", 'Int'>
+    readonly inherentImpact: FieldRef<"Risk", 'Int'>
+    readonly inherentScore: FieldRef<"Risk", 'Int'>
+    readonly inherentLevel: FieldRef<"Risk", 'RiskLevel'>
+    readonly existingControls: FieldRef<"Risk", 'String'>
+    readonly controlEffectiveness: FieldRef<"Risk", 'Int'>
+    readonly residualScore: FieldRef<"Risk", 'Int'>
+    readonly residualLevel: FieldRef<"Risk", 'RiskLevel'>
+    readonly status: FieldRef<"Risk", 'RiskStatus'>
+    readonly riskCategory: FieldRef<"Risk", 'String'>
+    readonly notes: FieldRef<"Risk", 'String'>
+    readonly ownerId: FieldRef<"Risk", 'String'>
+    readonly createdById: FieldRef<"Risk", 'String'>
+    readonly updatedById: FieldRef<"Risk", 'String'>
+    readonly createdAt: FieldRef<"Risk", 'DateTime'>
+    readonly updatedAt: FieldRef<"Risk", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Risk findUnique
+   */
+  export type RiskFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Risk
+     */
+    select?: RiskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskInclude<ExtArgs> | null
+    /**
+     * Filter, which Risk to fetch.
+     */
+    where: RiskWhereUniqueInput
+  }
+
+  /**
+   * Risk findUniqueOrThrow
+   */
+  export type RiskFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Risk
+     */
+    select?: RiskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskInclude<ExtArgs> | null
+    /**
+     * Filter, which Risk to fetch.
+     */
+    where: RiskWhereUniqueInput
+  }
+
+  /**
+   * Risk findFirst
+   */
+  export type RiskFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Risk
+     */
+    select?: RiskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskInclude<ExtArgs> | null
+    /**
+     * Filter, which Risk to fetch.
+     */
+    where?: RiskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Risks to fetch.
+     */
+    orderBy?: RiskOrderByWithRelationInput | RiskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Risks.
+     */
+    cursor?: RiskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Risks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Risks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Risks.
+     */
+    distinct?: RiskScalarFieldEnum | RiskScalarFieldEnum[]
+  }
+
+  /**
+   * Risk findFirstOrThrow
+   */
+  export type RiskFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Risk
+     */
+    select?: RiskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskInclude<ExtArgs> | null
+    /**
+     * Filter, which Risk to fetch.
+     */
+    where?: RiskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Risks to fetch.
+     */
+    orderBy?: RiskOrderByWithRelationInput | RiskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Risks.
+     */
+    cursor?: RiskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Risks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Risks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Risks.
+     */
+    distinct?: RiskScalarFieldEnum | RiskScalarFieldEnum[]
+  }
+
+  /**
+   * Risk findMany
+   */
+  export type RiskFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Risk
+     */
+    select?: RiskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskInclude<ExtArgs> | null
+    /**
+     * Filter, which Risks to fetch.
+     */
+    where?: RiskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Risks to fetch.
+     */
+    orderBy?: RiskOrderByWithRelationInput | RiskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Risks.
+     */
+    cursor?: RiskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Risks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Risks.
+     */
+    skip?: number
+    distinct?: RiskScalarFieldEnum | RiskScalarFieldEnum[]
+  }
+
+  /**
+   * Risk create
+   */
+  export type RiskCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Risk
+     */
+    select?: RiskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Risk.
+     */
+    data: XOR<RiskCreateInput, RiskUncheckedCreateInput>
+  }
+
+  /**
+   * Risk createMany
+   */
+  export type RiskCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Risks.
+     */
+    data: RiskCreateManyInput | RiskCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Risk createManyAndReturn
+   */
+  export type RiskCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Risk
+     */
+    select?: RiskSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Risks.
+     */
+    data: RiskCreateManyInput | RiskCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Risk update
+   */
+  export type RiskUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Risk
+     */
+    select?: RiskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Risk.
+     */
+    data: XOR<RiskUpdateInput, RiskUncheckedUpdateInput>
+    /**
+     * Choose, which Risk to update.
+     */
+    where: RiskWhereUniqueInput
+  }
+
+  /**
+   * Risk updateMany
+   */
+  export type RiskUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Risks.
+     */
+    data: XOR<RiskUpdateManyMutationInput, RiskUncheckedUpdateManyInput>
+    /**
+     * Filter which Risks to update
+     */
+    where?: RiskWhereInput
+  }
+
+  /**
+   * Risk upsert
+   */
+  export type RiskUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Risk
+     */
+    select?: RiskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Risk to update in case it exists.
+     */
+    where: RiskWhereUniqueInput
+    /**
+     * In case the Risk found by the `where` argument doesn't exist, create a new Risk with this data.
+     */
+    create: XOR<RiskCreateInput, RiskUncheckedCreateInput>
+    /**
+     * In case the Risk was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RiskUpdateInput, RiskUncheckedUpdateInput>
+  }
+
+  /**
+   * Risk delete
+   */
+  export type RiskDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Risk
+     */
+    select?: RiskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskInclude<ExtArgs> | null
+    /**
+     * Filter which Risk to delete.
+     */
+    where: RiskWhereUniqueInput
+  }
+
+  /**
+   * Risk deleteMany
+   */
+  export type RiskDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Risks to delete
+     */
+    where?: RiskWhereInput
+  }
+
+  /**
+   * Risk.owner
+   */
+  export type Risk$ownerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Risk.createdBy
+   */
+  export type Risk$createdByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Risk.updatedBy
+   */
+  export type Risk$updatedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Risk.actions
+   */
+  export type Risk$actionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RiskAction
+     */
+    select?: RiskActionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskActionInclude<ExtArgs> | null
+    where?: RiskActionWhereInput
+    orderBy?: RiskActionOrderByWithRelationInput | RiskActionOrderByWithRelationInput[]
+    cursor?: RiskActionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RiskActionScalarFieldEnum | RiskActionScalarFieldEnum[]
+  }
+
+  /**
+   * Risk without action
+   */
+  export type RiskDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Risk
+     */
+    select?: RiskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model RiskAction
+   */
+
+  export type AggregateRiskAction = {
+    _count: RiskActionCountAggregateOutputType | null
+    _min: RiskActionMinAggregateOutputType | null
+    _max: RiskActionMaxAggregateOutputType | null
+  }
+
+  export type RiskActionMinAggregateOutputType = {
+    id: string | null
+    riskId: string | null
+    title: string | null
+    description: string | null
+    assigneeId: string | null
+    dueDate: Date | null
+    completedAt: Date | null
+    status: $Enums.ActionStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type RiskActionMaxAggregateOutputType = {
+    id: string | null
+    riskId: string | null
+    title: string | null
+    description: string | null
+    assigneeId: string | null
+    dueDate: Date | null
+    completedAt: Date | null
+    status: $Enums.ActionStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type RiskActionCountAggregateOutputType = {
+    id: number
+    riskId: number
+    title: number
+    description: number
+    assigneeId: number
+    dueDate: number
+    completedAt: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type RiskActionMinAggregateInputType = {
+    id?: true
+    riskId?: true
+    title?: true
+    description?: true
+    assigneeId?: true
+    dueDate?: true
+    completedAt?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type RiskActionMaxAggregateInputType = {
+    id?: true
+    riskId?: true
+    title?: true
+    description?: true
+    assigneeId?: true
+    dueDate?: true
+    completedAt?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type RiskActionCountAggregateInputType = {
+    id?: true
+    riskId?: true
+    title?: true
+    description?: true
+    assigneeId?: true
+    dueDate?: true
+    completedAt?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type RiskActionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RiskAction to aggregate.
+     */
+    where?: RiskActionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RiskActions to fetch.
+     */
+    orderBy?: RiskActionOrderByWithRelationInput | RiskActionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RiskActionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RiskActions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RiskActions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned RiskActions
+    **/
+    _count?: true | RiskActionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RiskActionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RiskActionMaxAggregateInputType
+  }
+
+  export type GetRiskActionAggregateType<T extends RiskActionAggregateArgs> = {
+        [P in keyof T & keyof AggregateRiskAction]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRiskAction[P]>
+      : GetScalarType<T[P], AggregateRiskAction[P]>
+  }
+
+
+
+
+  export type RiskActionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RiskActionWhereInput
+    orderBy?: RiskActionOrderByWithAggregationInput | RiskActionOrderByWithAggregationInput[]
+    by: RiskActionScalarFieldEnum[] | RiskActionScalarFieldEnum
+    having?: RiskActionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RiskActionCountAggregateInputType | true
+    _min?: RiskActionMinAggregateInputType
+    _max?: RiskActionMaxAggregateInputType
+  }
+
+  export type RiskActionGroupByOutputType = {
+    id: string
+    riskId: string
+    title: string
+    description: string | null
+    assigneeId: string | null
+    dueDate: Date | null
+    completedAt: Date | null
+    status: $Enums.ActionStatus
+    createdAt: Date
+    updatedAt: Date
+    _count: RiskActionCountAggregateOutputType | null
+    _min: RiskActionMinAggregateOutputType | null
+    _max: RiskActionMaxAggregateOutputType | null
+  }
+
+  type GetRiskActionGroupByPayload<T extends RiskActionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RiskActionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RiskActionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RiskActionGroupByOutputType[P]>
+            : GetScalarType<T[P], RiskActionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RiskActionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    riskId?: boolean
+    title?: boolean
+    description?: boolean
+    assigneeId?: boolean
+    dueDate?: boolean
+    completedAt?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    risk?: boolean | RiskDefaultArgs<ExtArgs>
+    assignee?: boolean | RiskAction$assigneeArgs<ExtArgs>
+  }, ExtArgs["result"]["riskAction"]>
+
+  export type RiskActionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    riskId?: boolean
+    title?: boolean
+    description?: boolean
+    assigneeId?: boolean
+    dueDate?: boolean
+    completedAt?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    risk?: boolean | RiskDefaultArgs<ExtArgs>
+    assignee?: boolean | RiskAction$assigneeArgs<ExtArgs>
+  }, ExtArgs["result"]["riskAction"]>
+
+  export type RiskActionSelectScalar = {
+    id?: boolean
+    riskId?: boolean
+    title?: boolean
+    description?: boolean
+    assigneeId?: boolean
+    dueDate?: boolean
+    completedAt?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type RiskActionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    risk?: boolean | RiskDefaultArgs<ExtArgs>
+    assignee?: boolean | RiskAction$assigneeArgs<ExtArgs>
+  }
+  export type RiskActionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    risk?: boolean | RiskDefaultArgs<ExtArgs>
+    assignee?: boolean | RiskAction$assigneeArgs<ExtArgs>
+  }
+
+  export type $RiskActionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "RiskAction"
+    objects: {
+      risk: Prisma.$RiskPayload<ExtArgs>
+      assignee: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      riskId: string
+      title: string
+      description: string | null
+      assigneeId: string | null
+      dueDate: Date | null
+      completedAt: Date | null
+      status: $Enums.ActionStatus
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["riskAction"]>
+    composites: {}
+  }
+
+  type RiskActionGetPayload<S extends boolean | null | undefined | RiskActionDefaultArgs> = $Result.GetResult<Prisma.$RiskActionPayload, S>
+
+  type RiskActionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<RiskActionFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: RiskActionCountAggregateInputType | true
+    }
+
+  export interface RiskActionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RiskAction'], meta: { name: 'RiskAction' } }
+    /**
+     * Find zero or one RiskAction that matches the filter.
+     * @param {RiskActionFindUniqueArgs} args - Arguments to find a RiskAction
+     * @example
+     * // Get one RiskAction
+     * const riskAction = await prisma.riskAction.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RiskActionFindUniqueArgs>(args: SelectSubset<T, RiskActionFindUniqueArgs<ExtArgs>>): Prisma__RiskActionClient<$Result.GetResult<Prisma.$RiskActionPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one RiskAction that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {RiskActionFindUniqueOrThrowArgs} args - Arguments to find a RiskAction
+     * @example
+     * // Get one RiskAction
+     * const riskAction = await prisma.riskAction.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RiskActionFindUniqueOrThrowArgs>(args: SelectSubset<T, RiskActionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RiskActionClient<$Result.GetResult<Prisma.$RiskActionPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first RiskAction that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RiskActionFindFirstArgs} args - Arguments to find a RiskAction
+     * @example
+     * // Get one RiskAction
+     * const riskAction = await prisma.riskAction.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RiskActionFindFirstArgs>(args?: SelectSubset<T, RiskActionFindFirstArgs<ExtArgs>>): Prisma__RiskActionClient<$Result.GetResult<Prisma.$RiskActionPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first RiskAction that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RiskActionFindFirstOrThrowArgs} args - Arguments to find a RiskAction
+     * @example
+     * // Get one RiskAction
+     * const riskAction = await prisma.riskAction.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RiskActionFindFirstOrThrowArgs>(args?: SelectSubset<T, RiskActionFindFirstOrThrowArgs<ExtArgs>>): Prisma__RiskActionClient<$Result.GetResult<Prisma.$RiskActionPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more RiskActions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RiskActionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all RiskActions
+     * const riskActions = await prisma.riskAction.findMany()
+     * 
+     * // Get first 10 RiskActions
+     * const riskActions = await prisma.riskAction.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const riskActionWithIdOnly = await prisma.riskAction.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RiskActionFindManyArgs>(args?: SelectSubset<T, RiskActionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RiskActionPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a RiskAction.
+     * @param {RiskActionCreateArgs} args - Arguments to create a RiskAction.
+     * @example
+     * // Create one RiskAction
+     * const RiskAction = await prisma.riskAction.create({
+     *   data: {
+     *     // ... data to create a RiskAction
+     *   }
+     * })
+     * 
+     */
+    create<T extends RiskActionCreateArgs>(args: SelectSubset<T, RiskActionCreateArgs<ExtArgs>>): Prisma__RiskActionClient<$Result.GetResult<Prisma.$RiskActionPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many RiskActions.
+     * @param {RiskActionCreateManyArgs} args - Arguments to create many RiskActions.
+     * @example
+     * // Create many RiskActions
+     * const riskAction = await prisma.riskAction.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RiskActionCreateManyArgs>(args?: SelectSubset<T, RiskActionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many RiskActions and returns the data saved in the database.
+     * @param {RiskActionCreateManyAndReturnArgs} args - Arguments to create many RiskActions.
+     * @example
+     * // Create many RiskActions
+     * const riskAction = await prisma.riskAction.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many RiskActions and only return the `id`
+     * const riskActionWithIdOnly = await prisma.riskAction.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RiskActionCreateManyAndReturnArgs>(args?: SelectSubset<T, RiskActionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RiskActionPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a RiskAction.
+     * @param {RiskActionDeleteArgs} args - Arguments to delete one RiskAction.
+     * @example
+     * // Delete one RiskAction
+     * const RiskAction = await prisma.riskAction.delete({
+     *   where: {
+     *     // ... filter to delete one RiskAction
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RiskActionDeleteArgs>(args: SelectSubset<T, RiskActionDeleteArgs<ExtArgs>>): Prisma__RiskActionClient<$Result.GetResult<Prisma.$RiskActionPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one RiskAction.
+     * @param {RiskActionUpdateArgs} args - Arguments to update one RiskAction.
+     * @example
+     * // Update one RiskAction
+     * const riskAction = await prisma.riskAction.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RiskActionUpdateArgs>(args: SelectSubset<T, RiskActionUpdateArgs<ExtArgs>>): Prisma__RiskActionClient<$Result.GetResult<Prisma.$RiskActionPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more RiskActions.
+     * @param {RiskActionDeleteManyArgs} args - Arguments to filter RiskActions to delete.
+     * @example
+     * // Delete a few RiskActions
+     * const { count } = await prisma.riskAction.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RiskActionDeleteManyArgs>(args?: SelectSubset<T, RiskActionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RiskActions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RiskActionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many RiskActions
+     * const riskAction = await prisma.riskAction.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RiskActionUpdateManyArgs>(args: SelectSubset<T, RiskActionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one RiskAction.
+     * @param {RiskActionUpsertArgs} args - Arguments to update or create a RiskAction.
+     * @example
+     * // Update or create a RiskAction
+     * const riskAction = await prisma.riskAction.upsert({
+     *   create: {
+     *     // ... data to create a RiskAction
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the RiskAction we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RiskActionUpsertArgs>(args: SelectSubset<T, RiskActionUpsertArgs<ExtArgs>>): Prisma__RiskActionClient<$Result.GetResult<Prisma.$RiskActionPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of RiskActions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RiskActionCountArgs} args - Arguments to filter RiskActions to count.
+     * @example
+     * // Count the number of RiskActions
+     * const count = await prisma.riskAction.count({
+     *   where: {
+     *     // ... the filter for the RiskActions we want to count
+     *   }
+     * })
+    **/
+    count<T extends RiskActionCountArgs>(
+      args?: Subset<T, RiskActionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RiskActionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a RiskAction.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RiskActionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RiskActionAggregateArgs>(args: Subset<T, RiskActionAggregateArgs>): Prisma.PrismaPromise<GetRiskActionAggregateType<T>>
+
+    /**
+     * Group by RiskAction.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RiskActionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RiskActionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RiskActionGroupByArgs['orderBy'] }
+        : { orderBy?: RiskActionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RiskActionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRiskActionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the RiskAction model
+   */
+  readonly fields: RiskActionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for RiskAction.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RiskActionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    risk<T extends RiskDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RiskDefaultArgs<ExtArgs>>): Prisma__RiskClient<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    assignee<T extends RiskAction$assigneeArgs<ExtArgs> = {}>(args?: Subset<T, RiskAction$assigneeArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the RiskAction model
+   */ 
+  interface RiskActionFieldRefs {
+    readonly id: FieldRef<"RiskAction", 'String'>
+    readonly riskId: FieldRef<"RiskAction", 'String'>
+    readonly title: FieldRef<"RiskAction", 'String'>
+    readonly description: FieldRef<"RiskAction", 'String'>
+    readonly assigneeId: FieldRef<"RiskAction", 'String'>
+    readonly dueDate: FieldRef<"RiskAction", 'DateTime'>
+    readonly completedAt: FieldRef<"RiskAction", 'DateTime'>
+    readonly status: FieldRef<"RiskAction", 'ActionStatus'>
+    readonly createdAt: FieldRef<"RiskAction", 'DateTime'>
+    readonly updatedAt: FieldRef<"RiskAction", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * RiskAction findUnique
+   */
+  export type RiskActionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RiskAction
+     */
+    select?: RiskActionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskActionInclude<ExtArgs> | null
+    /**
+     * Filter, which RiskAction to fetch.
+     */
+    where: RiskActionWhereUniqueInput
+  }
+
+  /**
+   * RiskAction findUniqueOrThrow
+   */
+  export type RiskActionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RiskAction
+     */
+    select?: RiskActionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskActionInclude<ExtArgs> | null
+    /**
+     * Filter, which RiskAction to fetch.
+     */
+    where: RiskActionWhereUniqueInput
+  }
+
+  /**
+   * RiskAction findFirst
+   */
+  export type RiskActionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RiskAction
+     */
+    select?: RiskActionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskActionInclude<ExtArgs> | null
+    /**
+     * Filter, which RiskAction to fetch.
+     */
+    where?: RiskActionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RiskActions to fetch.
+     */
+    orderBy?: RiskActionOrderByWithRelationInput | RiskActionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RiskActions.
+     */
+    cursor?: RiskActionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RiskActions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RiskActions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RiskActions.
+     */
+    distinct?: RiskActionScalarFieldEnum | RiskActionScalarFieldEnum[]
+  }
+
+  /**
+   * RiskAction findFirstOrThrow
+   */
+  export type RiskActionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RiskAction
+     */
+    select?: RiskActionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskActionInclude<ExtArgs> | null
+    /**
+     * Filter, which RiskAction to fetch.
+     */
+    where?: RiskActionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RiskActions to fetch.
+     */
+    orderBy?: RiskActionOrderByWithRelationInput | RiskActionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RiskActions.
+     */
+    cursor?: RiskActionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RiskActions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RiskActions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RiskActions.
+     */
+    distinct?: RiskActionScalarFieldEnum | RiskActionScalarFieldEnum[]
+  }
+
+  /**
+   * RiskAction findMany
+   */
+  export type RiskActionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RiskAction
+     */
+    select?: RiskActionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskActionInclude<ExtArgs> | null
+    /**
+     * Filter, which RiskActions to fetch.
+     */
+    where?: RiskActionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RiskActions to fetch.
+     */
+    orderBy?: RiskActionOrderByWithRelationInput | RiskActionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing RiskActions.
+     */
+    cursor?: RiskActionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RiskActions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RiskActions.
+     */
+    skip?: number
+    distinct?: RiskActionScalarFieldEnum | RiskActionScalarFieldEnum[]
+  }
+
+  /**
+   * RiskAction create
+   */
+  export type RiskActionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RiskAction
+     */
+    select?: RiskActionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskActionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a RiskAction.
+     */
+    data: XOR<RiskActionCreateInput, RiskActionUncheckedCreateInput>
+  }
+
+  /**
+   * RiskAction createMany
+   */
+  export type RiskActionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many RiskActions.
+     */
+    data: RiskActionCreateManyInput | RiskActionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * RiskAction createManyAndReturn
+   */
+  export type RiskActionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RiskAction
+     */
+    select?: RiskActionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many RiskActions.
+     */
+    data: RiskActionCreateManyInput | RiskActionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskActionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RiskAction update
+   */
+  export type RiskActionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RiskAction
+     */
+    select?: RiskActionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskActionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a RiskAction.
+     */
+    data: XOR<RiskActionUpdateInput, RiskActionUncheckedUpdateInput>
+    /**
+     * Choose, which RiskAction to update.
+     */
+    where: RiskActionWhereUniqueInput
+  }
+
+  /**
+   * RiskAction updateMany
+   */
+  export type RiskActionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update RiskActions.
+     */
+    data: XOR<RiskActionUpdateManyMutationInput, RiskActionUncheckedUpdateManyInput>
+    /**
+     * Filter which RiskActions to update
+     */
+    where?: RiskActionWhereInput
+  }
+
+  /**
+   * RiskAction upsert
+   */
+  export type RiskActionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RiskAction
+     */
+    select?: RiskActionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskActionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the RiskAction to update in case it exists.
+     */
+    where: RiskActionWhereUniqueInput
+    /**
+     * In case the RiskAction found by the `where` argument doesn't exist, create a new RiskAction with this data.
+     */
+    create: XOR<RiskActionCreateInput, RiskActionUncheckedCreateInput>
+    /**
+     * In case the RiskAction was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RiskActionUpdateInput, RiskActionUncheckedUpdateInput>
+  }
+
+  /**
+   * RiskAction delete
+   */
+  export type RiskActionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RiskAction
+     */
+    select?: RiskActionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskActionInclude<ExtArgs> | null
+    /**
+     * Filter which RiskAction to delete.
+     */
+    where: RiskActionWhereUniqueInput
+  }
+
+  /**
+   * RiskAction deleteMany
+   */
+  export type RiskActionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RiskActions to delete
+     */
+    where?: RiskActionWhereInput
+  }
+
+  /**
+   * RiskAction.assignee
+   */
+  export type RiskAction$assigneeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * RiskAction without action
+   */
+  export type RiskActionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RiskAction
+     */
+    select?: RiskActionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskActionInclude<ExtArgs> | null
   }
 
 
@@ -8568,6 +11245,48 @@ export namespace Prisma {
   };
 
   export type AuditUniverseScalarFieldEnum = (typeof AuditUniverseScalarFieldEnum)[keyof typeof AuditUniverseScalarFieldEnum]
+
+
+  export const RiskScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    description: 'description',
+    auditEntityId: 'auditEntityId',
+    inherentLikelihood: 'inherentLikelihood',
+    inherentImpact: 'inherentImpact',
+    inherentScore: 'inherentScore',
+    inherentLevel: 'inherentLevel',
+    existingControls: 'existingControls',
+    controlEffectiveness: 'controlEffectiveness',
+    residualScore: 'residualScore',
+    residualLevel: 'residualLevel',
+    status: 'status',
+    riskCategory: 'riskCategory',
+    notes: 'notes',
+    ownerId: 'ownerId',
+    createdById: 'createdById',
+    updatedById: 'updatedById',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type RiskScalarFieldEnum = (typeof RiskScalarFieldEnum)[keyof typeof RiskScalarFieldEnum]
+
+
+  export const RiskActionScalarFieldEnum: {
+    id: 'id',
+    riskId: 'riskId',
+    title: 'title',
+    description: 'description',
+    assigneeId: 'assigneeId',
+    dueDate: 'dueDate',
+    completedAt: 'completedAt',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type RiskActionScalarFieldEnum = (typeof RiskActionScalarFieldEnum)[keyof typeof RiskActionScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -8698,6 +11417,62 @@ export namespace Prisma {
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
+
+
+  /**
+   * Reference to a field of type 'RiskLevel'
+   */
+  export type EnumRiskLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RiskLevel'>
+    
+
+
+  /**
+   * Reference to a field of type 'RiskLevel[]'
+   */
+  export type ListEnumRiskLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RiskLevel[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'RiskStatus'
+   */
+  export type EnumRiskStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RiskStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'RiskStatus[]'
+   */
+  export type ListEnumRiskStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RiskStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ActionStatus'
+   */
+  export type EnumActionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActionStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'ActionStatus[]'
+   */
+  export type ListEnumActionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActionStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
   /**
    * Deep Input Types
    */
@@ -8720,6 +11495,10 @@ export namespace Prisma {
     ownedAuditEntities?: AuditUniverseListRelationFilter
     createdAuditEntities?: AuditUniverseListRelationFilter
     updatedAuditEntities?: AuditUniverseListRelationFilter
+    ownedRisks?: RiskListRelationFilter
+    createdRisks?: RiskListRelationFilter
+    updatedRisks?: RiskListRelationFilter
+    assignedActions?: RiskActionListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -8736,6 +11515,10 @@ export namespace Prisma {
     ownedAuditEntities?: AuditUniverseOrderByRelationAggregateInput
     createdAuditEntities?: AuditUniverseOrderByRelationAggregateInput
     updatedAuditEntities?: AuditUniverseOrderByRelationAggregateInput
+    ownedRisks?: RiskOrderByRelationAggregateInput
+    createdRisks?: RiskOrderByRelationAggregateInput
+    updatedRisks?: RiskOrderByRelationAggregateInput
+    assignedActions?: RiskActionOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -8755,6 +11538,10 @@ export namespace Prisma {
     ownedAuditEntities?: AuditUniverseListRelationFilter
     createdAuditEntities?: AuditUniverseListRelationFilter
     updatedAuditEntities?: AuditUniverseListRelationFilter
+    ownedRisks?: RiskListRelationFilter
+    createdRisks?: RiskListRelationFilter
+    updatedRisks?: RiskListRelationFilter
+    assignedActions?: RiskActionListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -9095,6 +11882,7 @@ export namespace Prisma {
     owner?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    risks?: RiskListRelationFilter
   }
 
   export type AuditUniverseOrderByWithRelationInput = {
@@ -9119,6 +11907,7 @@ export namespace Prisma {
     owner?: UserOrderByWithRelationInput
     createdBy?: UserOrderByWithRelationInput
     updatedBy?: UserOrderByWithRelationInput
+    risks?: RiskOrderByRelationAggregateInput
   }
 
   export type AuditUniverseWhereUniqueInput = Prisma.AtLeast<{
@@ -9146,6 +11935,7 @@ export namespace Prisma {
     owner?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    risks?: RiskListRelationFilter
   }, "id" | "code">
 
   export type AuditUniverseOrderByWithAggregationInput = {
@@ -9192,6 +11982,233 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"AuditUniverse"> | Date | string
   }
 
+  export type RiskWhereInput = {
+    AND?: RiskWhereInput | RiskWhereInput[]
+    OR?: RiskWhereInput[]
+    NOT?: RiskWhereInput | RiskWhereInput[]
+    id?: UuidFilter<"Risk"> | string
+    title?: StringFilter<"Risk"> | string
+    description?: StringNullableFilter<"Risk"> | string | null
+    auditEntityId?: UuidFilter<"Risk"> | string
+    inherentLikelihood?: IntFilter<"Risk"> | number
+    inherentImpact?: IntFilter<"Risk"> | number
+    inherentScore?: IntFilter<"Risk"> | number
+    inherentLevel?: EnumRiskLevelFilter<"Risk"> | $Enums.RiskLevel
+    existingControls?: StringNullableFilter<"Risk"> | string | null
+    controlEffectiveness?: IntFilter<"Risk"> | number
+    residualScore?: IntFilter<"Risk"> | number
+    residualLevel?: EnumRiskLevelFilter<"Risk"> | $Enums.RiskLevel
+    status?: EnumRiskStatusFilter<"Risk"> | $Enums.RiskStatus
+    riskCategory?: StringNullableFilter<"Risk"> | string | null
+    notes?: StringNullableFilter<"Risk"> | string | null
+    ownerId?: UuidNullableFilter<"Risk"> | string | null
+    createdById?: UuidNullableFilter<"Risk"> | string | null
+    updatedById?: UuidNullableFilter<"Risk"> | string | null
+    createdAt?: DateTimeFilter<"Risk"> | Date | string
+    updatedAt?: DateTimeFilter<"Risk"> | Date | string
+    auditEntity?: XOR<AuditUniverseRelationFilter, AuditUniverseWhereInput>
+    owner?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    actions?: RiskActionListRelationFilter
+  }
+
+  export type RiskOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    auditEntityId?: SortOrder
+    inherentLikelihood?: SortOrder
+    inherentImpact?: SortOrder
+    inherentScore?: SortOrder
+    inherentLevel?: SortOrder
+    existingControls?: SortOrderInput | SortOrder
+    controlEffectiveness?: SortOrder
+    residualScore?: SortOrder
+    residualLevel?: SortOrder
+    status?: SortOrder
+    riskCategory?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    ownerId?: SortOrderInput | SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    auditEntity?: AuditUniverseOrderByWithRelationInput
+    owner?: UserOrderByWithRelationInput
+    createdBy?: UserOrderByWithRelationInput
+    updatedBy?: UserOrderByWithRelationInput
+    actions?: RiskActionOrderByRelationAggregateInput
+  }
+
+  export type RiskWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: RiskWhereInput | RiskWhereInput[]
+    OR?: RiskWhereInput[]
+    NOT?: RiskWhereInput | RiskWhereInput[]
+    title?: StringFilter<"Risk"> | string
+    description?: StringNullableFilter<"Risk"> | string | null
+    auditEntityId?: UuidFilter<"Risk"> | string
+    inherentLikelihood?: IntFilter<"Risk"> | number
+    inherentImpact?: IntFilter<"Risk"> | number
+    inherentScore?: IntFilter<"Risk"> | number
+    inherentLevel?: EnumRiskLevelFilter<"Risk"> | $Enums.RiskLevel
+    existingControls?: StringNullableFilter<"Risk"> | string | null
+    controlEffectiveness?: IntFilter<"Risk"> | number
+    residualScore?: IntFilter<"Risk"> | number
+    residualLevel?: EnumRiskLevelFilter<"Risk"> | $Enums.RiskLevel
+    status?: EnumRiskStatusFilter<"Risk"> | $Enums.RiskStatus
+    riskCategory?: StringNullableFilter<"Risk"> | string | null
+    notes?: StringNullableFilter<"Risk"> | string | null
+    ownerId?: UuidNullableFilter<"Risk"> | string | null
+    createdById?: UuidNullableFilter<"Risk"> | string | null
+    updatedById?: UuidNullableFilter<"Risk"> | string | null
+    createdAt?: DateTimeFilter<"Risk"> | Date | string
+    updatedAt?: DateTimeFilter<"Risk"> | Date | string
+    auditEntity?: XOR<AuditUniverseRelationFilter, AuditUniverseWhereInput>
+    owner?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    actions?: RiskActionListRelationFilter
+  }, "id">
+
+  export type RiskOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    auditEntityId?: SortOrder
+    inherentLikelihood?: SortOrder
+    inherentImpact?: SortOrder
+    inherentScore?: SortOrder
+    inherentLevel?: SortOrder
+    existingControls?: SortOrderInput | SortOrder
+    controlEffectiveness?: SortOrder
+    residualScore?: SortOrder
+    residualLevel?: SortOrder
+    status?: SortOrder
+    riskCategory?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    ownerId?: SortOrderInput | SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: RiskCountOrderByAggregateInput
+    _avg?: RiskAvgOrderByAggregateInput
+    _max?: RiskMaxOrderByAggregateInput
+    _min?: RiskMinOrderByAggregateInput
+    _sum?: RiskSumOrderByAggregateInput
+  }
+
+  export type RiskScalarWhereWithAggregatesInput = {
+    AND?: RiskScalarWhereWithAggregatesInput | RiskScalarWhereWithAggregatesInput[]
+    OR?: RiskScalarWhereWithAggregatesInput[]
+    NOT?: RiskScalarWhereWithAggregatesInput | RiskScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"Risk"> | string
+    title?: StringWithAggregatesFilter<"Risk"> | string
+    description?: StringNullableWithAggregatesFilter<"Risk"> | string | null
+    auditEntityId?: UuidWithAggregatesFilter<"Risk"> | string
+    inherentLikelihood?: IntWithAggregatesFilter<"Risk"> | number
+    inherentImpact?: IntWithAggregatesFilter<"Risk"> | number
+    inherentScore?: IntWithAggregatesFilter<"Risk"> | number
+    inherentLevel?: EnumRiskLevelWithAggregatesFilter<"Risk"> | $Enums.RiskLevel
+    existingControls?: StringNullableWithAggregatesFilter<"Risk"> | string | null
+    controlEffectiveness?: IntWithAggregatesFilter<"Risk"> | number
+    residualScore?: IntWithAggregatesFilter<"Risk"> | number
+    residualLevel?: EnumRiskLevelWithAggregatesFilter<"Risk"> | $Enums.RiskLevel
+    status?: EnumRiskStatusWithAggregatesFilter<"Risk"> | $Enums.RiskStatus
+    riskCategory?: StringNullableWithAggregatesFilter<"Risk"> | string | null
+    notes?: StringNullableWithAggregatesFilter<"Risk"> | string | null
+    ownerId?: UuidNullableWithAggregatesFilter<"Risk"> | string | null
+    createdById?: UuidNullableWithAggregatesFilter<"Risk"> | string | null
+    updatedById?: UuidNullableWithAggregatesFilter<"Risk"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Risk"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Risk"> | Date | string
+  }
+
+  export type RiskActionWhereInput = {
+    AND?: RiskActionWhereInput | RiskActionWhereInput[]
+    OR?: RiskActionWhereInput[]
+    NOT?: RiskActionWhereInput | RiskActionWhereInput[]
+    id?: UuidFilter<"RiskAction"> | string
+    riskId?: UuidFilter<"RiskAction"> | string
+    title?: StringFilter<"RiskAction"> | string
+    description?: StringNullableFilter<"RiskAction"> | string | null
+    assigneeId?: UuidNullableFilter<"RiskAction"> | string | null
+    dueDate?: DateTimeNullableFilter<"RiskAction"> | Date | string | null
+    completedAt?: DateTimeNullableFilter<"RiskAction"> | Date | string | null
+    status?: EnumActionStatusFilter<"RiskAction"> | $Enums.ActionStatus
+    createdAt?: DateTimeFilter<"RiskAction"> | Date | string
+    updatedAt?: DateTimeFilter<"RiskAction"> | Date | string
+    risk?: XOR<RiskRelationFilter, RiskWhereInput>
+    assignee?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+  }
+
+  export type RiskActionOrderByWithRelationInput = {
+    id?: SortOrder
+    riskId?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    assigneeId?: SortOrderInput | SortOrder
+    dueDate?: SortOrderInput | SortOrder
+    completedAt?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    risk?: RiskOrderByWithRelationInput
+    assignee?: UserOrderByWithRelationInput
+  }
+
+  export type RiskActionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: RiskActionWhereInput | RiskActionWhereInput[]
+    OR?: RiskActionWhereInput[]
+    NOT?: RiskActionWhereInput | RiskActionWhereInput[]
+    riskId?: UuidFilter<"RiskAction"> | string
+    title?: StringFilter<"RiskAction"> | string
+    description?: StringNullableFilter<"RiskAction"> | string | null
+    assigneeId?: UuidNullableFilter<"RiskAction"> | string | null
+    dueDate?: DateTimeNullableFilter<"RiskAction"> | Date | string | null
+    completedAt?: DateTimeNullableFilter<"RiskAction"> | Date | string | null
+    status?: EnumActionStatusFilter<"RiskAction"> | $Enums.ActionStatus
+    createdAt?: DateTimeFilter<"RiskAction"> | Date | string
+    updatedAt?: DateTimeFilter<"RiskAction"> | Date | string
+    risk?: XOR<RiskRelationFilter, RiskWhereInput>
+    assignee?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+  }, "id">
+
+  export type RiskActionOrderByWithAggregationInput = {
+    id?: SortOrder
+    riskId?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    assigneeId?: SortOrderInput | SortOrder
+    dueDate?: SortOrderInput | SortOrder
+    completedAt?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: RiskActionCountOrderByAggregateInput
+    _max?: RiskActionMaxOrderByAggregateInput
+    _min?: RiskActionMinOrderByAggregateInput
+  }
+
+  export type RiskActionScalarWhereWithAggregatesInput = {
+    AND?: RiskActionScalarWhereWithAggregatesInput | RiskActionScalarWhereWithAggregatesInput[]
+    OR?: RiskActionScalarWhereWithAggregatesInput[]
+    NOT?: RiskActionScalarWhereWithAggregatesInput | RiskActionScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"RiskAction"> | string
+    riskId?: UuidWithAggregatesFilter<"RiskAction"> | string
+    title?: StringWithAggregatesFilter<"RiskAction"> | string
+    description?: StringNullableWithAggregatesFilter<"RiskAction"> | string | null
+    assigneeId?: UuidNullableWithAggregatesFilter<"RiskAction"> | string | null
+    dueDate?: DateTimeNullableWithAggregatesFilter<"RiskAction"> | Date | string | null
+    completedAt?: DateTimeNullableWithAggregatesFilter<"RiskAction"> | Date | string | null
+    status?: EnumActionStatusWithAggregatesFilter<"RiskAction"> | $Enums.ActionStatus
+    createdAt?: DateTimeWithAggregatesFilter<"RiskAction"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"RiskAction"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     firstName: string
@@ -9206,6 +12223,10 @@ export namespace Prisma {
     ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
     createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
     updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -9222,6 +12243,10 @@ export namespace Prisma {
     ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
     createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
     updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
   }
 
   export type UserUpdateInput = {
@@ -9238,6 +12263,10 @@ export namespace Prisma {
     ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
     createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
     updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -9254,6 +12283,10 @@ export namespace Prisma {
     ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
     createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
     updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -9598,6 +12631,7 @@ export namespace Prisma {
     owner?: UserCreateNestedOneWithoutOwnedAuditEntitiesInput
     createdBy?: UserCreateNestedOneWithoutCreatedAuditEntitiesInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedAuditEntitiesInput
+    risks?: RiskCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateInput = {
@@ -9618,6 +12652,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     children?: AuditUniverseUncheckedCreateNestedManyWithoutParentInput
+    risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUpdateInput = {
@@ -9638,6 +12673,7 @@ export namespace Prisma {
     owner?: UserUpdateOneWithoutOwnedAuditEntitiesNestedInput
     createdBy?: UserUpdateOneWithoutCreatedAuditEntitiesNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedAuditEntitiesNestedInput
+    risks?: RiskUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateInput = {
@@ -9658,6 +12694,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: AuditUniverseUncheckedUpdateManyWithoutParentNestedInput
+    risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseCreateManyInput = {
@@ -9709,6 +12746,256 @@ export namespace Prisma {
     ownerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RiskCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    inherentLikelihood?: number
+    inherentImpact?: number
+    inherentScore?: number
+    inherentLevel?: $Enums.RiskLevel
+    existingControls?: string | null
+    controlEffectiveness?: number
+    residualScore?: number
+    residualLevel?: $Enums.RiskLevel
+    status?: $Enums.RiskStatus
+    riskCategory?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auditEntity: AuditUniverseCreateNestedOneWithoutRisksInput
+    owner?: UserCreateNestedOneWithoutOwnedRisksInput
+    createdBy?: UserCreateNestedOneWithoutCreatedRisksInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedRisksInput
+    actions?: RiskActionCreateNestedManyWithoutRiskInput
+  }
+
+  export type RiskUncheckedCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    auditEntityId: string
+    inherentLikelihood?: number
+    inherentImpact?: number
+    inherentScore?: number
+    inherentLevel?: $Enums.RiskLevel
+    existingControls?: string | null
+    controlEffectiveness?: number
+    residualScore?: number
+    residualLevel?: $Enums.RiskLevel
+    status?: $Enums.RiskStatus
+    riskCategory?: string | null
+    notes?: string | null
+    ownerId?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    actions?: RiskActionUncheckedCreateNestedManyWithoutRiskInput
+  }
+
+  export type RiskUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    inherentLikelihood?: IntFieldUpdateOperationsInput | number
+    inherentImpact?: IntFieldUpdateOperationsInput | number
+    inherentScore?: IntFieldUpdateOperationsInput | number
+    inherentLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    existingControls?: NullableStringFieldUpdateOperationsInput | string | null
+    controlEffectiveness?: IntFieldUpdateOperationsInput | number
+    residualScore?: IntFieldUpdateOperationsInput | number
+    residualLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    status?: EnumRiskStatusFieldUpdateOperationsInput | $Enums.RiskStatus
+    riskCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutRisksNestedInput
+    owner?: UserUpdateOneWithoutOwnedRisksNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedRisksNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedRisksNestedInput
+    actions?: RiskActionUpdateManyWithoutRiskNestedInput
+  }
+
+  export type RiskUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    inherentLikelihood?: IntFieldUpdateOperationsInput | number
+    inherentImpact?: IntFieldUpdateOperationsInput | number
+    inherentScore?: IntFieldUpdateOperationsInput | number
+    inherentLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    existingControls?: NullableStringFieldUpdateOperationsInput | string | null
+    controlEffectiveness?: IntFieldUpdateOperationsInput | number
+    residualScore?: IntFieldUpdateOperationsInput | number
+    residualLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    status?: EnumRiskStatusFieldUpdateOperationsInput | $Enums.RiskStatus
+    riskCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    actions?: RiskActionUncheckedUpdateManyWithoutRiskNestedInput
+  }
+
+  export type RiskCreateManyInput = {
+    id?: string
+    title: string
+    description?: string | null
+    auditEntityId: string
+    inherentLikelihood?: number
+    inherentImpact?: number
+    inherentScore?: number
+    inherentLevel?: $Enums.RiskLevel
+    existingControls?: string | null
+    controlEffectiveness?: number
+    residualScore?: number
+    residualLevel?: $Enums.RiskLevel
+    status?: $Enums.RiskStatus
+    riskCategory?: string | null
+    notes?: string | null
+    ownerId?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RiskUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    inherentLikelihood?: IntFieldUpdateOperationsInput | number
+    inherentImpact?: IntFieldUpdateOperationsInput | number
+    inherentScore?: IntFieldUpdateOperationsInput | number
+    inherentLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    existingControls?: NullableStringFieldUpdateOperationsInput | string | null
+    controlEffectiveness?: IntFieldUpdateOperationsInput | number
+    residualScore?: IntFieldUpdateOperationsInput | number
+    residualLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    status?: EnumRiskStatusFieldUpdateOperationsInput | $Enums.RiskStatus
+    riskCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RiskUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    inherentLikelihood?: IntFieldUpdateOperationsInput | number
+    inherentImpact?: IntFieldUpdateOperationsInput | number
+    inherentScore?: IntFieldUpdateOperationsInput | number
+    inherentLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    existingControls?: NullableStringFieldUpdateOperationsInput | string | null
+    controlEffectiveness?: IntFieldUpdateOperationsInput | number
+    residualScore?: IntFieldUpdateOperationsInput | number
+    residualLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    status?: EnumRiskStatusFieldUpdateOperationsInput | $Enums.RiskStatus
+    riskCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RiskActionCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    dueDate?: Date | string | null
+    completedAt?: Date | string | null
+    status?: $Enums.ActionStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    risk: RiskCreateNestedOneWithoutActionsInput
+    assignee?: UserCreateNestedOneWithoutAssignedActionsInput
+  }
+
+  export type RiskActionUncheckedCreateInput = {
+    id?: string
+    riskId: string
+    title: string
+    description?: string | null
+    assigneeId?: string | null
+    dueDate?: Date | string | null
+    completedAt?: Date | string | null
+    status?: $Enums.ActionStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RiskActionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumActionStatusFieldUpdateOperationsInput | $Enums.ActionStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    risk?: RiskUpdateOneRequiredWithoutActionsNestedInput
+    assignee?: UserUpdateOneWithoutAssignedActionsNestedInput
+  }
+
+  export type RiskActionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    riskId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumActionStatusFieldUpdateOperationsInput | $Enums.ActionStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RiskActionCreateManyInput = {
+    id?: string
+    riskId: string
+    title: string
+    description?: string | null
+    assigneeId?: string | null
+    dueDate?: Date | string | null
+    completedAt?: Date | string | null
+    status?: $Enums.ActionStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RiskActionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumActionStatusFieldUpdateOperationsInput | $Enums.ActionStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RiskActionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    riskId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumActionStatusFieldUpdateOperationsInput | $Enums.ActionStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9779,6 +13066,18 @@ export namespace Prisma {
     none?: AuditUniverseWhereInput
   }
 
+  export type RiskListRelationFilter = {
+    every?: RiskWhereInput
+    some?: RiskWhereInput
+    none?: RiskWhereInput
+  }
+
+  export type RiskActionListRelationFilter = {
+    every?: RiskActionWhereInput
+    some?: RiskActionWhereInput
+    none?: RiskActionWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -9789,6 +13088,14 @@ export namespace Prisma {
   }
 
   export type AuditUniverseOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RiskOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RiskActionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -10258,6 +13565,218 @@ export namespace Prisma {
     _max?: NestedEnumAuditEntityStatusFilter<$PrismaModel>
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type EnumRiskLevelFilter<$PrismaModel = never> = {
+    equals?: $Enums.RiskLevel | EnumRiskLevelFieldRefInput<$PrismaModel>
+    in?: $Enums.RiskLevel[] | ListEnumRiskLevelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RiskLevel[] | ListEnumRiskLevelFieldRefInput<$PrismaModel>
+    not?: NestedEnumRiskLevelFilter<$PrismaModel> | $Enums.RiskLevel
+  }
+
+  export type EnumRiskStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.RiskStatus | EnumRiskStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.RiskStatus[] | ListEnumRiskStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RiskStatus[] | ListEnumRiskStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumRiskStatusFilter<$PrismaModel> | $Enums.RiskStatus
+  }
+
+  export type AuditUniverseRelationFilter = {
+    is?: AuditUniverseWhereInput
+    isNot?: AuditUniverseWhereInput
+  }
+
+  export type RiskCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    auditEntityId?: SortOrder
+    inherentLikelihood?: SortOrder
+    inherentImpact?: SortOrder
+    inherentScore?: SortOrder
+    inherentLevel?: SortOrder
+    existingControls?: SortOrder
+    controlEffectiveness?: SortOrder
+    residualScore?: SortOrder
+    residualLevel?: SortOrder
+    status?: SortOrder
+    riskCategory?: SortOrder
+    notes?: SortOrder
+    ownerId?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RiskAvgOrderByAggregateInput = {
+    inherentLikelihood?: SortOrder
+    inherentImpact?: SortOrder
+    inherentScore?: SortOrder
+    controlEffectiveness?: SortOrder
+    residualScore?: SortOrder
+  }
+
+  export type RiskMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    auditEntityId?: SortOrder
+    inherentLikelihood?: SortOrder
+    inherentImpact?: SortOrder
+    inherentScore?: SortOrder
+    inherentLevel?: SortOrder
+    existingControls?: SortOrder
+    controlEffectiveness?: SortOrder
+    residualScore?: SortOrder
+    residualLevel?: SortOrder
+    status?: SortOrder
+    riskCategory?: SortOrder
+    notes?: SortOrder
+    ownerId?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RiskMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    auditEntityId?: SortOrder
+    inherentLikelihood?: SortOrder
+    inherentImpact?: SortOrder
+    inherentScore?: SortOrder
+    inherentLevel?: SortOrder
+    existingControls?: SortOrder
+    controlEffectiveness?: SortOrder
+    residualScore?: SortOrder
+    residualLevel?: SortOrder
+    status?: SortOrder
+    riskCategory?: SortOrder
+    notes?: SortOrder
+    ownerId?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RiskSumOrderByAggregateInput = {
+    inherentLikelihood?: SortOrder
+    inherentImpact?: SortOrder
+    inherentScore?: SortOrder
+    controlEffectiveness?: SortOrder
+    residualScore?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type EnumRiskLevelWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RiskLevel | EnumRiskLevelFieldRefInput<$PrismaModel>
+    in?: $Enums.RiskLevel[] | ListEnumRiskLevelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RiskLevel[] | ListEnumRiskLevelFieldRefInput<$PrismaModel>
+    not?: NestedEnumRiskLevelWithAggregatesFilter<$PrismaModel> | $Enums.RiskLevel
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRiskLevelFilter<$PrismaModel>
+    _max?: NestedEnumRiskLevelFilter<$PrismaModel>
+  }
+
+  export type EnumRiskStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RiskStatus | EnumRiskStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.RiskStatus[] | ListEnumRiskStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RiskStatus[] | ListEnumRiskStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumRiskStatusWithAggregatesFilter<$PrismaModel> | $Enums.RiskStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRiskStatusFilter<$PrismaModel>
+    _max?: NestedEnumRiskStatusFilter<$PrismaModel>
+  }
+
+  export type EnumActionStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActionStatus | EnumActionStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ActionStatus[] | ListEnumActionStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ActionStatus[] | ListEnumActionStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumActionStatusFilter<$PrismaModel> | $Enums.ActionStatus
+  }
+
+  export type RiskRelationFilter = {
+    is?: RiskWhereInput
+    isNot?: RiskWhereInput
+  }
+
+  export type RiskActionCountOrderByAggregateInput = {
+    id?: SortOrder
+    riskId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    assigneeId?: SortOrder
+    dueDate?: SortOrder
+    completedAt?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RiskActionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    riskId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    assigneeId?: SortOrder
+    dueDate?: SortOrder
+    completedAt?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RiskActionMinOrderByAggregateInput = {
+    id?: SortOrder
+    riskId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    assigneeId?: SortOrder
+    dueDate?: SortOrder
+    completedAt?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumActionStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActionStatus | EnumActionStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ActionStatus[] | ListEnumActionStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ActionStatus[] | ListEnumActionStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumActionStatusWithAggregatesFilter<$PrismaModel> | $Enums.ActionStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumActionStatusFilter<$PrismaModel>
+    _max?: NestedEnumActionStatusFilter<$PrismaModel>
+  }
+
   export type UserRoleCreateNestedManyWithoutUserInput = {
     create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
@@ -10286,6 +13805,34 @@ export namespace Prisma {
     connect?: AuditUniverseWhereUniqueInput | AuditUniverseWhereUniqueInput[]
   }
 
+  export type RiskCreateNestedManyWithoutOwnerInput = {
+    create?: XOR<RiskCreateWithoutOwnerInput, RiskUncheckedCreateWithoutOwnerInput> | RiskCreateWithoutOwnerInput[] | RiskUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: RiskCreateOrConnectWithoutOwnerInput | RiskCreateOrConnectWithoutOwnerInput[]
+    createMany?: RiskCreateManyOwnerInputEnvelope
+    connect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+  }
+
+  export type RiskCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<RiskCreateWithoutCreatedByInput, RiskUncheckedCreateWithoutCreatedByInput> | RiskCreateWithoutCreatedByInput[] | RiskUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: RiskCreateOrConnectWithoutCreatedByInput | RiskCreateOrConnectWithoutCreatedByInput[]
+    createMany?: RiskCreateManyCreatedByInputEnvelope
+    connect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+  }
+
+  export type RiskCreateNestedManyWithoutUpdatedByInput = {
+    create?: XOR<RiskCreateWithoutUpdatedByInput, RiskUncheckedCreateWithoutUpdatedByInput> | RiskCreateWithoutUpdatedByInput[] | RiskUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: RiskCreateOrConnectWithoutUpdatedByInput | RiskCreateOrConnectWithoutUpdatedByInput[]
+    createMany?: RiskCreateManyUpdatedByInputEnvelope
+    connect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+  }
+
+  export type RiskActionCreateNestedManyWithoutAssigneeInput = {
+    create?: XOR<RiskActionCreateWithoutAssigneeInput, RiskActionUncheckedCreateWithoutAssigneeInput> | RiskActionCreateWithoutAssigneeInput[] | RiskActionUncheckedCreateWithoutAssigneeInput[]
+    connectOrCreate?: RiskActionCreateOrConnectWithoutAssigneeInput | RiskActionCreateOrConnectWithoutAssigneeInput[]
+    createMany?: RiskActionCreateManyAssigneeInputEnvelope
+    connect?: RiskActionWhereUniqueInput | RiskActionWhereUniqueInput[]
+  }
+
   export type UserRoleUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
@@ -10312,6 +13859,34 @@ export namespace Prisma {
     connectOrCreate?: AuditUniverseCreateOrConnectWithoutUpdatedByInput | AuditUniverseCreateOrConnectWithoutUpdatedByInput[]
     createMany?: AuditUniverseCreateManyUpdatedByInputEnvelope
     connect?: AuditUniverseWhereUniqueInput | AuditUniverseWhereUniqueInput[]
+  }
+
+  export type RiskUncheckedCreateNestedManyWithoutOwnerInput = {
+    create?: XOR<RiskCreateWithoutOwnerInput, RiskUncheckedCreateWithoutOwnerInput> | RiskCreateWithoutOwnerInput[] | RiskUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: RiskCreateOrConnectWithoutOwnerInput | RiskCreateOrConnectWithoutOwnerInput[]
+    createMany?: RiskCreateManyOwnerInputEnvelope
+    connect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+  }
+
+  export type RiskUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<RiskCreateWithoutCreatedByInput, RiskUncheckedCreateWithoutCreatedByInput> | RiskCreateWithoutCreatedByInput[] | RiskUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: RiskCreateOrConnectWithoutCreatedByInput | RiskCreateOrConnectWithoutCreatedByInput[]
+    createMany?: RiskCreateManyCreatedByInputEnvelope
+    connect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+  }
+
+  export type RiskUncheckedCreateNestedManyWithoutUpdatedByInput = {
+    create?: XOR<RiskCreateWithoutUpdatedByInput, RiskUncheckedCreateWithoutUpdatedByInput> | RiskCreateWithoutUpdatedByInput[] | RiskUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: RiskCreateOrConnectWithoutUpdatedByInput | RiskCreateOrConnectWithoutUpdatedByInput[]
+    createMany?: RiskCreateManyUpdatedByInputEnvelope
+    connect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+  }
+
+  export type RiskActionUncheckedCreateNestedManyWithoutAssigneeInput = {
+    create?: XOR<RiskActionCreateWithoutAssigneeInput, RiskActionUncheckedCreateWithoutAssigneeInput> | RiskActionCreateWithoutAssigneeInput[] | RiskActionUncheckedCreateWithoutAssigneeInput[]
+    connectOrCreate?: RiskActionCreateOrConnectWithoutAssigneeInput | RiskActionCreateOrConnectWithoutAssigneeInput[]
+    createMany?: RiskActionCreateManyAssigneeInputEnvelope
+    connect?: RiskActionWhereUniqueInput | RiskActionWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -10386,6 +13961,62 @@ export namespace Prisma {
     deleteMany?: AuditUniverseScalarWhereInput | AuditUniverseScalarWhereInput[]
   }
 
+  export type RiskUpdateManyWithoutOwnerNestedInput = {
+    create?: XOR<RiskCreateWithoutOwnerInput, RiskUncheckedCreateWithoutOwnerInput> | RiskCreateWithoutOwnerInput[] | RiskUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: RiskCreateOrConnectWithoutOwnerInput | RiskCreateOrConnectWithoutOwnerInput[]
+    upsert?: RiskUpsertWithWhereUniqueWithoutOwnerInput | RiskUpsertWithWhereUniqueWithoutOwnerInput[]
+    createMany?: RiskCreateManyOwnerInputEnvelope
+    set?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    disconnect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    delete?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    connect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    update?: RiskUpdateWithWhereUniqueWithoutOwnerInput | RiskUpdateWithWhereUniqueWithoutOwnerInput[]
+    updateMany?: RiskUpdateManyWithWhereWithoutOwnerInput | RiskUpdateManyWithWhereWithoutOwnerInput[]
+    deleteMany?: RiskScalarWhereInput | RiskScalarWhereInput[]
+  }
+
+  export type RiskUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<RiskCreateWithoutCreatedByInput, RiskUncheckedCreateWithoutCreatedByInput> | RiskCreateWithoutCreatedByInput[] | RiskUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: RiskCreateOrConnectWithoutCreatedByInput | RiskCreateOrConnectWithoutCreatedByInput[]
+    upsert?: RiskUpsertWithWhereUniqueWithoutCreatedByInput | RiskUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: RiskCreateManyCreatedByInputEnvelope
+    set?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    disconnect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    delete?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    connect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    update?: RiskUpdateWithWhereUniqueWithoutCreatedByInput | RiskUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: RiskUpdateManyWithWhereWithoutCreatedByInput | RiskUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: RiskScalarWhereInput | RiskScalarWhereInput[]
+  }
+
+  export type RiskUpdateManyWithoutUpdatedByNestedInput = {
+    create?: XOR<RiskCreateWithoutUpdatedByInput, RiskUncheckedCreateWithoutUpdatedByInput> | RiskCreateWithoutUpdatedByInput[] | RiskUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: RiskCreateOrConnectWithoutUpdatedByInput | RiskCreateOrConnectWithoutUpdatedByInput[]
+    upsert?: RiskUpsertWithWhereUniqueWithoutUpdatedByInput | RiskUpsertWithWhereUniqueWithoutUpdatedByInput[]
+    createMany?: RiskCreateManyUpdatedByInputEnvelope
+    set?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    disconnect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    delete?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    connect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    update?: RiskUpdateWithWhereUniqueWithoutUpdatedByInput | RiskUpdateWithWhereUniqueWithoutUpdatedByInput[]
+    updateMany?: RiskUpdateManyWithWhereWithoutUpdatedByInput | RiskUpdateManyWithWhereWithoutUpdatedByInput[]
+    deleteMany?: RiskScalarWhereInput | RiskScalarWhereInput[]
+  }
+
+  export type RiskActionUpdateManyWithoutAssigneeNestedInput = {
+    create?: XOR<RiskActionCreateWithoutAssigneeInput, RiskActionUncheckedCreateWithoutAssigneeInput> | RiskActionCreateWithoutAssigneeInput[] | RiskActionUncheckedCreateWithoutAssigneeInput[]
+    connectOrCreate?: RiskActionCreateOrConnectWithoutAssigneeInput | RiskActionCreateOrConnectWithoutAssigneeInput[]
+    upsert?: RiskActionUpsertWithWhereUniqueWithoutAssigneeInput | RiskActionUpsertWithWhereUniqueWithoutAssigneeInput[]
+    createMany?: RiskActionCreateManyAssigneeInputEnvelope
+    set?: RiskActionWhereUniqueInput | RiskActionWhereUniqueInput[]
+    disconnect?: RiskActionWhereUniqueInput | RiskActionWhereUniqueInput[]
+    delete?: RiskActionWhereUniqueInput | RiskActionWhereUniqueInput[]
+    connect?: RiskActionWhereUniqueInput | RiskActionWhereUniqueInput[]
+    update?: RiskActionUpdateWithWhereUniqueWithoutAssigneeInput | RiskActionUpdateWithWhereUniqueWithoutAssigneeInput[]
+    updateMany?: RiskActionUpdateManyWithWhereWithoutAssigneeInput | RiskActionUpdateManyWithWhereWithoutAssigneeInput[]
+    deleteMany?: RiskActionScalarWhereInput | RiskActionScalarWhereInput[]
+  }
+
   export type UserRoleUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
@@ -10440,6 +14071,62 @@ export namespace Prisma {
     update?: AuditUniverseUpdateWithWhereUniqueWithoutUpdatedByInput | AuditUniverseUpdateWithWhereUniqueWithoutUpdatedByInput[]
     updateMany?: AuditUniverseUpdateManyWithWhereWithoutUpdatedByInput | AuditUniverseUpdateManyWithWhereWithoutUpdatedByInput[]
     deleteMany?: AuditUniverseScalarWhereInput | AuditUniverseScalarWhereInput[]
+  }
+
+  export type RiskUncheckedUpdateManyWithoutOwnerNestedInput = {
+    create?: XOR<RiskCreateWithoutOwnerInput, RiskUncheckedCreateWithoutOwnerInput> | RiskCreateWithoutOwnerInput[] | RiskUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: RiskCreateOrConnectWithoutOwnerInput | RiskCreateOrConnectWithoutOwnerInput[]
+    upsert?: RiskUpsertWithWhereUniqueWithoutOwnerInput | RiskUpsertWithWhereUniqueWithoutOwnerInput[]
+    createMany?: RiskCreateManyOwnerInputEnvelope
+    set?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    disconnect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    delete?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    connect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    update?: RiskUpdateWithWhereUniqueWithoutOwnerInput | RiskUpdateWithWhereUniqueWithoutOwnerInput[]
+    updateMany?: RiskUpdateManyWithWhereWithoutOwnerInput | RiskUpdateManyWithWhereWithoutOwnerInput[]
+    deleteMany?: RiskScalarWhereInput | RiskScalarWhereInput[]
+  }
+
+  export type RiskUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<RiskCreateWithoutCreatedByInput, RiskUncheckedCreateWithoutCreatedByInput> | RiskCreateWithoutCreatedByInput[] | RiskUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: RiskCreateOrConnectWithoutCreatedByInput | RiskCreateOrConnectWithoutCreatedByInput[]
+    upsert?: RiskUpsertWithWhereUniqueWithoutCreatedByInput | RiskUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: RiskCreateManyCreatedByInputEnvelope
+    set?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    disconnect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    delete?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    connect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    update?: RiskUpdateWithWhereUniqueWithoutCreatedByInput | RiskUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: RiskUpdateManyWithWhereWithoutCreatedByInput | RiskUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: RiskScalarWhereInput | RiskScalarWhereInput[]
+  }
+
+  export type RiskUncheckedUpdateManyWithoutUpdatedByNestedInput = {
+    create?: XOR<RiskCreateWithoutUpdatedByInput, RiskUncheckedCreateWithoutUpdatedByInput> | RiskCreateWithoutUpdatedByInput[] | RiskUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: RiskCreateOrConnectWithoutUpdatedByInput | RiskCreateOrConnectWithoutUpdatedByInput[]
+    upsert?: RiskUpsertWithWhereUniqueWithoutUpdatedByInput | RiskUpsertWithWhereUniqueWithoutUpdatedByInput[]
+    createMany?: RiskCreateManyUpdatedByInputEnvelope
+    set?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    disconnect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    delete?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    connect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    update?: RiskUpdateWithWhereUniqueWithoutUpdatedByInput | RiskUpdateWithWhereUniqueWithoutUpdatedByInput[]
+    updateMany?: RiskUpdateManyWithWhereWithoutUpdatedByInput | RiskUpdateManyWithWhereWithoutUpdatedByInput[]
+    deleteMany?: RiskScalarWhereInput | RiskScalarWhereInput[]
+  }
+
+  export type RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput = {
+    create?: XOR<RiskActionCreateWithoutAssigneeInput, RiskActionUncheckedCreateWithoutAssigneeInput> | RiskActionCreateWithoutAssigneeInput[] | RiskActionUncheckedCreateWithoutAssigneeInput[]
+    connectOrCreate?: RiskActionCreateOrConnectWithoutAssigneeInput | RiskActionCreateOrConnectWithoutAssigneeInput[]
+    upsert?: RiskActionUpsertWithWhereUniqueWithoutAssigneeInput | RiskActionUpsertWithWhereUniqueWithoutAssigneeInput[]
+    createMany?: RiskActionCreateManyAssigneeInputEnvelope
+    set?: RiskActionWhereUniqueInput | RiskActionWhereUniqueInput[]
+    disconnect?: RiskActionWhereUniqueInput | RiskActionWhereUniqueInput[]
+    delete?: RiskActionWhereUniqueInput | RiskActionWhereUniqueInput[]
+    connect?: RiskActionWhereUniqueInput | RiskActionWhereUniqueInput[]
+    update?: RiskActionUpdateWithWhereUniqueWithoutAssigneeInput | RiskActionUpdateWithWhereUniqueWithoutAssigneeInput[]
+    updateMany?: RiskActionUpdateManyWithWhereWithoutAssigneeInput | RiskActionUpdateManyWithWhereWithoutAssigneeInput[]
+    deleteMany?: RiskActionScalarWhereInput | RiskActionScalarWhereInput[]
   }
 
   export type UserRoleCreateNestedManyWithoutRoleInput = {
@@ -10659,11 +14346,25 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type RiskCreateNestedManyWithoutAuditEntityInput = {
+    create?: XOR<RiskCreateWithoutAuditEntityInput, RiskUncheckedCreateWithoutAuditEntityInput> | RiskCreateWithoutAuditEntityInput[] | RiskUncheckedCreateWithoutAuditEntityInput[]
+    connectOrCreate?: RiskCreateOrConnectWithoutAuditEntityInput | RiskCreateOrConnectWithoutAuditEntityInput[]
+    createMany?: RiskCreateManyAuditEntityInputEnvelope
+    connect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+  }
+
   export type AuditUniverseUncheckedCreateNestedManyWithoutParentInput = {
     create?: XOR<AuditUniverseCreateWithoutParentInput, AuditUniverseUncheckedCreateWithoutParentInput> | AuditUniverseCreateWithoutParentInput[] | AuditUniverseUncheckedCreateWithoutParentInput[]
     connectOrCreate?: AuditUniverseCreateOrConnectWithoutParentInput | AuditUniverseCreateOrConnectWithoutParentInput[]
     createMany?: AuditUniverseCreateManyParentInputEnvelope
     connect?: AuditUniverseWhereUniqueInput | AuditUniverseWhereUniqueInput[]
+  }
+
+  export type RiskUncheckedCreateNestedManyWithoutAuditEntityInput = {
+    create?: XOR<RiskCreateWithoutAuditEntityInput, RiskUncheckedCreateWithoutAuditEntityInput> | RiskCreateWithoutAuditEntityInput[] | RiskUncheckedCreateWithoutAuditEntityInput[]
+    connectOrCreate?: RiskCreateOrConnectWithoutAuditEntityInput | RiskCreateOrConnectWithoutAuditEntityInput[]
+    createMany?: RiskCreateManyAuditEntityInputEnvelope
+    connect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
   }
 
   export type EnumAuditEntityTypeFieldUpdateOperationsInput = {
@@ -10728,6 +14429,20 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUpdatedAuditEntitiesInput, UserUpdateWithoutUpdatedAuditEntitiesInput>, UserUncheckedUpdateWithoutUpdatedAuditEntitiesInput>
   }
 
+  export type RiskUpdateManyWithoutAuditEntityNestedInput = {
+    create?: XOR<RiskCreateWithoutAuditEntityInput, RiskUncheckedCreateWithoutAuditEntityInput> | RiskCreateWithoutAuditEntityInput[] | RiskUncheckedCreateWithoutAuditEntityInput[]
+    connectOrCreate?: RiskCreateOrConnectWithoutAuditEntityInput | RiskCreateOrConnectWithoutAuditEntityInput[]
+    upsert?: RiskUpsertWithWhereUniqueWithoutAuditEntityInput | RiskUpsertWithWhereUniqueWithoutAuditEntityInput[]
+    createMany?: RiskCreateManyAuditEntityInputEnvelope
+    set?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    disconnect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    delete?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    connect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    update?: RiskUpdateWithWhereUniqueWithoutAuditEntityInput | RiskUpdateWithWhereUniqueWithoutAuditEntityInput[]
+    updateMany?: RiskUpdateManyWithWhereWithoutAuditEntityInput | RiskUpdateManyWithWhereWithoutAuditEntityInput[]
+    deleteMany?: RiskScalarWhereInput | RiskScalarWhereInput[]
+  }
+
   export type AuditUniverseUncheckedUpdateManyWithoutParentNestedInput = {
     create?: XOR<AuditUniverseCreateWithoutParentInput, AuditUniverseUncheckedCreateWithoutParentInput> | AuditUniverseCreateWithoutParentInput[] | AuditUniverseUncheckedCreateWithoutParentInput[]
     connectOrCreate?: AuditUniverseCreateOrConnectWithoutParentInput | AuditUniverseCreateOrConnectWithoutParentInput[]
@@ -10740,6 +14455,174 @@ export namespace Prisma {
     update?: AuditUniverseUpdateWithWhereUniqueWithoutParentInput | AuditUniverseUpdateWithWhereUniqueWithoutParentInput[]
     updateMany?: AuditUniverseUpdateManyWithWhereWithoutParentInput | AuditUniverseUpdateManyWithWhereWithoutParentInput[]
     deleteMany?: AuditUniverseScalarWhereInput | AuditUniverseScalarWhereInput[]
+  }
+
+  export type RiskUncheckedUpdateManyWithoutAuditEntityNestedInput = {
+    create?: XOR<RiskCreateWithoutAuditEntityInput, RiskUncheckedCreateWithoutAuditEntityInput> | RiskCreateWithoutAuditEntityInput[] | RiskUncheckedCreateWithoutAuditEntityInput[]
+    connectOrCreate?: RiskCreateOrConnectWithoutAuditEntityInput | RiskCreateOrConnectWithoutAuditEntityInput[]
+    upsert?: RiskUpsertWithWhereUniqueWithoutAuditEntityInput | RiskUpsertWithWhereUniqueWithoutAuditEntityInput[]
+    createMany?: RiskCreateManyAuditEntityInputEnvelope
+    set?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    disconnect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    delete?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    connect?: RiskWhereUniqueInput | RiskWhereUniqueInput[]
+    update?: RiskUpdateWithWhereUniqueWithoutAuditEntityInput | RiskUpdateWithWhereUniqueWithoutAuditEntityInput[]
+    updateMany?: RiskUpdateManyWithWhereWithoutAuditEntityInput | RiskUpdateManyWithWhereWithoutAuditEntityInput[]
+    deleteMany?: RiskScalarWhereInput | RiskScalarWhereInput[]
+  }
+
+  export type AuditUniverseCreateNestedOneWithoutRisksInput = {
+    create?: XOR<AuditUniverseCreateWithoutRisksInput, AuditUniverseUncheckedCreateWithoutRisksInput>
+    connectOrCreate?: AuditUniverseCreateOrConnectWithoutRisksInput
+    connect?: AuditUniverseWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutOwnedRisksInput = {
+    create?: XOR<UserCreateWithoutOwnedRisksInput, UserUncheckedCreateWithoutOwnedRisksInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOwnedRisksInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutCreatedRisksInput = {
+    create?: XOR<UserCreateWithoutCreatedRisksInput, UserUncheckedCreateWithoutCreatedRisksInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedRisksInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutUpdatedRisksInput = {
+    create?: XOR<UserCreateWithoutUpdatedRisksInput, UserUncheckedCreateWithoutUpdatedRisksInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUpdatedRisksInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type RiskActionCreateNestedManyWithoutRiskInput = {
+    create?: XOR<RiskActionCreateWithoutRiskInput, RiskActionUncheckedCreateWithoutRiskInput> | RiskActionCreateWithoutRiskInput[] | RiskActionUncheckedCreateWithoutRiskInput[]
+    connectOrCreate?: RiskActionCreateOrConnectWithoutRiskInput | RiskActionCreateOrConnectWithoutRiskInput[]
+    createMany?: RiskActionCreateManyRiskInputEnvelope
+    connect?: RiskActionWhereUniqueInput | RiskActionWhereUniqueInput[]
+  }
+
+  export type RiskActionUncheckedCreateNestedManyWithoutRiskInput = {
+    create?: XOR<RiskActionCreateWithoutRiskInput, RiskActionUncheckedCreateWithoutRiskInput> | RiskActionCreateWithoutRiskInput[] | RiskActionUncheckedCreateWithoutRiskInput[]
+    connectOrCreate?: RiskActionCreateOrConnectWithoutRiskInput | RiskActionCreateOrConnectWithoutRiskInput[]
+    createMany?: RiskActionCreateManyRiskInputEnvelope
+    connect?: RiskActionWhereUniqueInput | RiskActionWhereUniqueInput[]
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type EnumRiskLevelFieldUpdateOperationsInput = {
+    set?: $Enums.RiskLevel
+  }
+
+  export type EnumRiskStatusFieldUpdateOperationsInput = {
+    set?: $Enums.RiskStatus
+  }
+
+  export type AuditUniverseUpdateOneRequiredWithoutRisksNestedInput = {
+    create?: XOR<AuditUniverseCreateWithoutRisksInput, AuditUniverseUncheckedCreateWithoutRisksInput>
+    connectOrCreate?: AuditUniverseCreateOrConnectWithoutRisksInput
+    upsert?: AuditUniverseUpsertWithoutRisksInput
+    connect?: AuditUniverseWhereUniqueInput
+    update?: XOR<XOR<AuditUniverseUpdateToOneWithWhereWithoutRisksInput, AuditUniverseUpdateWithoutRisksInput>, AuditUniverseUncheckedUpdateWithoutRisksInput>
+  }
+
+  export type UserUpdateOneWithoutOwnedRisksNestedInput = {
+    create?: XOR<UserCreateWithoutOwnedRisksInput, UserUncheckedCreateWithoutOwnedRisksInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOwnedRisksInput
+    upsert?: UserUpsertWithoutOwnedRisksInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOwnedRisksInput, UserUpdateWithoutOwnedRisksInput>, UserUncheckedUpdateWithoutOwnedRisksInput>
+  }
+
+  export type UserUpdateOneWithoutCreatedRisksNestedInput = {
+    create?: XOR<UserCreateWithoutCreatedRisksInput, UserUncheckedCreateWithoutCreatedRisksInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedRisksInput
+    upsert?: UserUpsertWithoutCreatedRisksInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedRisksInput, UserUpdateWithoutCreatedRisksInput>, UserUncheckedUpdateWithoutCreatedRisksInput>
+  }
+
+  export type UserUpdateOneWithoutUpdatedRisksNestedInput = {
+    create?: XOR<UserCreateWithoutUpdatedRisksInput, UserUncheckedCreateWithoutUpdatedRisksInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUpdatedRisksInput
+    upsert?: UserUpsertWithoutUpdatedRisksInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUpdatedRisksInput, UserUpdateWithoutUpdatedRisksInput>, UserUncheckedUpdateWithoutUpdatedRisksInput>
+  }
+
+  export type RiskActionUpdateManyWithoutRiskNestedInput = {
+    create?: XOR<RiskActionCreateWithoutRiskInput, RiskActionUncheckedCreateWithoutRiskInput> | RiskActionCreateWithoutRiskInput[] | RiskActionUncheckedCreateWithoutRiskInput[]
+    connectOrCreate?: RiskActionCreateOrConnectWithoutRiskInput | RiskActionCreateOrConnectWithoutRiskInput[]
+    upsert?: RiskActionUpsertWithWhereUniqueWithoutRiskInput | RiskActionUpsertWithWhereUniqueWithoutRiskInput[]
+    createMany?: RiskActionCreateManyRiskInputEnvelope
+    set?: RiskActionWhereUniqueInput | RiskActionWhereUniqueInput[]
+    disconnect?: RiskActionWhereUniqueInput | RiskActionWhereUniqueInput[]
+    delete?: RiskActionWhereUniqueInput | RiskActionWhereUniqueInput[]
+    connect?: RiskActionWhereUniqueInput | RiskActionWhereUniqueInput[]
+    update?: RiskActionUpdateWithWhereUniqueWithoutRiskInput | RiskActionUpdateWithWhereUniqueWithoutRiskInput[]
+    updateMany?: RiskActionUpdateManyWithWhereWithoutRiskInput | RiskActionUpdateManyWithWhereWithoutRiskInput[]
+    deleteMany?: RiskActionScalarWhereInput | RiskActionScalarWhereInput[]
+  }
+
+  export type RiskActionUncheckedUpdateManyWithoutRiskNestedInput = {
+    create?: XOR<RiskActionCreateWithoutRiskInput, RiskActionUncheckedCreateWithoutRiskInput> | RiskActionCreateWithoutRiskInput[] | RiskActionUncheckedCreateWithoutRiskInput[]
+    connectOrCreate?: RiskActionCreateOrConnectWithoutRiskInput | RiskActionCreateOrConnectWithoutRiskInput[]
+    upsert?: RiskActionUpsertWithWhereUniqueWithoutRiskInput | RiskActionUpsertWithWhereUniqueWithoutRiskInput[]
+    createMany?: RiskActionCreateManyRiskInputEnvelope
+    set?: RiskActionWhereUniqueInput | RiskActionWhereUniqueInput[]
+    disconnect?: RiskActionWhereUniqueInput | RiskActionWhereUniqueInput[]
+    delete?: RiskActionWhereUniqueInput | RiskActionWhereUniqueInput[]
+    connect?: RiskActionWhereUniqueInput | RiskActionWhereUniqueInput[]
+    update?: RiskActionUpdateWithWhereUniqueWithoutRiskInput | RiskActionUpdateWithWhereUniqueWithoutRiskInput[]
+    updateMany?: RiskActionUpdateManyWithWhereWithoutRiskInput | RiskActionUpdateManyWithWhereWithoutRiskInput[]
+    deleteMany?: RiskActionScalarWhereInput | RiskActionScalarWhereInput[]
+  }
+
+  export type RiskCreateNestedOneWithoutActionsInput = {
+    create?: XOR<RiskCreateWithoutActionsInput, RiskUncheckedCreateWithoutActionsInput>
+    connectOrCreate?: RiskCreateOrConnectWithoutActionsInput
+    connect?: RiskWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutAssignedActionsInput = {
+    create?: XOR<UserCreateWithoutAssignedActionsInput, UserUncheckedCreateWithoutAssignedActionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAssignedActionsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumActionStatusFieldUpdateOperationsInput = {
+    set?: $Enums.ActionStatus
+  }
+
+  export type RiskUpdateOneRequiredWithoutActionsNestedInput = {
+    create?: XOR<RiskCreateWithoutActionsInput, RiskUncheckedCreateWithoutActionsInput>
+    connectOrCreate?: RiskCreateOrConnectWithoutActionsInput
+    upsert?: RiskUpsertWithoutActionsInput
+    connect?: RiskWhereUniqueInput
+    update?: XOR<XOR<RiskUpdateToOneWithWhereWithoutActionsInput, RiskUpdateWithoutActionsInput>, RiskUncheckedUpdateWithoutActionsInput>
+  }
+
+  export type UserUpdateOneWithoutAssignedActionsNestedInput = {
+    create?: XOR<UserCreateWithoutAssignedActionsInput, UserUncheckedCreateWithoutAssignedActionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAssignedActionsInput
+    upsert?: UserUpsertWithoutAssignedActionsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAssignedActionsInput, UserUpdateWithoutAssignedActionsInput>, UserUncheckedUpdateWithoutAssignedActionsInput>
   }
 
   export type NestedUuidFilter<$PrismaModel = never> = {
@@ -10995,6 +14878,84 @@ export namespace Prisma {
     _max?: NestedEnumAuditEntityStatusFilter<$PrismaModel>
   }
 
+  export type NestedEnumRiskLevelFilter<$PrismaModel = never> = {
+    equals?: $Enums.RiskLevel | EnumRiskLevelFieldRefInput<$PrismaModel>
+    in?: $Enums.RiskLevel[] | ListEnumRiskLevelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RiskLevel[] | ListEnumRiskLevelFieldRefInput<$PrismaModel>
+    not?: NestedEnumRiskLevelFilter<$PrismaModel> | $Enums.RiskLevel
+  }
+
+  export type NestedEnumRiskStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.RiskStatus | EnumRiskStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.RiskStatus[] | ListEnumRiskStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RiskStatus[] | ListEnumRiskStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumRiskStatusFilter<$PrismaModel> | $Enums.RiskStatus
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedEnumRiskLevelWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RiskLevel | EnumRiskLevelFieldRefInput<$PrismaModel>
+    in?: $Enums.RiskLevel[] | ListEnumRiskLevelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RiskLevel[] | ListEnumRiskLevelFieldRefInput<$PrismaModel>
+    not?: NestedEnumRiskLevelWithAggregatesFilter<$PrismaModel> | $Enums.RiskLevel
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRiskLevelFilter<$PrismaModel>
+    _max?: NestedEnumRiskLevelFilter<$PrismaModel>
+  }
+
+  export type NestedEnumRiskStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RiskStatus | EnumRiskStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.RiskStatus[] | ListEnumRiskStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RiskStatus[] | ListEnumRiskStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumRiskStatusWithAggregatesFilter<$PrismaModel> | $Enums.RiskStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRiskStatusFilter<$PrismaModel>
+    _max?: NestedEnumRiskStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumActionStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActionStatus | EnumActionStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ActionStatus[] | ListEnumActionStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ActionStatus[] | ListEnumActionStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumActionStatusFilter<$PrismaModel> | $Enums.ActionStatus
+  }
+
+  export type NestedEnumActionStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActionStatus | EnumActionStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ActionStatus[] | ListEnumActionStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ActionStatus[] | ListEnumActionStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumActionStatusWithAggregatesFilter<$PrismaModel> | $Enums.ActionStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumActionStatusFilter<$PrismaModel>
+    _max?: NestedEnumActionStatusFilter<$PrismaModel>
+  }
+
   export type UserRoleCreateWithoutUserInput = {
     assignedAt?: Date | string
     role: RoleCreateNestedOneWithoutUserRolesInput
@@ -11032,6 +14993,7 @@ export namespace Prisma {
     children?: AuditUniverseCreateNestedManyWithoutParentInput
     createdBy?: UserCreateNestedOneWithoutCreatedAuditEntitiesInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedAuditEntitiesInput
+    risks?: RiskCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutOwnerInput = {
@@ -11051,6 +15013,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     children?: AuditUniverseUncheckedCreateNestedManyWithoutParentInput
+    risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutOwnerInput = {
@@ -11080,6 +15043,7 @@ export namespace Prisma {
     children?: AuditUniverseCreateNestedManyWithoutParentInput
     owner?: UserCreateNestedOneWithoutOwnedAuditEntitiesInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedAuditEntitiesInput
+    risks?: RiskCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutCreatedByInput = {
@@ -11099,6 +15063,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     children?: AuditUniverseUncheckedCreateNestedManyWithoutParentInput
+    risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutCreatedByInput = {
@@ -11128,6 +15093,7 @@ export namespace Prisma {
     children?: AuditUniverseCreateNestedManyWithoutParentInput
     owner?: UserCreateNestedOneWithoutOwnedAuditEntitiesInput
     createdBy?: UserCreateNestedOneWithoutCreatedAuditEntitiesInput
+    risks?: RiskCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutUpdatedByInput = {
@@ -11147,6 +15113,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     children?: AuditUniverseUncheckedCreateNestedManyWithoutParentInput
+    risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutUpdatedByInput = {
@@ -11156,6 +15123,208 @@ export namespace Prisma {
 
   export type AuditUniverseCreateManyUpdatedByInputEnvelope = {
     data: AuditUniverseCreateManyUpdatedByInput | AuditUniverseCreateManyUpdatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RiskCreateWithoutOwnerInput = {
+    id?: string
+    title: string
+    description?: string | null
+    inherentLikelihood?: number
+    inherentImpact?: number
+    inherentScore?: number
+    inherentLevel?: $Enums.RiskLevel
+    existingControls?: string | null
+    controlEffectiveness?: number
+    residualScore?: number
+    residualLevel?: $Enums.RiskLevel
+    status?: $Enums.RiskStatus
+    riskCategory?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auditEntity: AuditUniverseCreateNestedOneWithoutRisksInput
+    createdBy?: UserCreateNestedOneWithoutCreatedRisksInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedRisksInput
+    actions?: RiskActionCreateNestedManyWithoutRiskInput
+  }
+
+  export type RiskUncheckedCreateWithoutOwnerInput = {
+    id?: string
+    title: string
+    description?: string | null
+    auditEntityId: string
+    inherentLikelihood?: number
+    inherentImpact?: number
+    inherentScore?: number
+    inherentLevel?: $Enums.RiskLevel
+    existingControls?: string | null
+    controlEffectiveness?: number
+    residualScore?: number
+    residualLevel?: $Enums.RiskLevel
+    status?: $Enums.RiskStatus
+    riskCategory?: string | null
+    notes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    actions?: RiskActionUncheckedCreateNestedManyWithoutRiskInput
+  }
+
+  export type RiskCreateOrConnectWithoutOwnerInput = {
+    where: RiskWhereUniqueInput
+    create: XOR<RiskCreateWithoutOwnerInput, RiskUncheckedCreateWithoutOwnerInput>
+  }
+
+  export type RiskCreateManyOwnerInputEnvelope = {
+    data: RiskCreateManyOwnerInput | RiskCreateManyOwnerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RiskCreateWithoutCreatedByInput = {
+    id?: string
+    title: string
+    description?: string | null
+    inherentLikelihood?: number
+    inherentImpact?: number
+    inherentScore?: number
+    inherentLevel?: $Enums.RiskLevel
+    existingControls?: string | null
+    controlEffectiveness?: number
+    residualScore?: number
+    residualLevel?: $Enums.RiskLevel
+    status?: $Enums.RiskStatus
+    riskCategory?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auditEntity: AuditUniverseCreateNestedOneWithoutRisksInput
+    owner?: UserCreateNestedOneWithoutOwnedRisksInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedRisksInput
+    actions?: RiskActionCreateNestedManyWithoutRiskInput
+  }
+
+  export type RiskUncheckedCreateWithoutCreatedByInput = {
+    id?: string
+    title: string
+    description?: string | null
+    auditEntityId: string
+    inherentLikelihood?: number
+    inherentImpact?: number
+    inherentScore?: number
+    inherentLevel?: $Enums.RiskLevel
+    existingControls?: string | null
+    controlEffectiveness?: number
+    residualScore?: number
+    residualLevel?: $Enums.RiskLevel
+    status?: $Enums.RiskStatus
+    riskCategory?: string | null
+    notes?: string | null
+    ownerId?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    actions?: RiskActionUncheckedCreateNestedManyWithoutRiskInput
+  }
+
+  export type RiskCreateOrConnectWithoutCreatedByInput = {
+    where: RiskWhereUniqueInput
+    create: XOR<RiskCreateWithoutCreatedByInput, RiskUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type RiskCreateManyCreatedByInputEnvelope = {
+    data: RiskCreateManyCreatedByInput | RiskCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RiskCreateWithoutUpdatedByInput = {
+    id?: string
+    title: string
+    description?: string | null
+    inherentLikelihood?: number
+    inherentImpact?: number
+    inherentScore?: number
+    inherentLevel?: $Enums.RiskLevel
+    existingControls?: string | null
+    controlEffectiveness?: number
+    residualScore?: number
+    residualLevel?: $Enums.RiskLevel
+    status?: $Enums.RiskStatus
+    riskCategory?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auditEntity: AuditUniverseCreateNestedOneWithoutRisksInput
+    owner?: UserCreateNestedOneWithoutOwnedRisksInput
+    createdBy?: UserCreateNestedOneWithoutCreatedRisksInput
+    actions?: RiskActionCreateNestedManyWithoutRiskInput
+  }
+
+  export type RiskUncheckedCreateWithoutUpdatedByInput = {
+    id?: string
+    title: string
+    description?: string | null
+    auditEntityId: string
+    inherentLikelihood?: number
+    inherentImpact?: number
+    inherentScore?: number
+    inherentLevel?: $Enums.RiskLevel
+    existingControls?: string | null
+    controlEffectiveness?: number
+    residualScore?: number
+    residualLevel?: $Enums.RiskLevel
+    status?: $Enums.RiskStatus
+    riskCategory?: string | null
+    notes?: string | null
+    ownerId?: string | null
+    createdById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    actions?: RiskActionUncheckedCreateNestedManyWithoutRiskInput
+  }
+
+  export type RiskCreateOrConnectWithoutUpdatedByInput = {
+    where: RiskWhereUniqueInput
+    create: XOR<RiskCreateWithoutUpdatedByInput, RiskUncheckedCreateWithoutUpdatedByInput>
+  }
+
+  export type RiskCreateManyUpdatedByInputEnvelope = {
+    data: RiskCreateManyUpdatedByInput | RiskCreateManyUpdatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RiskActionCreateWithoutAssigneeInput = {
+    id?: string
+    title: string
+    description?: string | null
+    dueDate?: Date | string | null
+    completedAt?: Date | string | null
+    status?: $Enums.ActionStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    risk: RiskCreateNestedOneWithoutActionsInput
+  }
+
+  export type RiskActionUncheckedCreateWithoutAssigneeInput = {
+    id?: string
+    riskId: string
+    title: string
+    description?: string | null
+    dueDate?: Date | string | null
+    completedAt?: Date | string | null
+    status?: $Enums.ActionStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RiskActionCreateOrConnectWithoutAssigneeInput = {
+    where: RiskActionWhereUniqueInput
+    create: XOR<RiskActionCreateWithoutAssigneeInput, RiskActionUncheckedCreateWithoutAssigneeInput>
+  }
+
+  export type RiskActionCreateManyAssigneeInputEnvelope = {
+    data: RiskActionCreateManyAssigneeInput | RiskActionCreateManyAssigneeInput[]
     skipDuplicates?: boolean
   }
 
@@ -11252,6 +15421,112 @@ export namespace Prisma {
   export type AuditUniverseUpdateManyWithWhereWithoutUpdatedByInput = {
     where: AuditUniverseScalarWhereInput
     data: XOR<AuditUniverseUpdateManyMutationInput, AuditUniverseUncheckedUpdateManyWithoutUpdatedByInput>
+  }
+
+  export type RiskUpsertWithWhereUniqueWithoutOwnerInput = {
+    where: RiskWhereUniqueInput
+    update: XOR<RiskUpdateWithoutOwnerInput, RiskUncheckedUpdateWithoutOwnerInput>
+    create: XOR<RiskCreateWithoutOwnerInput, RiskUncheckedCreateWithoutOwnerInput>
+  }
+
+  export type RiskUpdateWithWhereUniqueWithoutOwnerInput = {
+    where: RiskWhereUniqueInput
+    data: XOR<RiskUpdateWithoutOwnerInput, RiskUncheckedUpdateWithoutOwnerInput>
+  }
+
+  export type RiskUpdateManyWithWhereWithoutOwnerInput = {
+    where: RiskScalarWhereInput
+    data: XOR<RiskUpdateManyMutationInput, RiskUncheckedUpdateManyWithoutOwnerInput>
+  }
+
+  export type RiskScalarWhereInput = {
+    AND?: RiskScalarWhereInput | RiskScalarWhereInput[]
+    OR?: RiskScalarWhereInput[]
+    NOT?: RiskScalarWhereInput | RiskScalarWhereInput[]
+    id?: UuidFilter<"Risk"> | string
+    title?: StringFilter<"Risk"> | string
+    description?: StringNullableFilter<"Risk"> | string | null
+    auditEntityId?: UuidFilter<"Risk"> | string
+    inherentLikelihood?: IntFilter<"Risk"> | number
+    inherentImpact?: IntFilter<"Risk"> | number
+    inherentScore?: IntFilter<"Risk"> | number
+    inherentLevel?: EnumRiskLevelFilter<"Risk"> | $Enums.RiskLevel
+    existingControls?: StringNullableFilter<"Risk"> | string | null
+    controlEffectiveness?: IntFilter<"Risk"> | number
+    residualScore?: IntFilter<"Risk"> | number
+    residualLevel?: EnumRiskLevelFilter<"Risk"> | $Enums.RiskLevel
+    status?: EnumRiskStatusFilter<"Risk"> | $Enums.RiskStatus
+    riskCategory?: StringNullableFilter<"Risk"> | string | null
+    notes?: StringNullableFilter<"Risk"> | string | null
+    ownerId?: UuidNullableFilter<"Risk"> | string | null
+    createdById?: UuidNullableFilter<"Risk"> | string | null
+    updatedById?: UuidNullableFilter<"Risk"> | string | null
+    createdAt?: DateTimeFilter<"Risk"> | Date | string
+    updatedAt?: DateTimeFilter<"Risk"> | Date | string
+  }
+
+  export type RiskUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: RiskWhereUniqueInput
+    update: XOR<RiskUpdateWithoutCreatedByInput, RiskUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<RiskCreateWithoutCreatedByInput, RiskUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type RiskUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: RiskWhereUniqueInput
+    data: XOR<RiskUpdateWithoutCreatedByInput, RiskUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type RiskUpdateManyWithWhereWithoutCreatedByInput = {
+    where: RiskScalarWhereInput
+    data: XOR<RiskUpdateManyMutationInput, RiskUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type RiskUpsertWithWhereUniqueWithoutUpdatedByInput = {
+    where: RiskWhereUniqueInput
+    update: XOR<RiskUpdateWithoutUpdatedByInput, RiskUncheckedUpdateWithoutUpdatedByInput>
+    create: XOR<RiskCreateWithoutUpdatedByInput, RiskUncheckedCreateWithoutUpdatedByInput>
+  }
+
+  export type RiskUpdateWithWhereUniqueWithoutUpdatedByInput = {
+    where: RiskWhereUniqueInput
+    data: XOR<RiskUpdateWithoutUpdatedByInput, RiskUncheckedUpdateWithoutUpdatedByInput>
+  }
+
+  export type RiskUpdateManyWithWhereWithoutUpdatedByInput = {
+    where: RiskScalarWhereInput
+    data: XOR<RiskUpdateManyMutationInput, RiskUncheckedUpdateManyWithoutUpdatedByInput>
+  }
+
+  export type RiskActionUpsertWithWhereUniqueWithoutAssigneeInput = {
+    where: RiskActionWhereUniqueInput
+    update: XOR<RiskActionUpdateWithoutAssigneeInput, RiskActionUncheckedUpdateWithoutAssigneeInput>
+    create: XOR<RiskActionCreateWithoutAssigneeInput, RiskActionUncheckedCreateWithoutAssigneeInput>
+  }
+
+  export type RiskActionUpdateWithWhereUniqueWithoutAssigneeInput = {
+    where: RiskActionWhereUniqueInput
+    data: XOR<RiskActionUpdateWithoutAssigneeInput, RiskActionUncheckedUpdateWithoutAssigneeInput>
+  }
+
+  export type RiskActionUpdateManyWithWhereWithoutAssigneeInput = {
+    where: RiskActionScalarWhereInput
+    data: XOR<RiskActionUpdateManyMutationInput, RiskActionUncheckedUpdateManyWithoutAssigneeInput>
+  }
+
+  export type RiskActionScalarWhereInput = {
+    AND?: RiskActionScalarWhereInput | RiskActionScalarWhereInput[]
+    OR?: RiskActionScalarWhereInput[]
+    NOT?: RiskActionScalarWhereInput | RiskActionScalarWhereInput[]
+    id?: UuidFilter<"RiskAction"> | string
+    riskId?: UuidFilter<"RiskAction"> | string
+    title?: StringFilter<"RiskAction"> | string
+    description?: StringNullableFilter<"RiskAction"> | string | null
+    assigneeId?: UuidNullableFilter<"RiskAction"> | string | null
+    dueDate?: DateTimeNullableFilter<"RiskAction"> | Date | string | null
+    completedAt?: DateTimeNullableFilter<"RiskAction"> | Date | string | null
+    status?: EnumActionStatusFilter<"RiskAction"> | $Enums.ActionStatus
+    createdAt?: DateTimeFilter<"RiskAction"> | Date | string
+    updatedAt?: DateTimeFilter<"RiskAction"> | Date | string
   }
 
   export type UserRoleCreateWithoutRoleInput = {
@@ -11384,6 +15659,10 @@ export namespace Prisma {
     ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
     createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
     updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
   }
 
   export type UserUncheckedCreateWithoutUserRolesInput = {
@@ -11399,6 +15678,10 @@ export namespace Prisma {
     ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
     createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
     updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
   }
 
   export type UserCreateOrConnectWithoutUserRolesInput = {
@@ -11453,6 +15736,10 @@ export namespace Prisma {
     ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
     createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
     updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUserRolesInput = {
@@ -11468,6 +15755,10 @@ export namespace Prisma {
     ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
     createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
     updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
   }
 
   export type RoleUpsertWithoutUserRolesInput = {
@@ -11616,6 +15907,7 @@ export namespace Prisma {
     owner?: UserCreateNestedOneWithoutOwnedAuditEntitiesInput
     createdBy?: UserCreateNestedOneWithoutCreatedAuditEntitiesInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedAuditEntitiesInput
+    risks?: RiskCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutChildrenInput = {
@@ -11635,6 +15927,7 @@ export namespace Prisma {
     updatedById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutChildrenInput = {
@@ -11659,6 +15952,7 @@ export namespace Prisma {
     owner?: UserCreateNestedOneWithoutOwnedAuditEntitiesInput
     createdBy?: UserCreateNestedOneWithoutCreatedAuditEntitiesInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedAuditEntitiesInput
+    risks?: RiskCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutParentInput = {
@@ -11678,6 +15972,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     children?: AuditUniverseUncheckedCreateNestedManyWithoutParentInput
+    risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutParentInput = {
@@ -11703,6 +15998,10 @@ export namespace Prisma {
     userRoles?: UserRoleCreateNestedManyWithoutUserInput
     createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
     updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
   }
 
   export type UserUncheckedCreateWithoutOwnedAuditEntitiesInput = {
@@ -11718,6 +16017,10 @@ export namespace Prisma {
     userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
     createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
     updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
   }
 
   export type UserCreateOrConnectWithoutOwnedAuditEntitiesInput = {
@@ -11738,6 +16041,10 @@ export namespace Prisma {
     userRoles?: UserRoleCreateNestedManyWithoutUserInput
     ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
     updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
   }
 
   export type UserUncheckedCreateWithoutCreatedAuditEntitiesInput = {
@@ -11753,6 +16060,10 @@ export namespace Prisma {
     userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
     ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
     updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
   }
 
   export type UserCreateOrConnectWithoutCreatedAuditEntitiesInput = {
@@ -11773,6 +16084,10 @@ export namespace Prisma {
     userRoles?: UserRoleCreateNestedManyWithoutUserInput
     ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
     createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
   }
 
   export type UserUncheckedCreateWithoutUpdatedAuditEntitiesInput = {
@@ -11788,11 +16103,71 @@ export namespace Prisma {
     userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
     ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
     createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
   }
 
   export type UserCreateOrConnectWithoutUpdatedAuditEntitiesInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutUpdatedAuditEntitiesInput, UserUncheckedCreateWithoutUpdatedAuditEntitiesInput>
+  }
+
+  export type RiskCreateWithoutAuditEntityInput = {
+    id?: string
+    title: string
+    description?: string | null
+    inherentLikelihood?: number
+    inherentImpact?: number
+    inherentScore?: number
+    inherentLevel?: $Enums.RiskLevel
+    existingControls?: string | null
+    controlEffectiveness?: number
+    residualScore?: number
+    residualLevel?: $Enums.RiskLevel
+    status?: $Enums.RiskStatus
+    riskCategory?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    owner?: UserCreateNestedOneWithoutOwnedRisksInput
+    createdBy?: UserCreateNestedOneWithoutCreatedRisksInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedRisksInput
+    actions?: RiskActionCreateNestedManyWithoutRiskInput
+  }
+
+  export type RiskUncheckedCreateWithoutAuditEntityInput = {
+    id?: string
+    title: string
+    description?: string | null
+    inherentLikelihood?: number
+    inherentImpact?: number
+    inherentScore?: number
+    inherentLevel?: $Enums.RiskLevel
+    existingControls?: string | null
+    controlEffectiveness?: number
+    residualScore?: number
+    residualLevel?: $Enums.RiskLevel
+    status?: $Enums.RiskStatus
+    riskCategory?: string | null
+    notes?: string | null
+    ownerId?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    actions?: RiskActionUncheckedCreateNestedManyWithoutRiskInput
+  }
+
+  export type RiskCreateOrConnectWithoutAuditEntityInput = {
+    where: RiskWhereUniqueInput
+    create: XOR<RiskCreateWithoutAuditEntityInput, RiskUncheckedCreateWithoutAuditEntityInput>
+  }
+
+  export type RiskCreateManyAuditEntityInputEnvelope = {
+    data: RiskCreateManyAuditEntityInput | RiskCreateManyAuditEntityInput[]
+    skipDuplicates?: boolean
   }
 
   export type AuditUniverseUpsertWithoutChildrenInput = {
@@ -11823,6 +16198,7 @@ export namespace Prisma {
     owner?: UserUpdateOneWithoutOwnedAuditEntitiesNestedInput
     createdBy?: UserUpdateOneWithoutCreatedAuditEntitiesNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedAuditEntitiesNestedInput
+    risks?: RiskUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutChildrenInput = {
@@ -11842,6 +16218,7 @@ export namespace Prisma {
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUpsertWithWhereUniqueWithoutParentInput = {
@@ -11884,6 +16261,10 @@ export namespace Prisma {
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput
     createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
     updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOwnedAuditEntitiesInput = {
@@ -11899,6 +16280,10 @@ export namespace Prisma {
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
     createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
     updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
   }
 
   export type UserUpsertWithoutCreatedAuditEntitiesInput = {
@@ -11925,6 +16310,10 @@ export namespace Prisma {
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput
     ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
     updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedAuditEntitiesInput = {
@@ -11940,6 +16329,10 @@ export namespace Prisma {
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
     ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
     updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
   }
 
   export type UserUpsertWithoutUpdatedAuditEntitiesInput = {
@@ -11966,6 +16359,10 @@ export namespace Prisma {
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput
     ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
     createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUpdatedAuditEntitiesInput = {
@@ -11981,6 +16378,648 @@ export namespace Prisma {
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
     ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
     createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+  }
+
+  export type RiskUpsertWithWhereUniqueWithoutAuditEntityInput = {
+    where: RiskWhereUniqueInput
+    update: XOR<RiskUpdateWithoutAuditEntityInput, RiskUncheckedUpdateWithoutAuditEntityInput>
+    create: XOR<RiskCreateWithoutAuditEntityInput, RiskUncheckedCreateWithoutAuditEntityInput>
+  }
+
+  export type RiskUpdateWithWhereUniqueWithoutAuditEntityInput = {
+    where: RiskWhereUniqueInput
+    data: XOR<RiskUpdateWithoutAuditEntityInput, RiskUncheckedUpdateWithoutAuditEntityInput>
+  }
+
+  export type RiskUpdateManyWithWhereWithoutAuditEntityInput = {
+    where: RiskScalarWhereInput
+    data: XOR<RiskUpdateManyMutationInput, RiskUncheckedUpdateManyWithoutAuditEntityInput>
+  }
+
+  export type AuditUniverseCreateWithoutRisksInput = {
+    id?: string
+    code: string
+    name: string
+    description?: string | null
+    entityType: $Enums.AuditEntityType
+    status?: $Enums.AuditEntityStatus
+    businessProcess?: string | null
+    department?: string | null
+    riskRating?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    parent?: AuditUniverseCreateNestedOneWithoutChildrenInput
+    children?: AuditUniverseCreateNestedManyWithoutParentInput
+    owner?: UserCreateNestedOneWithoutOwnedAuditEntitiesInput
+    createdBy?: UserCreateNestedOneWithoutCreatedAuditEntitiesInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedAuditEntitiesInput
+  }
+
+  export type AuditUniverseUncheckedCreateWithoutRisksInput = {
+    id?: string
+    code: string
+    name: string
+    description?: string | null
+    entityType: $Enums.AuditEntityType
+    status?: $Enums.AuditEntityStatus
+    parentId?: string | null
+    businessProcess?: string | null
+    department?: string | null
+    riskRating?: string | null
+    notes?: string | null
+    ownerId?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    children?: AuditUniverseUncheckedCreateNestedManyWithoutParentInput
+  }
+
+  export type AuditUniverseCreateOrConnectWithoutRisksInput = {
+    where: AuditUniverseWhereUniqueInput
+    create: XOR<AuditUniverseCreateWithoutRisksInput, AuditUniverseUncheckedCreateWithoutRisksInput>
+  }
+
+  export type UserCreateWithoutOwnedRisksInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
+  }
+
+  export type UserUncheckedCreateWithoutOwnedRisksInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
+  }
+
+  export type UserCreateOrConnectWithoutOwnedRisksInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutOwnedRisksInput, UserUncheckedCreateWithoutOwnedRisksInput>
+  }
+
+  export type UserCreateWithoutCreatedRisksInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
+  }
+
+  export type UserUncheckedCreateWithoutCreatedRisksInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
+  }
+
+  export type UserCreateOrConnectWithoutCreatedRisksInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCreatedRisksInput, UserUncheckedCreateWithoutCreatedRisksInput>
+  }
+
+  export type UserCreateWithoutUpdatedRisksInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
+  }
+
+  export type UserUncheckedCreateWithoutUpdatedRisksInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
+  }
+
+  export type UserCreateOrConnectWithoutUpdatedRisksInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUpdatedRisksInput, UserUncheckedCreateWithoutUpdatedRisksInput>
+  }
+
+  export type RiskActionCreateWithoutRiskInput = {
+    id?: string
+    title: string
+    description?: string | null
+    dueDate?: Date | string | null
+    completedAt?: Date | string | null
+    status?: $Enums.ActionStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    assignee?: UserCreateNestedOneWithoutAssignedActionsInput
+  }
+
+  export type RiskActionUncheckedCreateWithoutRiskInput = {
+    id?: string
+    title: string
+    description?: string | null
+    assigneeId?: string | null
+    dueDate?: Date | string | null
+    completedAt?: Date | string | null
+    status?: $Enums.ActionStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RiskActionCreateOrConnectWithoutRiskInput = {
+    where: RiskActionWhereUniqueInput
+    create: XOR<RiskActionCreateWithoutRiskInput, RiskActionUncheckedCreateWithoutRiskInput>
+  }
+
+  export type RiskActionCreateManyRiskInputEnvelope = {
+    data: RiskActionCreateManyRiskInput | RiskActionCreateManyRiskInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AuditUniverseUpsertWithoutRisksInput = {
+    update: XOR<AuditUniverseUpdateWithoutRisksInput, AuditUniverseUncheckedUpdateWithoutRisksInput>
+    create: XOR<AuditUniverseCreateWithoutRisksInput, AuditUniverseUncheckedCreateWithoutRisksInput>
+    where?: AuditUniverseWhereInput
+  }
+
+  export type AuditUniverseUpdateToOneWithWhereWithoutRisksInput = {
+    where?: AuditUniverseWhereInput
+    data: XOR<AuditUniverseUpdateWithoutRisksInput, AuditUniverseUncheckedUpdateWithoutRisksInput>
+  }
+
+  export type AuditUniverseUpdateWithoutRisksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    entityType?: EnumAuditEntityTypeFieldUpdateOperationsInput | $Enums.AuditEntityType
+    status?: EnumAuditEntityStatusFieldUpdateOperationsInput | $Enums.AuditEntityStatus
+    businessProcess?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    riskRating?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    parent?: AuditUniverseUpdateOneWithoutChildrenNestedInput
+    children?: AuditUniverseUpdateManyWithoutParentNestedInput
+    owner?: UserUpdateOneWithoutOwnedAuditEntitiesNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedAuditEntitiesNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedAuditEntitiesNestedInput
+  }
+
+  export type AuditUniverseUncheckedUpdateWithoutRisksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    entityType?: EnumAuditEntityTypeFieldUpdateOperationsInput | $Enums.AuditEntityType
+    status?: EnumAuditEntityStatusFieldUpdateOperationsInput | $Enums.AuditEntityStatus
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    businessProcess?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    riskRating?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    children?: AuditUniverseUncheckedUpdateManyWithoutParentNestedInput
+  }
+
+  export type UserUpsertWithoutOwnedRisksInput = {
+    update: XOR<UserUpdateWithoutOwnedRisksInput, UserUncheckedUpdateWithoutOwnedRisksInput>
+    create: XOR<UserCreateWithoutOwnedRisksInput, UserUncheckedCreateWithoutOwnedRisksInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutOwnedRisksInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutOwnedRisksInput, UserUncheckedUpdateWithoutOwnedRisksInput>
+  }
+
+  export type UserUpdateWithoutOwnedRisksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutOwnedRisksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+  }
+
+  export type UserUpsertWithoutCreatedRisksInput = {
+    update: XOR<UserUpdateWithoutCreatedRisksInput, UserUncheckedUpdateWithoutCreatedRisksInput>
+    create: XOR<UserCreateWithoutCreatedRisksInput, UserUncheckedCreateWithoutCreatedRisksInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCreatedRisksInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCreatedRisksInput, UserUncheckedUpdateWithoutCreatedRisksInput>
+  }
+
+  export type UserUpdateWithoutCreatedRisksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCreatedRisksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+  }
+
+  export type UserUpsertWithoutUpdatedRisksInput = {
+    update: XOR<UserUpdateWithoutUpdatedRisksInput, UserUncheckedUpdateWithoutUpdatedRisksInput>
+    create: XOR<UserCreateWithoutUpdatedRisksInput, UserUncheckedCreateWithoutUpdatedRisksInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUpdatedRisksInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUpdatedRisksInput, UserUncheckedUpdateWithoutUpdatedRisksInput>
+  }
+
+  export type UserUpdateWithoutUpdatedRisksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUpdatedRisksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+  }
+
+  export type RiskActionUpsertWithWhereUniqueWithoutRiskInput = {
+    where: RiskActionWhereUniqueInput
+    update: XOR<RiskActionUpdateWithoutRiskInput, RiskActionUncheckedUpdateWithoutRiskInput>
+    create: XOR<RiskActionCreateWithoutRiskInput, RiskActionUncheckedCreateWithoutRiskInput>
+  }
+
+  export type RiskActionUpdateWithWhereUniqueWithoutRiskInput = {
+    where: RiskActionWhereUniqueInput
+    data: XOR<RiskActionUpdateWithoutRiskInput, RiskActionUncheckedUpdateWithoutRiskInput>
+  }
+
+  export type RiskActionUpdateManyWithWhereWithoutRiskInput = {
+    where: RiskActionScalarWhereInput
+    data: XOR<RiskActionUpdateManyMutationInput, RiskActionUncheckedUpdateManyWithoutRiskInput>
+  }
+
+  export type RiskCreateWithoutActionsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    inherentLikelihood?: number
+    inherentImpact?: number
+    inherentScore?: number
+    inherentLevel?: $Enums.RiskLevel
+    existingControls?: string | null
+    controlEffectiveness?: number
+    residualScore?: number
+    residualLevel?: $Enums.RiskLevel
+    status?: $Enums.RiskStatus
+    riskCategory?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auditEntity: AuditUniverseCreateNestedOneWithoutRisksInput
+    owner?: UserCreateNestedOneWithoutOwnedRisksInput
+    createdBy?: UserCreateNestedOneWithoutCreatedRisksInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedRisksInput
+  }
+
+  export type RiskUncheckedCreateWithoutActionsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    auditEntityId: string
+    inherentLikelihood?: number
+    inherentImpact?: number
+    inherentScore?: number
+    inherentLevel?: $Enums.RiskLevel
+    existingControls?: string | null
+    controlEffectiveness?: number
+    residualScore?: number
+    residualLevel?: $Enums.RiskLevel
+    status?: $Enums.RiskStatus
+    riskCategory?: string | null
+    notes?: string | null
+    ownerId?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RiskCreateOrConnectWithoutActionsInput = {
+    where: RiskWhereUniqueInput
+    create: XOR<RiskCreateWithoutActionsInput, RiskUncheckedCreateWithoutActionsInput>
+  }
+
+  export type UserCreateWithoutAssignedActionsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserUncheckedCreateWithoutAssignedActionsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserCreateOrConnectWithoutAssignedActionsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAssignedActionsInput, UserUncheckedCreateWithoutAssignedActionsInput>
+  }
+
+  export type RiskUpsertWithoutActionsInput = {
+    update: XOR<RiskUpdateWithoutActionsInput, RiskUncheckedUpdateWithoutActionsInput>
+    create: XOR<RiskCreateWithoutActionsInput, RiskUncheckedCreateWithoutActionsInput>
+    where?: RiskWhereInput
+  }
+
+  export type RiskUpdateToOneWithWhereWithoutActionsInput = {
+    where?: RiskWhereInput
+    data: XOR<RiskUpdateWithoutActionsInput, RiskUncheckedUpdateWithoutActionsInput>
+  }
+
+  export type RiskUpdateWithoutActionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    inherentLikelihood?: IntFieldUpdateOperationsInput | number
+    inherentImpact?: IntFieldUpdateOperationsInput | number
+    inherentScore?: IntFieldUpdateOperationsInput | number
+    inherentLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    existingControls?: NullableStringFieldUpdateOperationsInput | string | null
+    controlEffectiveness?: IntFieldUpdateOperationsInput | number
+    residualScore?: IntFieldUpdateOperationsInput | number
+    residualLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    status?: EnumRiskStatusFieldUpdateOperationsInput | $Enums.RiskStatus
+    riskCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutRisksNestedInput
+    owner?: UserUpdateOneWithoutOwnedRisksNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedRisksNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedRisksNestedInput
+  }
+
+  export type RiskUncheckedUpdateWithoutActionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    inherentLikelihood?: IntFieldUpdateOperationsInput | number
+    inherentImpact?: IntFieldUpdateOperationsInput | number
+    inherentScore?: IntFieldUpdateOperationsInput | number
+    inherentLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    existingControls?: NullableStringFieldUpdateOperationsInput | string | null
+    controlEffectiveness?: IntFieldUpdateOperationsInput | number
+    residualScore?: IntFieldUpdateOperationsInput | number
+    residualLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    status?: EnumRiskStatusFieldUpdateOperationsInput | $Enums.RiskStatus
+    riskCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUpsertWithoutAssignedActionsInput = {
+    update: XOR<UserUpdateWithoutAssignedActionsInput, UserUncheckedUpdateWithoutAssignedActionsInput>
+    create: XOR<UserCreateWithoutAssignedActionsInput, UserUncheckedCreateWithoutAssignedActionsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutAssignedActionsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutAssignedActionsInput, UserUncheckedUpdateWithoutAssignedActionsInput>
+  }
+
+  export type UserUpdateWithoutAssignedActionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAssignedActionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserRoleCreateManyUserInput = {
@@ -12042,6 +17081,84 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type RiskCreateManyOwnerInput = {
+    id?: string
+    title: string
+    description?: string | null
+    auditEntityId: string
+    inherentLikelihood?: number
+    inherentImpact?: number
+    inherentScore?: number
+    inherentLevel?: $Enums.RiskLevel
+    existingControls?: string | null
+    controlEffectiveness?: number
+    residualScore?: number
+    residualLevel?: $Enums.RiskLevel
+    status?: $Enums.RiskStatus
+    riskCategory?: string | null
+    notes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RiskCreateManyCreatedByInput = {
+    id?: string
+    title: string
+    description?: string | null
+    auditEntityId: string
+    inherentLikelihood?: number
+    inherentImpact?: number
+    inherentScore?: number
+    inherentLevel?: $Enums.RiskLevel
+    existingControls?: string | null
+    controlEffectiveness?: number
+    residualScore?: number
+    residualLevel?: $Enums.RiskLevel
+    status?: $Enums.RiskStatus
+    riskCategory?: string | null
+    notes?: string | null
+    ownerId?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RiskCreateManyUpdatedByInput = {
+    id?: string
+    title: string
+    description?: string | null
+    auditEntityId: string
+    inherentLikelihood?: number
+    inherentImpact?: number
+    inherentScore?: number
+    inherentLevel?: $Enums.RiskLevel
+    existingControls?: string | null
+    controlEffectiveness?: number
+    residualScore?: number
+    residualLevel?: $Enums.RiskLevel
+    status?: $Enums.RiskStatus
+    riskCategory?: string | null
+    notes?: string | null
+    ownerId?: string | null
+    createdById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RiskActionCreateManyAssigneeInput = {
+    id?: string
+    riskId: string
+    title: string
+    description?: string | null
+    dueDate?: Date | string | null
+    completedAt?: Date | string | null
+    status?: $Enums.ActionStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type UserRoleUpdateWithoutUserInput = {
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUserRolesNestedInput
@@ -12074,6 +17191,7 @@ export namespace Prisma {
     children?: AuditUniverseUpdateManyWithoutParentNestedInput
     createdBy?: UserUpdateOneWithoutCreatedAuditEntitiesNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedAuditEntitiesNestedInput
+    risks?: RiskUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutOwnerInput = {
@@ -12093,6 +17211,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: AuditUniverseUncheckedUpdateManyWithoutParentNestedInput
+    risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateManyWithoutOwnerInput = {
@@ -12130,6 +17249,7 @@ export namespace Prisma {
     children?: AuditUniverseUpdateManyWithoutParentNestedInput
     owner?: UserUpdateOneWithoutOwnedAuditEntitiesNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedAuditEntitiesNestedInput
+    risks?: RiskUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutCreatedByInput = {
@@ -12149,6 +17269,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: AuditUniverseUncheckedUpdateManyWithoutParentNestedInput
+    risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateManyWithoutCreatedByInput = {
@@ -12186,6 +17307,7 @@ export namespace Prisma {
     children?: AuditUniverseUpdateManyWithoutParentNestedInput
     owner?: UserUpdateOneWithoutOwnedAuditEntitiesNestedInput
     createdBy?: UserUpdateOneWithoutCreatedAuditEntitiesNestedInput
+    risks?: RiskUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutUpdatedByInput = {
@@ -12205,6 +17327,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: AuditUniverseUncheckedUpdateManyWithoutParentNestedInput
+    risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -12221,6 +17344,246 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     ownerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RiskUpdateWithoutOwnerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    inherentLikelihood?: IntFieldUpdateOperationsInput | number
+    inherentImpact?: IntFieldUpdateOperationsInput | number
+    inherentScore?: IntFieldUpdateOperationsInput | number
+    inherentLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    existingControls?: NullableStringFieldUpdateOperationsInput | string | null
+    controlEffectiveness?: IntFieldUpdateOperationsInput | number
+    residualScore?: IntFieldUpdateOperationsInput | number
+    residualLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    status?: EnumRiskStatusFieldUpdateOperationsInput | $Enums.RiskStatus
+    riskCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutRisksNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedRisksNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedRisksNestedInput
+    actions?: RiskActionUpdateManyWithoutRiskNestedInput
+  }
+
+  export type RiskUncheckedUpdateWithoutOwnerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    inherentLikelihood?: IntFieldUpdateOperationsInput | number
+    inherentImpact?: IntFieldUpdateOperationsInput | number
+    inherentScore?: IntFieldUpdateOperationsInput | number
+    inherentLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    existingControls?: NullableStringFieldUpdateOperationsInput | string | null
+    controlEffectiveness?: IntFieldUpdateOperationsInput | number
+    residualScore?: IntFieldUpdateOperationsInput | number
+    residualLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    status?: EnumRiskStatusFieldUpdateOperationsInput | $Enums.RiskStatus
+    riskCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    actions?: RiskActionUncheckedUpdateManyWithoutRiskNestedInput
+  }
+
+  export type RiskUncheckedUpdateManyWithoutOwnerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    inherentLikelihood?: IntFieldUpdateOperationsInput | number
+    inherentImpact?: IntFieldUpdateOperationsInput | number
+    inherentScore?: IntFieldUpdateOperationsInput | number
+    inherentLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    existingControls?: NullableStringFieldUpdateOperationsInput | string | null
+    controlEffectiveness?: IntFieldUpdateOperationsInput | number
+    residualScore?: IntFieldUpdateOperationsInput | number
+    residualLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    status?: EnumRiskStatusFieldUpdateOperationsInput | $Enums.RiskStatus
+    riskCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RiskUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    inherentLikelihood?: IntFieldUpdateOperationsInput | number
+    inherentImpact?: IntFieldUpdateOperationsInput | number
+    inherentScore?: IntFieldUpdateOperationsInput | number
+    inherentLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    existingControls?: NullableStringFieldUpdateOperationsInput | string | null
+    controlEffectiveness?: IntFieldUpdateOperationsInput | number
+    residualScore?: IntFieldUpdateOperationsInput | number
+    residualLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    status?: EnumRiskStatusFieldUpdateOperationsInput | $Enums.RiskStatus
+    riskCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutRisksNestedInput
+    owner?: UserUpdateOneWithoutOwnedRisksNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedRisksNestedInput
+    actions?: RiskActionUpdateManyWithoutRiskNestedInput
+  }
+
+  export type RiskUncheckedUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    inherentLikelihood?: IntFieldUpdateOperationsInput | number
+    inherentImpact?: IntFieldUpdateOperationsInput | number
+    inherentScore?: IntFieldUpdateOperationsInput | number
+    inherentLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    existingControls?: NullableStringFieldUpdateOperationsInput | string | null
+    controlEffectiveness?: IntFieldUpdateOperationsInput | number
+    residualScore?: IntFieldUpdateOperationsInput | number
+    residualLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    status?: EnumRiskStatusFieldUpdateOperationsInput | $Enums.RiskStatus
+    riskCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    actions?: RiskActionUncheckedUpdateManyWithoutRiskNestedInput
+  }
+
+  export type RiskUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    inherentLikelihood?: IntFieldUpdateOperationsInput | number
+    inherentImpact?: IntFieldUpdateOperationsInput | number
+    inherentScore?: IntFieldUpdateOperationsInput | number
+    inherentLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    existingControls?: NullableStringFieldUpdateOperationsInput | string | null
+    controlEffectiveness?: IntFieldUpdateOperationsInput | number
+    residualScore?: IntFieldUpdateOperationsInput | number
+    residualLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    status?: EnumRiskStatusFieldUpdateOperationsInput | $Enums.RiskStatus
+    riskCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RiskUpdateWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    inherentLikelihood?: IntFieldUpdateOperationsInput | number
+    inherentImpact?: IntFieldUpdateOperationsInput | number
+    inherentScore?: IntFieldUpdateOperationsInput | number
+    inherentLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    existingControls?: NullableStringFieldUpdateOperationsInput | string | null
+    controlEffectiveness?: IntFieldUpdateOperationsInput | number
+    residualScore?: IntFieldUpdateOperationsInput | number
+    residualLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    status?: EnumRiskStatusFieldUpdateOperationsInput | $Enums.RiskStatus
+    riskCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutRisksNestedInput
+    owner?: UserUpdateOneWithoutOwnedRisksNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedRisksNestedInput
+    actions?: RiskActionUpdateManyWithoutRiskNestedInput
+  }
+
+  export type RiskUncheckedUpdateWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    inherentLikelihood?: IntFieldUpdateOperationsInput | number
+    inherentImpact?: IntFieldUpdateOperationsInput | number
+    inherentScore?: IntFieldUpdateOperationsInput | number
+    inherentLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    existingControls?: NullableStringFieldUpdateOperationsInput | string | null
+    controlEffectiveness?: IntFieldUpdateOperationsInput | number
+    residualScore?: IntFieldUpdateOperationsInput | number
+    residualLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    status?: EnumRiskStatusFieldUpdateOperationsInput | $Enums.RiskStatus
+    riskCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    actions?: RiskActionUncheckedUpdateManyWithoutRiskNestedInput
+  }
+
+  export type RiskUncheckedUpdateManyWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    inherentLikelihood?: IntFieldUpdateOperationsInput | number
+    inherentImpact?: IntFieldUpdateOperationsInput | number
+    inherentScore?: IntFieldUpdateOperationsInput | number
+    inherentLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    existingControls?: NullableStringFieldUpdateOperationsInput | string | null
+    controlEffectiveness?: IntFieldUpdateOperationsInput | number
+    residualScore?: IntFieldUpdateOperationsInput | number
+    residualLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    status?: EnumRiskStatusFieldUpdateOperationsInput | $Enums.RiskStatus
+    riskCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RiskActionUpdateWithoutAssigneeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumActionStatusFieldUpdateOperationsInput | $Enums.ActionStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    risk?: RiskUpdateOneRequiredWithoutActionsNestedInput
+  }
+
+  export type RiskActionUncheckedUpdateWithoutAssigneeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    riskId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumActionStatusFieldUpdateOperationsInput | $Enums.ActionStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RiskActionUncheckedUpdateManyWithoutAssigneeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    riskId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumActionStatusFieldUpdateOperationsInput | $Enums.ActionStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12303,6 +17666,28 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type RiskCreateManyAuditEntityInput = {
+    id?: string
+    title: string
+    description?: string | null
+    inherentLikelihood?: number
+    inherentImpact?: number
+    inherentScore?: number
+    inherentLevel?: $Enums.RiskLevel
+    existingControls?: string | null
+    controlEffectiveness?: number
+    residualScore?: number
+    residualLevel?: $Enums.RiskLevel
+    status?: $Enums.RiskStatus
+    riskCategory?: string | null
+    notes?: string | null
+    ownerId?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type AuditUniverseUpdateWithoutParentInput = {
     id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
@@ -12320,6 +17705,7 @@ export namespace Prisma {
     owner?: UserUpdateOneWithoutOwnedAuditEntitiesNestedInput
     createdBy?: UserUpdateOneWithoutCreatedAuditEntitiesNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedAuditEntitiesNestedInput
+    risks?: RiskUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutParentInput = {
@@ -12339,6 +17725,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: AuditUniverseUncheckedUpdateManyWithoutParentNestedInput
+    risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateManyWithoutParentInput = {
@@ -12355,6 +17742,122 @@ export namespace Prisma {
     ownerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RiskUpdateWithoutAuditEntityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    inherentLikelihood?: IntFieldUpdateOperationsInput | number
+    inherentImpact?: IntFieldUpdateOperationsInput | number
+    inherentScore?: IntFieldUpdateOperationsInput | number
+    inherentLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    existingControls?: NullableStringFieldUpdateOperationsInput | string | null
+    controlEffectiveness?: IntFieldUpdateOperationsInput | number
+    residualScore?: IntFieldUpdateOperationsInput | number
+    residualLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    status?: EnumRiskStatusFieldUpdateOperationsInput | $Enums.RiskStatus
+    riskCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner?: UserUpdateOneWithoutOwnedRisksNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedRisksNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedRisksNestedInput
+    actions?: RiskActionUpdateManyWithoutRiskNestedInput
+  }
+
+  export type RiskUncheckedUpdateWithoutAuditEntityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    inherentLikelihood?: IntFieldUpdateOperationsInput | number
+    inherentImpact?: IntFieldUpdateOperationsInput | number
+    inherentScore?: IntFieldUpdateOperationsInput | number
+    inherentLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    existingControls?: NullableStringFieldUpdateOperationsInput | string | null
+    controlEffectiveness?: IntFieldUpdateOperationsInput | number
+    residualScore?: IntFieldUpdateOperationsInput | number
+    residualLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    status?: EnumRiskStatusFieldUpdateOperationsInput | $Enums.RiskStatus
+    riskCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    actions?: RiskActionUncheckedUpdateManyWithoutRiskNestedInput
+  }
+
+  export type RiskUncheckedUpdateManyWithoutAuditEntityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    inherentLikelihood?: IntFieldUpdateOperationsInput | number
+    inherentImpact?: IntFieldUpdateOperationsInput | number
+    inherentScore?: IntFieldUpdateOperationsInput | number
+    inherentLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    existingControls?: NullableStringFieldUpdateOperationsInput | string | null
+    controlEffectiveness?: IntFieldUpdateOperationsInput | number
+    residualScore?: IntFieldUpdateOperationsInput | number
+    residualLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    status?: EnumRiskStatusFieldUpdateOperationsInput | $Enums.RiskStatus
+    riskCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RiskActionCreateManyRiskInput = {
+    id?: string
+    title: string
+    description?: string | null
+    assigneeId?: string | null
+    dueDate?: Date | string | null
+    completedAt?: Date | string | null
+    status?: $Enums.ActionStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RiskActionUpdateWithoutRiskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumActionStatusFieldUpdateOperationsInput | $Enums.ActionStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    assignee?: UserUpdateOneWithoutAssignedActionsNestedInput
+  }
+
+  export type RiskActionUncheckedUpdateWithoutRiskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumActionStatusFieldUpdateOperationsInput | $Enums.ActionStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RiskActionUncheckedUpdateManyWithoutRiskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumActionStatusFieldUpdateOperationsInput | $Enums.ActionStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12380,6 +17883,10 @@ export namespace Prisma {
      * @deprecated Use AuditUniverseCountOutputTypeDefaultArgs instead
      */
     export type AuditUniverseCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = AuditUniverseCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use RiskCountOutputTypeDefaultArgs instead
+     */
+    export type RiskCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = RiskCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use UserDefaultArgs instead
      */
@@ -12408,6 +17915,14 @@ export namespace Prisma {
      * @deprecated Use AuditUniverseDefaultArgs instead
      */
     export type AuditUniverseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = AuditUniverseDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use RiskDefaultArgs instead
+     */
+    export type RiskArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = RiskDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use RiskActionDefaultArgs instead
+     */
+    export type RiskActionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = RiskActionDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

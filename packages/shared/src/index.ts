@@ -252,3 +252,151 @@ export interface AuditUniverseListResponse {
 export type CreateAuditUniverseInput = CreateAuditUniverseRequest;
 export type UpdateAuditUniverseInput = UpdateAuditUniverseRequest;
 export type ListAuditUniverseInput = AuditUniverseFilters;
+
+// ---- Risk Assessment ----
+
+export type RiskLevel = 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
+export type RiskStatus = 'OPEN' | 'MITIGATING' | 'MONITORING' | 'CLOSED';
+export type ActionStatus = 'OPEN' | 'IN_PROGRESS' | 'COMPLETED' | 'OVERDUE' | 'CANCELLED';
+
+export const RISK_LEVELS: RiskLevel[] = ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'];
+export const RISK_STATUSES: RiskStatus[] = ['OPEN', 'MITIGATING', 'MONITORING', 'CLOSED'];
+export const ACTION_STATUSES: ActionStatus[] = ['OPEN', 'IN_PROGRESS', 'COMPLETED', 'OVERDUE', 'CANCELLED'];
+
+export function scoreToLevel(score: number): RiskLevel {
+  if (score >= 20) return 'CRITICAL';
+  if (score >= 12) return 'HIGH';
+  if (score >= 6) return 'MEDIUM';
+  return 'LOW';
+}
+
+export function residualScore(inherentScore: number, controlEffectiveness: number): number {
+  const reduction = Math.max(0, Math.min(100, controlEffectiveness)) / 100;
+  return Math.max(1, Math.round(inherentScore * (1 - reduction)));
+}
+
+export interface RiskActionDto {
+  id: string;
+  riskId: string;
+  title: string;
+  description: string | null;
+  assigneeId: string | null;
+  assigneeName: string | null;
+  dueDate: string | null;
+  completedAt: string | null;
+  status: ActionStatus;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface RiskSummaryDto {
+  id: string;
+  title: string;
+  auditEntityId: string;
+  auditEntityCode: string;
+  auditEntityName: string;
+  inherentScore: number;
+  inherentLevel: RiskLevel;
+  residualScore: number;
+  residualLevel: RiskLevel;
+  controlEffectiveness: number;
+  status: RiskStatus;
+  riskCategory: string | null;
+  ownerId: string | null;
+  ownerName: string | null;
+  actionCount: number;
+  overdueActionCount: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface RiskDetailDto extends RiskSummaryDto {
+  description: string | null;
+  inherentLikelihood: number;
+  inherentImpact: number;
+  existingControls: string | null;
+  notes: string | null;
+  actions: RiskActionDto[];
+}
+
+export interface CreateRiskRequest {
+  title: string;
+  description?: string;
+  auditEntityId: string;
+  inherentLikelihood: number;
+  inherentImpact: number;
+  existingControls?: string;
+  controlEffectiveness?: number;
+  riskCategory?: string;
+  notes?: string;
+  ownerId?: string | null;
+}
+
+export interface UpdateRiskRequest {
+  title?: string;
+  description?: string | null;
+  auditEntityId?: string;
+  inherentLikelihood?: number;
+  inherentImpact?: number;
+  existingControls?: string | null;
+  controlEffectiveness?: number;
+  status?: RiskStatus;
+  riskCategory?: string | null;
+  notes?: string | null;
+  ownerId?: string | null;
+}
+
+export interface RiskFilters {
+  search?: string;
+  auditEntityId?: string;
+  status?: RiskStatus;
+  inherentLevel?: RiskLevel;
+  residualLevel?: RiskLevel;
+  ownerId?: string;
+  riskCategory?: string;
+  page?: number;
+  pageSize?: number;
+  sortBy?: string;
+  sortOrder?: 'asc' | 'desc';
+}
+
+export interface RiskListResponse {
+  items: RiskSummaryDto[];
+  total: number;
+  page: number;
+  pageSize: number;
+}
+
+export interface CreateRiskActionRequest {
+  title: string;
+  description?: string;
+  assigneeId?: string | null;
+  dueDate?: string | null;
+  status?: ActionStatus;
+}
+
+export interface UpdateRiskActionRequest {
+  title?: string;
+  description?: string | null;
+  assigneeId?: string | null;
+  dueDate?: string | null;
+  completedAt?: string | null;
+  status?: ActionStatus;
+}
+
+export interface RiskDashboardDto {
+  totalRisks: number;
+  byInherentLevel: Record<RiskLevel, number>;
+  byResidualLevel: Record<RiskLevel, number>;
+  byStatus: Record<RiskStatus, number>;
+  openActions: number;
+  overdueActions: number;
+  risksWithOverdueActions: number;
+  topRisks: RiskSummaryDto[];
+}
+
+export type CreateRiskInput = CreateRiskRequest;
+export type UpdateRiskInput = UpdateRiskRequest;
+export type ListRiskInput = RiskFilters;
+export type CreateRiskActionInput = CreateRiskActionRequest;
+export type UpdateRiskActionInput = UpdateRiskActionRequest;

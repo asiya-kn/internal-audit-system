@@ -47,6 +47,10 @@ const permissionDefs: { name: string; description: string }[] = [
   { name: 'risk_assessment.create', description: 'Create risk assessments' },
   { name: 'risk_assessment.update', description: 'Update risk assessments' },
   { name: 'risk_assessment.review', description: 'Review risk assessments' },
+  { name: 'risk.view', description: 'View the risk register' },
+  { name: 'risk.create', description: 'Create risks' },
+  { name: 'risk.update', description: 'Update risks and mitigation actions' },
+  { name: 'risk.delete', description: 'Delete risks' },
 
   // Audit Engagements
   { name: 'engagements.view', description: 'View engagements' },
@@ -137,6 +141,10 @@ const roleDefs: {
       'risk_assessment.create',
       'risk_assessment.update',
       'risk_assessment.review',
+      'risk.view',
+      'risk.create',
+      'risk.update',
+      'risk.delete',
 
       'engagements.view',
       'engagements.create',
@@ -211,6 +219,9 @@ const roleDefs: {
       'risk_assessment.create',
       'risk_assessment.update',
       'risk_assessment.review',
+      'risk.view',
+      'risk.create',
+      'risk.update',
 
       'engagements.view',
       'engagements.create',
@@ -295,6 +306,9 @@ const roleDefs: {
       'risk_assessment.view',
       'risk_assessment.create',
       'risk_assessment.update',
+      'risk.view',
+      'risk.create',
+      'risk.update',
 
       'actions.view',
       'actions.create',
@@ -339,6 +353,9 @@ const roleDefs: {
       'risk_assessment.view',
       'risk_assessment.create',
       'risk_assessment.update',
+      'risk.view',
+      'risk.create',
+      'risk.update',
 
       'actions.view',
       'actions.create',
@@ -375,6 +392,7 @@ const roleDefs: {
       'audit_plan.view',
       'engagements.view',
       'risk_assessment.view',
+      'risk.view',
       'findings.view',
       'actions.view',
       'reports.view',

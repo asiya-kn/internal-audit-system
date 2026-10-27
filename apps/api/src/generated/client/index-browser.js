@@ -193,6 +193,42 @@ exports.Prisma.AuditUniverseScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.RiskScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  auditEntityId: 'auditEntityId',
+  inherentLikelihood: 'inherentLikelihood',
+  inherentImpact: 'inherentImpact',
+  inherentScore: 'inherentScore',
+  inherentLevel: 'inherentLevel',
+  existingControls: 'existingControls',
+  controlEffectiveness: 'controlEffectiveness',
+  residualScore: 'residualScore',
+  residualLevel: 'residualLevel',
+  status: 'status',
+  riskCategory: 'riskCategory',
+  notes: 'notes',
+  ownerId: 'ownerId',
+  createdById: 'createdById',
+  updatedById: 'updatedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.RiskActionScalarFieldEnum = {
+  id: 'id',
+  riskId: 'riskId',
+  title: 'title',
+  description: 'description',
+  assigneeId: 'assigneeId',
+  dueDate: 'dueDate',
+  completedAt: 'completedAt',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -236,6 +272,28 @@ exports.AuditEntityStatus = exports.$Enums.AuditEntityStatus = {
   ARCHIVED: 'ARCHIVED'
 };
 
+exports.RiskLevel = exports.$Enums.RiskLevel = {
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH',
+  CRITICAL: 'CRITICAL'
+};
+
+exports.RiskStatus = exports.$Enums.RiskStatus = {
+  OPEN: 'OPEN',
+  MITIGATING: 'MITIGATING',
+  MONITORING: 'MONITORING',
+  CLOSED: 'CLOSED'
+};
+
+exports.ActionStatus = exports.$Enums.ActionStatus = {
+  OPEN: 'OPEN',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  OVERDUE: 'OVERDUE',
+  CANCELLED: 'CANCELLED'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Role: 'Role',
@@ -243,7 +301,9 @@ exports.Prisma.ModelName = {
   UserRole: 'UserRole',
   RolePermission: 'RolePermission',
   AuditLog: 'AuditLog',
-  AuditUniverse: 'AuditUniverse'
+  AuditUniverse: 'AuditUniverse',
+  Risk: 'Risk',
+  RiskAction: 'RiskAction'
 };
 
 /**
