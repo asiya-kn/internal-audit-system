@@ -545,3 +545,201 @@ export interface AuditPlanDashboardDto {
 export type CreateAuditPlanInput = CreateAuditPlanRequest;
 export type UpdateAuditPlanInput = UpdateAuditPlanRequest;
 export type ListAuditPlanInput = AuditPlanFilters;
+
+// ---- Audit Engagements ----
+
+export type EngagementStatus =
+  | 'PLANNED'
+  | 'ASSIGNED'
+  | 'IN_PROGRESS'
+  | 'IN_REVIEW'
+  | 'COMPLETED'
+  | 'CANCELLED'
+  | 'ON_HOLD';
+
+export type EngagementType =
+  | 'INTERNAL_AUDIT'
+  | 'COMPLIANCE_AUDIT'
+  | 'IT_AUDIT'
+  | 'OPERATIONAL_AUDIT'
+  | 'FINANCIAL_AUDIT'
+  | 'FOLLOW_UP'
+  | 'SPECIAL_REVIEW'
+  | 'AD_HOC';
+
+export type TeamMemberRole =
+  | 'LEAD_AUDITOR'
+  | 'AUDITOR'
+  | 'OBSERVER'
+  | 'SUBJECT_MATTER_EXPERT'
+  | 'REVIEWER';
+
+export const ENGAGEMENT_STATUSES: EngagementStatus[] = [
+  'PLANNED',
+  'ASSIGNED',
+  'IN_PROGRESS',
+  'IN_REVIEW',
+  'COMPLETED',
+  'CANCELLED',
+  'ON_HOLD',
+];
+
+export const ENGAGEMENT_TYPES: EngagementType[] = [
+  'INTERNAL_AUDIT',
+  'COMPLIANCE_AUDIT',
+  'IT_AUDIT',
+  'OPERATIONAL_AUDIT',
+  'FINANCIAL_AUDIT',
+  'FOLLOW_UP',
+  'SPECIAL_REVIEW',
+  'AD_HOC',
+];
+
+export const TEAM_MEMBER_ROLES: TeamMemberRole[] = [
+  'LEAD_AUDITOR',
+  'AUDITOR',
+  'OBSERVER',
+  'SUBJECT_MATTER_EXPERT',
+  'REVIEWER',
+];
+
+export const ENGAGEMENT_TRANSITIONS: Record<EngagementStatus, EngagementStatus[]> = {
+  PLANNED: ['ASSIGNED', 'CANCELLED', 'ON_HOLD'],
+  ASSIGNED: ['IN_PROGRESS', 'PLANNED', 'CANCELLED', 'ON_HOLD'],
+  IN_PROGRESS: ['IN_REVIEW', 'ON_HOLD', 'CANCELLED'],
+  IN_REVIEW: ['COMPLETED', 'IN_PROGRESS', 'ON_HOLD'],
+  COMPLETED: [],
+  CANCELLED: [],
+  ON_HOLD: ['PLANNED', 'ASSIGNED', 'IN_PROGRESS', 'CANCELLED'],
+};
+
+export function canTransitionEngagement(from: EngagementStatus, to: EngagementStatus): boolean {
+  return ENGAGEMENT_TRANSITIONS[from]?.includes(to) ?? false;
+}
+
+export interface EngagementTeamMemberDto {
+  engagementId: string;
+  userId: string;
+  userName: string;
+  userEmail: string;
+  role: TeamMemberRole;
+  assignedAt: string;
+}
+
+export interface EngagementSummaryDto {
+  id: string;
+  reference: string;
+  title: string;
+  auditPlanId: string | null;
+  auditPlanReference: string | null;
+  auditEntityId: string;
+  auditEntityCode: string;
+  auditEntityName: string;
+  riskId: string | null;
+  riskTitle: string | null;
+  type: EngagementType;
+  status: EngagementStatus;
+  leadAuditorId: string | null;
+  leadAuditorName: string | null;
+  startDate: string | null;
+  endDate: string | null;
+  actualStartDate: string | null;
+  actualEndDate: string | null;
+  teamMemberCount: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface EngagementDetailDto extends EngagementSummaryDto {
+  objectives: string;
+  scope: string;
+  methodology: string | null;
+  closedAt: string | null;
+  closedById: string | null;
+  closedByName: string | null;
+  closureNotes: string | null;
+  riskInherentLevel: string | null;
+  riskResidualLevel: string | null;
+  teamMembers: EngagementTeamMemberDto[];
+}
+
+export interface CreateEngagementRequest {
+  reference: string;
+  title: string;
+  auditPlanId?: string | null;
+  auditEntityId: string;
+  riskId?: string | null;
+  type?: EngagementType;
+  objectives: string;
+  scope: string;
+  methodology?: string;
+  leadAuditorId?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
+  teamMemberUserIds?: string[];
+}
+
+export interface UpdateEngagementRequest {
+  reference?: string;
+  title?: string;
+  auditPlanId?: string | null;
+  auditEntityId?: string;
+  riskId?: string | null;
+  type?: EngagementType;
+  objectives?: string;
+  scope?: string;
+  methodology?: string | null;
+  leadAuditorId?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
+}
+
+export interface TransitionEngagementRequest {
+  status: EngagementStatus;
+  closureNotes?: string;
+}
+
+export interface AddTeamMemberRequest {
+  userId: string;
+  role?: TeamMemberRole;
+}
+
+export interface UpdateTeamMemberRequest {
+  role: TeamMemberRole;
+}
+
+export interface EngagementFilters {
+  search?: string;
+  auditPlanId?: string;
+  auditEntityId?: string;
+  riskId?: string;
+  status?: EngagementStatus;
+  type?: EngagementType;
+  leadAuditorId?: string;
+  page?: number;
+  pageSize?: number;
+  sortBy?: string;
+  sortOrder?: 'asc' | 'desc';
+}
+
+export interface EngagementListResponse {
+  items: EngagementSummaryDto[];
+  total: number;
+  page: number;
+  pageSize: number;
+}
+
+export interface EngagementDashboardDto {
+  totalEngagements: number;
+  byStatus: Record<EngagementStatus, number>;
+  byType: Record<EngagementType, number>;
+  activeCount: number;
+  completedCount: number;
+  plannedFromAuditPlan: number;
+  upcomingEngagements: EngagementSummaryDto[];
+  overdueEngagements: number;
+}
+
+export type CreateEngagementInput = CreateEngagementRequest;
+export type UpdateEngagementInput = UpdateEngagementRequest;
+export type ListEngagementInput = EngagementFilters;

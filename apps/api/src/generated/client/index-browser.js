@@ -252,6 +252,39 @@ exports.Prisma.AuditPlanScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.EngagementScalarFieldEnum = {
+  id: 'id',
+  reference: 'reference',
+  title: 'title',
+  auditPlanId: 'auditPlanId',
+  auditEntityId: 'auditEntityId',
+  riskId: 'riskId',
+  type: 'type',
+  status: 'status',
+  objectives: 'objectives',
+  scope: 'scope',
+  methodology: 'methodology',
+  leadAuditorId: 'leadAuditorId',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  actualStartDate: 'actualStartDate',
+  actualEndDate: 'actualEndDate',
+  closedAt: 'closedAt',
+  closedById: 'closedById',
+  closureNotes: 'closureNotes',
+  createdById: 'createdById',
+  updatedById: 'updatedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EngagementTeamMemberScalarFieldEnum = {
+  engagementId: 'engagementId',
+  userId: 'userId',
+  role: 'role',
+  assignedAt: 'assignedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -334,6 +367,35 @@ exports.AuditPlanStatus = exports.$Enums.AuditPlanStatus = {
   CANCELLED: 'CANCELLED'
 };
 
+exports.EngagementType = exports.$Enums.EngagementType = {
+  INTERNAL_AUDIT: 'INTERNAL_AUDIT',
+  COMPLIANCE_AUDIT: 'COMPLIANCE_AUDIT',
+  IT_AUDIT: 'IT_AUDIT',
+  OPERATIONAL_AUDIT: 'OPERATIONAL_AUDIT',
+  FINANCIAL_AUDIT: 'FINANCIAL_AUDIT',
+  FOLLOW_UP: 'FOLLOW_UP',
+  SPECIAL_REVIEW: 'SPECIAL_REVIEW',
+  AD_HOC: 'AD_HOC'
+};
+
+exports.EngagementStatus = exports.$Enums.EngagementStatus = {
+  PLANNED: 'PLANNED',
+  ASSIGNED: 'ASSIGNED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  IN_REVIEW: 'IN_REVIEW',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED',
+  ON_HOLD: 'ON_HOLD'
+};
+
+exports.TeamMemberRole = exports.$Enums.TeamMemberRole = {
+  LEAD_AUDITOR: 'LEAD_AUDITOR',
+  AUDITOR: 'AUDITOR',
+  OBSERVER: 'OBSERVER',
+  SUBJECT_MATTER_EXPERT: 'SUBJECT_MATTER_EXPERT',
+  REVIEWER: 'REVIEWER'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Role: 'Role',
@@ -344,7 +406,9 @@ exports.Prisma.ModelName = {
   AuditUniverse: 'AuditUniverse',
   Risk: 'Risk',
   RiskAction: 'RiskAction',
-  AuditPlan: 'AuditPlan'
+  AuditPlan: 'AuditPlan',
+  Engagement: 'Engagement',
+  EngagementTeamMember: 'EngagementTeamMember'
 };
 
 /**

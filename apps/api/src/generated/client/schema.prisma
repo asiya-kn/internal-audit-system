@@ -41,6 +41,12 @@ model User {
   createdAuditPlans  AuditPlan[] @relation("AuditPlanCreator")
   updatedAuditPlans  AuditPlan[] @relation("AuditPlanUpdater")
 
+  leadEngagements       Engagement[]           @relation("EngagementLeadAuditor")
+  createdEngagements    Engagement[]           @relation("EngagementCreator")
+  updatedEngagements    Engagement[]           @relation("EngagementUpdater")
+  closedEngagements     Engagement[]           @relation("EngagementClosedBy")
+  engagementMemberships EngagementTeamMember[] @relation("EngagementTeamMember")
+
   @@index([email])
   @@index([isActive])
 }
@@ -159,8 +165,9 @@ model AuditUniverse {
   createdBy User? @relation("AuditUniverseCreator", fields: [createdById], references: [id], onDelete: SetNull)
   updatedBy User? @relation("AuditUniverseUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
 
-  risks      Risk[]
-  auditPlans AuditPlan[]
+  risks       Risk[]
+  auditPlans  AuditPlan[]
+  engagements Engagement[]
 
   @@index([parentId])
   @@index([entityType])
@@ -229,8 +236,9 @@ model Risk {
   createdBy   User?         @relation("RiskCreator", fields: [createdById], references: [id], onDelete: SetNull)
   updatedBy   User?         @relation("RiskUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
 
-  actions    RiskAction[]
-  auditPlans AuditPlan[]  @relation("AuditPlanRisk")
+  actions     RiskAction[]
+  auditPlans  AuditPlan[]  @relation("AuditPlanRisk")
+  engagements Engagement[] @relation("EngagementRisk")
 
   @@index([auditEntityId])
   @@index([status])
@@ -315,6 +323,8 @@ model AuditPlan {
   createdBy   User?         @relation("AuditPlanCreator", fields: [createdById], references: [id], onDelete: SetNull)
   updatedBy   User?         @relation("AuditPlanUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
 
+  engagements Engagement[]
+
   @@index([auditEntityId])
   @@index([riskId])
   @@index([status])
@@ -322,4 +332,97 @@ model AuditPlan {
   @@index([fiscalYear])
   @@index([leadAuditorId])
   @@index([title])
+}
+
+// ---- Audit Engagements ----
+
+enum EngagementStatus {
+  PLANNED
+  ASSIGNED
+  IN_PROGRESS
+  IN_REVIEW
+  COMPLETED
+  CANCELLED
+  ON_HOLD
+}
+
+enum EngagementType {
+  INTERNAL_AUDIT
+  COMPLIANCE_AUDIT
+  IT_AUDIT
+  OPERATIONAL_AUDIT
+  FINANCIAL_AUDIT
+  FOLLOW_UP
+  SPECIAL_REVIEW
+  AD_HOC
+}
+
+model Engagement {
+  id            String  @id @default(uuid()) @db.Uuid
+  reference     String  @unique
+  title         String
+  auditPlanId   String? @db.Uuid
+  auditEntityId String  @db.Uuid
+  riskId        String? @db.Uuid
+
+  type   EngagementType   @default(INTERNAL_AUDIT)
+  status EngagementStatus @default(PLANNED)
+
+  objectives  String
+  scope       String
+  methodology String?
+
+  leadAuditorId   String?   @db.Uuid
+  startDate       DateTime?
+  endDate         DateTime?
+  actualStartDate DateTime?
+  actualEndDate   DateTime?
+  closedAt        DateTime?
+  closedById      String?   @db.Uuid
+  closureNotes    String?
+
+  createdById String? @db.Uuid
+  updatedById String? @db.Uuid
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  auditPlan   AuditPlan?    @relation(fields: [auditPlanId], references: [id], onDelete: SetNull)
+  auditEntity AuditUniverse @relation(fields: [auditEntityId], references: [id], onDelete: Restrict)
+  risk        Risk?         @relation("EngagementRisk", fields: [riskId], references: [id], onDelete: SetNull)
+  leadAuditor User?         @relation("EngagementLeadAuditor", fields: [leadAuditorId], references: [id], onDelete: SetNull)
+  closedBy    User?         @relation("EngagementClosedBy", fields: [closedById], references: [id], onDelete: SetNull)
+  createdBy   User?         @relation("EngagementCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy   User?         @relation("EngagementUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
+
+  teamMembers EngagementTeamMember[]
+
+  @@index([auditPlanId])
+  @@index([auditEntityId])
+  @@index([riskId])
+  @@index([status])
+  @@index([type])
+  @@index([leadAuditorId])
+  @@index([title])
+}
+
+enum TeamMemberRole {
+  LEAD_AUDITOR
+  AUDITOR
+  OBSERVER
+  SUBJECT_MATTER_EXPERT
+  REVIEWER
+}
+
+model EngagementTeamMember {
+  engagementId String         @db.Uuid
+  userId       String         @db.Uuid
+  role         TeamMemberRole @default(AUDITOR)
+  assignedAt   DateTime       @default(now())
+
+  engagement Engagement @relation(fields: [engagementId], references: [id], onDelete: Cascade)
+  user       User       @relation("EngagementTeamMember", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([engagementId, userId])
+  @@index([userId])
 }

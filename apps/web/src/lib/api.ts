@@ -28,6 +28,17 @@ import type {
   UpdateAuditPlanRequest,
   TransitionAuditPlanRequest,
   AuditPlanStatus,
+  EngagementListResponse,
+  EngagementDetailDto,
+  EngagementDashboardDto,
+  EngagementFilters,
+  CreateEngagementRequest,
+  UpdateEngagementRequest,
+  TransitionEngagementRequest,
+  EngagementStatus,
+  EngagementTeamMemberDto,
+  AddTeamMemberRequest,
+  UpdateTeamMemberRequest,
 } from '@iams/shared';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? '/api';
@@ -180,4 +191,39 @@ export const api = {
     request<AuditPlanDetailDto>(`/audit-plans/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),
   deleteAuditPlan: (id: string) =>
     request<{ message: string }>(`/audit-plans/${id}`, { method: 'DELETE' }),
+
+  // ---- Audit Engagements ----
+
+  listEngagements: (filters: EngagementFilters = {}) => {
+    const params = new URLSearchParams();
+    if (filters.search) params.set('search', filters.search);
+    if (filters.auditPlanId) params.set('auditPlanId', filters.auditPlanId);
+    if (filters.auditEntityId) params.set('auditEntityId', filters.auditEntityId);
+    if (filters.riskId) params.set('riskId', filters.riskId);
+    if (filters.status) params.set('status', filters.status);
+    if (filters.type) params.set('type', filters.type);
+    if (filters.leadAuditorId) params.set('leadAuditorId', filters.leadAuditorId);
+    if (filters.page) params.set('page', String(filters.page));
+    if (filters.pageSize) params.set('pageSize', String(filters.pageSize));
+    if (filters.sortBy) params.set('sortBy', filters.sortBy);
+    if (filters.sortOrder) params.set('sortOrder', filters.sortOrder);
+    const qs = params.toString();
+    return request<EngagementListResponse>(`/engagements${qs ? `?${qs}` : ''}`);
+  },
+  getEngagement: (id: string) => request<EngagementDetailDto>(`/engagements/${id}`),
+  getEngagementDashboard: () => request<EngagementDashboardDto>('/engagements/dashboard'),
+  createEngagement: (data: CreateEngagementRequest) =>
+    request<EngagementDetailDto>('/engagements', { method: 'POST', body: JSON.stringify(data) }),
+  updateEngagement: (id: string, data: UpdateEngagementRequest) =>
+    request<EngagementDetailDto>(`/engagements/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  transitionEngagement: (id: string, status: EngagementStatus, closureNotes?: string) =>
+    request<EngagementDetailDto>(`/engagements/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status, closureNotes }) }),
+  deleteEngagement: (id: string) =>
+    request<{ message: string }>(`/engagements/${id}`, { method: 'DELETE' }),
+  addEngagementTeamMember: (id: string, data: AddTeamMemberRequest) =>
+    request<EngagementTeamMemberDto>(`/engagements/${id}/team-members`, { method: 'POST', body: JSON.stringify(data) }),
+  updateEngagementTeamMember: (id: string, userId: string, data: UpdateTeamMemberRequest) =>
+    request<EngagementTeamMemberDto>(`/engagements/${id}/team-members/${userId}`, { method: 'PUT', body: JSON.stringify(data) }),
+  removeEngagementTeamMember: (id: string, userId: string) =>
+    request<{ message: string }>(`/engagements/${id}/team-members/${userId}`, { method: 'DELETE' }),
 };

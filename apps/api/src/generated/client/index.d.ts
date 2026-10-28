@@ -63,6 +63,16 @@ export type RiskAction = $Result.DefaultSelection<Prisma.$RiskActionPayload>
  * 
  */
 export type AuditPlan = $Result.DefaultSelection<Prisma.$AuditPlanPayload>
+/**
+ * Model Engagement
+ * 
+ */
+export type Engagement = $Result.DefaultSelection<Prisma.$EngagementPayload>
+/**
+ * Model EngagementTeamMember
+ * 
+ */
+export type EngagementTeamMember = $Result.DefaultSelection<Prisma.$EngagementTeamMemberPayload>
 
 /**
  * Enums
@@ -145,6 +155,44 @@ export const AuditPlanStatus: {
 
 export type AuditPlanStatus = (typeof AuditPlanStatus)[keyof typeof AuditPlanStatus]
 
+
+export const EngagementType: {
+  INTERNAL_AUDIT: 'INTERNAL_AUDIT',
+  COMPLIANCE_AUDIT: 'COMPLIANCE_AUDIT',
+  IT_AUDIT: 'IT_AUDIT',
+  OPERATIONAL_AUDIT: 'OPERATIONAL_AUDIT',
+  FINANCIAL_AUDIT: 'FINANCIAL_AUDIT',
+  FOLLOW_UP: 'FOLLOW_UP',
+  SPECIAL_REVIEW: 'SPECIAL_REVIEW',
+  AD_HOC: 'AD_HOC'
+};
+
+export type EngagementType = (typeof EngagementType)[keyof typeof EngagementType]
+
+
+export const EngagementStatus: {
+  PLANNED: 'PLANNED',
+  ASSIGNED: 'ASSIGNED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  IN_REVIEW: 'IN_REVIEW',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED',
+  ON_HOLD: 'ON_HOLD'
+};
+
+export type EngagementStatus = (typeof EngagementStatus)[keyof typeof EngagementStatus]
+
+
+export const TeamMemberRole: {
+  LEAD_AUDITOR: 'LEAD_AUDITOR',
+  AUDITOR: 'AUDITOR',
+  OBSERVER: 'OBSERVER',
+  SUBJECT_MATTER_EXPERT: 'SUBJECT_MATTER_EXPERT',
+  REVIEWER: 'REVIEWER'
+};
+
+export type TeamMemberRole = (typeof TeamMemberRole)[keyof typeof TeamMemberRole]
+
 }
 
 export type AuditEntityType = $Enums.AuditEntityType
@@ -174,6 +222,18 @@ export const AuditPriority: typeof $Enums.AuditPriority
 export type AuditPlanStatus = $Enums.AuditPlanStatus
 
 export const AuditPlanStatus: typeof $Enums.AuditPlanStatus
+
+export type EngagementType = $Enums.EngagementType
+
+export const EngagementType: typeof $Enums.EngagementType
+
+export type EngagementStatus = $Enums.EngagementStatus
+
+export const EngagementStatus: typeof $Enums.EngagementStatus
+
+export type TeamMemberRole = $Enums.TeamMemberRole
+
+export const TeamMemberRole: typeof $Enums.TeamMemberRole
 
 /**
  * ##  Prisma Client ʲˢ
@@ -397,6 +457,26 @@ export class PrismaClient<
     * ```
     */
   get auditPlan(): Prisma.AuditPlanDelegate<ExtArgs>;
+
+  /**
+   * `prisma.engagement`: Exposes CRUD operations for the **Engagement** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Engagements
+    * const engagements = await prisma.engagement.findMany()
+    * ```
+    */
+  get engagement(): Prisma.EngagementDelegate<ExtArgs>;
+
+  /**
+   * `prisma.engagementTeamMember`: Exposes CRUD operations for the **EngagementTeamMember** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EngagementTeamMembers
+    * const engagementTeamMembers = await prisma.engagementTeamMember.findMany()
+    * ```
+    */
+  get engagementTeamMember(): Prisma.EngagementTeamMemberDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -847,7 +927,9 @@ export namespace Prisma {
     AuditUniverse: 'AuditUniverse',
     Risk: 'Risk',
     RiskAction: 'RiskAction',
-    AuditPlan: 'AuditPlan'
+    AuditPlan: 'AuditPlan',
+    Engagement: 'Engagement',
+    EngagementTeamMember: 'EngagementTeamMember'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -863,7 +945,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "role" | "permission" | "userRole" | "rolePermission" | "auditLog" | "auditUniverse" | "risk" | "riskAction" | "auditPlan"
+      modelProps: "user" | "role" | "permission" | "userRole" | "rolePermission" | "auditLog" | "auditUniverse" | "risk" | "riskAction" | "auditPlan" | "engagement" | "engagementTeamMember"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1567,6 +1649,146 @@ export namespace Prisma {
           }
         }
       }
+      Engagement: {
+        payload: Prisma.$EngagementPayload<ExtArgs>
+        fields: Prisma.EngagementFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EngagementFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EngagementPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EngagementFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EngagementPayload>
+          }
+          findFirst: {
+            args: Prisma.EngagementFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EngagementPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EngagementFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EngagementPayload>
+          }
+          findMany: {
+            args: Prisma.EngagementFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EngagementPayload>[]
+          }
+          create: {
+            args: Prisma.EngagementCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EngagementPayload>
+          }
+          createMany: {
+            args: Prisma.EngagementCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EngagementCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EngagementPayload>[]
+          }
+          delete: {
+            args: Prisma.EngagementDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EngagementPayload>
+          }
+          update: {
+            args: Prisma.EngagementUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EngagementPayload>
+          }
+          deleteMany: {
+            args: Prisma.EngagementDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EngagementUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.EngagementUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EngagementPayload>
+          }
+          aggregate: {
+            args: Prisma.EngagementAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEngagement>
+          }
+          groupBy: {
+            args: Prisma.EngagementGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EngagementGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EngagementCountArgs<ExtArgs>
+            result: $Utils.Optional<EngagementCountAggregateOutputType> | number
+          }
+        }
+      }
+      EngagementTeamMember: {
+        payload: Prisma.$EngagementTeamMemberPayload<ExtArgs>
+        fields: Prisma.EngagementTeamMemberFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EngagementTeamMemberFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EngagementTeamMemberPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EngagementTeamMemberFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EngagementTeamMemberPayload>
+          }
+          findFirst: {
+            args: Prisma.EngagementTeamMemberFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EngagementTeamMemberPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EngagementTeamMemberFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EngagementTeamMemberPayload>
+          }
+          findMany: {
+            args: Prisma.EngagementTeamMemberFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EngagementTeamMemberPayload>[]
+          }
+          create: {
+            args: Prisma.EngagementTeamMemberCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EngagementTeamMemberPayload>
+          }
+          createMany: {
+            args: Prisma.EngagementTeamMemberCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EngagementTeamMemberCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EngagementTeamMemberPayload>[]
+          }
+          delete: {
+            args: Prisma.EngagementTeamMemberDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EngagementTeamMemberPayload>
+          }
+          update: {
+            args: Prisma.EngagementTeamMemberUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EngagementTeamMemberPayload>
+          }
+          deleteMany: {
+            args: Prisma.EngagementTeamMemberDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EngagementTeamMemberUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.EngagementTeamMemberUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EngagementTeamMemberPayload>
+          }
+          aggregate: {
+            args: Prisma.EngagementTeamMemberAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEngagementTeamMember>
+          }
+          groupBy: {
+            args: Prisma.EngagementTeamMemberGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EngagementTeamMemberGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EngagementTeamMemberCountArgs<ExtArgs>
+            result: $Utils.Optional<EngagementTeamMemberCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1740,6 +1962,11 @@ export namespace Prisma {
     leadAuditPlans: number
     createdAuditPlans: number
     updatedAuditPlans: number
+    leadEngagements: number
+    createdEngagements: number
+    updatedEngagements: number
+    closedEngagements: number
+    engagementMemberships: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1755,6 +1982,11 @@ export namespace Prisma {
     leadAuditPlans?: boolean | UserCountOutputTypeCountLeadAuditPlansArgs
     createdAuditPlans?: boolean | UserCountOutputTypeCountCreatedAuditPlansArgs
     updatedAuditPlans?: boolean | UserCountOutputTypeCountUpdatedAuditPlansArgs
+    leadEngagements?: boolean | UserCountOutputTypeCountLeadEngagementsArgs
+    createdEngagements?: boolean | UserCountOutputTypeCountCreatedEngagementsArgs
+    updatedEngagements?: boolean | UserCountOutputTypeCountUpdatedEngagementsArgs
+    closedEngagements?: boolean | UserCountOutputTypeCountClosedEngagementsArgs
+    engagementMemberships?: boolean | UserCountOutputTypeCountEngagementMembershipsArgs
   }
 
   // Custom InputTypes
@@ -1852,6 +2084,41 @@ export namespace Prisma {
     where?: AuditPlanWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountLeadEngagementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EngagementWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCreatedEngagementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EngagementWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountUpdatedEngagementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EngagementWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountClosedEngagementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EngagementWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountEngagementMembershipsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EngagementTeamMemberWhereInput
+  }
+
 
   /**
    * Count Type RoleCountOutputType
@@ -1932,12 +2199,14 @@ export namespace Prisma {
     children: number
     risks: number
     auditPlans: number
+    engagements: number
   }
 
   export type AuditUniverseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     children?: boolean | AuditUniverseCountOutputTypeCountChildrenArgs
     risks?: boolean | AuditUniverseCountOutputTypeCountRisksArgs
     auditPlans?: boolean | AuditUniverseCountOutputTypeCountAuditPlansArgs
+    engagements?: boolean | AuditUniverseCountOutputTypeCountEngagementsArgs
   }
 
   // Custom InputTypes
@@ -1972,6 +2241,13 @@ export namespace Prisma {
     where?: AuditPlanWhereInput
   }
 
+  /**
+   * AuditUniverseCountOutputType without action
+   */
+  export type AuditUniverseCountOutputTypeCountEngagementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EngagementWhereInput
+  }
+
 
   /**
    * Count Type RiskCountOutputType
@@ -1980,11 +2256,13 @@ export namespace Prisma {
   export type RiskCountOutputType = {
     actions: number
     auditPlans: number
+    engagements: number
   }
 
   export type RiskCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     actions?: boolean | RiskCountOutputTypeCountActionsArgs
     auditPlans?: boolean | RiskCountOutputTypeCountAuditPlansArgs
+    engagements?: boolean | RiskCountOutputTypeCountEngagementsArgs
   }
 
   // Custom InputTypes
@@ -2010,6 +2288,75 @@ export namespace Prisma {
    */
   export type RiskCountOutputTypeCountAuditPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AuditPlanWhereInput
+  }
+
+  /**
+   * RiskCountOutputType without action
+   */
+  export type RiskCountOutputTypeCountEngagementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EngagementWhereInput
+  }
+
+
+  /**
+   * Count Type AuditPlanCountOutputType
+   */
+
+  export type AuditPlanCountOutputType = {
+    engagements: number
+  }
+
+  export type AuditPlanCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    engagements?: boolean | AuditPlanCountOutputTypeCountEngagementsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AuditPlanCountOutputType without action
+   */
+  export type AuditPlanCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditPlanCountOutputType
+     */
+    select?: AuditPlanCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AuditPlanCountOutputType without action
+   */
+  export type AuditPlanCountOutputTypeCountEngagementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EngagementWhereInput
+  }
+
+
+  /**
+   * Count Type EngagementCountOutputType
+   */
+
+  export type EngagementCountOutputType = {
+    teamMembers: number
+  }
+
+  export type EngagementCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    teamMembers?: boolean | EngagementCountOutputTypeCountTeamMembersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * EngagementCountOutputType without action
+   */
+  export type EngagementCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EngagementCountOutputType
+     */
+    select?: EngagementCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EngagementCountOutputType without action
+   */
+  export type EngagementCountOutputTypeCountTeamMembersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EngagementTeamMemberWhereInput
   }
 
 
@@ -2225,6 +2572,11 @@ export namespace Prisma {
     leadAuditPlans?: boolean | User$leadAuditPlansArgs<ExtArgs>
     createdAuditPlans?: boolean | User$createdAuditPlansArgs<ExtArgs>
     updatedAuditPlans?: boolean | User$updatedAuditPlansArgs<ExtArgs>
+    leadEngagements?: boolean | User$leadEngagementsArgs<ExtArgs>
+    createdEngagements?: boolean | User$createdEngagementsArgs<ExtArgs>
+    updatedEngagements?: boolean | User$updatedEngagementsArgs<ExtArgs>
+    closedEngagements?: boolean | User$closedEngagementsArgs<ExtArgs>
+    engagementMemberships?: boolean | User$engagementMembershipsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2265,6 +2617,11 @@ export namespace Prisma {
     leadAuditPlans?: boolean | User$leadAuditPlansArgs<ExtArgs>
     createdAuditPlans?: boolean | User$createdAuditPlansArgs<ExtArgs>
     updatedAuditPlans?: boolean | User$updatedAuditPlansArgs<ExtArgs>
+    leadEngagements?: boolean | User$leadEngagementsArgs<ExtArgs>
+    createdEngagements?: boolean | User$createdEngagementsArgs<ExtArgs>
+    updatedEngagements?: boolean | User$updatedEngagementsArgs<ExtArgs>
+    closedEngagements?: boolean | User$closedEngagementsArgs<ExtArgs>
+    engagementMemberships?: boolean | User$engagementMembershipsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2284,6 +2641,11 @@ export namespace Prisma {
       leadAuditPlans: Prisma.$AuditPlanPayload<ExtArgs>[]
       createdAuditPlans: Prisma.$AuditPlanPayload<ExtArgs>[]
       updatedAuditPlans: Prisma.$AuditPlanPayload<ExtArgs>[]
+      leadEngagements: Prisma.$EngagementPayload<ExtArgs>[]
+      createdEngagements: Prisma.$EngagementPayload<ExtArgs>[]
+      updatedEngagements: Prisma.$EngagementPayload<ExtArgs>[]
+      closedEngagements: Prisma.$EngagementPayload<ExtArgs>[]
+      engagementMemberships: Prisma.$EngagementTeamMemberPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2671,6 +3033,11 @@ export namespace Prisma {
     leadAuditPlans<T extends User$leadAuditPlansArgs<ExtArgs> = {}>(args?: Subset<T, User$leadAuditPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditPlanPayload<ExtArgs>, T, "findMany"> | Null>
     createdAuditPlans<T extends User$createdAuditPlansArgs<ExtArgs> = {}>(args?: Subset<T, User$createdAuditPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditPlanPayload<ExtArgs>, T, "findMany"> | Null>
     updatedAuditPlans<T extends User$updatedAuditPlansArgs<ExtArgs> = {}>(args?: Subset<T, User$updatedAuditPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditPlanPayload<ExtArgs>, T, "findMany"> | Null>
+    leadEngagements<T extends User$leadEngagementsArgs<ExtArgs> = {}>(args?: Subset<T, User$leadEngagementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findMany"> | Null>
+    createdEngagements<T extends User$createdEngagementsArgs<ExtArgs> = {}>(args?: Subset<T, User$createdEngagementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findMany"> | Null>
+    updatedEngagements<T extends User$updatedEngagementsArgs<ExtArgs> = {}>(args?: Subset<T, User$updatedEngagementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findMany"> | Null>
+    closedEngagements<T extends User$closedEngagementsArgs<ExtArgs> = {}>(args?: Subset<T, User$closedEngagementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findMany"> | Null>
+    engagementMemberships<T extends User$engagementMembershipsArgs<ExtArgs> = {}>(args?: Subset<T, User$engagementMembershipsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EngagementTeamMemberPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3260,6 +3627,106 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AuditPlanScalarFieldEnum | AuditPlanScalarFieldEnum[]
+  }
+
+  /**
+   * User.leadEngagements
+   */
+  export type User$leadEngagementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Engagement
+     */
+    select?: EngagementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementInclude<ExtArgs> | null
+    where?: EngagementWhereInput
+    orderBy?: EngagementOrderByWithRelationInput | EngagementOrderByWithRelationInput[]
+    cursor?: EngagementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EngagementScalarFieldEnum | EngagementScalarFieldEnum[]
+  }
+
+  /**
+   * User.createdEngagements
+   */
+  export type User$createdEngagementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Engagement
+     */
+    select?: EngagementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementInclude<ExtArgs> | null
+    where?: EngagementWhereInput
+    orderBy?: EngagementOrderByWithRelationInput | EngagementOrderByWithRelationInput[]
+    cursor?: EngagementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EngagementScalarFieldEnum | EngagementScalarFieldEnum[]
+  }
+
+  /**
+   * User.updatedEngagements
+   */
+  export type User$updatedEngagementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Engagement
+     */
+    select?: EngagementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementInclude<ExtArgs> | null
+    where?: EngagementWhereInput
+    orderBy?: EngagementOrderByWithRelationInput | EngagementOrderByWithRelationInput[]
+    cursor?: EngagementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EngagementScalarFieldEnum | EngagementScalarFieldEnum[]
+  }
+
+  /**
+   * User.closedEngagements
+   */
+  export type User$closedEngagementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Engagement
+     */
+    select?: EngagementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementInclude<ExtArgs> | null
+    where?: EngagementWhereInput
+    orderBy?: EngagementOrderByWithRelationInput | EngagementOrderByWithRelationInput[]
+    cursor?: EngagementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EngagementScalarFieldEnum | EngagementScalarFieldEnum[]
+  }
+
+  /**
+   * User.engagementMemberships
+   */
+  export type User$engagementMembershipsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EngagementTeamMember
+     */
+    select?: EngagementTeamMemberSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementTeamMemberInclude<ExtArgs> | null
+    where?: EngagementTeamMemberWhereInput
+    orderBy?: EngagementTeamMemberOrderByWithRelationInput | EngagementTeamMemberOrderByWithRelationInput[]
+    cursor?: EngagementTeamMemberWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EngagementTeamMemberScalarFieldEnum | EngagementTeamMemberScalarFieldEnum[]
   }
 
   /**
@@ -8208,6 +8675,7 @@ export namespace Prisma {
     updatedBy?: boolean | AuditUniverse$updatedByArgs<ExtArgs>
     risks?: boolean | AuditUniverse$risksArgs<ExtArgs>
     auditPlans?: boolean | AuditUniverse$auditPlansArgs<ExtArgs>
+    engagements?: boolean | AuditUniverse$engagementsArgs<ExtArgs>
     _count?: boolean | AuditUniverseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["auditUniverse"]>
 
@@ -8261,6 +8729,7 @@ export namespace Prisma {
     updatedBy?: boolean | AuditUniverse$updatedByArgs<ExtArgs>
     risks?: boolean | AuditUniverse$risksArgs<ExtArgs>
     auditPlans?: boolean | AuditUniverse$auditPlansArgs<ExtArgs>
+    engagements?: boolean | AuditUniverse$engagementsArgs<ExtArgs>
     _count?: boolean | AuditUniverseCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AuditUniverseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8280,6 +8749,7 @@ export namespace Prisma {
       updatedBy: Prisma.$UserPayload<ExtArgs> | null
       risks: Prisma.$RiskPayload<ExtArgs>[]
       auditPlans: Prisma.$AuditPlanPayload<ExtArgs>[]
+      engagements: Prisma.$EngagementPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -8669,6 +9139,7 @@ export namespace Prisma {
     updatedBy<T extends AuditUniverse$updatedByArgs<ExtArgs> = {}>(args?: Subset<T, AuditUniverse$updatedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     risks<T extends AuditUniverse$risksArgs<ExtArgs> = {}>(args?: Subset<T, AuditUniverse$risksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "findMany"> | Null>
     auditPlans<T extends AuditUniverse$auditPlansArgs<ExtArgs> = {}>(args?: Subset<T, AuditUniverse$auditPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditPlanPayload<ExtArgs>, T, "findMany"> | Null>
+    engagements<T extends AuditUniverse$engagementsArgs<ExtArgs> = {}>(args?: Subset<T, AuditUniverse$engagementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9152,6 +9623,26 @@ export namespace Prisma {
   }
 
   /**
+   * AuditUniverse.engagements
+   */
+  export type AuditUniverse$engagementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Engagement
+     */
+    select?: EngagementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementInclude<ExtArgs> | null
+    where?: EngagementWhereInput
+    orderBy?: EngagementOrderByWithRelationInput | EngagementOrderByWithRelationInput[]
+    cursor?: EngagementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EngagementScalarFieldEnum | EngagementScalarFieldEnum[]
+  }
+
+  /**
    * AuditUniverse without action
    */
   export type AuditUniverseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9506,6 +9997,7 @@ export namespace Prisma {
     updatedBy?: boolean | Risk$updatedByArgs<ExtArgs>
     actions?: boolean | Risk$actionsArgs<ExtArgs>
     auditPlans?: boolean | Risk$auditPlansArgs<ExtArgs>
+    engagements?: boolean | Risk$engagementsArgs<ExtArgs>
     _count?: boolean | RiskCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["risk"]>
 
@@ -9566,6 +10058,7 @@ export namespace Prisma {
     updatedBy?: boolean | Risk$updatedByArgs<ExtArgs>
     actions?: boolean | Risk$actionsArgs<ExtArgs>
     auditPlans?: boolean | Risk$auditPlansArgs<ExtArgs>
+    engagements?: boolean | Risk$engagementsArgs<ExtArgs>
     _count?: boolean | RiskCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type RiskIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9584,6 +10077,7 @@ export namespace Prisma {
       updatedBy: Prisma.$UserPayload<ExtArgs> | null
       actions: Prisma.$RiskActionPayload<ExtArgs>[]
       auditPlans: Prisma.$AuditPlanPayload<ExtArgs>[]
+      engagements: Prisma.$EngagementPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -9976,6 +10470,7 @@ export namespace Prisma {
     updatedBy<T extends Risk$updatedByArgs<ExtArgs> = {}>(args?: Subset<T, Risk$updatedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     actions<T extends Risk$actionsArgs<ExtArgs> = {}>(args?: Subset<T, Risk$actionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RiskActionPayload<ExtArgs>, T, "findMany"> | Null>
     auditPlans<T extends Risk$auditPlansArgs<ExtArgs> = {}>(args?: Subset<T, Risk$auditPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditPlanPayload<ExtArgs>, T, "findMany"> | Null>
+    engagements<T extends Risk$engagementsArgs<ExtArgs> = {}>(args?: Subset<T, Risk$engagementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10425,6 +10920,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AuditPlanScalarFieldEnum | AuditPlanScalarFieldEnum[]
+  }
+
+  /**
+   * Risk.engagements
+   */
+  export type Risk$engagementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Engagement
+     */
+    select?: EngagementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementInclude<ExtArgs> | null
+    where?: EngagementWhereInput
+    orderBy?: EngagementOrderByWithRelationInput | EngagementOrderByWithRelationInput[]
+    cursor?: EngagementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EngagementScalarFieldEnum | EngagementScalarFieldEnum[]
   }
 
   /**
@@ -11780,6 +12295,8 @@ export namespace Prisma {
     leadAuditor?: boolean | AuditPlan$leadAuditorArgs<ExtArgs>
     createdBy?: boolean | AuditPlan$createdByArgs<ExtArgs>
     updatedBy?: boolean | AuditPlan$updatedByArgs<ExtArgs>
+    engagements?: boolean | AuditPlan$engagementsArgs<ExtArgs>
+    _count?: boolean | AuditPlanCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["auditPlan"]>
 
   export type AuditPlanSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -11841,6 +12358,8 @@ export namespace Prisma {
     leadAuditor?: boolean | AuditPlan$leadAuditorArgs<ExtArgs>
     createdBy?: boolean | AuditPlan$createdByArgs<ExtArgs>
     updatedBy?: boolean | AuditPlan$updatedByArgs<ExtArgs>
+    engagements?: boolean | AuditPlan$engagementsArgs<ExtArgs>
+    _count?: boolean | AuditPlanCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AuditPlanIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     auditEntity?: boolean | AuditUniverseDefaultArgs<ExtArgs>
@@ -11860,6 +12379,7 @@ export namespace Prisma {
       leadAuditor: Prisma.$UserPayload<ExtArgs> | null
       createdBy: Prisma.$UserPayload<ExtArgs> | null
       updatedBy: Prisma.$UserPayload<ExtArgs> | null
+      engagements: Prisma.$EngagementPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -12252,6 +12772,7 @@ export namespace Prisma {
     leadAuditor<T extends AuditPlan$leadAuditorArgs<ExtArgs> = {}>(args?: Subset<T, AuditPlan$leadAuditorArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     createdBy<T extends AuditPlan$createdByArgs<ExtArgs> = {}>(args?: Subset<T, AuditPlan$createdByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     updatedBy<T extends AuditPlan$updatedByArgs<ExtArgs> = {}>(args?: Subset<T, AuditPlan$updatedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    engagements<T extends AuditPlan$engagementsArgs<ExtArgs> = {}>(args?: Subset<T, AuditPlan$engagementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -12694,6 +13215,26 @@ export namespace Prisma {
   }
 
   /**
+   * AuditPlan.engagements
+   */
+  export type AuditPlan$engagementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Engagement
+     */
+    select?: EngagementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementInclude<ExtArgs> | null
+    where?: EngagementWhereInput
+    orderBy?: EngagementOrderByWithRelationInput | EngagementOrderByWithRelationInput[]
+    cursor?: EngagementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EngagementScalarFieldEnum | EngagementScalarFieldEnum[]
+  }
+
+  /**
    * AuditPlan without action
    */
   export type AuditPlanDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12705,6 +13246,2234 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: AuditPlanInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Engagement
+   */
+
+  export type AggregateEngagement = {
+    _count: EngagementCountAggregateOutputType | null
+    _min: EngagementMinAggregateOutputType | null
+    _max: EngagementMaxAggregateOutputType | null
+  }
+
+  export type EngagementMinAggregateOutputType = {
+    id: string | null
+    reference: string | null
+    title: string | null
+    auditPlanId: string | null
+    auditEntityId: string | null
+    riskId: string | null
+    type: $Enums.EngagementType | null
+    status: $Enums.EngagementStatus | null
+    objectives: string | null
+    scope: string | null
+    methodology: string | null
+    leadAuditorId: string | null
+    startDate: Date | null
+    endDate: Date | null
+    actualStartDate: Date | null
+    actualEndDate: Date | null
+    closedAt: Date | null
+    closedById: string | null
+    closureNotes: string | null
+    createdById: string | null
+    updatedById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EngagementMaxAggregateOutputType = {
+    id: string | null
+    reference: string | null
+    title: string | null
+    auditPlanId: string | null
+    auditEntityId: string | null
+    riskId: string | null
+    type: $Enums.EngagementType | null
+    status: $Enums.EngagementStatus | null
+    objectives: string | null
+    scope: string | null
+    methodology: string | null
+    leadAuditorId: string | null
+    startDate: Date | null
+    endDate: Date | null
+    actualStartDate: Date | null
+    actualEndDate: Date | null
+    closedAt: Date | null
+    closedById: string | null
+    closureNotes: string | null
+    createdById: string | null
+    updatedById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EngagementCountAggregateOutputType = {
+    id: number
+    reference: number
+    title: number
+    auditPlanId: number
+    auditEntityId: number
+    riskId: number
+    type: number
+    status: number
+    objectives: number
+    scope: number
+    methodology: number
+    leadAuditorId: number
+    startDate: number
+    endDate: number
+    actualStartDate: number
+    actualEndDate: number
+    closedAt: number
+    closedById: number
+    closureNotes: number
+    createdById: number
+    updatedById: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type EngagementMinAggregateInputType = {
+    id?: true
+    reference?: true
+    title?: true
+    auditPlanId?: true
+    auditEntityId?: true
+    riskId?: true
+    type?: true
+    status?: true
+    objectives?: true
+    scope?: true
+    methodology?: true
+    leadAuditorId?: true
+    startDate?: true
+    endDate?: true
+    actualStartDate?: true
+    actualEndDate?: true
+    closedAt?: true
+    closedById?: true
+    closureNotes?: true
+    createdById?: true
+    updatedById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EngagementMaxAggregateInputType = {
+    id?: true
+    reference?: true
+    title?: true
+    auditPlanId?: true
+    auditEntityId?: true
+    riskId?: true
+    type?: true
+    status?: true
+    objectives?: true
+    scope?: true
+    methodology?: true
+    leadAuditorId?: true
+    startDate?: true
+    endDate?: true
+    actualStartDate?: true
+    actualEndDate?: true
+    closedAt?: true
+    closedById?: true
+    closureNotes?: true
+    createdById?: true
+    updatedById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EngagementCountAggregateInputType = {
+    id?: true
+    reference?: true
+    title?: true
+    auditPlanId?: true
+    auditEntityId?: true
+    riskId?: true
+    type?: true
+    status?: true
+    objectives?: true
+    scope?: true
+    methodology?: true
+    leadAuditorId?: true
+    startDate?: true
+    endDate?: true
+    actualStartDate?: true
+    actualEndDate?: true
+    closedAt?: true
+    closedById?: true
+    closureNotes?: true
+    createdById?: true
+    updatedById?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type EngagementAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Engagement to aggregate.
+     */
+    where?: EngagementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Engagements to fetch.
+     */
+    orderBy?: EngagementOrderByWithRelationInput | EngagementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EngagementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Engagements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Engagements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Engagements
+    **/
+    _count?: true | EngagementCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EngagementMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EngagementMaxAggregateInputType
+  }
+
+  export type GetEngagementAggregateType<T extends EngagementAggregateArgs> = {
+        [P in keyof T & keyof AggregateEngagement]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEngagement[P]>
+      : GetScalarType<T[P], AggregateEngagement[P]>
+  }
+
+
+
+
+  export type EngagementGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EngagementWhereInput
+    orderBy?: EngagementOrderByWithAggregationInput | EngagementOrderByWithAggregationInput[]
+    by: EngagementScalarFieldEnum[] | EngagementScalarFieldEnum
+    having?: EngagementScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EngagementCountAggregateInputType | true
+    _min?: EngagementMinAggregateInputType
+    _max?: EngagementMaxAggregateInputType
+  }
+
+  export type EngagementGroupByOutputType = {
+    id: string
+    reference: string
+    title: string
+    auditPlanId: string | null
+    auditEntityId: string
+    riskId: string | null
+    type: $Enums.EngagementType
+    status: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology: string | null
+    leadAuditorId: string | null
+    startDate: Date | null
+    endDate: Date | null
+    actualStartDate: Date | null
+    actualEndDate: Date | null
+    closedAt: Date | null
+    closedById: string | null
+    closureNotes: string | null
+    createdById: string | null
+    updatedById: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: EngagementCountAggregateOutputType | null
+    _min: EngagementMinAggregateOutputType | null
+    _max: EngagementMaxAggregateOutputType | null
+  }
+
+  type GetEngagementGroupByPayload<T extends EngagementGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EngagementGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EngagementGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EngagementGroupByOutputType[P]>
+            : GetScalarType<T[P], EngagementGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EngagementSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reference?: boolean
+    title?: boolean
+    auditPlanId?: boolean
+    auditEntityId?: boolean
+    riskId?: boolean
+    type?: boolean
+    status?: boolean
+    objectives?: boolean
+    scope?: boolean
+    methodology?: boolean
+    leadAuditorId?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    actualStartDate?: boolean
+    actualEndDate?: boolean
+    closedAt?: boolean
+    closedById?: boolean
+    closureNotes?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    auditPlan?: boolean | Engagement$auditPlanArgs<ExtArgs>
+    auditEntity?: boolean | AuditUniverseDefaultArgs<ExtArgs>
+    risk?: boolean | Engagement$riskArgs<ExtArgs>
+    leadAuditor?: boolean | Engagement$leadAuditorArgs<ExtArgs>
+    closedBy?: boolean | Engagement$closedByArgs<ExtArgs>
+    createdBy?: boolean | Engagement$createdByArgs<ExtArgs>
+    updatedBy?: boolean | Engagement$updatedByArgs<ExtArgs>
+    teamMembers?: boolean | Engagement$teamMembersArgs<ExtArgs>
+    _count?: boolean | EngagementCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["engagement"]>
+
+  export type EngagementSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reference?: boolean
+    title?: boolean
+    auditPlanId?: boolean
+    auditEntityId?: boolean
+    riskId?: boolean
+    type?: boolean
+    status?: boolean
+    objectives?: boolean
+    scope?: boolean
+    methodology?: boolean
+    leadAuditorId?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    actualStartDate?: boolean
+    actualEndDate?: boolean
+    closedAt?: boolean
+    closedById?: boolean
+    closureNotes?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    auditPlan?: boolean | Engagement$auditPlanArgs<ExtArgs>
+    auditEntity?: boolean | AuditUniverseDefaultArgs<ExtArgs>
+    risk?: boolean | Engagement$riskArgs<ExtArgs>
+    leadAuditor?: boolean | Engagement$leadAuditorArgs<ExtArgs>
+    closedBy?: boolean | Engagement$closedByArgs<ExtArgs>
+    createdBy?: boolean | Engagement$createdByArgs<ExtArgs>
+    updatedBy?: boolean | Engagement$updatedByArgs<ExtArgs>
+  }, ExtArgs["result"]["engagement"]>
+
+  export type EngagementSelectScalar = {
+    id?: boolean
+    reference?: boolean
+    title?: boolean
+    auditPlanId?: boolean
+    auditEntityId?: boolean
+    riskId?: boolean
+    type?: boolean
+    status?: boolean
+    objectives?: boolean
+    scope?: boolean
+    methodology?: boolean
+    leadAuditorId?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    actualStartDate?: boolean
+    actualEndDate?: boolean
+    closedAt?: boolean
+    closedById?: boolean
+    closureNotes?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type EngagementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    auditPlan?: boolean | Engagement$auditPlanArgs<ExtArgs>
+    auditEntity?: boolean | AuditUniverseDefaultArgs<ExtArgs>
+    risk?: boolean | Engagement$riskArgs<ExtArgs>
+    leadAuditor?: boolean | Engagement$leadAuditorArgs<ExtArgs>
+    closedBy?: boolean | Engagement$closedByArgs<ExtArgs>
+    createdBy?: boolean | Engagement$createdByArgs<ExtArgs>
+    updatedBy?: boolean | Engagement$updatedByArgs<ExtArgs>
+    teamMembers?: boolean | Engagement$teamMembersArgs<ExtArgs>
+    _count?: boolean | EngagementCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type EngagementIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    auditPlan?: boolean | Engagement$auditPlanArgs<ExtArgs>
+    auditEntity?: boolean | AuditUniverseDefaultArgs<ExtArgs>
+    risk?: boolean | Engagement$riskArgs<ExtArgs>
+    leadAuditor?: boolean | Engagement$leadAuditorArgs<ExtArgs>
+    closedBy?: boolean | Engagement$closedByArgs<ExtArgs>
+    createdBy?: boolean | Engagement$createdByArgs<ExtArgs>
+    updatedBy?: boolean | Engagement$updatedByArgs<ExtArgs>
+  }
+
+  export type $EngagementPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Engagement"
+    objects: {
+      auditPlan: Prisma.$AuditPlanPayload<ExtArgs> | null
+      auditEntity: Prisma.$AuditUniversePayload<ExtArgs>
+      risk: Prisma.$RiskPayload<ExtArgs> | null
+      leadAuditor: Prisma.$UserPayload<ExtArgs> | null
+      closedBy: Prisma.$UserPayload<ExtArgs> | null
+      createdBy: Prisma.$UserPayload<ExtArgs> | null
+      updatedBy: Prisma.$UserPayload<ExtArgs> | null
+      teamMembers: Prisma.$EngagementTeamMemberPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      reference: string
+      title: string
+      auditPlanId: string | null
+      auditEntityId: string
+      riskId: string | null
+      type: $Enums.EngagementType
+      status: $Enums.EngagementStatus
+      objectives: string
+      scope: string
+      methodology: string | null
+      leadAuditorId: string | null
+      startDate: Date | null
+      endDate: Date | null
+      actualStartDate: Date | null
+      actualEndDate: Date | null
+      closedAt: Date | null
+      closedById: string | null
+      closureNotes: string | null
+      createdById: string | null
+      updatedById: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["engagement"]>
+    composites: {}
+  }
+
+  type EngagementGetPayload<S extends boolean | null | undefined | EngagementDefaultArgs> = $Result.GetResult<Prisma.$EngagementPayload, S>
+
+  type EngagementCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<EngagementFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: EngagementCountAggregateInputType | true
+    }
+
+  export interface EngagementDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Engagement'], meta: { name: 'Engagement' } }
+    /**
+     * Find zero or one Engagement that matches the filter.
+     * @param {EngagementFindUniqueArgs} args - Arguments to find a Engagement
+     * @example
+     * // Get one Engagement
+     * const engagement = await prisma.engagement.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EngagementFindUniqueArgs>(args: SelectSubset<T, EngagementFindUniqueArgs<ExtArgs>>): Prisma__EngagementClient<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Engagement that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {EngagementFindUniqueOrThrowArgs} args - Arguments to find a Engagement
+     * @example
+     * // Get one Engagement
+     * const engagement = await prisma.engagement.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EngagementFindUniqueOrThrowArgs>(args: SelectSubset<T, EngagementFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EngagementClient<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Engagement that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EngagementFindFirstArgs} args - Arguments to find a Engagement
+     * @example
+     * // Get one Engagement
+     * const engagement = await prisma.engagement.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EngagementFindFirstArgs>(args?: SelectSubset<T, EngagementFindFirstArgs<ExtArgs>>): Prisma__EngagementClient<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Engagement that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EngagementFindFirstOrThrowArgs} args - Arguments to find a Engagement
+     * @example
+     * // Get one Engagement
+     * const engagement = await prisma.engagement.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EngagementFindFirstOrThrowArgs>(args?: SelectSubset<T, EngagementFindFirstOrThrowArgs<ExtArgs>>): Prisma__EngagementClient<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Engagements that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EngagementFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Engagements
+     * const engagements = await prisma.engagement.findMany()
+     * 
+     * // Get first 10 Engagements
+     * const engagements = await prisma.engagement.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const engagementWithIdOnly = await prisma.engagement.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EngagementFindManyArgs>(args?: SelectSubset<T, EngagementFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Engagement.
+     * @param {EngagementCreateArgs} args - Arguments to create a Engagement.
+     * @example
+     * // Create one Engagement
+     * const Engagement = await prisma.engagement.create({
+     *   data: {
+     *     // ... data to create a Engagement
+     *   }
+     * })
+     * 
+     */
+    create<T extends EngagementCreateArgs>(args: SelectSubset<T, EngagementCreateArgs<ExtArgs>>): Prisma__EngagementClient<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Engagements.
+     * @param {EngagementCreateManyArgs} args - Arguments to create many Engagements.
+     * @example
+     * // Create many Engagements
+     * const engagement = await prisma.engagement.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EngagementCreateManyArgs>(args?: SelectSubset<T, EngagementCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Engagements and returns the data saved in the database.
+     * @param {EngagementCreateManyAndReturnArgs} args - Arguments to create many Engagements.
+     * @example
+     * // Create many Engagements
+     * const engagement = await prisma.engagement.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Engagements and only return the `id`
+     * const engagementWithIdOnly = await prisma.engagement.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EngagementCreateManyAndReturnArgs>(args?: SelectSubset<T, EngagementCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Engagement.
+     * @param {EngagementDeleteArgs} args - Arguments to delete one Engagement.
+     * @example
+     * // Delete one Engagement
+     * const Engagement = await prisma.engagement.delete({
+     *   where: {
+     *     // ... filter to delete one Engagement
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EngagementDeleteArgs>(args: SelectSubset<T, EngagementDeleteArgs<ExtArgs>>): Prisma__EngagementClient<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Engagement.
+     * @param {EngagementUpdateArgs} args - Arguments to update one Engagement.
+     * @example
+     * // Update one Engagement
+     * const engagement = await prisma.engagement.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EngagementUpdateArgs>(args: SelectSubset<T, EngagementUpdateArgs<ExtArgs>>): Prisma__EngagementClient<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Engagements.
+     * @param {EngagementDeleteManyArgs} args - Arguments to filter Engagements to delete.
+     * @example
+     * // Delete a few Engagements
+     * const { count } = await prisma.engagement.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EngagementDeleteManyArgs>(args?: SelectSubset<T, EngagementDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Engagements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EngagementUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Engagements
+     * const engagement = await prisma.engagement.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EngagementUpdateManyArgs>(args: SelectSubset<T, EngagementUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Engagement.
+     * @param {EngagementUpsertArgs} args - Arguments to update or create a Engagement.
+     * @example
+     * // Update or create a Engagement
+     * const engagement = await prisma.engagement.upsert({
+     *   create: {
+     *     // ... data to create a Engagement
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Engagement we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EngagementUpsertArgs>(args: SelectSubset<T, EngagementUpsertArgs<ExtArgs>>): Prisma__EngagementClient<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Engagements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EngagementCountArgs} args - Arguments to filter Engagements to count.
+     * @example
+     * // Count the number of Engagements
+     * const count = await prisma.engagement.count({
+     *   where: {
+     *     // ... the filter for the Engagements we want to count
+     *   }
+     * })
+    **/
+    count<T extends EngagementCountArgs>(
+      args?: Subset<T, EngagementCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EngagementCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Engagement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EngagementAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EngagementAggregateArgs>(args: Subset<T, EngagementAggregateArgs>): Prisma.PrismaPromise<GetEngagementAggregateType<T>>
+
+    /**
+     * Group by Engagement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EngagementGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EngagementGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EngagementGroupByArgs['orderBy'] }
+        : { orderBy?: EngagementGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EngagementGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEngagementGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Engagement model
+   */
+  readonly fields: EngagementFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Engagement.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EngagementClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    auditPlan<T extends Engagement$auditPlanArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$auditPlanArgs<ExtArgs>>): Prisma__AuditPlanClient<$Result.GetResult<Prisma.$AuditPlanPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    auditEntity<T extends AuditUniverseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AuditUniverseDefaultArgs<ExtArgs>>): Prisma__AuditUniverseClient<$Result.GetResult<Prisma.$AuditUniversePayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    risk<T extends Engagement$riskArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$riskArgs<ExtArgs>>): Prisma__RiskClient<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    leadAuditor<T extends Engagement$leadAuditorArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$leadAuditorArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    closedBy<T extends Engagement$closedByArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$closedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    createdBy<T extends Engagement$createdByArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$createdByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    updatedBy<T extends Engagement$updatedByArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$updatedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    teamMembers<T extends Engagement$teamMembersArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$teamMembersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EngagementTeamMemberPayload<ExtArgs>, T, "findMany"> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Engagement model
+   */ 
+  interface EngagementFieldRefs {
+    readonly id: FieldRef<"Engagement", 'String'>
+    readonly reference: FieldRef<"Engagement", 'String'>
+    readonly title: FieldRef<"Engagement", 'String'>
+    readonly auditPlanId: FieldRef<"Engagement", 'String'>
+    readonly auditEntityId: FieldRef<"Engagement", 'String'>
+    readonly riskId: FieldRef<"Engagement", 'String'>
+    readonly type: FieldRef<"Engagement", 'EngagementType'>
+    readonly status: FieldRef<"Engagement", 'EngagementStatus'>
+    readonly objectives: FieldRef<"Engagement", 'String'>
+    readonly scope: FieldRef<"Engagement", 'String'>
+    readonly methodology: FieldRef<"Engagement", 'String'>
+    readonly leadAuditorId: FieldRef<"Engagement", 'String'>
+    readonly startDate: FieldRef<"Engagement", 'DateTime'>
+    readonly endDate: FieldRef<"Engagement", 'DateTime'>
+    readonly actualStartDate: FieldRef<"Engagement", 'DateTime'>
+    readonly actualEndDate: FieldRef<"Engagement", 'DateTime'>
+    readonly closedAt: FieldRef<"Engagement", 'DateTime'>
+    readonly closedById: FieldRef<"Engagement", 'String'>
+    readonly closureNotes: FieldRef<"Engagement", 'String'>
+    readonly createdById: FieldRef<"Engagement", 'String'>
+    readonly updatedById: FieldRef<"Engagement", 'String'>
+    readonly createdAt: FieldRef<"Engagement", 'DateTime'>
+    readonly updatedAt: FieldRef<"Engagement", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Engagement findUnique
+   */
+  export type EngagementFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Engagement
+     */
+    select?: EngagementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementInclude<ExtArgs> | null
+    /**
+     * Filter, which Engagement to fetch.
+     */
+    where: EngagementWhereUniqueInput
+  }
+
+  /**
+   * Engagement findUniqueOrThrow
+   */
+  export type EngagementFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Engagement
+     */
+    select?: EngagementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementInclude<ExtArgs> | null
+    /**
+     * Filter, which Engagement to fetch.
+     */
+    where: EngagementWhereUniqueInput
+  }
+
+  /**
+   * Engagement findFirst
+   */
+  export type EngagementFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Engagement
+     */
+    select?: EngagementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementInclude<ExtArgs> | null
+    /**
+     * Filter, which Engagement to fetch.
+     */
+    where?: EngagementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Engagements to fetch.
+     */
+    orderBy?: EngagementOrderByWithRelationInput | EngagementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Engagements.
+     */
+    cursor?: EngagementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Engagements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Engagements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Engagements.
+     */
+    distinct?: EngagementScalarFieldEnum | EngagementScalarFieldEnum[]
+  }
+
+  /**
+   * Engagement findFirstOrThrow
+   */
+  export type EngagementFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Engagement
+     */
+    select?: EngagementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementInclude<ExtArgs> | null
+    /**
+     * Filter, which Engagement to fetch.
+     */
+    where?: EngagementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Engagements to fetch.
+     */
+    orderBy?: EngagementOrderByWithRelationInput | EngagementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Engagements.
+     */
+    cursor?: EngagementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Engagements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Engagements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Engagements.
+     */
+    distinct?: EngagementScalarFieldEnum | EngagementScalarFieldEnum[]
+  }
+
+  /**
+   * Engagement findMany
+   */
+  export type EngagementFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Engagement
+     */
+    select?: EngagementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementInclude<ExtArgs> | null
+    /**
+     * Filter, which Engagements to fetch.
+     */
+    where?: EngagementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Engagements to fetch.
+     */
+    orderBy?: EngagementOrderByWithRelationInput | EngagementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Engagements.
+     */
+    cursor?: EngagementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Engagements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Engagements.
+     */
+    skip?: number
+    distinct?: EngagementScalarFieldEnum | EngagementScalarFieldEnum[]
+  }
+
+  /**
+   * Engagement create
+   */
+  export type EngagementCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Engagement
+     */
+    select?: EngagementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Engagement.
+     */
+    data: XOR<EngagementCreateInput, EngagementUncheckedCreateInput>
+  }
+
+  /**
+   * Engagement createMany
+   */
+  export type EngagementCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Engagements.
+     */
+    data: EngagementCreateManyInput | EngagementCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Engagement createManyAndReturn
+   */
+  export type EngagementCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Engagement
+     */
+    select?: EngagementSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Engagements.
+     */
+    data: EngagementCreateManyInput | EngagementCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Engagement update
+   */
+  export type EngagementUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Engagement
+     */
+    select?: EngagementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Engagement.
+     */
+    data: XOR<EngagementUpdateInput, EngagementUncheckedUpdateInput>
+    /**
+     * Choose, which Engagement to update.
+     */
+    where: EngagementWhereUniqueInput
+  }
+
+  /**
+   * Engagement updateMany
+   */
+  export type EngagementUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Engagements.
+     */
+    data: XOR<EngagementUpdateManyMutationInput, EngagementUncheckedUpdateManyInput>
+    /**
+     * Filter which Engagements to update
+     */
+    where?: EngagementWhereInput
+  }
+
+  /**
+   * Engagement upsert
+   */
+  export type EngagementUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Engagement
+     */
+    select?: EngagementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Engagement to update in case it exists.
+     */
+    where: EngagementWhereUniqueInput
+    /**
+     * In case the Engagement found by the `where` argument doesn't exist, create a new Engagement with this data.
+     */
+    create: XOR<EngagementCreateInput, EngagementUncheckedCreateInput>
+    /**
+     * In case the Engagement was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EngagementUpdateInput, EngagementUncheckedUpdateInput>
+  }
+
+  /**
+   * Engagement delete
+   */
+  export type EngagementDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Engagement
+     */
+    select?: EngagementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementInclude<ExtArgs> | null
+    /**
+     * Filter which Engagement to delete.
+     */
+    where: EngagementWhereUniqueInput
+  }
+
+  /**
+   * Engagement deleteMany
+   */
+  export type EngagementDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Engagements to delete
+     */
+    where?: EngagementWhereInput
+  }
+
+  /**
+   * Engagement.auditPlan
+   */
+  export type Engagement$auditPlanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditPlan
+     */
+    select?: AuditPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditPlanInclude<ExtArgs> | null
+    where?: AuditPlanWhereInput
+  }
+
+  /**
+   * Engagement.risk
+   */
+  export type Engagement$riskArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Risk
+     */
+    select?: RiskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskInclude<ExtArgs> | null
+    where?: RiskWhereInput
+  }
+
+  /**
+   * Engagement.leadAuditor
+   */
+  export type Engagement$leadAuditorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Engagement.closedBy
+   */
+  export type Engagement$closedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Engagement.createdBy
+   */
+  export type Engagement$createdByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Engagement.updatedBy
+   */
+  export type Engagement$updatedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Engagement.teamMembers
+   */
+  export type Engagement$teamMembersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EngagementTeamMember
+     */
+    select?: EngagementTeamMemberSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementTeamMemberInclude<ExtArgs> | null
+    where?: EngagementTeamMemberWhereInput
+    orderBy?: EngagementTeamMemberOrderByWithRelationInput | EngagementTeamMemberOrderByWithRelationInput[]
+    cursor?: EngagementTeamMemberWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EngagementTeamMemberScalarFieldEnum | EngagementTeamMemberScalarFieldEnum[]
+  }
+
+  /**
+   * Engagement without action
+   */
+  export type EngagementDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Engagement
+     */
+    select?: EngagementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model EngagementTeamMember
+   */
+
+  export type AggregateEngagementTeamMember = {
+    _count: EngagementTeamMemberCountAggregateOutputType | null
+    _min: EngagementTeamMemberMinAggregateOutputType | null
+    _max: EngagementTeamMemberMaxAggregateOutputType | null
+  }
+
+  export type EngagementTeamMemberMinAggregateOutputType = {
+    engagementId: string | null
+    userId: string | null
+    role: $Enums.TeamMemberRole | null
+    assignedAt: Date | null
+  }
+
+  export type EngagementTeamMemberMaxAggregateOutputType = {
+    engagementId: string | null
+    userId: string | null
+    role: $Enums.TeamMemberRole | null
+    assignedAt: Date | null
+  }
+
+  export type EngagementTeamMemberCountAggregateOutputType = {
+    engagementId: number
+    userId: number
+    role: number
+    assignedAt: number
+    _all: number
+  }
+
+
+  export type EngagementTeamMemberMinAggregateInputType = {
+    engagementId?: true
+    userId?: true
+    role?: true
+    assignedAt?: true
+  }
+
+  export type EngagementTeamMemberMaxAggregateInputType = {
+    engagementId?: true
+    userId?: true
+    role?: true
+    assignedAt?: true
+  }
+
+  export type EngagementTeamMemberCountAggregateInputType = {
+    engagementId?: true
+    userId?: true
+    role?: true
+    assignedAt?: true
+    _all?: true
+  }
+
+  export type EngagementTeamMemberAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EngagementTeamMember to aggregate.
+     */
+    where?: EngagementTeamMemberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EngagementTeamMembers to fetch.
+     */
+    orderBy?: EngagementTeamMemberOrderByWithRelationInput | EngagementTeamMemberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EngagementTeamMemberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EngagementTeamMembers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EngagementTeamMembers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EngagementTeamMembers
+    **/
+    _count?: true | EngagementTeamMemberCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EngagementTeamMemberMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EngagementTeamMemberMaxAggregateInputType
+  }
+
+  export type GetEngagementTeamMemberAggregateType<T extends EngagementTeamMemberAggregateArgs> = {
+        [P in keyof T & keyof AggregateEngagementTeamMember]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEngagementTeamMember[P]>
+      : GetScalarType<T[P], AggregateEngagementTeamMember[P]>
+  }
+
+
+
+
+  export type EngagementTeamMemberGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EngagementTeamMemberWhereInput
+    orderBy?: EngagementTeamMemberOrderByWithAggregationInput | EngagementTeamMemberOrderByWithAggregationInput[]
+    by: EngagementTeamMemberScalarFieldEnum[] | EngagementTeamMemberScalarFieldEnum
+    having?: EngagementTeamMemberScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EngagementTeamMemberCountAggregateInputType | true
+    _min?: EngagementTeamMemberMinAggregateInputType
+    _max?: EngagementTeamMemberMaxAggregateInputType
+  }
+
+  export type EngagementTeamMemberGroupByOutputType = {
+    engagementId: string
+    userId: string
+    role: $Enums.TeamMemberRole
+    assignedAt: Date
+    _count: EngagementTeamMemberCountAggregateOutputType | null
+    _min: EngagementTeamMemberMinAggregateOutputType | null
+    _max: EngagementTeamMemberMaxAggregateOutputType | null
+  }
+
+  type GetEngagementTeamMemberGroupByPayload<T extends EngagementTeamMemberGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EngagementTeamMemberGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EngagementTeamMemberGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EngagementTeamMemberGroupByOutputType[P]>
+            : GetScalarType<T[P], EngagementTeamMemberGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EngagementTeamMemberSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    engagementId?: boolean
+    userId?: boolean
+    role?: boolean
+    assignedAt?: boolean
+    engagement?: boolean | EngagementDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["engagementTeamMember"]>
+
+  export type EngagementTeamMemberSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    engagementId?: boolean
+    userId?: boolean
+    role?: boolean
+    assignedAt?: boolean
+    engagement?: boolean | EngagementDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["engagementTeamMember"]>
+
+  export type EngagementTeamMemberSelectScalar = {
+    engagementId?: boolean
+    userId?: boolean
+    role?: boolean
+    assignedAt?: boolean
+  }
+
+  export type EngagementTeamMemberInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    engagement?: boolean | EngagementDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type EngagementTeamMemberIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    engagement?: boolean | EngagementDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $EngagementTeamMemberPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EngagementTeamMember"
+    objects: {
+      engagement: Prisma.$EngagementPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      engagementId: string
+      userId: string
+      role: $Enums.TeamMemberRole
+      assignedAt: Date
+    }, ExtArgs["result"]["engagementTeamMember"]>
+    composites: {}
+  }
+
+  type EngagementTeamMemberGetPayload<S extends boolean | null | undefined | EngagementTeamMemberDefaultArgs> = $Result.GetResult<Prisma.$EngagementTeamMemberPayload, S>
+
+  type EngagementTeamMemberCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<EngagementTeamMemberFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: EngagementTeamMemberCountAggregateInputType | true
+    }
+
+  export interface EngagementTeamMemberDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EngagementTeamMember'], meta: { name: 'EngagementTeamMember' } }
+    /**
+     * Find zero or one EngagementTeamMember that matches the filter.
+     * @param {EngagementTeamMemberFindUniqueArgs} args - Arguments to find a EngagementTeamMember
+     * @example
+     * // Get one EngagementTeamMember
+     * const engagementTeamMember = await prisma.engagementTeamMember.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EngagementTeamMemberFindUniqueArgs>(args: SelectSubset<T, EngagementTeamMemberFindUniqueArgs<ExtArgs>>): Prisma__EngagementTeamMemberClient<$Result.GetResult<Prisma.$EngagementTeamMemberPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one EngagementTeamMember that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {EngagementTeamMemberFindUniqueOrThrowArgs} args - Arguments to find a EngagementTeamMember
+     * @example
+     * // Get one EngagementTeamMember
+     * const engagementTeamMember = await prisma.engagementTeamMember.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EngagementTeamMemberFindUniqueOrThrowArgs>(args: SelectSubset<T, EngagementTeamMemberFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EngagementTeamMemberClient<$Result.GetResult<Prisma.$EngagementTeamMemberPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first EngagementTeamMember that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EngagementTeamMemberFindFirstArgs} args - Arguments to find a EngagementTeamMember
+     * @example
+     * // Get one EngagementTeamMember
+     * const engagementTeamMember = await prisma.engagementTeamMember.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EngagementTeamMemberFindFirstArgs>(args?: SelectSubset<T, EngagementTeamMemberFindFirstArgs<ExtArgs>>): Prisma__EngagementTeamMemberClient<$Result.GetResult<Prisma.$EngagementTeamMemberPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first EngagementTeamMember that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EngagementTeamMemberFindFirstOrThrowArgs} args - Arguments to find a EngagementTeamMember
+     * @example
+     * // Get one EngagementTeamMember
+     * const engagementTeamMember = await prisma.engagementTeamMember.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EngagementTeamMemberFindFirstOrThrowArgs>(args?: SelectSubset<T, EngagementTeamMemberFindFirstOrThrowArgs<ExtArgs>>): Prisma__EngagementTeamMemberClient<$Result.GetResult<Prisma.$EngagementTeamMemberPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more EngagementTeamMembers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EngagementTeamMemberFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EngagementTeamMembers
+     * const engagementTeamMembers = await prisma.engagementTeamMember.findMany()
+     * 
+     * // Get first 10 EngagementTeamMembers
+     * const engagementTeamMembers = await prisma.engagementTeamMember.findMany({ take: 10 })
+     * 
+     * // Only select the `engagementId`
+     * const engagementTeamMemberWithEngagementIdOnly = await prisma.engagementTeamMember.findMany({ select: { engagementId: true } })
+     * 
+     */
+    findMany<T extends EngagementTeamMemberFindManyArgs>(args?: SelectSubset<T, EngagementTeamMemberFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EngagementTeamMemberPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a EngagementTeamMember.
+     * @param {EngagementTeamMemberCreateArgs} args - Arguments to create a EngagementTeamMember.
+     * @example
+     * // Create one EngagementTeamMember
+     * const EngagementTeamMember = await prisma.engagementTeamMember.create({
+     *   data: {
+     *     // ... data to create a EngagementTeamMember
+     *   }
+     * })
+     * 
+     */
+    create<T extends EngagementTeamMemberCreateArgs>(args: SelectSubset<T, EngagementTeamMemberCreateArgs<ExtArgs>>): Prisma__EngagementTeamMemberClient<$Result.GetResult<Prisma.$EngagementTeamMemberPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many EngagementTeamMembers.
+     * @param {EngagementTeamMemberCreateManyArgs} args - Arguments to create many EngagementTeamMembers.
+     * @example
+     * // Create many EngagementTeamMembers
+     * const engagementTeamMember = await prisma.engagementTeamMember.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EngagementTeamMemberCreateManyArgs>(args?: SelectSubset<T, EngagementTeamMemberCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EngagementTeamMembers and returns the data saved in the database.
+     * @param {EngagementTeamMemberCreateManyAndReturnArgs} args - Arguments to create many EngagementTeamMembers.
+     * @example
+     * // Create many EngagementTeamMembers
+     * const engagementTeamMember = await prisma.engagementTeamMember.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EngagementTeamMembers and only return the `engagementId`
+     * const engagementTeamMemberWithEngagementIdOnly = await prisma.engagementTeamMember.createManyAndReturn({ 
+     *   select: { engagementId: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EngagementTeamMemberCreateManyAndReturnArgs>(args?: SelectSubset<T, EngagementTeamMemberCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EngagementTeamMemberPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a EngagementTeamMember.
+     * @param {EngagementTeamMemberDeleteArgs} args - Arguments to delete one EngagementTeamMember.
+     * @example
+     * // Delete one EngagementTeamMember
+     * const EngagementTeamMember = await prisma.engagementTeamMember.delete({
+     *   where: {
+     *     // ... filter to delete one EngagementTeamMember
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EngagementTeamMemberDeleteArgs>(args: SelectSubset<T, EngagementTeamMemberDeleteArgs<ExtArgs>>): Prisma__EngagementTeamMemberClient<$Result.GetResult<Prisma.$EngagementTeamMemberPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one EngagementTeamMember.
+     * @param {EngagementTeamMemberUpdateArgs} args - Arguments to update one EngagementTeamMember.
+     * @example
+     * // Update one EngagementTeamMember
+     * const engagementTeamMember = await prisma.engagementTeamMember.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EngagementTeamMemberUpdateArgs>(args: SelectSubset<T, EngagementTeamMemberUpdateArgs<ExtArgs>>): Prisma__EngagementTeamMemberClient<$Result.GetResult<Prisma.$EngagementTeamMemberPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more EngagementTeamMembers.
+     * @param {EngagementTeamMemberDeleteManyArgs} args - Arguments to filter EngagementTeamMembers to delete.
+     * @example
+     * // Delete a few EngagementTeamMembers
+     * const { count } = await prisma.engagementTeamMember.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EngagementTeamMemberDeleteManyArgs>(args?: SelectSubset<T, EngagementTeamMemberDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EngagementTeamMembers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EngagementTeamMemberUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EngagementTeamMembers
+     * const engagementTeamMember = await prisma.engagementTeamMember.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EngagementTeamMemberUpdateManyArgs>(args: SelectSubset<T, EngagementTeamMemberUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one EngagementTeamMember.
+     * @param {EngagementTeamMemberUpsertArgs} args - Arguments to update or create a EngagementTeamMember.
+     * @example
+     * // Update or create a EngagementTeamMember
+     * const engagementTeamMember = await prisma.engagementTeamMember.upsert({
+     *   create: {
+     *     // ... data to create a EngagementTeamMember
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EngagementTeamMember we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EngagementTeamMemberUpsertArgs>(args: SelectSubset<T, EngagementTeamMemberUpsertArgs<ExtArgs>>): Prisma__EngagementTeamMemberClient<$Result.GetResult<Prisma.$EngagementTeamMemberPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of EngagementTeamMembers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EngagementTeamMemberCountArgs} args - Arguments to filter EngagementTeamMembers to count.
+     * @example
+     * // Count the number of EngagementTeamMembers
+     * const count = await prisma.engagementTeamMember.count({
+     *   where: {
+     *     // ... the filter for the EngagementTeamMembers we want to count
+     *   }
+     * })
+    **/
+    count<T extends EngagementTeamMemberCountArgs>(
+      args?: Subset<T, EngagementTeamMemberCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EngagementTeamMemberCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EngagementTeamMember.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EngagementTeamMemberAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EngagementTeamMemberAggregateArgs>(args: Subset<T, EngagementTeamMemberAggregateArgs>): Prisma.PrismaPromise<GetEngagementTeamMemberAggregateType<T>>
+
+    /**
+     * Group by EngagementTeamMember.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EngagementTeamMemberGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EngagementTeamMemberGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EngagementTeamMemberGroupByArgs['orderBy'] }
+        : { orderBy?: EngagementTeamMemberGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EngagementTeamMemberGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEngagementTeamMemberGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EngagementTeamMember model
+   */
+  readonly fields: EngagementTeamMemberFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EngagementTeamMember.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EngagementTeamMemberClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    engagement<T extends EngagementDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EngagementDefaultArgs<ExtArgs>>): Prisma__EngagementClient<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EngagementTeamMember model
+   */ 
+  interface EngagementTeamMemberFieldRefs {
+    readonly engagementId: FieldRef<"EngagementTeamMember", 'String'>
+    readonly userId: FieldRef<"EngagementTeamMember", 'String'>
+    readonly role: FieldRef<"EngagementTeamMember", 'TeamMemberRole'>
+    readonly assignedAt: FieldRef<"EngagementTeamMember", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EngagementTeamMember findUnique
+   */
+  export type EngagementTeamMemberFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EngagementTeamMember
+     */
+    select?: EngagementTeamMemberSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementTeamMemberInclude<ExtArgs> | null
+    /**
+     * Filter, which EngagementTeamMember to fetch.
+     */
+    where: EngagementTeamMemberWhereUniqueInput
+  }
+
+  /**
+   * EngagementTeamMember findUniqueOrThrow
+   */
+  export type EngagementTeamMemberFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EngagementTeamMember
+     */
+    select?: EngagementTeamMemberSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementTeamMemberInclude<ExtArgs> | null
+    /**
+     * Filter, which EngagementTeamMember to fetch.
+     */
+    where: EngagementTeamMemberWhereUniqueInput
+  }
+
+  /**
+   * EngagementTeamMember findFirst
+   */
+  export type EngagementTeamMemberFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EngagementTeamMember
+     */
+    select?: EngagementTeamMemberSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementTeamMemberInclude<ExtArgs> | null
+    /**
+     * Filter, which EngagementTeamMember to fetch.
+     */
+    where?: EngagementTeamMemberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EngagementTeamMembers to fetch.
+     */
+    orderBy?: EngagementTeamMemberOrderByWithRelationInput | EngagementTeamMemberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EngagementTeamMembers.
+     */
+    cursor?: EngagementTeamMemberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EngagementTeamMembers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EngagementTeamMembers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EngagementTeamMembers.
+     */
+    distinct?: EngagementTeamMemberScalarFieldEnum | EngagementTeamMemberScalarFieldEnum[]
+  }
+
+  /**
+   * EngagementTeamMember findFirstOrThrow
+   */
+  export type EngagementTeamMemberFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EngagementTeamMember
+     */
+    select?: EngagementTeamMemberSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementTeamMemberInclude<ExtArgs> | null
+    /**
+     * Filter, which EngagementTeamMember to fetch.
+     */
+    where?: EngagementTeamMemberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EngagementTeamMembers to fetch.
+     */
+    orderBy?: EngagementTeamMemberOrderByWithRelationInput | EngagementTeamMemberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EngagementTeamMembers.
+     */
+    cursor?: EngagementTeamMemberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EngagementTeamMembers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EngagementTeamMembers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EngagementTeamMembers.
+     */
+    distinct?: EngagementTeamMemberScalarFieldEnum | EngagementTeamMemberScalarFieldEnum[]
+  }
+
+  /**
+   * EngagementTeamMember findMany
+   */
+  export type EngagementTeamMemberFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EngagementTeamMember
+     */
+    select?: EngagementTeamMemberSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementTeamMemberInclude<ExtArgs> | null
+    /**
+     * Filter, which EngagementTeamMembers to fetch.
+     */
+    where?: EngagementTeamMemberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EngagementTeamMembers to fetch.
+     */
+    orderBy?: EngagementTeamMemberOrderByWithRelationInput | EngagementTeamMemberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EngagementTeamMembers.
+     */
+    cursor?: EngagementTeamMemberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EngagementTeamMembers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EngagementTeamMembers.
+     */
+    skip?: number
+    distinct?: EngagementTeamMemberScalarFieldEnum | EngagementTeamMemberScalarFieldEnum[]
+  }
+
+  /**
+   * EngagementTeamMember create
+   */
+  export type EngagementTeamMemberCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EngagementTeamMember
+     */
+    select?: EngagementTeamMemberSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementTeamMemberInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EngagementTeamMember.
+     */
+    data: XOR<EngagementTeamMemberCreateInput, EngagementTeamMemberUncheckedCreateInput>
+  }
+
+  /**
+   * EngagementTeamMember createMany
+   */
+  export type EngagementTeamMemberCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EngagementTeamMembers.
+     */
+    data: EngagementTeamMemberCreateManyInput | EngagementTeamMemberCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EngagementTeamMember createManyAndReturn
+   */
+  export type EngagementTeamMemberCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EngagementTeamMember
+     */
+    select?: EngagementTeamMemberSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many EngagementTeamMembers.
+     */
+    data: EngagementTeamMemberCreateManyInput | EngagementTeamMemberCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementTeamMemberIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EngagementTeamMember update
+   */
+  export type EngagementTeamMemberUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EngagementTeamMember
+     */
+    select?: EngagementTeamMemberSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementTeamMemberInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EngagementTeamMember.
+     */
+    data: XOR<EngagementTeamMemberUpdateInput, EngagementTeamMemberUncheckedUpdateInput>
+    /**
+     * Choose, which EngagementTeamMember to update.
+     */
+    where: EngagementTeamMemberWhereUniqueInput
+  }
+
+  /**
+   * EngagementTeamMember updateMany
+   */
+  export type EngagementTeamMemberUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EngagementTeamMembers.
+     */
+    data: XOR<EngagementTeamMemberUpdateManyMutationInput, EngagementTeamMemberUncheckedUpdateManyInput>
+    /**
+     * Filter which EngagementTeamMembers to update
+     */
+    where?: EngagementTeamMemberWhereInput
+  }
+
+  /**
+   * EngagementTeamMember upsert
+   */
+  export type EngagementTeamMemberUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EngagementTeamMember
+     */
+    select?: EngagementTeamMemberSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementTeamMemberInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EngagementTeamMember to update in case it exists.
+     */
+    where: EngagementTeamMemberWhereUniqueInput
+    /**
+     * In case the EngagementTeamMember found by the `where` argument doesn't exist, create a new EngagementTeamMember with this data.
+     */
+    create: XOR<EngagementTeamMemberCreateInput, EngagementTeamMemberUncheckedCreateInput>
+    /**
+     * In case the EngagementTeamMember was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EngagementTeamMemberUpdateInput, EngagementTeamMemberUncheckedUpdateInput>
+  }
+
+  /**
+   * EngagementTeamMember delete
+   */
+  export type EngagementTeamMemberDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EngagementTeamMember
+     */
+    select?: EngagementTeamMemberSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementTeamMemberInclude<ExtArgs> | null
+    /**
+     * Filter which EngagementTeamMember to delete.
+     */
+    where: EngagementTeamMemberWhereUniqueInput
+  }
+
+  /**
+   * EngagementTeamMember deleteMany
+   */
+  export type EngagementTeamMemberDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EngagementTeamMembers to delete
+     */
+    where?: EngagementTeamMemberWhereInput
+  }
+
+  /**
+   * EngagementTeamMember without action
+   */
+  export type EngagementTeamMemberDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EngagementTeamMember
+     */
+    select?: EngagementTeamMemberSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementTeamMemberInclude<ExtArgs> | null
   }
 
 
@@ -12880,6 +15649,45 @@ export namespace Prisma {
   };
 
   export type AuditPlanScalarFieldEnum = (typeof AuditPlanScalarFieldEnum)[keyof typeof AuditPlanScalarFieldEnum]
+
+
+  export const EngagementScalarFieldEnum: {
+    id: 'id',
+    reference: 'reference',
+    title: 'title',
+    auditPlanId: 'auditPlanId',
+    auditEntityId: 'auditEntityId',
+    riskId: 'riskId',
+    type: 'type',
+    status: 'status',
+    objectives: 'objectives',
+    scope: 'scope',
+    methodology: 'methodology',
+    leadAuditorId: 'leadAuditorId',
+    startDate: 'startDate',
+    endDate: 'endDate',
+    actualStartDate: 'actualStartDate',
+    actualEndDate: 'actualEndDate',
+    closedAt: 'closedAt',
+    closedById: 'closedById',
+    closureNotes: 'closureNotes',
+    createdById: 'createdById',
+    updatedById: 'updatedById',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type EngagementScalarFieldEnum = (typeof EngagementScalarFieldEnum)[keyof typeof EngagementScalarFieldEnum]
+
+
+  export const EngagementTeamMemberScalarFieldEnum: {
+    engagementId: 'engagementId',
+    userId: 'userId',
+    role: 'role',
+    assignedAt: 'assignedAt'
+  };
+
+  export type EngagementTeamMemberScalarFieldEnum = (typeof EngagementTeamMemberScalarFieldEnum)[keyof typeof EngagementTeamMemberScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -13083,6 +15891,48 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'EngagementType'
+   */
+  export type EnumEngagementTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EngagementType'>
+    
+
+
+  /**
+   * Reference to a field of type 'EngagementType[]'
+   */
+  export type ListEnumEngagementTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EngagementType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'EngagementStatus'
+   */
+  export type EnumEngagementStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EngagementStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'EngagementStatus[]'
+   */
+  export type ListEnumEngagementStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EngagementStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'TeamMemberRole'
+   */
+  export type EnumTeamMemberRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TeamMemberRole'>
+    
+
+
+  /**
+   * Reference to a field of type 'TeamMemberRole[]'
+   */
+  export type ListEnumTeamMemberRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TeamMemberRole[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -13124,6 +15974,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanListRelationFilter
     createdAuditPlans?: AuditPlanListRelationFilter
     updatedAuditPlans?: AuditPlanListRelationFilter
+    leadEngagements?: EngagementListRelationFilter
+    createdEngagements?: EngagementListRelationFilter
+    updatedEngagements?: EngagementListRelationFilter
+    closedEngagements?: EngagementListRelationFilter
+    engagementMemberships?: EngagementTeamMemberListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -13148,6 +16003,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanOrderByRelationAggregateInput
     createdAuditPlans?: AuditPlanOrderByRelationAggregateInput
     updatedAuditPlans?: AuditPlanOrderByRelationAggregateInput
+    leadEngagements?: EngagementOrderByRelationAggregateInput
+    createdEngagements?: EngagementOrderByRelationAggregateInput
+    updatedEngagements?: EngagementOrderByRelationAggregateInput
+    closedEngagements?: EngagementOrderByRelationAggregateInput
+    engagementMemberships?: EngagementTeamMemberOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -13175,6 +16035,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanListRelationFilter
     createdAuditPlans?: AuditPlanListRelationFilter
     updatedAuditPlans?: AuditPlanListRelationFilter
+    leadEngagements?: EngagementListRelationFilter
+    createdEngagements?: EngagementListRelationFilter
+    updatedEngagements?: EngagementListRelationFilter
+    closedEngagements?: EngagementListRelationFilter
+    engagementMemberships?: EngagementTeamMemberListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -13517,6 +16382,7 @@ export namespace Prisma {
     updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     risks?: RiskListRelationFilter
     auditPlans?: AuditPlanListRelationFilter
+    engagements?: EngagementListRelationFilter
   }
 
   export type AuditUniverseOrderByWithRelationInput = {
@@ -13543,6 +16409,7 @@ export namespace Prisma {
     updatedBy?: UserOrderByWithRelationInput
     risks?: RiskOrderByRelationAggregateInput
     auditPlans?: AuditPlanOrderByRelationAggregateInput
+    engagements?: EngagementOrderByRelationAggregateInput
   }
 
   export type AuditUniverseWhereUniqueInput = Prisma.AtLeast<{
@@ -13572,6 +16439,7 @@ export namespace Prisma {
     updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     risks?: RiskListRelationFilter
     auditPlans?: AuditPlanListRelationFilter
+    engagements?: EngagementListRelationFilter
   }, "id" | "code">
 
   export type AuditUniverseOrderByWithAggregationInput = {
@@ -13648,6 +16516,7 @@ export namespace Prisma {
     updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     actions?: RiskActionListRelationFilter
     auditPlans?: AuditPlanListRelationFilter
+    engagements?: EngagementListRelationFilter
   }
 
   export type RiskOrderByWithRelationInput = {
@@ -13677,6 +16546,7 @@ export namespace Prisma {
     updatedBy?: UserOrderByWithRelationInput
     actions?: RiskActionOrderByRelationAggregateInput
     auditPlans?: AuditPlanOrderByRelationAggregateInput
+    engagements?: EngagementOrderByRelationAggregateInput
   }
 
   export type RiskWhereUniqueInput = Prisma.AtLeast<{
@@ -13709,6 +16579,7 @@ export namespace Prisma {
     updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     actions?: RiskActionListRelationFilter
     auditPlans?: AuditPlanListRelationFilter
+    engagements?: EngagementListRelationFilter
   }, "id">
 
   export type RiskOrderByWithAggregationInput = {
@@ -13878,6 +16749,7 @@ export namespace Prisma {
     leadAuditor?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    engagements?: EngagementListRelationFilter
   }
 
   export type AuditPlanOrderByWithRelationInput = {
@@ -13907,6 +16779,7 @@ export namespace Prisma {
     leadAuditor?: UserOrderByWithRelationInput
     createdBy?: UserOrderByWithRelationInput
     updatedBy?: UserOrderByWithRelationInput
+    engagements?: EngagementOrderByRelationAggregateInput
   }
 
   export type AuditPlanWhereUniqueInput = Prisma.AtLeast<{
@@ -13939,6 +16812,7 @@ export namespace Prisma {
     leadAuditor?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    engagements?: EngagementListRelationFilter
   }, "id" | "reference">
 
   export type AuditPlanOrderByWithAggregationInput = {
@@ -13995,6 +16869,226 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"AuditPlan"> | Date | string
   }
 
+  export type EngagementWhereInput = {
+    AND?: EngagementWhereInput | EngagementWhereInput[]
+    OR?: EngagementWhereInput[]
+    NOT?: EngagementWhereInput | EngagementWhereInput[]
+    id?: UuidFilter<"Engagement"> | string
+    reference?: StringFilter<"Engagement"> | string
+    title?: StringFilter<"Engagement"> | string
+    auditPlanId?: UuidNullableFilter<"Engagement"> | string | null
+    auditEntityId?: UuidFilter<"Engagement"> | string
+    riskId?: UuidNullableFilter<"Engagement"> | string | null
+    type?: EnumEngagementTypeFilter<"Engagement"> | $Enums.EngagementType
+    status?: EnumEngagementStatusFilter<"Engagement"> | $Enums.EngagementStatus
+    objectives?: StringFilter<"Engagement"> | string
+    scope?: StringFilter<"Engagement"> | string
+    methodology?: StringNullableFilter<"Engagement"> | string | null
+    leadAuditorId?: UuidNullableFilter<"Engagement"> | string | null
+    startDate?: DateTimeNullableFilter<"Engagement"> | Date | string | null
+    endDate?: DateTimeNullableFilter<"Engagement"> | Date | string | null
+    actualStartDate?: DateTimeNullableFilter<"Engagement"> | Date | string | null
+    actualEndDate?: DateTimeNullableFilter<"Engagement"> | Date | string | null
+    closedAt?: DateTimeNullableFilter<"Engagement"> | Date | string | null
+    closedById?: UuidNullableFilter<"Engagement"> | string | null
+    closureNotes?: StringNullableFilter<"Engagement"> | string | null
+    createdById?: UuidNullableFilter<"Engagement"> | string | null
+    updatedById?: UuidNullableFilter<"Engagement"> | string | null
+    createdAt?: DateTimeFilter<"Engagement"> | Date | string
+    updatedAt?: DateTimeFilter<"Engagement"> | Date | string
+    auditPlan?: XOR<AuditPlanNullableRelationFilter, AuditPlanWhereInput> | null
+    auditEntity?: XOR<AuditUniverseRelationFilter, AuditUniverseWhereInput>
+    risk?: XOR<RiskNullableRelationFilter, RiskWhereInput> | null
+    leadAuditor?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    closedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    teamMembers?: EngagementTeamMemberListRelationFilter
+  }
+
+  export type EngagementOrderByWithRelationInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    auditPlanId?: SortOrderInput | SortOrder
+    auditEntityId?: SortOrder
+    riskId?: SortOrderInput | SortOrder
+    type?: SortOrder
+    status?: SortOrder
+    objectives?: SortOrder
+    scope?: SortOrder
+    methodology?: SortOrderInput | SortOrder
+    leadAuditorId?: SortOrderInput | SortOrder
+    startDate?: SortOrderInput | SortOrder
+    endDate?: SortOrderInput | SortOrder
+    actualStartDate?: SortOrderInput | SortOrder
+    actualEndDate?: SortOrderInput | SortOrder
+    closedAt?: SortOrderInput | SortOrder
+    closedById?: SortOrderInput | SortOrder
+    closureNotes?: SortOrderInput | SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    auditPlan?: AuditPlanOrderByWithRelationInput
+    auditEntity?: AuditUniverseOrderByWithRelationInput
+    risk?: RiskOrderByWithRelationInput
+    leadAuditor?: UserOrderByWithRelationInput
+    closedBy?: UserOrderByWithRelationInput
+    createdBy?: UserOrderByWithRelationInput
+    updatedBy?: UserOrderByWithRelationInput
+    teamMembers?: EngagementTeamMemberOrderByRelationAggregateInput
+  }
+
+  export type EngagementWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    reference?: string
+    AND?: EngagementWhereInput | EngagementWhereInput[]
+    OR?: EngagementWhereInput[]
+    NOT?: EngagementWhereInput | EngagementWhereInput[]
+    title?: StringFilter<"Engagement"> | string
+    auditPlanId?: UuidNullableFilter<"Engagement"> | string | null
+    auditEntityId?: UuidFilter<"Engagement"> | string
+    riskId?: UuidNullableFilter<"Engagement"> | string | null
+    type?: EnumEngagementTypeFilter<"Engagement"> | $Enums.EngagementType
+    status?: EnumEngagementStatusFilter<"Engagement"> | $Enums.EngagementStatus
+    objectives?: StringFilter<"Engagement"> | string
+    scope?: StringFilter<"Engagement"> | string
+    methodology?: StringNullableFilter<"Engagement"> | string | null
+    leadAuditorId?: UuidNullableFilter<"Engagement"> | string | null
+    startDate?: DateTimeNullableFilter<"Engagement"> | Date | string | null
+    endDate?: DateTimeNullableFilter<"Engagement"> | Date | string | null
+    actualStartDate?: DateTimeNullableFilter<"Engagement"> | Date | string | null
+    actualEndDate?: DateTimeNullableFilter<"Engagement"> | Date | string | null
+    closedAt?: DateTimeNullableFilter<"Engagement"> | Date | string | null
+    closedById?: UuidNullableFilter<"Engagement"> | string | null
+    closureNotes?: StringNullableFilter<"Engagement"> | string | null
+    createdById?: UuidNullableFilter<"Engagement"> | string | null
+    updatedById?: UuidNullableFilter<"Engagement"> | string | null
+    createdAt?: DateTimeFilter<"Engagement"> | Date | string
+    updatedAt?: DateTimeFilter<"Engagement"> | Date | string
+    auditPlan?: XOR<AuditPlanNullableRelationFilter, AuditPlanWhereInput> | null
+    auditEntity?: XOR<AuditUniverseRelationFilter, AuditUniverseWhereInput>
+    risk?: XOR<RiskNullableRelationFilter, RiskWhereInput> | null
+    leadAuditor?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    closedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    teamMembers?: EngagementTeamMemberListRelationFilter
+  }, "id" | "reference">
+
+  export type EngagementOrderByWithAggregationInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    auditPlanId?: SortOrderInput | SortOrder
+    auditEntityId?: SortOrder
+    riskId?: SortOrderInput | SortOrder
+    type?: SortOrder
+    status?: SortOrder
+    objectives?: SortOrder
+    scope?: SortOrder
+    methodology?: SortOrderInput | SortOrder
+    leadAuditorId?: SortOrderInput | SortOrder
+    startDate?: SortOrderInput | SortOrder
+    endDate?: SortOrderInput | SortOrder
+    actualStartDate?: SortOrderInput | SortOrder
+    actualEndDate?: SortOrderInput | SortOrder
+    closedAt?: SortOrderInput | SortOrder
+    closedById?: SortOrderInput | SortOrder
+    closureNotes?: SortOrderInput | SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: EngagementCountOrderByAggregateInput
+    _max?: EngagementMaxOrderByAggregateInput
+    _min?: EngagementMinOrderByAggregateInput
+  }
+
+  export type EngagementScalarWhereWithAggregatesInput = {
+    AND?: EngagementScalarWhereWithAggregatesInput | EngagementScalarWhereWithAggregatesInput[]
+    OR?: EngagementScalarWhereWithAggregatesInput[]
+    NOT?: EngagementScalarWhereWithAggregatesInput | EngagementScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"Engagement"> | string
+    reference?: StringWithAggregatesFilter<"Engagement"> | string
+    title?: StringWithAggregatesFilter<"Engagement"> | string
+    auditPlanId?: UuidNullableWithAggregatesFilter<"Engagement"> | string | null
+    auditEntityId?: UuidWithAggregatesFilter<"Engagement"> | string
+    riskId?: UuidNullableWithAggregatesFilter<"Engagement"> | string | null
+    type?: EnumEngagementTypeWithAggregatesFilter<"Engagement"> | $Enums.EngagementType
+    status?: EnumEngagementStatusWithAggregatesFilter<"Engagement"> | $Enums.EngagementStatus
+    objectives?: StringWithAggregatesFilter<"Engagement"> | string
+    scope?: StringWithAggregatesFilter<"Engagement"> | string
+    methodology?: StringNullableWithAggregatesFilter<"Engagement"> | string | null
+    leadAuditorId?: UuidNullableWithAggregatesFilter<"Engagement"> | string | null
+    startDate?: DateTimeNullableWithAggregatesFilter<"Engagement"> | Date | string | null
+    endDate?: DateTimeNullableWithAggregatesFilter<"Engagement"> | Date | string | null
+    actualStartDate?: DateTimeNullableWithAggregatesFilter<"Engagement"> | Date | string | null
+    actualEndDate?: DateTimeNullableWithAggregatesFilter<"Engagement"> | Date | string | null
+    closedAt?: DateTimeNullableWithAggregatesFilter<"Engagement"> | Date | string | null
+    closedById?: UuidNullableWithAggregatesFilter<"Engagement"> | string | null
+    closureNotes?: StringNullableWithAggregatesFilter<"Engagement"> | string | null
+    createdById?: UuidNullableWithAggregatesFilter<"Engagement"> | string | null
+    updatedById?: UuidNullableWithAggregatesFilter<"Engagement"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Engagement"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Engagement"> | Date | string
+  }
+
+  export type EngagementTeamMemberWhereInput = {
+    AND?: EngagementTeamMemberWhereInput | EngagementTeamMemberWhereInput[]
+    OR?: EngagementTeamMemberWhereInput[]
+    NOT?: EngagementTeamMemberWhereInput | EngagementTeamMemberWhereInput[]
+    engagementId?: UuidFilter<"EngagementTeamMember"> | string
+    userId?: UuidFilter<"EngagementTeamMember"> | string
+    role?: EnumTeamMemberRoleFilter<"EngagementTeamMember"> | $Enums.TeamMemberRole
+    assignedAt?: DateTimeFilter<"EngagementTeamMember"> | Date | string
+    engagement?: XOR<EngagementRelationFilter, EngagementWhereInput>
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }
+
+  export type EngagementTeamMemberOrderByWithRelationInput = {
+    engagementId?: SortOrder
+    userId?: SortOrder
+    role?: SortOrder
+    assignedAt?: SortOrder
+    engagement?: EngagementOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type EngagementTeamMemberWhereUniqueInput = Prisma.AtLeast<{
+    engagementId_userId?: EngagementTeamMemberEngagementIdUserIdCompoundUniqueInput
+    AND?: EngagementTeamMemberWhereInput | EngagementTeamMemberWhereInput[]
+    OR?: EngagementTeamMemberWhereInput[]
+    NOT?: EngagementTeamMemberWhereInput | EngagementTeamMemberWhereInput[]
+    engagementId?: UuidFilter<"EngagementTeamMember"> | string
+    userId?: UuidFilter<"EngagementTeamMember"> | string
+    role?: EnumTeamMemberRoleFilter<"EngagementTeamMember"> | $Enums.TeamMemberRole
+    assignedAt?: DateTimeFilter<"EngagementTeamMember"> | Date | string
+    engagement?: XOR<EngagementRelationFilter, EngagementWhereInput>
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }, "engagementId_userId">
+
+  export type EngagementTeamMemberOrderByWithAggregationInput = {
+    engagementId?: SortOrder
+    userId?: SortOrder
+    role?: SortOrder
+    assignedAt?: SortOrder
+    _count?: EngagementTeamMemberCountOrderByAggregateInput
+    _max?: EngagementTeamMemberMaxOrderByAggregateInput
+    _min?: EngagementTeamMemberMinOrderByAggregateInput
+  }
+
+  export type EngagementTeamMemberScalarWhereWithAggregatesInput = {
+    AND?: EngagementTeamMemberScalarWhereWithAggregatesInput | EngagementTeamMemberScalarWhereWithAggregatesInput[]
+    OR?: EngagementTeamMemberScalarWhereWithAggregatesInput[]
+    NOT?: EngagementTeamMemberScalarWhereWithAggregatesInput | EngagementTeamMemberScalarWhereWithAggregatesInput[]
+    engagementId?: UuidWithAggregatesFilter<"EngagementTeamMember"> | string
+    userId?: UuidWithAggregatesFilter<"EngagementTeamMember"> | string
+    role?: EnumTeamMemberRoleWithAggregatesFilter<"EngagementTeamMember"> | $Enums.TeamMemberRole
+    assignedAt?: DateTimeWithAggregatesFilter<"EngagementTeamMember"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     firstName: string
@@ -14017,6 +17111,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
     createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
     updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -14041,6 +17140,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
     createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
     updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -14065,6 +17169,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
     createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
     updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -14089,6 +17198,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
     createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
     updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -14435,6 +17549,7 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedAuditEntitiesInput
     risks?: RiskCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
+    engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateInput = {
@@ -14457,6 +17572,7 @@ export namespace Prisma {
     children?: AuditUniverseUncheckedCreateNestedManyWithoutParentInput
     risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
+    engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUpdateInput = {
@@ -14479,6 +17595,7 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedAuditEntitiesNestedInput
     risks?: RiskUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
+    engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateInput = {
@@ -14501,6 +17618,7 @@ export namespace Prisma {
     children?: AuditUniverseUncheckedUpdateManyWithoutParentNestedInput
     risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
+    engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseCreateManyInput = {
@@ -14579,6 +17697,7 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedRisksInput
     actions?: RiskActionCreateNestedManyWithoutRiskInput
     auditPlans?: AuditPlanCreateNestedManyWithoutRiskInput
+    engagements?: EngagementCreateNestedManyWithoutRiskInput
   }
 
   export type RiskUncheckedCreateInput = {
@@ -14604,6 +17723,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     actions?: RiskActionUncheckedCreateNestedManyWithoutRiskInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutRiskInput
+    engagements?: EngagementUncheckedCreateNestedManyWithoutRiskInput
   }
 
   export type RiskUpdateInput = {
@@ -14629,6 +17749,7 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedRisksNestedInput
     actions?: RiskActionUpdateManyWithoutRiskNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutRiskNestedInput
+    engagements?: EngagementUpdateManyWithoutRiskNestedInput
   }
 
   export type RiskUncheckedUpdateInput = {
@@ -14654,6 +17775,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     actions?: RiskActionUncheckedUpdateManyWithoutRiskNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutRiskNestedInput
+    engagements?: EngagementUncheckedUpdateManyWithoutRiskNestedInput
   }
 
   export type RiskCreateManyInput = {
@@ -14831,6 +17953,7 @@ export namespace Prisma {
     leadAuditor?: UserCreateNestedOneWithoutLeadAuditPlansInput
     createdBy?: UserCreateNestedOneWithoutCreatedAuditPlansInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedAuditPlansInput
+    engagements?: EngagementCreateNestedManyWithoutAuditPlanInput
   }
 
   export type AuditPlanUncheckedCreateInput = {
@@ -14854,6 +17977,7 @@ export namespace Prisma {
     updatedById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    engagements?: EngagementUncheckedCreateNestedManyWithoutAuditPlanInput
   }
 
   export type AuditPlanUpdateInput = {
@@ -14877,6 +18001,7 @@ export namespace Prisma {
     leadAuditor?: UserUpdateOneWithoutLeadAuditPlansNestedInput
     createdBy?: UserUpdateOneWithoutCreatedAuditPlansNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedAuditPlansNestedInput
+    engagements?: EngagementUpdateManyWithoutAuditPlanNestedInput
   }
 
   export type AuditPlanUncheckedUpdateInput = {
@@ -14900,6 +18025,7 @@ export namespace Prisma {
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagements?: EngagementUncheckedUpdateManyWithoutAuditPlanNestedInput
   }
 
   export type AuditPlanCreateManyInput = {
@@ -14963,6 +18089,232 @@ export namespace Prisma {
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EngagementCreateInput = {
+    id?: string
+    reference: string
+    title: string
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closureNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auditPlan?: AuditPlanCreateNestedOneWithoutEngagementsInput
+    auditEntity: AuditUniverseCreateNestedOneWithoutEngagementsInput
+    risk?: RiskCreateNestedOneWithoutEngagementsInput
+    leadAuditor?: UserCreateNestedOneWithoutLeadEngagementsInput
+    closedBy?: UserCreateNestedOneWithoutClosedEngagementsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedEngagementsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
+    teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
+  }
+
+  export type EngagementUncheckedCreateInput = {
+    id?: string
+    reference: string
+    title: string
+    auditPlanId?: string | null
+    auditEntityId: string
+    riskId?: string | null
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    leadAuditorId?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closedById?: string | null
+    closureNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
+  }
+
+  export type EngagementUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auditPlan?: AuditPlanUpdateOneWithoutEngagementsNestedInput
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutEngagementsNestedInput
+    risk?: RiskUpdateOneWithoutEngagementsNestedInput
+    leadAuditor?: UserUpdateOneWithoutLeadEngagementsNestedInput
+    closedBy?: UserUpdateOneWithoutClosedEngagementsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedEngagementsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
+    teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
+  }
+
+  export type EngagementUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    auditPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedById?: NullableStringFieldUpdateOperationsInput | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
+  }
+
+  export type EngagementCreateManyInput = {
+    id?: string
+    reference: string
+    title: string
+    auditPlanId?: string | null
+    auditEntityId: string
+    riskId?: string | null
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    leadAuditorId?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closedById?: string | null
+    closureNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EngagementUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EngagementUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    auditPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedById?: NullableStringFieldUpdateOperationsInput | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EngagementTeamMemberCreateInput = {
+    role?: $Enums.TeamMemberRole
+    assignedAt?: Date | string
+    engagement: EngagementCreateNestedOneWithoutTeamMembersInput
+    user: UserCreateNestedOneWithoutEngagementMembershipsInput
+  }
+
+  export type EngagementTeamMemberUncheckedCreateInput = {
+    engagementId: string
+    userId: string
+    role?: $Enums.TeamMemberRole
+    assignedAt?: Date | string
+  }
+
+  export type EngagementTeamMemberUpdateInput = {
+    role?: EnumTeamMemberRoleFieldUpdateOperationsInput | $Enums.TeamMemberRole
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneRequiredWithoutTeamMembersNestedInput
+    user?: UserUpdateOneRequiredWithoutEngagementMembershipsNestedInput
+  }
+
+  export type EngagementTeamMemberUncheckedUpdateInput = {
+    engagementId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    role?: EnumTeamMemberRoleFieldUpdateOperationsInput | $Enums.TeamMemberRole
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EngagementTeamMemberCreateManyInput = {
+    engagementId: string
+    userId: string
+    role?: $Enums.TeamMemberRole
+    assignedAt?: Date | string
+  }
+
+  export type EngagementTeamMemberUpdateManyMutationInput = {
+    role?: EnumTeamMemberRoleFieldUpdateOperationsInput | $Enums.TeamMemberRole
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EngagementTeamMemberUncheckedUpdateManyInput = {
+    engagementId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    role?: EnumTeamMemberRoleFieldUpdateOperationsInput | $Enums.TeamMemberRole
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UuidFilter<$PrismaModel = never> = {
@@ -15049,6 +18401,18 @@ export namespace Prisma {
     none?: AuditPlanWhereInput
   }
 
+  export type EngagementListRelationFilter = {
+    every?: EngagementWhereInput
+    some?: EngagementWhereInput
+    none?: EngagementWhereInput
+  }
+
+  export type EngagementTeamMemberListRelationFilter = {
+    every?: EngagementTeamMemberWhereInput
+    some?: EngagementTeamMemberWhereInput
+    none?: EngagementTeamMemberWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -15071,6 +18435,14 @@ export namespace Prisma {
   }
 
   export type AuditPlanOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EngagementOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EngagementTeamMemberOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -15868,6 +19240,171 @@ export namespace Prisma {
     _max?: NestedEnumAuditPlanStatusFilter<$PrismaModel>
   }
 
+  export type EnumEngagementTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.EngagementType | EnumEngagementTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.EngagementType[] | ListEnumEngagementTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EngagementType[] | ListEnumEngagementTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumEngagementTypeFilter<$PrismaModel> | $Enums.EngagementType
+  }
+
+  export type EnumEngagementStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.EngagementStatus | EnumEngagementStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.EngagementStatus[] | ListEnumEngagementStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EngagementStatus[] | ListEnumEngagementStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumEngagementStatusFilter<$PrismaModel> | $Enums.EngagementStatus
+  }
+
+  export type AuditPlanNullableRelationFilter = {
+    is?: AuditPlanWhereInput | null
+    isNot?: AuditPlanWhereInput | null
+  }
+
+  export type EngagementCountOrderByAggregateInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    auditPlanId?: SortOrder
+    auditEntityId?: SortOrder
+    riskId?: SortOrder
+    type?: SortOrder
+    status?: SortOrder
+    objectives?: SortOrder
+    scope?: SortOrder
+    methodology?: SortOrder
+    leadAuditorId?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    actualStartDate?: SortOrder
+    actualEndDate?: SortOrder
+    closedAt?: SortOrder
+    closedById?: SortOrder
+    closureNotes?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EngagementMaxOrderByAggregateInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    auditPlanId?: SortOrder
+    auditEntityId?: SortOrder
+    riskId?: SortOrder
+    type?: SortOrder
+    status?: SortOrder
+    objectives?: SortOrder
+    scope?: SortOrder
+    methodology?: SortOrder
+    leadAuditorId?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    actualStartDate?: SortOrder
+    actualEndDate?: SortOrder
+    closedAt?: SortOrder
+    closedById?: SortOrder
+    closureNotes?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EngagementMinOrderByAggregateInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    auditPlanId?: SortOrder
+    auditEntityId?: SortOrder
+    riskId?: SortOrder
+    type?: SortOrder
+    status?: SortOrder
+    objectives?: SortOrder
+    scope?: SortOrder
+    methodology?: SortOrder
+    leadAuditorId?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    actualStartDate?: SortOrder
+    actualEndDate?: SortOrder
+    closedAt?: SortOrder
+    closedById?: SortOrder
+    closureNotes?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumEngagementTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EngagementType | EnumEngagementTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.EngagementType[] | ListEnumEngagementTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EngagementType[] | ListEnumEngagementTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumEngagementTypeWithAggregatesFilter<$PrismaModel> | $Enums.EngagementType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumEngagementTypeFilter<$PrismaModel>
+    _max?: NestedEnumEngagementTypeFilter<$PrismaModel>
+  }
+
+  export type EnumEngagementStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EngagementStatus | EnumEngagementStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.EngagementStatus[] | ListEnumEngagementStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EngagementStatus[] | ListEnumEngagementStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumEngagementStatusWithAggregatesFilter<$PrismaModel> | $Enums.EngagementStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumEngagementStatusFilter<$PrismaModel>
+    _max?: NestedEnumEngagementStatusFilter<$PrismaModel>
+  }
+
+  export type EnumTeamMemberRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.TeamMemberRole | EnumTeamMemberRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.TeamMemberRole[] | ListEnumTeamMemberRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TeamMemberRole[] | ListEnumTeamMemberRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumTeamMemberRoleFilter<$PrismaModel> | $Enums.TeamMemberRole
+  }
+
+  export type EngagementRelationFilter = {
+    is?: EngagementWhereInput
+    isNot?: EngagementWhereInput
+  }
+
+  export type EngagementTeamMemberEngagementIdUserIdCompoundUniqueInput = {
+    engagementId: string
+    userId: string
+  }
+
+  export type EngagementTeamMemberCountOrderByAggregateInput = {
+    engagementId?: SortOrder
+    userId?: SortOrder
+    role?: SortOrder
+    assignedAt?: SortOrder
+  }
+
+  export type EngagementTeamMemberMaxOrderByAggregateInput = {
+    engagementId?: SortOrder
+    userId?: SortOrder
+    role?: SortOrder
+    assignedAt?: SortOrder
+  }
+
+  export type EngagementTeamMemberMinOrderByAggregateInput = {
+    engagementId?: SortOrder
+    userId?: SortOrder
+    role?: SortOrder
+    assignedAt?: SortOrder
+  }
+
+  export type EnumTeamMemberRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TeamMemberRole | EnumTeamMemberRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.TeamMemberRole[] | ListEnumTeamMemberRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TeamMemberRole[] | ListEnumTeamMemberRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumTeamMemberRoleWithAggregatesFilter<$PrismaModel> | $Enums.TeamMemberRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTeamMemberRoleFilter<$PrismaModel>
+    _max?: NestedEnumTeamMemberRoleFilter<$PrismaModel>
+  }
+
   export type UserRoleCreateNestedManyWithoutUserInput = {
     create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
@@ -15952,6 +19489,41 @@ export namespace Prisma {
     connect?: AuditPlanWhereUniqueInput | AuditPlanWhereUniqueInput[]
   }
 
+  export type EngagementCreateNestedManyWithoutLeadAuditorInput = {
+    create?: XOR<EngagementCreateWithoutLeadAuditorInput, EngagementUncheckedCreateWithoutLeadAuditorInput> | EngagementCreateWithoutLeadAuditorInput[] | EngagementUncheckedCreateWithoutLeadAuditorInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutLeadAuditorInput | EngagementCreateOrConnectWithoutLeadAuditorInput[]
+    createMany?: EngagementCreateManyLeadAuditorInputEnvelope
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+  }
+
+  export type EngagementCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<EngagementCreateWithoutCreatedByInput, EngagementUncheckedCreateWithoutCreatedByInput> | EngagementCreateWithoutCreatedByInput[] | EngagementUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutCreatedByInput | EngagementCreateOrConnectWithoutCreatedByInput[]
+    createMany?: EngagementCreateManyCreatedByInputEnvelope
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+  }
+
+  export type EngagementCreateNestedManyWithoutUpdatedByInput = {
+    create?: XOR<EngagementCreateWithoutUpdatedByInput, EngagementUncheckedCreateWithoutUpdatedByInput> | EngagementCreateWithoutUpdatedByInput[] | EngagementUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutUpdatedByInput | EngagementCreateOrConnectWithoutUpdatedByInput[]
+    createMany?: EngagementCreateManyUpdatedByInputEnvelope
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+  }
+
+  export type EngagementCreateNestedManyWithoutClosedByInput = {
+    create?: XOR<EngagementCreateWithoutClosedByInput, EngagementUncheckedCreateWithoutClosedByInput> | EngagementCreateWithoutClosedByInput[] | EngagementUncheckedCreateWithoutClosedByInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutClosedByInput | EngagementCreateOrConnectWithoutClosedByInput[]
+    createMany?: EngagementCreateManyClosedByInputEnvelope
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+  }
+
+  export type EngagementTeamMemberCreateNestedManyWithoutUserInput = {
+    create?: XOR<EngagementTeamMemberCreateWithoutUserInput, EngagementTeamMemberUncheckedCreateWithoutUserInput> | EngagementTeamMemberCreateWithoutUserInput[] | EngagementTeamMemberUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: EngagementTeamMemberCreateOrConnectWithoutUserInput | EngagementTeamMemberCreateOrConnectWithoutUserInput[]
+    createMany?: EngagementTeamMemberCreateManyUserInputEnvelope
+    connect?: EngagementTeamMemberWhereUniqueInput | EngagementTeamMemberWhereUniqueInput[]
+  }
+
   export type UserRoleUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
@@ -16034,6 +19606,41 @@ export namespace Prisma {
     connectOrCreate?: AuditPlanCreateOrConnectWithoutUpdatedByInput | AuditPlanCreateOrConnectWithoutUpdatedByInput[]
     createMany?: AuditPlanCreateManyUpdatedByInputEnvelope
     connect?: AuditPlanWhereUniqueInput | AuditPlanWhereUniqueInput[]
+  }
+
+  export type EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput = {
+    create?: XOR<EngagementCreateWithoutLeadAuditorInput, EngagementUncheckedCreateWithoutLeadAuditorInput> | EngagementCreateWithoutLeadAuditorInput[] | EngagementUncheckedCreateWithoutLeadAuditorInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutLeadAuditorInput | EngagementCreateOrConnectWithoutLeadAuditorInput[]
+    createMany?: EngagementCreateManyLeadAuditorInputEnvelope
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+  }
+
+  export type EngagementUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<EngagementCreateWithoutCreatedByInput, EngagementUncheckedCreateWithoutCreatedByInput> | EngagementCreateWithoutCreatedByInput[] | EngagementUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutCreatedByInput | EngagementCreateOrConnectWithoutCreatedByInput[]
+    createMany?: EngagementCreateManyCreatedByInputEnvelope
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+  }
+
+  export type EngagementUncheckedCreateNestedManyWithoutUpdatedByInput = {
+    create?: XOR<EngagementCreateWithoutUpdatedByInput, EngagementUncheckedCreateWithoutUpdatedByInput> | EngagementCreateWithoutUpdatedByInput[] | EngagementUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutUpdatedByInput | EngagementCreateOrConnectWithoutUpdatedByInput[]
+    createMany?: EngagementCreateManyUpdatedByInputEnvelope
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+  }
+
+  export type EngagementUncheckedCreateNestedManyWithoutClosedByInput = {
+    create?: XOR<EngagementCreateWithoutClosedByInput, EngagementUncheckedCreateWithoutClosedByInput> | EngagementCreateWithoutClosedByInput[] | EngagementUncheckedCreateWithoutClosedByInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutClosedByInput | EngagementCreateOrConnectWithoutClosedByInput[]
+    createMany?: EngagementCreateManyClosedByInputEnvelope
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+  }
+
+  export type EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<EngagementTeamMemberCreateWithoutUserInput, EngagementTeamMemberUncheckedCreateWithoutUserInput> | EngagementTeamMemberCreateWithoutUserInput[] | EngagementTeamMemberUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: EngagementTeamMemberCreateOrConnectWithoutUserInput | EngagementTeamMemberCreateOrConnectWithoutUserInput[]
+    createMany?: EngagementTeamMemberCreateManyUserInputEnvelope
+    connect?: EngagementTeamMemberWhereUniqueInput | EngagementTeamMemberWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -16220,6 +19827,76 @@ export namespace Prisma {
     deleteMany?: AuditPlanScalarWhereInput | AuditPlanScalarWhereInput[]
   }
 
+  export type EngagementUpdateManyWithoutLeadAuditorNestedInput = {
+    create?: XOR<EngagementCreateWithoutLeadAuditorInput, EngagementUncheckedCreateWithoutLeadAuditorInput> | EngagementCreateWithoutLeadAuditorInput[] | EngagementUncheckedCreateWithoutLeadAuditorInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutLeadAuditorInput | EngagementCreateOrConnectWithoutLeadAuditorInput[]
+    upsert?: EngagementUpsertWithWhereUniqueWithoutLeadAuditorInput | EngagementUpsertWithWhereUniqueWithoutLeadAuditorInput[]
+    createMany?: EngagementCreateManyLeadAuditorInputEnvelope
+    set?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    disconnect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    delete?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    update?: EngagementUpdateWithWhereUniqueWithoutLeadAuditorInput | EngagementUpdateWithWhereUniqueWithoutLeadAuditorInput[]
+    updateMany?: EngagementUpdateManyWithWhereWithoutLeadAuditorInput | EngagementUpdateManyWithWhereWithoutLeadAuditorInput[]
+    deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
+  }
+
+  export type EngagementUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<EngagementCreateWithoutCreatedByInput, EngagementUncheckedCreateWithoutCreatedByInput> | EngagementCreateWithoutCreatedByInput[] | EngagementUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutCreatedByInput | EngagementCreateOrConnectWithoutCreatedByInput[]
+    upsert?: EngagementUpsertWithWhereUniqueWithoutCreatedByInput | EngagementUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: EngagementCreateManyCreatedByInputEnvelope
+    set?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    disconnect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    delete?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    update?: EngagementUpdateWithWhereUniqueWithoutCreatedByInput | EngagementUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: EngagementUpdateManyWithWhereWithoutCreatedByInput | EngagementUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
+  }
+
+  export type EngagementUpdateManyWithoutUpdatedByNestedInput = {
+    create?: XOR<EngagementCreateWithoutUpdatedByInput, EngagementUncheckedCreateWithoutUpdatedByInput> | EngagementCreateWithoutUpdatedByInput[] | EngagementUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutUpdatedByInput | EngagementCreateOrConnectWithoutUpdatedByInput[]
+    upsert?: EngagementUpsertWithWhereUniqueWithoutUpdatedByInput | EngagementUpsertWithWhereUniqueWithoutUpdatedByInput[]
+    createMany?: EngagementCreateManyUpdatedByInputEnvelope
+    set?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    disconnect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    delete?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    update?: EngagementUpdateWithWhereUniqueWithoutUpdatedByInput | EngagementUpdateWithWhereUniqueWithoutUpdatedByInput[]
+    updateMany?: EngagementUpdateManyWithWhereWithoutUpdatedByInput | EngagementUpdateManyWithWhereWithoutUpdatedByInput[]
+    deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
+  }
+
+  export type EngagementUpdateManyWithoutClosedByNestedInput = {
+    create?: XOR<EngagementCreateWithoutClosedByInput, EngagementUncheckedCreateWithoutClosedByInput> | EngagementCreateWithoutClosedByInput[] | EngagementUncheckedCreateWithoutClosedByInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutClosedByInput | EngagementCreateOrConnectWithoutClosedByInput[]
+    upsert?: EngagementUpsertWithWhereUniqueWithoutClosedByInput | EngagementUpsertWithWhereUniqueWithoutClosedByInput[]
+    createMany?: EngagementCreateManyClosedByInputEnvelope
+    set?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    disconnect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    delete?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    update?: EngagementUpdateWithWhereUniqueWithoutClosedByInput | EngagementUpdateWithWhereUniqueWithoutClosedByInput[]
+    updateMany?: EngagementUpdateManyWithWhereWithoutClosedByInput | EngagementUpdateManyWithWhereWithoutClosedByInput[]
+    deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
+  }
+
+  export type EngagementTeamMemberUpdateManyWithoutUserNestedInput = {
+    create?: XOR<EngagementTeamMemberCreateWithoutUserInput, EngagementTeamMemberUncheckedCreateWithoutUserInput> | EngagementTeamMemberCreateWithoutUserInput[] | EngagementTeamMemberUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: EngagementTeamMemberCreateOrConnectWithoutUserInput | EngagementTeamMemberCreateOrConnectWithoutUserInput[]
+    upsert?: EngagementTeamMemberUpsertWithWhereUniqueWithoutUserInput | EngagementTeamMemberUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: EngagementTeamMemberCreateManyUserInputEnvelope
+    set?: EngagementTeamMemberWhereUniqueInput | EngagementTeamMemberWhereUniqueInput[]
+    disconnect?: EngagementTeamMemberWhereUniqueInput | EngagementTeamMemberWhereUniqueInput[]
+    delete?: EngagementTeamMemberWhereUniqueInput | EngagementTeamMemberWhereUniqueInput[]
+    connect?: EngagementTeamMemberWhereUniqueInput | EngagementTeamMemberWhereUniqueInput[]
+    update?: EngagementTeamMemberUpdateWithWhereUniqueWithoutUserInput | EngagementTeamMemberUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: EngagementTeamMemberUpdateManyWithWhereWithoutUserInput | EngagementTeamMemberUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: EngagementTeamMemberScalarWhereInput | EngagementTeamMemberScalarWhereInput[]
+  }
+
   export type UserRoleUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
@@ -16386,6 +20063,76 @@ export namespace Prisma {
     update?: AuditPlanUpdateWithWhereUniqueWithoutUpdatedByInput | AuditPlanUpdateWithWhereUniqueWithoutUpdatedByInput[]
     updateMany?: AuditPlanUpdateManyWithWhereWithoutUpdatedByInput | AuditPlanUpdateManyWithWhereWithoutUpdatedByInput[]
     deleteMany?: AuditPlanScalarWhereInput | AuditPlanScalarWhereInput[]
+  }
+
+  export type EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput = {
+    create?: XOR<EngagementCreateWithoutLeadAuditorInput, EngagementUncheckedCreateWithoutLeadAuditorInput> | EngagementCreateWithoutLeadAuditorInput[] | EngagementUncheckedCreateWithoutLeadAuditorInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutLeadAuditorInput | EngagementCreateOrConnectWithoutLeadAuditorInput[]
+    upsert?: EngagementUpsertWithWhereUniqueWithoutLeadAuditorInput | EngagementUpsertWithWhereUniqueWithoutLeadAuditorInput[]
+    createMany?: EngagementCreateManyLeadAuditorInputEnvelope
+    set?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    disconnect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    delete?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    update?: EngagementUpdateWithWhereUniqueWithoutLeadAuditorInput | EngagementUpdateWithWhereUniqueWithoutLeadAuditorInput[]
+    updateMany?: EngagementUpdateManyWithWhereWithoutLeadAuditorInput | EngagementUpdateManyWithWhereWithoutLeadAuditorInput[]
+    deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
+  }
+
+  export type EngagementUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<EngagementCreateWithoutCreatedByInput, EngagementUncheckedCreateWithoutCreatedByInput> | EngagementCreateWithoutCreatedByInput[] | EngagementUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutCreatedByInput | EngagementCreateOrConnectWithoutCreatedByInput[]
+    upsert?: EngagementUpsertWithWhereUniqueWithoutCreatedByInput | EngagementUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: EngagementCreateManyCreatedByInputEnvelope
+    set?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    disconnect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    delete?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    update?: EngagementUpdateWithWhereUniqueWithoutCreatedByInput | EngagementUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: EngagementUpdateManyWithWhereWithoutCreatedByInput | EngagementUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
+  }
+
+  export type EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput = {
+    create?: XOR<EngagementCreateWithoutUpdatedByInput, EngagementUncheckedCreateWithoutUpdatedByInput> | EngagementCreateWithoutUpdatedByInput[] | EngagementUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutUpdatedByInput | EngagementCreateOrConnectWithoutUpdatedByInput[]
+    upsert?: EngagementUpsertWithWhereUniqueWithoutUpdatedByInput | EngagementUpsertWithWhereUniqueWithoutUpdatedByInput[]
+    createMany?: EngagementCreateManyUpdatedByInputEnvelope
+    set?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    disconnect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    delete?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    update?: EngagementUpdateWithWhereUniqueWithoutUpdatedByInput | EngagementUpdateWithWhereUniqueWithoutUpdatedByInput[]
+    updateMany?: EngagementUpdateManyWithWhereWithoutUpdatedByInput | EngagementUpdateManyWithWhereWithoutUpdatedByInput[]
+    deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
+  }
+
+  export type EngagementUncheckedUpdateManyWithoutClosedByNestedInput = {
+    create?: XOR<EngagementCreateWithoutClosedByInput, EngagementUncheckedCreateWithoutClosedByInput> | EngagementCreateWithoutClosedByInput[] | EngagementUncheckedCreateWithoutClosedByInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutClosedByInput | EngagementCreateOrConnectWithoutClosedByInput[]
+    upsert?: EngagementUpsertWithWhereUniqueWithoutClosedByInput | EngagementUpsertWithWhereUniqueWithoutClosedByInput[]
+    createMany?: EngagementCreateManyClosedByInputEnvelope
+    set?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    disconnect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    delete?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    update?: EngagementUpdateWithWhereUniqueWithoutClosedByInput | EngagementUpdateWithWhereUniqueWithoutClosedByInput[]
+    updateMany?: EngagementUpdateManyWithWhereWithoutClosedByInput | EngagementUpdateManyWithWhereWithoutClosedByInput[]
+    deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
+  }
+
+  export type EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<EngagementTeamMemberCreateWithoutUserInput, EngagementTeamMemberUncheckedCreateWithoutUserInput> | EngagementTeamMemberCreateWithoutUserInput[] | EngagementTeamMemberUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: EngagementTeamMemberCreateOrConnectWithoutUserInput | EngagementTeamMemberCreateOrConnectWithoutUserInput[]
+    upsert?: EngagementTeamMemberUpsertWithWhereUniqueWithoutUserInput | EngagementTeamMemberUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: EngagementTeamMemberCreateManyUserInputEnvelope
+    set?: EngagementTeamMemberWhereUniqueInput | EngagementTeamMemberWhereUniqueInput[]
+    disconnect?: EngagementTeamMemberWhereUniqueInput | EngagementTeamMemberWhereUniqueInput[]
+    delete?: EngagementTeamMemberWhereUniqueInput | EngagementTeamMemberWhereUniqueInput[]
+    connect?: EngagementTeamMemberWhereUniqueInput | EngagementTeamMemberWhereUniqueInput[]
+    update?: EngagementTeamMemberUpdateWithWhereUniqueWithoutUserInput | EngagementTeamMemberUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: EngagementTeamMemberUpdateManyWithWhereWithoutUserInput | EngagementTeamMemberUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: EngagementTeamMemberScalarWhereInput | EngagementTeamMemberScalarWhereInput[]
   }
 
   export type UserRoleCreateNestedManyWithoutRoleInput = {
@@ -16619,6 +20366,13 @@ export namespace Prisma {
     connect?: AuditPlanWhereUniqueInput | AuditPlanWhereUniqueInput[]
   }
 
+  export type EngagementCreateNestedManyWithoutAuditEntityInput = {
+    create?: XOR<EngagementCreateWithoutAuditEntityInput, EngagementUncheckedCreateWithoutAuditEntityInput> | EngagementCreateWithoutAuditEntityInput[] | EngagementUncheckedCreateWithoutAuditEntityInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutAuditEntityInput | EngagementCreateOrConnectWithoutAuditEntityInput[]
+    createMany?: EngagementCreateManyAuditEntityInputEnvelope
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+  }
+
   export type AuditUniverseUncheckedCreateNestedManyWithoutParentInput = {
     create?: XOR<AuditUniverseCreateWithoutParentInput, AuditUniverseUncheckedCreateWithoutParentInput> | AuditUniverseCreateWithoutParentInput[] | AuditUniverseUncheckedCreateWithoutParentInput[]
     connectOrCreate?: AuditUniverseCreateOrConnectWithoutParentInput | AuditUniverseCreateOrConnectWithoutParentInput[]
@@ -16638,6 +20392,13 @@ export namespace Prisma {
     connectOrCreate?: AuditPlanCreateOrConnectWithoutAuditEntityInput | AuditPlanCreateOrConnectWithoutAuditEntityInput[]
     createMany?: AuditPlanCreateManyAuditEntityInputEnvelope
     connect?: AuditPlanWhereUniqueInput | AuditPlanWhereUniqueInput[]
+  }
+
+  export type EngagementUncheckedCreateNestedManyWithoutAuditEntityInput = {
+    create?: XOR<EngagementCreateWithoutAuditEntityInput, EngagementUncheckedCreateWithoutAuditEntityInput> | EngagementCreateWithoutAuditEntityInput[] | EngagementUncheckedCreateWithoutAuditEntityInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutAuditEntityInput | EngagementCreateOrConnectWithoutAuditEntityInput[]
+    createMany?: EngagementCreateManyAuditEntityInputEnvelope
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
   }
 
   export type EnumAuditEntityTypeFieldUpdateOperationsInput = {
@@ -16730,6 +20491,20 @@ export namespace Prisma {
     deleteMany?: AuditPlanScalarWhereInput | AuditPlanScalarWhereInput[]
   }
 
+  export type EngagementUpdateManyWithoutAuditEntityNestedInput = {
+    create?: XOR<EngagementCreateWithoutAuditEntityInput, EngagementUncheckedCreateWithoutAuditEntityInput> | EngagementCreateWithoutAuditEntityInput[] | EngagementUncheckedCreateWithoutAuditEntityInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutAuditEntityInput | EngagementCreateOrConnectWithoutAuditEntityInput[]
+    upsert?: EngagementUpsertWithWhereUniqueWithoutAuditEntityInput | EngagementUpsertWithWhereUniqueWithoutAuditEntityInput[]
+    createMany?: EngagementCreateManyAuditEntityInputEnvelope
+    set?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    disconnect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    delete?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    update?: EngagementUpdateWithWhereUniqueWithoutAuditEntityInput | EngagementUpdateWithWhereUniqueWithoutAuditEntityInput[]
+    updateMany?: EngagementUpdateManyWithWhereWithoutAuditEntityInput | EngagementUpdateManyWithWhereWithoutAuditEntityInput[]
+    deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
+  }
+
   export type AuditUniverseUncheckedUpdateManyWithoutParentNestedInput = {
     create?: XOR<AuditUniverseCreateWithoutParentInput, AuditUniverseUncheckedCreateWithoutParentInput> | AuditUniverseCreateWithoutParentInput[] | AuditUniverseUncheckedCreateWithoutParentInput[]
     connectOrCreate?: AuditUniverseCreateOrConnectWithoutParentInput | AuditUniverseCreateOrConnectWithoutParentInput[]
@@ -16772,6 +20547,20 @@ export namespace Prisma {
     deleteMany?: AuditPlanScalarWhereInput | AuditPlanScalarWhereInput[]
   }
 
+  export type EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput = {
+    create?: XOR<EngagementCreateWithoutAuditEntityInput, EngagementUncheckedCreateWithoutAuditEntityInput> | EngagementCreateWithoutAuditEntityInput[] | EngagementUncheckedCreateWithoutAuditEntityInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutAuditEntityInput | EngagementCreateOrConnectWithoutAuditEntityInput[]
+    upsert?: EngagementUpsertWithWhereUniqueWithoutAuditEntityInput | EngagementUpsertWithWhereUniqueWithoutAuditEntityInput[]
+    createMany?: EngagementCreateManyAuditEntityInputEnvelope
+    set?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    disconnect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    delete?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    update?: EngagementUpdateWithWhereUniqueWithoutAuditEntityInput | EngagementUpdateWithWhereUniqueWithoutAuditEntityInput[]
+    updateMany?: EngagementUpdateManyWithWhereWithoutAuditEntityInput | EngagementUpdateManyWithWhereWithoutAuditEntityInput[]
+    deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
+  }
+
   export type AuditUniverseCreateNestedOneWithoutRisksInput = {
     create?: XOR<AuditUniverseCreateWithoutRisksInput, AuditUniverseUncheckedCreateWithoutRisksInput>
     connectOrCreate?: AuditUniverseCreateOrConnectWithoutRisksInput
@@ -16810,6 +20599,13 @@ export namespace Prisma {
     connect?: AuditPlanWhereUniqueInput | AuditPlanWhereUniqueInput[]
   }
 
+  export type EngagementCreateNestedManyWithoutRiskInput = {
+    create?: XOR<EngagementCreateWithoutRiskInput, EngagementUncheckedCreateWithoutRiskInput> | EngagementCreateWithoutRiskInput[] | EngagementUncheckedCreateWithoutRiskInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutRiskInput | EngagementCreateOrConnectWithoutRiskInput[]
+    createMany?: EngagementCreateManyRiskInputEnvelope
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+  }
+
   export type RiskActionUncheckedCreateNestedManyWithoutRiskInput = {
     create?: XOR<RiskActionCreateWithoutRiskInput, RiskActionUncheckedCreateWithoutRiskInput> | RiskActionCreateWithoutRiskInput[] | RiskActionUncheckedCreateWithoutRiskInput[]
     connectOrCreate?: RiskActionCreateOrConnectWithoutRiskInput | RiskActionCreateOrConnectWithoutRiskInput[]
@@ -16822,6 +20618,13 @@ export namespace Prisma {
     connectOrCreate?: AuditPlanCreateOrConnectWithoutRiskInput | AuditPlanCreateOrConnectWithoutRiskInput[]
     createMany?: AuditPlanCreateManyRiskInputEnvelope
     connect?: AuditPlanWhereUniqueInput | AuditPlanWhereUniqueInput[]
+  }
+
+  export type EngagementUncheckedCreateNestedManyWithoutRiskInput = {
+    create?: XOR<EngagementCreateWithoutRiskInput, EngagementUncheckedCreateWithoutRiskInput> | EngagementCreateWithoutRiskInput[] | EngagementUncheckedCreateWithoutRiskInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutRiskInput | EngagementCreateOrConnectWithoutRiskInput[]
+    createMany?: EngagementCreateManyRiskInputEnvelope
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -16906,6 +20709,20 @@ export namespace Prisma {
     deleteMany?: AuditPlanScalarWhereInput | AuditPlanScalarWhereInput[]
   }
 
+  export type EngagementUpdateManyWithoutRiskNestedInput = {
+    create?: XOR<EngagementCreateWithoutRiskInput, EngagementUncheckedCreateWithoutRiskInput> | EngagementCreateWithoutRiskInput[] | EngagementUncheckedCreateWithoutRiskInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutRiskInput | EngagementCreateOrConnectWithoutRiskInput[]
+    upsert?: EngagementUpsertWithWhereUniqueWithoutRiskInput | EngagementUpsertWithWhereUniqueWithoutRiskInput[]
+    createMany?: EngagementCreateManyRiskInputEnvelope
+    set?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    disconnect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    delete?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    update?: EngagementUpdateWithWhereUniqueWithoutRiskInput | EngagementUpdateWithWhereUniqueWithoutRiskInput[]
+    updateMany?: EngagementUpdateManyWithWhereWithoutRiskInput | EngagementUpdateManyWithWhereWithoutRiskInput[]
+    deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
+  }
+
   export type RiskActionUncheckedUpdateManyWithoutRiskNestedInput = {
     create?: XOR<RiskActionCreateWithoutRiskInput, RiskActionUncheckedCreateWithoutRiskInput> | RiskActionCreateWithoutRiskInput[] | RiskActionUncheckedCreateWithoutRiskInput[]
     connectOrCreate?: RiskActionCreateOrConnectWithoutRiskInput | RiskActionCreateOrConnectWithoutRiskInput[]
@@ -16932,6 +20749,20 @@ export namespace Prisma {
     update?: AuditPlanUpdateWithWhereUniqueWithoutRiskInput | AuditPlanUpdateWithWhereUniqueWithoutRiskInput[]
     updateMany?: AuditPlanUpdateManyWithWhereWithoutRiskInput | AuditPlanUpdateManyWithWhereWithoutRiskInput[]
     deleteMany?: AuditPlanScalarWhereInput | AuditPlanScalarWhereInput[]
+  }
+
+  export type EngagementUncheckedUpdateManyWithoutRiskNestedInput = {
+    create?: XOR<EngagementCreateWithoutRiskInput, EngagementUncheckedCreateWithoutRiskInput> | EngagementCreateWithoutRiskInput[] | EngagementUncheckedCreateWithoutRiskInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutRiskInput | EngagementCreateOrConnectWithoutRiskInput[]
+    upsert?: EngagementUpsertWithWhereUniqueWithoutRiskInput | EngagementUpsertWithWhereUniqueWithoutRiskInput[]
+    createMany?: EngagementCreateManyRiskInputEnvelope
+    set?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    disconnect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    delete?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    update?: EngagementUpdateWithWhereUniqueWithoutRiskInput | EngagementUpdateWithWhereUniqueWithoutRiskInput[]
+    updateMany?: EngagementUpdateManyWithWhereWithoutRiskInput | EngagementUpdateManyWithWhereWithoutRiskInput[]
+    deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
   }
 
   export type RiskCreateNestedOneWithoutActionsInput = {
@@ -17004,6 +20835,20 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type EngagementCreateNestedManyWithoutAuditPlanInput = {
+    create?: XOR<EngagementCreateWithoutAuditPlanInput, EngagementUncheckedCreateWithoutAuditPlanInput> | EngagementCreateWithoutAuditPlanInput[] | EngagementUncheckedCreateWithoutAuditPlanInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutAuditPlanInput | EngagementCreateOrConnectWithoutAuditPlanInput[]
+    createMany?: EngagementCreateManyAuditPlanInputEnvelope
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+  }
+
+  export type EngagementUncheckedCreateNestedManyWithoutAuditPlanInput = {
+    create?: XOR<EngagementCreateWithoutAuditPlanInput, EngagementUncheckedCreateWithoutAuditPlanInput> | EngagementCreateWithoutAuditPlanInput[] | EngagementUncheckedCreateWithoutAuditPlanInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutAuditPlanInput | EngagementCreateOrConnectWithoutAuditPlanInput[]
+    createMany?: EngagementCreateManyAuditPlanInputEnvelope
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+  }
+
   export type EnumAuditPriorityFieldUpdateOperationsInput = {
     set?: $Enums.AuditPriority
   }
@@ -17068,6 +20913,226 @@ export namespace Prisma {
     delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUpdatedAuditPlansInput, UserUpdateWithoutUpdatedAuditPlansInput>, UserUncheckedUpdateWithoutUpdatedAuditPlansInput>
+  }
+
+  export type EngagementUpdateManyWithoutAuditPlanNestedInput = {
+    create?: XOR<EngagementCreateWithoutAuditPlanInput, EngagementUncheckedCreateWithoutAuditPlanInput> | EngagementCreateWithoutAuditPlanInput[] | EngagementUncheckedCreateWithoutAuditPlanInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutAuditPlanInput | EngagementCreateOrConnectWithoutAuditPlanInput[]
+    upsert?: EngagementUpsertWithWhereUniqueWithoutAuditPlanInput | EngagementUpsertWithWhereUniqueWithoutAuditPlanInput[]
+    createMany?: EngagementCreateManyAuditPlanInputEnvelope
+    set?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    disconnect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    delete?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    update?: EngagementUpdateWithWhereUniqueWithoutAuditPlanInput | EngagementUpdateWithWhereUniqueWithoutAuditPlanInput[]
+    updateMany?: EngagementUpdateManyWithWhereWithoutAuditPlanInput | EngagementUpdateManyWithWhereWithoutAuditPlanInput[]
+    deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
+  }
+
+  export type EngagementUncheckedUpdateManyWithoutAuditPlanNestedInput = {
+    create?: XOR<EngagementCreateWithoutAuditPlanInput, EngagementUncheckedCreateWithoutAuditPlanInput> | EngagementCreateWithoutAuditPlanInput[] | EngagementUncheckedCreateWithoutAuditPlanInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutAuditPlanInput | EngagementCreateOrConnectWithoutAuditPlanInput[]
+    upsert?: EngagementUpsertWithWhereUniqueWithoutAuditPlanInput | EngagementUpsertWithWhereUniqueWithoutAuditPlanInput[]
+    createMany?: EngagementCreateManyAuditPlanInputEnvelope
+    set?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    disconnect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    delete?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    update?: EngagementUpdateWithWhereUniqueWithoutAuditPlanInput | EngagementUpdateWithWhereUniqueWithoutAuditPlanInput[]
+    updateMany?: EngagementUpdateManyWithWhereWithoutAuditPlanInput | EngagementUpdateManyWithWhereWithoutAuditPlanInput[]
+    deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
+  }
+
+  export type AuditPlanCreateNestedOneWithoutEngagementsInput = {
+    create?: XOR<AuditPlanCreateWithoutEngagementsInput, AuditPlanUncheckedCreateWithoutEngagementsInput>
+    connectOrCreate?: AuditPlanCreateOrConnectWithoutEngagementsInput
+    connect?: AuditPlanWhereUniqueInput
+  }
+
+  export type AuditUniverseCreateNestedOneWithoutEngagementsInput = {
+    create?: XOR<AuditUniverseCreateWithoutEngagementsInput, AuditUniverseUncheckedCreateWithoutEngagementsInput>
+    connectOrCreate?: AuditUniverseCreateOrConnectWithoutEngagementsInput
+    connect?: AuditUniverseWhereUniqueInput
+  }
+
+  export type RiskCreateNestedOneWithoutEngagementsInput = {
+    create?: XOR<RiskCreateWithoutEngagementsInput, RiskUncheckedCreateWithoutEngagementsInput>
+    connectOrCreate?: RiskCreateOrConnectWithoutEngagementsInput
+    connect?: RiskWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutLeadEngagementsInput = {
+    create?: XOR<UserCreateWithoutLeadEngagementsInput, UserUncheckedCreateWithoutLeadEngagementsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutLeadEngagementsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutClosedEngagementsInput = {
+    create?: XOR<UserCreateWithoutClosedEngagementsInput, UserUncheckedCreateWithoutClosedEngagementsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutClosedEngagementsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutCreatedEngagementsInput = {
+    create?: XOR<UserCreateWithoutCreatedEngagementsInput, UserUncheckedCreateWithoutCreatedEngagementsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedEngagementsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutUpdatedEngagementsInput = {
+    create?: XOR<UserCreateWithoutUpdatedEngagementsInput, UserUncheckedCreateWithoutUpdatedEngagementsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUpdatedEngagementsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EngagementTeamMemberCreateNestedManyWithoutEngagementInput = {
+    create?: XOR<EngagementTeamMemberCreateWithoutEngagementInput, EngagementTeamMemberUncheckedCreateWithoutEngagementInput> | EngagementTeamMemberCreateWithoutEngagementInput[] | EngagementTeamMemberUncheckedCreateWithoutEngagementInput[]
+    connectOrCreate?: EngagementTeamMemberCreateOrConnectWithoutEngagementInput | EngagementTeamMemberCreateOrConnectWithoutEngagementInput[]
+    createMany?: EngagementTeamMemberCreateManyEngagementInputEnvelope
+    connect?: EngagementTeamMemberWhereUniqueInput | EngagementTeamMemberWhereUniqueInput[]
+  }
+
+  export type EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput = {
+    create?: XOR<EngagementTeamMemberCreateWithoutEngagementInput, EngagementTeamMemberUncheckedCreateWithoutEngagementInput> | EngagementTeamMemberCreateWithoutEngagementInput[] | EngagementTeamMemberUncheckedCreateWithoutEngagementInput[]
+    connectOrCreate?: EngagementTeamMemberCreateOrConnectWithoutEngagementInput | EngagementTeamMemberCreateOrConnectWithoutEngagementInput[]
+    createMany?: EngagementTeamMemberCreateManyEngagementInputEnvelope
+    connect?: EngagementTeamMemberWhereUniqueInput | EngagementTeamMemberWhereUniqueInput[]
+  }
+
+  export type EnumEngagementTypeFieldUpdateOperationsInput = {
+    set?: $Enums.EngagementType
+  }
+
+  export type EnumEngagementStatusFieldUpdateOperationsInput = {
+    set?: $Enums.EngagementStatus
+  }
+
+  export type AuditPlanUpdateOneWithoutEngagementsNestedInput = {
+    create?: XOR<AuditPlanCreateWithoutEngagementsInput, AuditPlanUncheckedCreateWithoutEngagementsInput>
+    connectOrCreate?: AuditPlanCreateOrConnectWithoutEngagementsInput
+    upsert?: AuditPlanUpsertWithoutEngagementsInput
+    disconnect?: AuditPlanWhereInput | boolean
+    delete?: AuditPlanWhereInput | boolean
+    connect?: AuditPlanWhereUniqueInput
+    update?: XOR<XOR<AuditPlanUpdateToOneWithWhereWithoutEngagementsInput, AuditPlanUpdateWithoutEngagementsInput>, AuditPlanUncheckedUpdateWithoutEngagementsInput>
+  }
+
+  export type AuditUniverseUpdateOneRequiredWithoutEngagementsNestedInput = {
+    create?: XOR<AuditUniverseCreateWithoutEngagementsInput, AuditUniverseUncheckedCreateWithoutEngagementsInput>
+    connectOrCreate?: AuditUniverseCreateOrConnectWithoutEngagementsInput
+    upsert?: AuditUniverseUpsertWithoutEngagementsInput
+    connect?: AuditUniverseWhereUniqueInput
+    update?: XOR<XOR<AuditUniverseUpdateToOneWithWhereWithoutEngagementsInput, AuditUniverseUpdateWithoutEngagementsInput>, AuditUniverseUncheckedUpdateWithoutEngagementsInput>
+  }
+
+  export type RiskUpdateOneWithoutEngagementsNestedInput = {
+    create?: XOR<RiskCreateWithoutEngagementsInput, RiskUncheckedCreateWithoutEngagementsInput>
+    connectOrCreate?: RiskCreateOrConnectWithoutEngagementsInput
+    upsert?: RiskUpsertWithoutEngagementsInput
+    disconnect?: RiskWhereInput | boolean
+    delete?: RiskWhereInput | boolean
+    connect?: RiskWhereUniqueInput
+    update?: XOR<XOR<RiskUpdateToOneWithWhereWithoutEngagementsInput, RiskUpdateWithoutEngagementsInput>, RiskUncheckedUpdateWithoutEngagementsInput>
+  }
+
+  export type UserUpdateOneWithoutLeadEngagementsNestedInput = {
+    create?: XOR<UserCreateWithoutLeadEngagementsInput, UserUncheckedCreateWithoutLeadEngagementsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutLeadEngagementsInput
+    upsert?: UserUpsertWithoutLeadEngagementsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutLeadEngagementsInput, UserUpdateWithoutLeadEngagementsInput>, UserUncheckedUpdateWithoutLeadEngagementsInput>
+  }
+
+  export type UserUpdateOneWithoutClosedEngagementsNestedInput = {
+    create?: XOR<UserCreateWithoutClosedEngagementsInput, UserUncheckedCreateWithoutClosedEngagementsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutClosedEngagementsInput
+    upsert?: UserUpsertWithoutClosedEngagementsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutClosedEngagementsInput, UserUpdateWithoutClosedEngagementsInput>, UserUncheckedUpdateWithoutClosedEngagementsInput>
+  }
+
+  export type UserUpdateOneWithoutCreatedEngagementsNestedInput = {
+    create?: XOR<UserCreateWithoutCreatedEngagementsInput, UserUncheckedCreateWithoutCreatedEngagementsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedEngagementsInput
+    upsert?: UserUpsertWithoutCreatedEngagementsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedEngagementsInput, UserUpdateWithoutCreatedEngagementsInput>, UserUncheckedUpdateWithoutCreatedEngagementsInput>
+  }
+
+  export type UserUpdateOneWithoutUpdatedEngagementsNestedInput = {
+    create?: XOR<UserCreateWithoutUpdatedEngagementsInput, UserUncheckedCreateWithoutUpdatedEngagementsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUpdatedEngagementsInput
+    upsert?: UserUpsertWithoutUpdatedEngagementsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUpdatedEngagementsInput, UserUpdateWithoutUpdatedEngagementsInput>, UserUncheckedUpdateWithoutUpdatedEngagementsInput>
+  }
+
+  export type EngagementTeamMemberUpdateManyWithoutEngagementNestedInput = {
+    create?: XOR<EngagementTeamMemberCreateWithoutEngagementInput, EngagementTeamMemberUncheckedCreateWithoutEngagementInput> | EngagementTeamMemberCreateWithoutEngagementInput[] | EngagementTeamMemberUncheckedCreateWithoutEngagementInput[]
+    connectOrCreate?: EngagementTeamMemberCreateOrConnectWithoutEngagementInput | EngagementTeamMemberCreateOrConnectWithoutEngagementInput[]
+    upsert?: EngagementTeamMemberUpsertWithWhereUniqueWithoutEngagementInput | EngagementTeamMemberUpsertWithWhereUniqueWithoutEngagementInput[]
+    createMany?: EngagementTeamMemberCreateManyEngagementInputEnvelope
+    set?: EngagementTeamMemberWhereUniqueInput | EngagementTeamMemberWhereUniqueInput[]
+    disconnect?: EngagementTeamMemberWhereUniqueInput | EngagementTeamMemberWhereUniqueInput[]
+    delete?: EngagementTeamMemberWhereUniqueInput | EngagementTeamMemberWhereUniqueInput[]
+    connect?: EngagementTeamMemberWhereUniqueInput | EngagementTeamMemberWhereUniqueInput[]
+    update?: EngagementTeamMemberUpdateWithWhereUniqueWithoutEngagementInput | EngagementTeamMemberUpdateWithWhereUniqueWithoutEngagementInput[]
+    updateMany?: EngagementTeamMemberUpdateManyWithWhereWithoutEngagementInput | EngagementTeamMemberUpdateManyWithWhereWithoutEngagementInput[]
+    deleteMany?: EngagementTeamMemberScalarWhereInput | EngagementTeamMemberScalarWhereInput[]
+  }
+
+  export type EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput = {
+    create?: XOR<EngagementTeamMemberCreateWithoutEngagementInput, EngagementTeamMemberUncheckedCreateWithoutEngagementInput> | EngagementTeamMemberCreateWithoutEngagementInput[] | EngagementTeamMemberUncheckedCreateWithoutEngagementInput[]
+    connectOrCreate?: EngagementTeamMemberCreateOrConnectWithoutEngagementInput | EngagementTeamMemberCreateOrConnectWithoutEngagementInput[]
+    upsert?: EngagementTeamMemberUpsertWithWhereUniqueWithoutEngagementInput | EngagementTeamMemberUpsertWithWhereUniqueWithoutEngagementInput[]
+    createMany?: EngagementTeamMemberCreateManyEngagementInputEnvelope
+    set?: EngagementTeamMemberWhereUniqueInput | EngagementTeamMemberWhereUniqueInput[]
+    disconnect?: EngagementTeamMemberWhereUniqueInput | EngagementTeamMemberWhereUniqueInput[]
+    delete?: EngagementTeamMemberWhereUniqueInput | EngagementTeamMemberWhereUniqueInput[]
+    connect?: EngagementTeamMemberWhereUniqueInput | EngagementTeamMemberWhereUniqueInput[]
+    update?: EngagementTeamMemberUpdateWithWhereUniqueWithoutEngagementInput | EngagementTeamMemberUpdateWithWhereUniqueWithoutEngagementInput[]
+    updateMany?: EngagementTeamMemberUpdateManyWithWhereWithoutEngagementInput | EngagementTeamMemberUpdateManyWithWhereWithoutEngagementInput[]
+    deleteMany?: EngagementTeamMemberScalarWhereInput | EngagementTeamMemberScalarWhereInput[]
+  }
+
+  export type EngagementCreateNestedOneWithoutTeamMembersInput = {
+    create?: XOR<EngagementCreateWithoutTeamMembersInput, EngagementUncheckedCreateWithoutTeamMembersInput>
+    connectOrCreate?: EngagementCreateOrConnectWithoutTeamMembersInput
+    connect?: EngagementWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutEngagementMembershipsInput = {
+    create?: XOR<UserCreateWithoutEngagementMembershipsInput, UserUncheckedCreateWithoutEngagementMembershipsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEngagementMembershipsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumTeamMemberRoleFieldUpdateOperationsInput = {
+    set?: $Enums.TeamMemberRole
+  }
+
+  export type EngagementUpdateOneRequiredWithoutTeamMembersNestedInput = {
+    create?: XOR<EngagementCreateWithoutTeamMembersInput, EngagementUncheckedCreateWithoutTeamMembersInput>
+    connectOrCreate?: EngagementCreateOrConnectWithoutTeamMembersInput
+    upsert?: EngagementUpsertWithoutTeamMembersInput
+    connect?: EngagementWhereUniqueInput
+    update?: XOR<XOR<EngagementUpdateToOneWithWhereWithoutTeamMembersInput, EngagementUpdateWithoutTeamMembersInput>, EngagementUncheckedUpdateWithoutTeamMembersInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutEngagementMembershipsNestedInput = {
+    create?: XOR<UserCreateWithoutEngagementMembershipsInput, UserUncheckedCreateWithoutEngagementMembershipsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEngagementMembershipsInput
+    upsert?: UserUpsertWithoutEngagementMembershipsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEngagementMembershipsInput, UserUpdateWithoutEngagementMembershipsInput>, UserUncheckedUpdateWithoutEngagementMembershipsInput>
   }
 
   export type NestedUuidFilter<$PrismaModel = never> = {
@@ -17435,6 +21500,57 @@ export namespace Prisma {
     _max?: NestedEnumAuditPlanStatusFilter<$PrismaModel>
   }
 
+  export type NestedEnumEngagementTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.EngagementType | EnumEngagementTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.EngagementType[] | ListEnumEngagementTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EngagementType[] | ListEnumEngagementTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumEngagementTypeFilter<$PrismaModel> | $Enums.EngagementType
+  }
+
+  export type NestedEnumEngagementStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.EngagementStatus | EnumEngagementStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.EngagementStatus[] | ListEnumEngagementStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EngagementStatus[] | ListEnumEngagementStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumEngagementStatusFilter<$PrismaModel> | $Enums.EngagementStatus
+  }
+
+  export type NestedEnumEngagementTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EngagementType | EnumEngagementTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.EngagementType[] | ListEnumEngagementTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EngagementType[] | ListEnumEngagementTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumEngagementTypeWithAggregatesFilter<$PrismaModel> | $Enums.EngagementType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumEngagementTypeFilter<$PrismaModel>
+    _max?: NestedEnumEngagementTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumEngagementStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EngagementStatus | EnumEngagementStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.EngagementStatus[] | ListEnumEngagementStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EngagementStatus[] | ListEnumEngagementStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumEngagementStatusWithAggregatesFilter<$PrismaModel> | $Enums.EngagementStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumEngagementStatusFilter<$PrismaModel>
+    _max?: NestedEnumEngagementStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumTeamMemberRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.TeamMemberRole | EnumTeamMemberRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.TeamMemberRole[] | ListEnumTeamMemberRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TeamMemberRole[] | ListEnumTeamMemberRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumTeamMemberRoleFilter<$PrismaModel> | $Enums.TeamMemberRole
+  }
+
+  export type NestedEnumTeamMemberRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TeamMemberRole | EnumTeamMemberRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.TeamMemberRole[] | ListEnumTeamMemberRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TeamMemberRole[] | ListEnumTeamMemberRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumTeamMemberRoleWithAggregatesFilter<$PrismaModel> | $Enums.TeamMemberRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTeamMemberRoleFilter<$PrismaModel>
+    _max?: NestedEnumTeamMemberRoleFilter<$PrismaModel>
+  }
+
   export type UserRoleCreateWithoutUserInput = {
     assignedAt?: Date | string
     role: RoleCreateNestedOneWithoutUserRolesInput
@@ -17474,6 +21590,7 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedAuditEntitiesInput
     risks?: RiskCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
+    engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutOwnerInput = {
@@ -17495,6 +21612,7 @@ export namespace Prisma {
     children?: AuditUniverseUncheckedCreateNestedManyWithoutParentInput
     risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
+    engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutOwnerInput = {
@@ -17526,6 +21644,7 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedAuditEntitiesInput
     risks?: RiskCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
+    engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutCreatedByInput = {
@@ -17547,6 +21666,7 @@ export namespace Prisma {
     children?: AuditUniverseUncheckedCreateNestedManyWithoutParentInput
     risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
+    engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutCreatedByInput = {
@@ -17578,6 +21698,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedAuditEntitiesInput
     risks?: RiskCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
+    engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutUpdatedByInput = {
@@ -17599,6 +21720,7 @@ export namespace Prisma {
     children?: AuditUniverseUncheckedCreateNestedManyWithoutParentInput
     risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
+    engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutUpdatedByInput = {
@@ -17633,6 +21755,7 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedRisksInput
     actions?: RiskActionCreateNestedManyWithoutRiskInput
     auditPlans?: AuditPlanCreateNestedManyWithoutRiskInput
+    engagements?: EngagementCreateNestedManyWithoutRiskInput
   }
 
   export type RiskUncheckedCreateWithoutOwnerInput = {
@@ -17657,6 +21780,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     actions?: RiskActionUncheckedCreateNestedManyWithoutRiskInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutRiskInput
+    engagements?: EngagementUncheckedCreateNestedManyWithoutRiskInput
   }
 
   export type RiskCreateOrConnectWithoutOwnerInput = {
@@ -17691,6 +21815,7 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedRisksInput
     actions?: RiskActionCreateNestedManyWithoutRiskInput
     auditPlans?: AuditPlanCreateNestedManyWithoutRiskInput
+    engagements?: EngagementCreateNestedManyWithoutRiskInput
   }
 
   export type RiskUncheckedCreateWithoutCreatedByInput = {
@@ -17715,6 +21840,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     actions?: RiskActionUncheckedCreateNestedManyWithoutRiskInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutRiskInput
+    engagements?: EngagementUncheckedCreateNestedManyWithoutRiskInput
   }
 
   export type RiskCreateOrConnectWithoutCreatedByInput = {
@@ -17749,6 +21875,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedRisksInput
     actions?: RiskActionCreateNestedManyWithoutRiskInput
     auditPlans?: AuditPlanCreateNestedManyWithoutRiskInput
+    engagements?: EngagementCreateNestedManyWithoutRiskInput
   }
 
   export type RiskUncheckedCreateWithoutUpdatedByInput = {
@@ -17773,6 +21900,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     actions?: RiskActionUncheckedCreateNestedManyWithoutRiskInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutRiskInput
+    engagements?: EngagementUncheckedCreateNestedManyWithoutRiskInput
   }
 
   export type RiskCreateOrConnectWithoutUpdatedByInput = {
@@ -17839,6 +21967,7 @@ export namespace Prisma {
     leadAuditor?: UserCreateNestedOneWithoutLeadAuditPlansInput
     createdBy?: UserCreateNestedOneWithoutCreatedAuditPlansInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedAuditPlansInput
+    engagements?: EngagementCreateNestedManyWithoutAuditPlanInput
   }
 
   export type AuditPlanUncheckedCreateWithoutApprovedByInput = {
@@ -17861,6 +21990,7 @@ export namespace Prisma {
     updatedById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    engagements?: EngagementUncheckedCreateNestedManyWithoutAuditPlanInput
   }
 
   export type AuditPlanCreateOrConnectWithoutApprovedByInput = {
@@ -17893,6 +22023,7 @@ export namespace Prisma {
     approvedBy?: UserCreateNestedOneWithoutApprovedAuditPlansInput
     createdBy?: UserCreateNestedOneWithoutCreatedAuditPlansInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedAuditPlansInput
+    engagements?: EngagementCreateNestedManyWithoutAuditPlanInput
   }
 
   export type AuditPlanUncheckedCreateWithoutLeadAuditorInput = {
@@ -17915,6 +22046,7 @@ export namespace Prisma {
     updatedById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    engagements?: EngagementUncheckedCreateNestedManyWithoutAuditPlanInput
   }
 
   export type AuditPlanCreateOrConnectWithoutLeadAuditorInput = {
@@ -17947,6 +22079,7 @@ export namespace Prisma {
     approvedBy?: UserCreateNestedOneWithoutApprovedAuditPlansInput
     leadAuditor?: UserCreateNestedOneWithoutLeadAuditPlansInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedAuditPlansInput
+    engagements?: EngagementCreateNestedManyWithoutAuditPlanInput
   }
 
   export type AuditPlanUncheckedCreateWithoutCreatedByInput = {
@@ -17969,6 +22102,7 @@ export namespace Prisma {
     updatedById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    engagements?: EngagementUncheckedCreateNestedManyWithoutAuditPlanInput
   }
 
   export type AuditPlanCreateOrConnectWithoutCreatedByInput = {
@@ -18001,6 +22135,7 @@ export namespace Prisma {
     approvedBy?: UserCreateNestedOneWithoutApprovedAuditPlansInput
     leadAuditor?: UserCreateNestedOneWithoutLeadAuditPlansInput
     createdBy?: UserCreateNestedOneWithoutCreatedAuditPlansInput
+    engagements?: EngagementCreateNestedManyWithoutAuditPlanInput
   }
 
   export type AuditPlanUncheckedCreateWithoutUpdatedByInput = {
@@ -18023,6 +22158,7 @@ export namespace Prisma {
     createdById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    engagements?: EngagementUncheckedCreateNestedManyWithoutAuditPlanInput
   }
 
   export type AuditPlanCreateOrConnectWithoutUpdatedByInput = {
@@ -18032,6 +22168,276 @@ export namespace Prisma {
 
   export type AuditPlanCreateManyUpdatedByInputEnvelope = {
     data: AuditPlanCreateManyUpdatedByInput | AuditPlanCreateManyUpdatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EngagementCreateWithoutLeadAuditorInput = {
+    id?: string
+    reference: string
+    title: string
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closureNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auditPlan?: AuditPlanCreateNestedOneWithoutEngagementsInput
+    auditEntity: AuditUniverseCreateNestedOneWithoutEngagementsInput
+    risk?: RiskCreateNestedOneWithoutEngagementsInput
+    closedBy?: UserCreateNestedOneWithoutClosedEngagementsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedEngagementsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
+    teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
+  }
+
+  export type EngagementUncheckedCreateWithoutLeadAuditorInput = {
+    id?: string
+    reference: string
+    title: string
+    auditPlanId?: string | null
+    auditEntityId: string
+    riskId?: string | null
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closedById?: string | null
+    closureNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
+  }
+
+  export type EngagementCreateOrConnectWithoutLeadAuditorInput = {
+    where: EngagementWhereUniqueInput
+    create: XOR<EngagementCreateWithoutLeadAuditorInput, EngagementUncheckedCreateWithoutLeadAuditorInput>
+  }
+
+  export type EngagementCreateManyLeadAuditorInputEnvelope = {
+    data: EngagementCreateManyLeadAuditorInput | EngagementCreateManyLeadAuditorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EngagementCreateWithoutCreatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closureNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auditPlan?: AuditPlanCreateNestedOneWithoutEngagementsInput
+    auditEntity: AuditUniverseCreateNestedOneWithoutEngagementsInput
+    risk?: RiskCreateNestedOneWithoutEngagementsInput
+    leadAuditor?: UserCreateNestedOneWithoutLeadEngagementsInput
+    closedBy?: UserCreateNestedOneWithoutClosedEngagementsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
+    teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
+  }
+
+  export type EngagementUncheckedCreateWithoutCreatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    auditPlanId?: string | null
+    auditEntityId: string
+    riskId?: string | null
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    leadAuditorId?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closedById?: string | null
+    closureNotes?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
+  }
+
+  export type EngagementCreateOrConnectWithoutCreatedByInput = {
+    where: EngagementWhereUniqueInput
+    create: XOR<EngagementCreateWithoutCreatedByInput, EngagementUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type EngagementCreateManyCreatedByInputEnvelope = {
+    data: EngagementCreateManyCreatedByInput | EngagementCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EngagementCreateWithoutUpdatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closureNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auditPlan?: AuditPlanCreateNestedOneWithoutEngagementsInput
+    auditEntity: AuditUniverseCreateNestedOneWithoutEngagementsInput
+    risk?: RiskCreateNestedOneWithoutEngagementsInput
+    leadAuditor?: UserCreateNestedOneWithoutLeadEngagementsInput
+    closedBy?: UserCreateNestedOneWithoutClosedEngagementsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedEngagementsInput
+    teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
+  }
+
+  export type EngagementUncheckedCreateWithoutUpdatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    auditPlanId?: string | null
+    auditEntityId: string
+    riskId?: string | null
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    leadAuditorId?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closedById?: string | null
+    closureNotes?: string | null
+    createdById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
+  }
+
+  export type EngagementCreateOrConnectWithoutUpdatedByInput = {
+    where: EngagementWhereUniqueInput
+    create: XOR<EngagementCreateWithoutUpdatedByInput, EngagementUncheckedCreateWithoutUpdatedByInput>
+  }
+
+  export type EngagementCreateManyUpdatedByInputEnvelope = {
+    data: EngagementCreateManyUpdatedByInput | EngagementCreateManyUpdatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EngagementCreateWithoutClosedByInput = {
+    id?: string
+    reference: string
+    title: string
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closureNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auditPlan?: AuditPlanCreateNestedOneWithoutEngagementsInput
+    auditEntity: AuditUniverseCreateNestedOneWithoutEngagementsInput
+    risk?: RiskCreateNestedOneWithoutEngagementsInput
+    leadAuditor?: UserCreateNestedOneWithoutLeadEngagementsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedEngagementsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
+    teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
+  }
+
+  export type EngagementUncheckedCreateWithoutClosedByInput = {
+    id?: string
+    reference: string
+    title: string
+    auditPlanId?: string | null
+    auditEntityId: string
+    riskId?: string | null
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    leadAuditorId?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closureNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
+  }
+
+  export type EngagementCreateOrConnectWithoutClosedByInput = {
+    where: EngagementWhereUniqueInput
+    create: XOR<EngagementCreateWithoutClosedByInput, EngagementUncheckedCreateWithoutClosedByInput>
+  }
+
+  export type EngagementCreateManyClosedByInputEnvelope = {
+    data: EngagementCreateManyClosedByInput | EngagementCreateManyClosedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EngagementTeamMemberCreateWithoutUserInput = {
+    role?: $Enums.TeamMemberRole
+    assignedAt?: Date | string
+    engagement: EngagementCreateNestedOneWithoutTeamMembersInput
+  }
+
+  export type EngagementTeamMemberUncheckedCreateWithoutUserInput = {
+    engagementId: string
+    role?: $Enums.TeamMemberRole
+    assignedAt?: Date | string
+  }
+
+  export type EngagementTeamMemberCreateOrConnectWithoutUserInput = {
+    where: EngagementTeamMemberWhereUniqueInput
+    create: XOR<EngagementTeamMemberCreateWithoutUserInput, EngagementTeamMemberUncheckedCreateWithoutUserInput>
+  }
+
+  export type EngagementTeamMemberCreateManyUserInputEnvelope = {
+    data: EngagementTeamMemberCreateManyUserInput | EngagementTeamMemberCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -18326,6 +22732,125 @@ export namespace Prisma {
     data: XOR<AuditPlanUpdateManyMutationInput, AuditPlanUncheckedUpdateManyWithoutUpdatedByInput>
   }
 
+  export type EngagementUpsertWithWhereUniqueWithoutLeadAuditorInput = {
+    where: EngagementWhereUniqueInput
+    update: XOR<EngagementUpdateWithoutLeadAuditorInput, EngagementUncheckedUpdateWithoutLeadAuditorInput>
+    create: XOR<EngagementCreateWithoutLeadAuditorInput, EngagementUncheckedCreateWithoutLeadAuditorInput>
+  }
+
+  export type EngagementUpdateWithWhereUniqueWithoutLeadAuditorInput = {
+    where: EngagementWhereUniqueInput
+    data: XOR<EngagementUpdateWithoutLeadAuditorInput, EngagementUncheckedUpdateWithoutLeadAuditorInput>
+  }
+
+  export type EngagementUpdateManyWithWhereWithoutLeadAuditorInput = {
+    where: EngagementScalarWhereInput
+    data: XOR<EngagementUpdateManyMutationInput, EngagementUncheckedUpdateManyWithoutLeadAuditorInput>
+  }
+
+  export type EngagementScalarWhereInput = {
+    AND?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
+    OR?: EngagementScalarWhereInput[]
+    NOT?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
+    id?: UuidFilter<"Engagement"> | string
+    reference?: StringFilter<"Engagement"> | string
+    title?: StringFilter<"Engagement"> | string
+    auditPlanId?: UuidNullableFilter<"Engagement"> | string | null
+    auditEntityId?: UuidFilter<"Engagement"> | string
+    riskId?: UuidNullableFilter<"Engagement"> | string | null
+    type?: EnumEngagementTypeFilter<"Engagement"> | $Enums.EngagementType
+    status?: EnumEngagementStatusFilter<"Engagement"> | $Enums.EngagementStatus
+    objectives?: StringFilter<"Engagement"> | string
+    scope?: StringFilter<"Engagement"> | string
+    methodology?: StringNullableFilter<"Engagement"> | string | null
+    leadAuditorId?: UuidNullableFilter<"Engagement"> | string | null
+    startDate?: DateTimeNullableFilter<"Engagement"> | Date | string | null
+    endDate?: DateTimeNullableFilter<"Engagement"> | Date | string | null
+    actualStartDate?: DateTimeNullableFilter<"Engagement"> | Date | string | null
+    actualEndDate?: DateTimeNullableFilter<"Engagement"> | Date | string | null
+    closedAt?: DateTimeNullableFilter<"Engagement"> | Date | string | null
+    closedById?: UuidNullableFilter<"Engagement"> | string | null
+    closureNotes?: StringNullableFilter<"Engagement"> | string | null
+    createdById?: UuidNullableFilter<"Engagement"> | string | null
+    updatedById?: UuidNullableFilter<"Engagement"> | string | null
+    createdAt?: DateTimeFilter<"Engagement"> | Date | string
+    updatedAt?: DateTimeFilter<"Engagement"> | Date | string
+  }
+
+  export type EngagementUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: EngagementWhereUniqueInput
+    update: XOR<EngagementUpdateWithoutCreatedByInput, EngagementUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<EngagementCreateWithoutCreatedByInput, EngagementUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type EngagementUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: EngagementWhereUniqueInput
+    data: XOR<EngagementUpdateWithoutCreatedByInput, EngagementUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type EngagementUpdateManyWithWhereWithoutCreatedByInput = {
+    where: EngagementScalarWhereInput
+    data: XOR<EngagementUpdateManyMutationInput, EngagementUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type EngagementUpsertWithWhereUniqueWithoutUpdatedByInput = {
+    where: EngagementWhereUniqueInput
+    update: XOR<EngagementUpdateWithoutUpdatedByInput, EngagementUncheckedUpdateWithoutUpdatedByInput>
+    create: XOR<EngagementCreateWithoutUpdatedByInput, EngagementUncheckedCreateWithoutUpdatedByInput>
+  }
+
+  export type EngagementUpdateWithWhereUniqueWithoutUpdatedByInput = {
+    where: EngagementWhereUniqueInput
+    data: XOR<EngagementUpdateWithoutUpdatedByInput, EngagementUncheckedUpdateWithoutUpdatedByInput>
+  }
+
+  export type EngagementUpdateManyWithWhereWithoutUpdatedByInput = {
+    where: EngagementScalarWhereInput
+    data: XOR<EngagementUpdateManyMutationInput, EngagementUncheckedUpdateManyWithoutUpdatedByInput>
+  }
+
+  export type EngagementUpsertWithWhereUniqueWithoutClosedByInput = {
+    where: EngagementWhereUniqueInput
+    update: XOR<EngagementUpdateWithoutClosedByInput, EngagementUncheckedUpdateWithoutClosedByInput>
+    create: XOR<EngagementCreateWithoutClosedByInput, EngagementUncheckedCreateWithoutClosedByInput>
+  }
+
+  export type EngagementUpdateWithWhereUniqueWithoutClosedByInput = {
+    where: EngagementWhereUniqueInput
+    data: XOR<EngagementUpdateWithoutClosedByInput, EngagementUncheckedUpdateWithoutClosedByInput>
+  }
+
+  export type EngagementUpdateManyWithWhereWithoutClosedByInput = {
+    where: EngagementScalarWhereInput
+    data: XOR<EngagementUpdateManyMutationInput, EngagementUncheckedUpdateManyWithoutClosedByInput>
+  }
+
+  export type EngagementTeamMemberUpsertWithWhereUniqueWithoutUserInput = {
+    where: EngagementTeamMemberWhereUniqueInput
+    update: XOR<EngagementTeamMemberUpdateWithoutUserInput, EngagementTeamMemberUncheckedUpdateWithoutUserInput>
+    create: XOR<EngagementTeamMemberCreateWithoutUserInput, EngagementTeamMemberUncheckedCreateWithoutUserInput>
+  }
+
+  export type EngagementTeamMemberUpdateWithWhereUniqueWithoutUserInput = {
+    where: EngagementTeamMemberWhereUniqueInput
+    data: XOR<EngagementTeamMemberUpdateWithoutUserInput, EngagementTeamMemberUncheckedUpdateWithoutUserInput>
+  }
+
+  export type EngagementTeamMemberUpdateManyWithWhereWithoutUserInput = {
+    where: EngagementTeamMemberScalarWhereInput
+    data: XOR<EngagementTeamMemberUpdateManyMutationInput, EngagementTeamMemberUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type EngagementTeamMemberScalarWhereInput = {
+    AND?: EngagementTeamMemberScalarWhereInput | EngagementTeamMemberScalarWhereInput[]
+    OR?: EngagementTeamMemberScalarWhereInput[]
+    NOT?: EngagementTeamMemberScalarWhereInput | EngagementTeamMemberScalarWhereInput[]
+    engagementId?: UuidFilter<"EngagementTeamMember"> | string
+    userId?: UuidFilter<"EngagementTeamMember"> | string
+    role?: EnumTeamMemberRoleFilter<"EngagementTeamMember"> | $Enums.TeamMemberRole
+    assignedAt?: DateTimeFilter<"EngagementTeamMember"> | Date | string
+  }
+
   export type UserRoleCreateWithoutRoleInput = {
     assignedAt?: Date | string
     user: UserCreateNestedOneWithoutUserRolesInput
@@ -18464,6 +22989,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
     createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
     updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutUserRolesInput = {
@@ -18487,6 +23017,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
     createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
     updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutUserRolesInput = {
@@ -18549,6 +23084,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
     createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
     updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUserRolesInput = {
@@ -18572,6 +23112,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
     createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
     updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type RoleUpsertWithoutUserRolesInput = {
@@ -18722,6 +23267,7 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedAuditEntitiesInput
     risks?: RiskCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
+    engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutChildrenInput = {
@@ -18743,6 +23289,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
+    engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutChildrenInput = {
@@ -18769,6 +23316,7 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedAuditEntitiesInput
     risks?: RiskCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
+    engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutParentInput = {
@@ -18790,6 +23338,7 @@ export namespace Prisma {
     children?: AuditUniverseUncheckedCreateNestedManyWithoutParentInput
     risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
+    engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutParentInput = {
@@ -18823,6 +23372,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
     createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
     updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutOwnedAuditEntitiesInput = {
@@ -18846,6 +23400,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
     createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
     updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutOwnedAuditEntitiesInput = {
@@ -18874,6 +23433,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
     createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
     updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCreatedAuditEntitiesInput = {
@@ -18897,6 +23461,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
     createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
     updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCreatedAuditEntitiesInput = {
@@ -18925,6 +23494,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
     createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
     updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutUpdatedAuditEntitiesInput = {
@@ -18948,6 +23522,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
     createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
     updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutUpdatedAuditEntitiesInput = {
@@ -18977,6 +23556,7 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedRisksInput
     actions?: RiskActionCreateNestedManyWithoutRiskInput
     auditPlans?: AuditPlanCreateNestedManyWithoutRiskInput
+    engagements?: EngagementCreateNestedManyWithoutRiskInput
   }
 
   export type RiskUncheckedCreateWithoutAuditEntityInput = {
@@ -19001,6 +23581,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     actions?: RiskActionUncheckedCreateNestedManyWithoutRiskInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutRiskInput
+    engagements?: EngagementUncheckedCreateNestedManyWithoutRiskInput
   }
 
   export type RiskCreateOrConnectWithoutAuditEntityInput = {
@@ -19033,6 +23614,7 @@ export namespace Prisma {
     leadAuditor?: UserCreateNestedOneWithoutLeadAuditPlansInput
     createdBy?: UserCreateNestedOneWithoutCreatedAuditPlansInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedAuditPlansInput
+    engagements?: EngagementCreateNestedManyWithoutAuditPlanInput
   }
 
   export type AuditPlanUncheckedCreateWithoutAuditEntityInput = {
@@ -19055,6 +23637,7 @@ export namespace Prisma {
     updatedById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    engagements?: EngagementUncheckedCreateNestedManyWithoutAuditPlanInput
   }
 
   export type AuditPlanCreateOrConnectWithoutAuditEntityInput = {
@@ -19064,6 +23647,68 @@ export namespace Prisma {
 
   export type AuditPlanCreateManyAuditEntityInputEnvelope = {
     data: AuditPlanCreateManyAuditEntityInput | AuditPlanCreateManyAuditEntityInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EngagementCreateWithoutAuditEntityInput = {
+    id?: string
+    reference: string
+    title: string
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closureNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auditPlan?: AuditPlanCreateNestedOneWithoutEngagementsInput
+    risk?: RiskCreateNestedOneWithoutEngagementsInput
+    leadAuditor?: UserCreateNestedOneWithoutLeadEngagementsInput
+    closedBy?: UserCreateNestedOneWithoutClosedEngagementsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedEngagementsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
+    teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
+  }
+
+  export type EngagementUncheckedCreateWithoutAuditEntityInput = {
+    id?: string
+    reference: string
+    title: string
+    auditPlanId?: string | null
+    riskId?: string | null
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    leadAuditorId?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closedById?: string | null
+    closureNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
+  }
+
+  export type EngagementCreateOrConnectWithoutAuditEntityInput = {
+    where: EngagementWhereUniqueInput
+    create: XOR<EngagementCreateWithoutAuditEntityInput, EngagementUncheckedCreateWithoutAuditEntityInput>
+  }
+
+  export type EngagementCreateManyAuditEntityInputEnvelope = {
+    data: EngagementCreateManyAuditEntityInput | EngagementCreateManyAuditEntityInput[]
     skipDuplicates?: boolean
   }
 
@@ -19097,6 +23742,7 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedAuditEntitiesNestedInput
     risks?: RiskUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
+    engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutChildrenInput = {
@@ -19118,6 +23764,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
+    engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUpsertWithWhereUniqueWithoutParentInput = {
@@ -19168,6 +23815,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
     createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
     updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOwnedAuditEntitiesInput = {
@@ -19191,6 +23843,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
     createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
     updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutCreatedAuditEntitiesInput = {
@@ -19225,6 +23882,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
     createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
     updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedAuditEntitiesInput = {
@@ -19248,6 +23910,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
     createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
     updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutUpdatedAuditEntitiesInput = {
@@ -19282,6 +23949,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
     createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
     updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUpdatedAuditEntitiesInput = {
@@ -19305,6 +23977,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
     createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
     updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type RiskUpsertWithWhereUniqueWithoutAuditEntityInput = {
@@ -19339,6 +24016,22 @@ export namespace Prisma {
     data: XOR<AuditPlanUpdateManyMutationInput, AuditPlanUncheckedUpdateManyWithoutAuditEntityInput>
   }
 
+  export type EngagementUpsertWithWhereUniqueWithoutAuditEntityInput = {
+    where: EngagementWhereUniqueInput
+    update: XOR<EngagementUpdateWithoutAuditEntityInput, EngagementUncheckedUpdateWithoutAuditEntityInput>
+    create: XOR<EngagementCreateWithoutAuditEntityInput, EngagementUncheckedCreateWithoutAuditEntityInput>
+  }
+
+  export type EngagementUpdateWithWhereUniqueWithoutAuditEntityInput = {
+    where: EngagementWhereUniqueInput
+    data: XOR<EngagementUpdateWithoutAuditEntityInput, EngagementUncheckedUpdateWithoutAuditEntityInput>
+  }
+
+  export type EngagementUpdateManyWithWhereWithoutAuditEntityInput = {
+    where: EngagementScalarWhereInput
+    data: XOR<EngagementUpdateManyMutationInput, EngagementUncheckedUpdateManyWithoutAuditEntityInput>
+  }
+
   export type AuditUniverseCreateWithoutRisksInput = {
     id?: string
     code: string
@@ -19358,6 +24051,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedAuditEntitiesInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedAuditEntitiesInput
     auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
+    engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutRisksInput = {
@@ -19379,6 +24073,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     children?: AuditUniverseUncheckedCreateNestedManyWithoutParentInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
+    engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutRisksInput = {
@@ -19407,6 +24102,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
     createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
     updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutOwnedRisksInput = {
@@ -19430,6 +24130,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
     createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
     updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutOwnedRisksInput = {
@@ -19458,6 +24163,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
     createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
     updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCreatedRisksInput = {
@@ -19481,6 +24191,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
     createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
     updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCreatedRisksInput = {
@@ -19509,6 +24224,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
     createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
     updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutUpdatedRisksInput = {
@@ -19532,6 +24252,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
     createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
     updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutUpdatedRisksInput = {
@@ -19593,6 +24318,7 @@ export namespace Prisma {
     leadAuditor?: UserCreateNestedOneWithoutLeadAuditPlansInput
     createdBy?: UserCreateNestedOneWithoutCreatedAuditPlansInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedAuditPlansInput
+    engagements?: EngagementCreateNestedManyWithoutAuditPlanInput
   }
 
   export type AuditPlanUncheckedCreateWithoutRiskInput = {
@@ -19615,6 +24341,7 @@ export namespace Prisma {
     updatedById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    engagements?: EngagementUncheckedCreateNestedManyWithoutAuditPlanInput
   }
 
   export type AuditPlanCreateOrConnectWithoutRiskInput = {
@@ -19624,6 +24351,68 @@ export namespace Prisma {
 
   export type AuditPlanCreateManyRiskInputEnvelope = {
     data: AuditPlanCreateManyRiskInput | AuditPlanCreateManyRiskInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EngagementCreateWithoutRiskInput = {
+    id?: string
+    reference: string
+    title: string
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closureNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auditPlan?: AuditPlanCreateNestedOneWithoutEngagementsInput
+    auditEntity: AuditUniverseCreateNestedOneWithoutEngagementsInput
+    leadAuditor?: UserCreateNestedOneWithoutLeadEngagementsInput
+    closedBy?: UserCreateNestedOneWithoutClosedEngagementsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedEngagementsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
+    teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
+  }
+
+  export type EngagementUncheckedCreateWithoutRiskInput = {
+    id?: string
+    reference: string
+    title: string
+    auditPlanId?: string | null
+    auditEntityId: string
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    leadAuditorId?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closedById?: string | null
+    closureNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
+  }
+
+  export type EngagementCreateOrConnectWithoutRiskInput = {
+    where: EngagementWhereUniqueInput
+    create: XOR<EngagementCreateWithoutRiskInput, EngagementUncheckedCreateWithoutRiskInput>
+  }
+
+  export type EngagementCreateManyRiskInputEnvelope = {
+    data: EngagementCreateManyRiskInput | EngagementCreateManyRiskInput[]
     skipDuplicates?: boolean
   }
 
@@ -19657,6 +24446,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedAuditEntitiesNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedAuditEntitiesNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
+    engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutRisksInput = {
@@ -19678,6 +24468,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: AuditUniverseUncheckedUpdateManyWithoutParentNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
+    engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type UserUpsertWithoutOwnedRisksInput = {
@@ -19712,6 +24503,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
     createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
     updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOwnedRisksInput = {
@@ -19735,6 +24531,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
     createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
     updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutCreatedRisksInput = {
@@ -19769,6 +24570,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
     createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
     updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedRisksInput = {
@@ -19792,6 +24598,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
     createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
     updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutUpdatedRisksInput = {
@@ -19826,6 +24637,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
     createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
     updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUpdatedRisksInput = {
@@ -19849,6 +24665,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
     createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
     updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type RiskActionUpsertWithWhereUniqueWithoutRiskInput = {
@@ -19883,6 +24704,22 @@ export namespace Prisma {
     data: XOR<AuditPlanUpdateManyMutationInput, AuditPlanUncheckedUpdateManyWithoutRiskInput>
   }
 
+  export type EngagementUpsertWithWhereUniqueWithoutRiskInput = {
+    where: EngagementWhereUniqueInput
+    update: XOR<EngagementUpdateWithoutRiskInput, EngagementUncheckedUpdateWithoutRiskInput>
+    create: XOR<EngagementCreateWithoutRiskInput, EngagementUncheckedCreateWithoutRiskInput>
+  }
+
+  export type EngagementUpdateWithWhereUniqueWithoutRiskInput = {
+    where: EngagementWhereUniqueInput
+    data: XOR<EngagementUpdateWithoutRiskInput, EngagementUncheckedUpdateWithoutRiskInput>
+  }
+
+  export type EngagementUpdateManyWithWhereWithoutRiskInput = {
+    where: EngagementScalarWhereInput
+    data: XOR<EngagementUpdateManyMutationInput, EngagementUncheckedUpdateManyWithoutRiskInput>
+  }
+
   export type RiskCreateWithoutActionsInput = {
     id?: string
     title: string
@@ -19905,6 +24742,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedRisksInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedRisksInput
     auditPlans?: AuditPlanCreateNestedManyWithoutRiskInput
+    engagements?: EngagementCreateNestedManyWithoutRiskInput
   }
 
   export type RiskUncheckedCreateWithoutActionsInput = {
@@ -19929,6 +24767,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutRiskInput
+    engagements?: EngagementUncheckedCreateNestedManyWithoutRiskInput
   }
 
   export type RiskCreateOrConnectWithoutActionsInput = {
@@ -19957,6 +24796,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
     createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
     updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAssignedActionsInput = {
@@ -19980,6 +24824,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
     createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
     updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAssignedActionsInput = {
@@ -20020,6 +24869,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedRisksNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedRisksNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutRiskNestedInput
+    engagements?: EngagementUpdateManyWithoutRiskNestedInput
   }
 
   export type RiskUncheckedUpdateWithoutActionsInput = {
@@ -20044,6 +24894,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutRiskNestedInput
+    engagements?: EngagementUncheckedUpdateManyWithoutRiskNestedInput
   }
 
   export type UserUpsertWithoutAssignedActionsInput = {
@@ -20078,6 +24929,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
     createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
     updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssignedActionsInput = {
@@ -20101,6 +24957,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
     createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
     updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AuditUniverseCreateWithoutAuditPlansInput = {
@@ -20122,6 +24983,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedAuditEntitiesInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedAuditEntitiesInput
     risks?: RiskCreateNestedManyWithoutAuditEntityInput
+    engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutAuditPlansInput = {
@@ -20143,6 +25005,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     children?: AuditUniverseUncheckedCreateNestedManyWithoutParentInput
     risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
+    engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutAuditPlansInput = {
@@ -20172,6 +25035,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedRisksInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedRisksInput
     actions?: RiskActionCreateNestedManyWithoutRiskInput
+    engagements?: EngagementCreateNestedManyWithoutRiskInput
   }
 
   export type RiskUncheckedCreateWithoutAuditPlansInput = {
@@ -20196,6 +25060,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     actions?: RiskActionUncheckedCreateNestedManyWithoutRiskInput
+    engagements?: EngagementUncheckedCreateNestedManyWithoutRiskInput
   }
 
   export type RiskCreateOrConnectWithoutAuditPlansInput = {
@@ -20224,6 +25089,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
     createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
     updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutApprovedAuditPlansInput = {
@@ -20247,6 +25117,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
     createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
     updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutApprovedAuditPlansInput = {
@@ -20275,6 +25150,11 @@ export namespace Prisma {
     approvedAuditPlans?: AuditPlanCreateNestedManyWithoutApprovedByInput
     createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
     updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutLeadAuditPlansInput = {
@@ -20298,6 +25178,11 @@ export namespace Prisma {
     approvedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutApprovedByInput
     createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
     updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutLeadAuditPlansInput = {
@@ -20326,6 +25211,11 @@ export namespace Prisma {
     approvedAuditPlans?: AuditPlanCreateNestedManyWithoutApprovedByInput
     leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
     updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCreatedAuditPlansInput = {
@@ -20349,6 +25239,11 @@ export namespace Prisma {
     approvedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutApprovedByInput
     leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
     updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCreatedAuditPlansInput = {
@@ -20377,6 +25272,11 @@ export namespace Prisma {
     approvedAuditPlans?: AuditPlanCreateNestedManyWithoutApprovedByInput
     leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
     createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutUpdatedAuditPlansInput = {
@@ -20400,11 +25300,78 @@ export namespace Prisma {
     approvedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutApprovedByInput
     leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
     createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutUpdatedAuditPlansInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutUpdatedAuditPlansInput, UserUncheckedCreateWithoutUpdatedAuditPlansInput>
+  }
+
+  export type EngagementCreateWithoutAuditPlanInput = {
+    id?: string
+    reference: string
+    title: string
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closureNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auditEntity: AuditUniverseCreateNestedOneWithoutEngagementsInput
+    risk?: RiskCreateNestedOneWithoutEngagementsInput
+    leadAuditor?: UserCreateNestedOneWithoutLeadEngagementsInput
+    closedBy?: UserCreateNestedOneWithoutClosedEngagementsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedEngagementsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
+    teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
+  }
+
+  export type EngagementUncheckedCreateWithoutAuditPlanInput = {
+    id?: string
+    reference: string
+    title: string
+    auditEntityId: string
+    riskId?: string | null
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    leadAuditorId?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closedById?: string | null
+    closureNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
+  }
+
+  export type EngagementCreateOrConnectWithoutAuditPlanInput = {
+    where: EngagementWhereUniqueInput
+    create: XOR<EngagementCreateWithoutAuditPlanInput, EngagementUncheckedCreateWithoutAuditPlanInput>
+  }
+
+  export type EngagementCreateManyAuditPlanInputEnvelope = {
+    data: EngagementCreateManyAuditPlanInput | EngagementCreateManyAuditPlanInput[]
+    skipDuplicates?: boolean
   }
 
   export type AuditUniverseUpsertWithoutAuditPlansInput = {
@@ -20437,6 +25404,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedAuditEntitiesNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedAuditEntitiesNestedInput
     risks?: RiskUpdateManyWithoutAuditEntityNestedInput
+    engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutAuditPlansInput = {
@@ -20458,6 +25426,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: AuditUniverseUncheckedUpdateManyWithoutParentNestedInput
     risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
+    engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type RiskUpsertWithoutAuditPlansInput = {
@@ -20493,6 +25462,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedRisksNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedRisksNestedInput
     actions?: RiskActionUpdateManyWithoutRiskNestedInput
+    engagements?: EngagementUpdateManyWithoutRiskNestedInput
   }
 
   export type RiskUncheckedUpdateWithoutAuditPlansInput = {
@@ -20517,6 +25487,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     actions?: RiskActionUncheckedUpdateManyWithoutRiskNestedInput
+    engagements?: EngagementUncheckedUpdateManyWithoutRiskNestedInput
   }
 
   export type UserUpsertWithoutApprovedAuditPlansInput = {
@@ -20551,6 +25522,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
     createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
     updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovedAuditPlansInput = {
@@ -20574,6 +25550,11 @@ export namespace Prisma {
     leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
     createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
     updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutLeadAuditPlansInput = {
@@ -20608,6 +25589,11 @@ export namespace Prisma {
     approvedAuditPlans?: AuditPlanUpdateManyWithoutApprovedByNestedInput
     createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
     updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLeadAuditPlansInput = {
@@ -20631,6 +25617,11 @@ export namespace Prisma {
     approvedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutApprovedByNestedInput
     createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
     updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutCreatedAuditPlansInput = {
@@ -20665,6 +25656,11 @@ export namespace Prisma {
     approvedAuditPlans?: AuditPlanUpdateManyWithoutApprovedByNestedInput
     leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
     updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedAuditPlansInput = {
@@ -20688,6 +25684,11 @@ export namespace Prisma {
     approvedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutApprovedByNestedInput
     leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
     updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutUpdatedAuditPlansInput = {
@@ -20722,6 +25723,11 @@ export namespace Prisma {
     approvedAuditPlans?: AuditPlanUpdateManyWithoutApprovedByNestedInput
     leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
     createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUpdatedAuditPlansInput = {
@@ -20745,6 +25751,1153 @@ export namespace Prisma {
     approvedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutApprovedByNestedInput
     leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
     createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type EngagementUpsertWithWhereUniqueWithoutAuditPlanInput = {
+    where: EngagementWhereUniqueInput
+    update: XOR<EngagementUpdateWithoutAuditPlanInput, EngagementUncheckedUpdateWithoutAuditPlanInput>
+    create: XOR<EngagementCreateWithoutAuditPlanInput, EngagementUncheckedCreateWithoutAuditPlanInput>
+  }
+
+  export type EngagementUpdateWithWhereUniqueWithoutAuditPlanInput = {
+    where: EngagementWhereUniqueInput
+    data: XOR<EngagementUpdateWithoutAuditPlanInput, EngagementUncheckedUpdateWithoutAuditPlanInput>
+  }
+
+  export type EngagementUpdateManyWithWhereWithoutAuditPlanInput = {
+    where: EngagementScalarWhereInput
+    data: XOR<EngagementUpdateManyMutationInput, EngagementUncheckedUpdateManyWithoutAuditPlanInput>
+  }
+
+  export type AuditPlanCreateWithoutEngagementsInput = {
+    id?: string
+    title: string
+    reference: string
+    fiscalYear: number
+    objectives: string
+    scope: string
+    priority?: $Enums.AuditPriority
+    status?: $Enums.AuditPlanStatus
+    proposedStartDate?: Date | string | null
+    proposedEndDate?: Date | string | null
+    approvedAt?: Date | string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auditEntity: AuditUniverseCreateNestedOneWithoutAuditPlansInput
+    risk?: RiskCreateNestedOneWithoutAuditPlansInput
+    approvedBy?: UserCreateNestedOneWithoutApprovedAuditPlansInput
+    leadAuditor?: UserCreateNestedOneWithoutLeadAuditPlansInput
+    createdBy?: UserCreateNestedOneWithoutCreatedAuditPlansInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedAuditPlansInput
+  }
+
+  export type AuditPlanUncheckedCreateWithoutEngagementsInput = {
+    id?: string
+    title: string
+    reference: string
+    fiscalYear: number
+    auditEntityId: string
+    riskId?: string | null
+    objectives: string
+    scope: string
+    priority?: $Enums.AuditPriority
+    status?: $Enums.AuditPlanStatus
+    proposedStartDate?: Date | string | null
+    proposedEndDate?: Date | string | null
+    approvedAt?: Date | string | null
+    approvedById?: string | null
+    leadAuditorId?: string | null
+    notes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AuditPlanCreateOrConnectWithoutEngagementsInput = {
+    where: AuditPlanWhereUniqueInput
+    create: XOR<AuditPlanCreateWithoutEngagementsInput, AuditPlanUncheckedCreateWithoutEngagementsInput>
+  }
+
+  export type AuditUniverseCreateWithoutEngagementsInput = {
+    id?: string
+    code: string
+    name: string
+    description?: string | null
+    entityType: $Enums.AuditEntityType
+    status?: $Enums.AuditEntityStatus
+    businessProcess?: string | null
+    department?: string | null
+    riskRating?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    parent?: AuditUniverseCreateNestedOneWithoutChildrenInput
+    children?: AuditUniverseCreateNestedManyWithoutParentInput
+    owner?: UserCreateNestedOneWithoutOwnedAuditEntitiesInput
+    createdBy?: UserCreateNestedOneWithoutCreatedAuditEntitiesInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedAuditEntitiesInput
+    risks?: RiskCreateNestedManyWithoutAuditEntityInput
+    auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
+  }
+
+  export type AuditUniverseUncheckedCreateWithoutEngagementsInput = {
+    id?: string
+    code: string
+    name: string
+    description?: string | null
+    entityType: $Enums.AuditEntityType
+    status?: $Enums.AuditEntityStatus
+    parentId?: string | null
+    businessProcess?: string | null
+    department?: string | null
+    riskRating?: string | null
+    notes?: string | null
+    ownerId?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    children?: AuditUniverseUncheckedCreateNestedManyWithoutParentInput
+    risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
+    auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
+  }
+
+  export type AuditUniverseCreateOrConnectWithoutEngagementsInput = {
+    where: AuditUniverseWhereUniqueInput
+    create: XOR<AuditUniverseCreateWithoutEngagementsInput, AuditUniverseUncheckedCreateWithoutEngagementsInput>
+  }
+
+  export type RiskCreateWithoutEngagementsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    inherentLikelihood?: number
+    inherentImpact?: number
+    inherentScore?: number
+    inherentLevel?: $Enums.RiskLevel
+    existingControls?: string | null
+    controlEffectiveness?: number
+    residualScore?: number
+    residualLevel?: $Enums.RiskLevel
+    status?: $Enums.RiskStatus
+    riskCategory?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auditEntity: AuditUniverseCreateNestedOneWithoutRisksInput
+    owner?: UserCreateNestedOneWithoutOwnedRisksInput
+    createdBy?: UserCreateNestedOneWithoutCreatedRisksInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedRisksInput
+    actions?: RiskActionCreateNestedManyWithoutRiskInput
+    auditPlans?: AuditPlanCreateNestedManyWithoutRiskInput
+  }
+
+  export type RiskUncheckedCreateWithoutEngagementsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    auditEntityId: string
+    inherentLikelihood?: number
+    inherentImpact?: number
+    inherentScore?: number
+    inherentLevel?: $Enums.RiskLevel
+    existingControls?: string | null
+    controlEffectiveness?: number
+    residualScore?: number
+    residualLevel?: $Enums.RiskLevel
+    status?: $Enums.RiskStatus
+    riskCategory?: string | null
+    notes?: string | null
+    ownerId?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    actions?: RiskActionUncheckedCreateNestedManyWithoutRiskInput
+    auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutRiskInput
+  }
+
+  export type RiskCreateOrConnectWithoutEngagementsInput = {
+    where: RiskWhereUniqueInput
+    create: XOR<RiskCreateWithoutEngagementsInput, RiskUncheckedCreateWithoutEngagementsInput>
+  }
+
+  export type UserCreateWithoutLeadEngagementsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutLeadEngagementsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutLeadEngagementsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutLeadEngagementsInput, UserUncheckedCreateWithoutLeadEngagementsInput>
+  }
+
+  export type UserCreateWithoutClosedEngagementsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutClosedEngagementsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutClosedEngagementsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutClosedEngagementsInput, UserUncheckedCreateWithoutClosedEngagementsInput>
+  }
+
+  export type UserCreateWithoutCreatedEngagementsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCreatedEngagementsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCreatedEngagementsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCreatedEngagementsInput, UserUncheckedCreateWithoutCreatedEngagementsInput>
+  }
+
+  export type UserCreateWithoutUpdatedEngagementsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutUpdatedEngagementsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutUpdatedEngagementsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUpdatedEngagementsInput, UserUncheckedCreateWithoutUpdatedEngagementsInput>
+  }
+
+  export type EngagementTeamMemberCreateWithoutEngagementInput = {
+    role?: $Enums.TeamMemberRole
+    assignedAt?: Date | string
+    user: UserCreateNestedOneWithoutEngagementMembershipsInput
+  }
+
+  export type EngagementTeamMemberUncheckedCreateWithoutEngagementInput = {
+    userId: string
+    role?: $Enums.TeamMemberRole
+    assignedAt?: Date | string
+  }
+
+  export type EngagementTeamMemberCreateOrConnectWithoutEngagementInput = {
+    where: EngagementTeamMemberWhereUniqueInput
+    create: XOR<EngagementTeamMemberCreateWithoutEngagementInput, EngagementTeamMemberUncheckedCreateWithoutEngagementInput>
+  }
+
+  export type EngagementTeamMemberCreateManyEngagementInputEnvelope = {
+    data: EngagementTeamMemberCreateManyEngagementInput | EngagementTeamMemberCreateManyEngagementInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AuditPlanUpsertWithoutEngagementsInput = {
+    update: XOR<AuditPlanUpdateWithoutEngagementsInput, AuditPlanUncheckedUpdateWithoutEngagementsInput>
+    create: XOR<AuditPlanCreateWithoutEngagementsInput, AuditPlanUncheckedCreateWithoutEngagementsInput>
+    where?: AuditPlanWhereInput
+  }
+
+  export type AuditPlanUpdateToOneWithWhereWithoutEngagementsInput = {
+    where?: AuditPlanWhereInput
+    data: XOR<AuditPlanUpdateWithoutEngagementsInput, AuditPlanUncheckedUpdateWithoutEngagementsInput>
+  }
+
+  export type AuditPlanUpdateWithoutEngagementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    fiscalYear?: IntFieldUpdateOperationsInput | number
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    priority?: EnumAuditPriorityFieldUpdateOperationsInput | $Enums.AuditPriority
+    status?: EnumAuditPlanStatusFieldUpdateOperationsInput | $Enums.AuditPlanStatus
+    proposedStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    proposedEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutAuditPlansNestedInput
+    risk?: RiskUpdateOneWithoutAuditPlansNestedInput
+    approvedBy?: UserUpdateOneWithoutApprovedAuditPlansNestedInput
+    leadAuditor?: UserUpdateOneWithoutLeadAuditPlansNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedAuditPlansNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedAuditPlansNestedInput
+  }
+
+  export type AuditPlanUncheckedUpdateWithoutEngagementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    fiscalYear?: IntFieldUpdateOperationsInput | number
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    priority?: EnumAuditPriorityFieldUpdateOperationsInput | $Enums.AuditPriority
+    status?: EnumAuditPlanStatusFieldUpdateOperationsInput | $Enums.AuditPlanStatus
+    proposedStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    proposedEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvedById?: NullableStringFieldUpdateOperationsInput | string | null
+    leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AuditUniverseUpsertWithoutEngagementsInput = {
+    update: XOR<AuditUniverseUpdateWithoutEngagementsInput, AuditUniverseUncheckedUpdateWithoutEngagementsInput>
+    create: XOR<AuditUniverseCreateWithoutEngagementsInput, AuditUniverseUncheckedCreateWithoutEngagementsInput>
+    where?: AuditUniverseWhereInput
+  }
+
+  export type AuditUniverseUpdateToOneWithWhereWithoutEngagementsInput = {
+    where?: AuditUniverseWhereInput
+    data: XOR<AuditUniverseUpdateWithoutEngagementsInput, AuditUniverseUncheckedUpdateWithoutEngagementsInput>
+  }
+
+  export type AuditUniverseUpdateWithoutEngagementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    entityType?: EnumAuditEntityTypeFieldUpdateOperationsInput | $Enums.AuditEntityType
+    status?: EnumAuditEntityStatusFieldUpdateOperationsInput | $Enums.AuditEntityStatus
+    businessProcess?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    riskRating?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    parent?: AuditUniverseUpdateOneWithoutChildrenNestedInput
+    children?: AuditUniverseUpdateManyWithoutParentNestedInput
+    owner?: UserUpdateOneWithoutOwnedAuditEntitiesNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedAuditEntitiesNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedAuditEntitiesNestedInput
+    risks?: RiskUpdateManyWithoutAuditEntityNestedInput
+    auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
+  }
+
+  export type AuditUniverseUncheckedUpdateWithoutEngagementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    entityType?: EnumAuditEntityTypeFieldUpdateOperationsInput | $Enums.AuditEntityType
+    status?: EnumAuditEntityStatusFieldUpdateOperationsInput | $Enums.AuditEntityStatus
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    businessProcess?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    riskRating?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    children?: AuditUniverseUncheckedUpdateManyWithoutParentNestedInput
+    risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
+    auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
+  }
+
+  export type RiskUpsertWithoutEngagementsInput = {
+    update: XOR<RiskUpdateWithoutEngagementsInput, RiskUncheckedUpdateWithoutEngagementsInput>
+    create: XOR<RiskCreateWithoutEngagementsInput, RiskUncheckedCreateWithoutEngagementsInput>
+    where?: RiskWhereInput
+  }
+
+  export type RiskUpdateToOneWithWhereWithoutEngagementsInput = {
+    where?: RiskWhereInput
+    data: XOR<RiskUpdateWithoutEngagementsInput, RiskUncheckedUpdateWithoutEngagementsInput>
+  }
+
+  export type RiskUpdateWithoutEngagementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    inherentLikelihood?: IntFieldUpdateOperationsInput | number
+    inherentImpact?: IntFieldUpdateOperationsInput | number
+    inherentScore?: IntFieldUpdateOperationsInput | number
+    inherentLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    existingControls?: NullableStringFieldUpdateOperationsInput | string | null
+    controlEffectiveness?: IntFieldUpdateOperationsInput | number
+    residualScore?: IntFieldUpdateOperationsInput | number
+    residualLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    status?: EnumRiskStatusFieldUpdateOperationsInput | $Enums.RiskStatus
+    riskCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutRisksNestedInput
+    owner?: UserUpdateOneWithoutOwnedRisksNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedRisksNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedRisksNestedInput
+    actions?: RiskActionUpdateManyWithoutRiskNestedInput
+    auditPlans?: AuditPlanUpdateManyWithoutRiskNestedInput
+  }
+
+  export type RiskUncheckedUpdateWithoutEngagementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    inherentLikelihood?: IntFieldUpdateOperationsInput | number
+    inherentImpact?: IntFieldUpdateOperationsInput | number
+    inherentScore?: IntFieldUpdateOperationsInput | number
+    inherentLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    existingControls?: NullableStringFieldUpdateOperationsInput | string | null
+    controlEffectiveness?: IntFieldUpdateOperationsInput | number
+    residualScore?: IntFieldUpdateOperationsInput | number
+    residualLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    status?: EnumRiskStatusFieldUpdateOperationsInput | $Enums.RiskStatus
+    riskCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    actions?: RiskActionUncheckedUpdateManyWithoutRiskNestedInput
+    auditPlans?: AuditPlanUncheckedUpdateManyWithoutRiskNestedInput
+  }
+
+  export type UserUpsertWithoutLeadEngagementsInput = {
+    update: XOR<UserUpdateWithoutLeadEngagementsInput, UserUncheckedUpdateWithoutLeadEngagementsInput>
+    create: XOR<UserCreateWithoutLeadEngagementsInput, UserUncheckedCreateWithoutLeadEngagementsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutLeadEngagementsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutLeadEngagementsInput, UserUncheckedUpdateWithoutLeadEngagementsInput>
+  }
+
+  export type UserUpdateWithoutLeadEngagementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutLeadEngagementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUpsertWithoutClosedEngagementsInput = {
+    update: XOR<UserUpdateWithoutClosedEngagementsInput, UserUncheckedUpdateWithoutClosedEngagementsInput>
+    create: XOR<UserCreateWithoutClosedEngagementsInput, UserUncheckedCreateWithoutClosedEngagementsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutClosedEngagementsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutClosedEngagementsInput, UserUncheckedUpdateWithoutClosedEngagementsInput>
+  }
+
+  export type UserUpdateWithoutClosedEngagementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutClosedEngagementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUpsertWithoutCreatedEngagementsInput = {
+    update: XOR<UserUpdateWithoutCreatedEngagementsInput, UserUncheckedUpdateWithoutCreatedEngagementsInput>
+    create: XOR<UserCreateWithoutCreatedEngagementsInput, UserUncheckedCreateWithoutCreatedEngagementsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCreatedEngagementsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCreatedEngagementsInput, UserUncheckedUpdateWithoutCreatedEngagementsInput>
+  }
+
+  export type UserUpdateWithoutCreatedEngagementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCreatedEngagementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUpsertWithoutUpdatedEngagementsInput = {
+    update: XOR<UserUpdateWithoutUpdatedEngagementsInput, UserUncheckedUpdateWithoutUpdatedEngagementsInput>
+    create: XOR<UserCreateWithoutUpdatedEngagementsInput, UserUncheckedCreateWithoutUpdatedEngagementsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUpdatedEngagementsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUpdatedEngagementsInput, UserUncheckedUpdateWithoutUpdatedEngagementsInput>
+  }
+
+  export type UserUpdateWithoutUpdatedEngagementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUpdatedEngagementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type EngagementTeamMemberUpsertWithWhereUniqueWithoutEngagementInput = {
+    where: EngagementTeamMemberWhereUniqueInput
+    update: XOR<EngagementTeamMemberUpdateWithoutEngagementInput, EngagementTeamMemberUncheckedUpdateWithoutEngagementInput>
+    create: XOR<EngagementTeamMemberCreateWithoutEngagementInput, EngagementTeamMemberUncheckedCreateWithoutEngagementInput>
+  }
+
+  export type EngagementTeamMemberUpdateWithWhereUniqueWithoutEngagementInput = {
+    where: EngagementTeamMemberWhereUniqueInput
+    data: XOR<EngagementTeamMemberUpdateWithoutEngagementInput, EngagementTeamMemberUncheckedUpdateWithoutEngagementInput>
+  }
+
+  export type EngagementTeamMemberUpdateManyWithWhereWithoutEngagementInput = {
+    where: EngagementTeamMemberScalarWhereInput
+    data: XOR<EngagementTeamMemberUpdateManyMutationInput, EngagementTeamMemberUncheckedUpdateManyWithoutEngagementInput>
+  }
+
+  export type EngagementCreateWithoutTeamMembersInput = {
+    id?: string
+    reference: string
+    title: string
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closureNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auditPlan?: AuditPlanCreateNestedOneWithoutEngagementsInput
+    auditEntity: AuditUniverseCreateNestedOneWithoutEngagementsInput
+    risk?: RiskCreateNestedOneWithoutEngagementsInput
+    leadAuditor?: UserCreateNestedOneWithoutLeadEngagementsInput
+    closedBy?: UserCreateNestedOneWithoutClosedEngagementsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedEngagementsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
+  }
+
+  export type EngagementUncheckedCreateWithoutTeamMembersInput = {
+    id?: string
+    reference: string
+    title: string
+    auditPlanId?: string | null
+    auditEntityId: string
+    riskId?: string | null
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    leadAuditorId?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closedById?: string | null
+    closureNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EngagementCreateOrConnectWithoutTeamMembersInput = {
+    where: EngagementWhereUniqueInput
+    create: XOR<EngagementCreateWithoutTeamMembersInput, EngagementUncheckedCreateWithoutTeamMembersInput>
+  }
+
+  export type UserCreateWithoutEngagementMembershipsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+  }
+
+  export type UserUncheckedCreateWithoutEngagementMembershipsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+  }
+
+  export type UserCreateOrConnectWithoutEngagementMembershipsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutEngagementMembershipsInput, UserUncheckedCreateWithoutEngagementMembershipsInput>
+  }
+
+  export type EngagementUpsertWithoutTeamMembersInput = {
+    update: XOR<EngagementUpdateWithoutTeamMembersInput, EngagementUncheckedUpdateWithoutTeamMembersInput>
+    create: XOR<EngagementCreateWithoutTeamMembersInput, EngagementUncheckedCreateWithoutTeamMembersInput>
+    where?: EngagementWhereInput
+  }
+
+  export type EngagementUpdateToOneWithWhereWithoutTeamMembersInput = {
+    where?: EngagementWhereInput
+    data: XOR<EngagementUpdateWithoutTeamMembersInput, EngagementUncheckedUpdateWithoutTeamMembersInput>
+  }
+
+  export type EngagementUpdateWithoutTeamMembersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auditPlan?: AuditPlanUpdateOneWithoutEngagementsNestedInput
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutEngagementsNestedInput
+    risk?: RiskUpdateOneWithoutEngagementsNestedInput
+    leadAuditor?: UserUpdateOneWithoutLeadEngagementsNestedInput
+    closedBy?: UserUpdateOneWithoutClosedEngagementsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedEngagementsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
+  }
+
+  export type EngagementUncheckedUpdateWithoutTeamMembersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    auditPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedById?: NullableStringFieldUpdateOperationsInput | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUpsertWithoutEngagementMembershipsInput = {
+    update: XOR<UserUpdateWithoutEngagementMembershipsInput, UserUncheckedUpdateWithoutEngagementMembershipsInput>
+    create: XOR<UserCreateWithoutEngagementMembershipsInput, UserUncheckedCreateWithoutEngagementMembershipsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutEngagementMembershipsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutEngagementMembershipsInput, UserUncheckedUpdateWithoutEngagementMembershipsInput>
+  }
+
+  export type UserUpdateWithoutEngagementMembershipsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutEngagementMembershipsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
   }
 
   export type UserRoleCreateManyUserInput = {
@@ -20972,6 +27125,112 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type EngagementCreateManyLeadAuditorInput = {
+    id?: string
+    reference: string
+    title: string
+    auditPlanId?: string | null
+    auditEntityId: string
+    riskId?: string | null
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closedById?: string | null
+    closureNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EngagementCreateManyCreatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    auditPlanId?: string | null
+    auditEntityId: string
+    riskId?: string | null
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    leadAuditorId?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closedById?: string | null
+    closureNotes?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EngagementCreateManyUpdatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    auditPlanId?: string | null
+    auditEntityId: string
+    riskId?: string | null
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    leadAuditorId?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closedById?: string | null
+    closureNotes?: string | null
+    createdById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EngagementCreateManyClosedByInput = {
+    id?: string
+    reference: string
+    title: string
+    auditPlanId?: string | null
+    auditEntityId: string
+    riskId?: string | null
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    leadAuditorId?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closureNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EngagementTeamMemberCreateManyUserInput = {
+    engagementId: string
+    role?: $Enums.TeamMemberRole
+    assignedAt?: Date | string
+  }
+
   export type UserRoleUpdateWithoutUserInput = {
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUserRolesNestedInput
@@ -21006,6 +27265,7 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedAuditEntitiesNestedInput
     risks?: RiskUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
+    engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutOwnerInput = {
@@ -21027,6 +27287,7 @@ export namespace Prisma {
     children?: AuditUniverseUncheckedUpdateManyWithoutParentNestedInput
     risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
+    engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateManyWithoutOwnerInput = {
@@ -21066,6 +27327,7 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedAuditEntitiesNestedInput
     risks?: RiskUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
+    engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutCreatedByInput = {
@@ -21087,6 +27349,7 @@ export namespace Prisma {
     children?: AuditUniverseUncheckedUpdateManyWithoutParentNestedInput
     risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
+    engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateManyWithoutCreatedByInput = {
@@ -21126,6 +27389,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedAuditEntitiesNestedInput
     risks?: RiskUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
+    engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutUpdatedByInput = {
@@ -21147,6 +27411,7 @@ export namespace Prisma {
     children?: AuditUniverseUncheckedUpdateManyWithoutParentNestedInput
     risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
+    engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -21189,6 +27454,7 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedRisksNestedInput
     actions?: RiskActionUpdateManyWithoutRiskNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutRiskNestedInput
+    engagements?: EngagementUpdateManyWithoutRiskNestedInput
   }
 
   export type RiskUncheckedUpdateWithoutOwnerInput = {
@@ -21213,6 +27479,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     actions?: RiskActionUncheckedUpdateManyWithoutRiskNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutRiskNestedInput
+    engagements?: EngagementUncheckedUpdateManyWithoutRiskNestedInput
   }
 
   export type RiskUncheckedUpdateManyWithoutOwnerInput = {
@@ -21259,6 +27526,7 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedRisksNestedInput
     actions?: RiskActionUpdateManyWithoutRiskNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutRiskNestedInput
+    engagements?: EngagementUpdateManyWithoutRiskNestedInput
   }
 
   export type RiskUncheckedUpdateWithoutCreatedByInput = {
@@ -21283,6 +27551,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     actions?: RiskActionUncheckedUpdateManyWithoutRiskNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutRiskNestedInput
+    engagements?: EngagementUncheckedUpdateManyWithoutRiskNestedInput
   }
 
   export type RiskUncheckedUpdateManyWithoutCreatedByInput = {
@@ -21329,6 +27598,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedRisksNestedInput
     actions?: RiskActionUpdateManyWithoutRiskNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutRiskNestedInput
+    engagements?: EngagementUpdateManyWithoutRiskNestedInput
   }
 
   export type RiskUncheckedUpdateWithoutUpdatedByInput = {
@@ -21353,6 +27623,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     actions?: RiskActionUncheckedUpdateManyWithoutRiskNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutRiskNestedInput
+    engagements?: EngagementUncheckedUpdateManyWithoutRiskNestedInput
   }
 
   export type RiskUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -21433,6 +27704,7 @@ export namespace Prisma {
     leadAuditor?: UserUpdateOneWithoutLeadAuditPlansNestedInput
     createdBy?: UserUpdateOneWithoutCreatedAuditPlansNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedAuditPlansNestedInput
+    engagements?: EngagementUpdateManyWithoutAuditPlanNestedInput
   }
 
   export type AuditPlanUncheckedUpdateWithoutApprovedByInput = {
@@ -21455,6 +27727,7 @@ export namespace Prisma {
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagements?: EngagementUncheckedUpdateManyWithoutAuditPlanNestedInput
   }
 
   export type AuditPlanUncheckedUpdateManyWithoutApprovedByInput = {
@@ -21499,6 +27772,7 @@ export namespace Prisma {
     approvedBy?: UserUpdateOneWithoutApprovedAuditPlansNestedInput
     createdBy?: UserUpdateOneWithoutCreatedAuditPlansNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedAuditPlansNestedInput
+    engagements?: EngagementUpdateManyWithoutAuditPlanNestedInput
   }
 
   export type AuditPlanUncheckedUpdateWithoutLeadAuditorInput = {
@@ -21521,6 +27795,7 @@ export namespace Prisma {
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagements?: EngagementUncheckedUpdateManyWithoutAuditPlanNestedInput
   }
 
   export type AuditPlanUncheckedUpdateManyWithoutLeadAuditorInput = {
@@ -21565,6 +27840,7 @@ export namespace Prisma {
     approvedBy?: UserUpdateOneWithoutApprovedAuditPlansNestedInput
     leadAuditor?: UserUpdateOneWithoutLeadAuditPlansNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedAuditPlansNestedInput
+    engagements?: EngagementUpdateManyWithoutAuditPlanNestedInput
   }
 
   export type AuditPlanUncheckedUpdateWithoutCreatedByInput = {
@@ -21587,6 +27863,7 @@ export namespace Prisma {
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagements?: EngagementUncheckedUpdateManyWithoutAuditPlanNestedInput
   }
 
   export type AuditPlanUncheckedUpdateManyWithoutCreatedByInput = {
@@ -21631,6 +27908,7 @@ export namespace Prisma {
     approvedBy?: UserUpdateOneWithoutApprovedAuditPlansNestedInput
     leadAuditor?: UserUpdateOneWithoutLeadAuditPlansNestedInput
     createdBy?: UserUpdateOneWithoutCreatedAuditPlansNestedInput
+    engagements?: EngagementUpdateManyWithoutAuditPlanNestedInput
   }
 
   export type AuditPlanUncheckedUpdateWithoutUpdatedByInput = {
@@ -21653,6 +27931,7 @@ export namespace Prisma {
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagements?: EngagementUncheckedUpdateManyWithoutAuditPlanNestedInput
   }
 
   export type AuditPlanUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -21675,6 +27954,332 @@ export namespace Prisma {
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EngagementUpdateWithoutLeadAuditorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auditPlan?: AuditPlanUpdateOneWithoutEngagementsNestedInput
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutEngagementsNestedInput
+    risk?: RiskUpdateOneWithoutEngagementsNestedInput
+    closedBy?: UserUpdateOneWithoutClosedEngagementsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedEngagementsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
+    teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
+  }
+
+  export type EngagementUncheckedUpdateWithoutLeadAuditorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    auditPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedById?: NullableStringFieldUpdateOperationsInput | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
+  }
+
+  export type EngagementUncheckedUpdateManyWithoutLeadAuditorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    auditPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedById?: NullableStringFieldUpdateOperationsInput | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EngagementUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auditPlan?: AuditPlanUpdateOneWithoutEngagementsNestedInput
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutEngagementsNestedInput
+    risk?: RiskUpdateOneWithoutEngagementsNestedInput
+    leadAuditor?: UserUpdateOneWithoutLeadEngagementsNestedInput
+    closedBy?: UserUpdateOneWithoutClosedEngagementsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
+    teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
+  }
+
+  export type EngagementUncheckedUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    auditPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedById?: NullableStringFieldUpdateOperationsInput | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
+  }
+
+  export type EngagementUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    auditPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedById?: NullableStringFieldUpdateOperationsInput | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EngagementUpdateWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auditPlan?: AuditPlanUpdateOneWithoutEngagementsNestedInput
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutEngagementsNestedInput
+    risk?: RiskUpdateOneWithoutEngagementsNestedInput
+    leadAuditor?: UserUpdateOneWithoutLeadEngagementsNestedInput
+    closedBy?: UserUpdateOneWithoutClosedEngagementsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedEngagementsNestedInput
+    teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
+  }
+
+  export type EngagementUncheckedUpdateWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    auditPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedById?: NullableStringFieldUpdateOperationsInput | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
+  }
+
+  export type EngagementUncheckedUpdateManyWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    auditPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedById?: NullableStringFieldUpdateOperationsInput | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EngagementUpdateWithoutClosedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auditPlan?: AuditPlanUpdateOneWithoutEngagementsNestedInput
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutEngagementsNestedInput
+    risk?: RiskUpdateOneWithoutEngagementsNestedInput
+    leadAuditor?: UserUpdateOneWithoutLeadEngagementsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedEngagementsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
+    teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
+  }
+
+  export type EngagementUncheckedUpdateWithoutClosedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    auditPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
+  }
+
+  export type EngagementUncheckedUpdateManyWithoutClosedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    auditPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EngagementTeamMemberUpdateWithoutUserInput = {
+    role?: EnumTeamMemberRoleFieldUpdateOperationsInput | $Enums.TeamMemberRole
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneRequiredWithoutTeamMembersNestedInput
+  }
+
+  export type EngagementTeamMemberUncheckedUpdateWithoutUserInput = {
+    engagementId?: StringFieldUpdateOperationsInput | string
+    role?: EnumTeamMemberRoleFieldUpdateOperationsInput | $Enums.TeamMemberRole
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EngagementTeamMemberUncheckedUpdateManyWithoutUserInput = {
+    engagementId?: StringFieldUpdateOperationsInput | string
+    role?: EnumTeamMemberRoleFieldUpdateOperationsInput | $Enums.TeamMemberRole
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserRoleCreateManyRoleInput = {
@@ -21799,6 +28404,31 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type EngagementCreateManyAuditEntityInput = {
+    id?: string
+    reference: string
+    title: string
+    auditPlanId?: string | null
+    riskId?: string | null
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    leadAuditorId?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closedById?: string | null
+    closureNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type AuditUniverseUpdateWithoutParentInput = {
     id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
@@ -21818,6 +28448,7 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedAuditEntitiesNestedInput
     risks?: RiskUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
+    engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutParentInput = {
@@ -21839,6 +28470,7 @@ export namespace Prisma {
     children?: AuditUniverseUncheckedUpdateManyWithoutParentNestedInput
     risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
+    engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateManyWithoutParentInput = {
@@ -21881,6 +28513,7 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedRisksNestedInput
     actions?: RiskActionUpdateManyWithoutRiskNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutRiskNestedInput
+    engagements?: EngagementUpdateManyWithoutRiskNestedInput
   }
 
   export type RiskUncheckedUpdateWithoutAuditEntityInput = {
@@ -21905,6 +28538,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     actions?: RiskActionUncheckedUpdateManyWithoutRiskNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutRiskNestedInput
+    engagements?: EngagementUncheckedUpdateManyWithoutRiskNestedInput
   }
 
   export type RiskUncheckedUpdateManyWithoutAuditEntityInput = {
@@ -21949,6 +28583,7 @@ export namespace Prisma {
     leadAuditor?: UserUpdateOneWithoutLeadAuditPlansNestedInput
     createdBy?: UserUpdateOneWithoutCreatedAuditPlansNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedAuditPlansNestedInput
+    engagements?: EngagementUpdateManyWithoutAuditPlanNestedInput
   }
 
   export type AuditPlanUncheckedUpdateWithoutAuditEntityInput = {
@@ -21971,6 +28606,7 @@ export namespace Prisma {
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagements?: EngagementUncheckedUpdateManyWithoutAuditPlanNestedInput
   }
 
   export type AuditPlanUncheckedUpdateManyWithoutAuditEntityInput = {
@@ -21989,6 +28625,83 @@ export namespace Prisma {
     approvedById?: NullableStringFieldUpdateOperationsInput | string | null
     leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EngagementUpdateWithoutAuditEntityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auditPlan?: AuditPlanUpdateOneWithoutEngagementsNestedInput
+    risk?: RiskUpdateOneWithoutEngagementsNestedInput
+    leadAuditor?: UserUpdateOneWithoutLeadEngagementsNestedInput
+    closedBy?: UserUpdateOneWithoutClosedEngagementsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedEngagementsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
+    teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
+  }
+
+  export type EngagementUncheckedUpdateWithoutAuditEntityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    auditPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedById?: NullableStringFieldUpdateOperationsInput | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
+  }
+
+  export type EngagementUncheckedUpdateManyWithoutAuditEntityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    auditPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedById?: NullableStringFieldUpdateOperationsInput | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22023,6 +28736,31 @@ export namespace Prisma {
     approvedById?: string | null
     leadAuditorId?: string | null
     notes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EngagementCreateManyRiskInput = {
+    id?: string
+    reference: string
+    title: string
+    auditPlanId?: string | null
+    auditEntityId: string
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    leadAuditorId?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closedById?: string | null
+    closureNotes?: string | null
     createdById?: string | null
     updatedById?: string | null
     createdAt?: Date | string
@@ -22085,6 +28823,7 @@ export namespace Prisma {
     leadAuditor?: UserUpdateOneWithoutLeadAuditPlansNestedInput
     createdBy?: UserUpdateOneWithoutCreatedAuditPlansNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedAuditPlansNestedInput
+    engagements?: EngagementUpdateManyWithoutAuditPlanNestedInput
   }
 
   export type AuditPlanUncheckedUpdateWithoutRiskInput = {
@@ -22107,6 +28846,7 @@ export namespace Prisma {
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagements?: EngagementUncheckedUpdateManyWithoutAuditPlanNestedInput
   }
 
   export type AuditPlanUncheckedUpdateManyWithoutRiskInput = {
@@ -22129,6 +28869,209 @@ export namespace Prisma {
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EngagementUpdateWithoutRiskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auditPlan?: AuditPlanUpdateOneWithoutEngagementsNestedInput
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutEngagementsNestedInput
+    leadAuditor?: UserUpdateOneWithoutLeadEngagementsNestedInput
+    closedBy?: UserUpdateOneWithoutClosedEngagementsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedEngagementsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
+    teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
+  }
+
+  export type EngagementUncheckedUpdateWithoutRiskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    auditPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedById?: NullableStringFieldUpdateOperationsInput | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
+  }
+
+  export type EngagementUncheckedUpdateManyWithoutRiskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    auditPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedById?: NullableStringFieldUpdateOperationsInput | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EngagementCreateManyAuditPlanInput = {
+    id?: string
+    reference: string
+    title: string
+    auditEntityId: string
+    riskId?: string | null
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    leadAuditorId?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closedById?: string | null
+    closureNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EngagementUpdateWithoutAuditPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutEngagementsNestedInput
+    risk?: RiskUpdateOneWithoutEngagementsNestedInput
+    leadAuditor?: UserUpdateOneWithoutLeadEngagementsNestedInput
+    closedBy?: UserUpdateOneWithoutClosedEngagementsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedEngagementsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
+    teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
+  }
+
+  export type EngagementUncheckedUpdateWithoutAuditPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedById?: NullableStringFieldUpdateOperationsInput | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
+  }
+
+  export type EngagementUncheckedUpdateManyWithoutAuditPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedById?: NullableStringFieldUpdateOperationsInput | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EngagementTeamMemberCreateManyEngagementInput = {
+    userId: string
+    role?: $Enums.TeamMemberRole
+    assignedAt?: Date | string
+  }
+
+  export type EngagementTeamMemberUpdateWithoutEngagementInput = {
+    role?: EnumTeamMemberRoleFieldUpdateOperationsInput | $Enums.TeamMemberRole
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutEngagementMembershipsNestedInput
+  }
+
+  export type EngagementTeamMemberUncheckedUpdateWithoutEngagementInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    role?: EnumTeamMemberRoleFieldUpdateOperationsInput | $Enums.TeamMemberRole
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EngagementTeamMemberUncheckedUpdateManyWithoutEngagementInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    role?: EnumTeamMemberRoleFieldUpdateOperationsInput | $Enums.TeamMemberRole
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
@@ -22156,6 +29099,14 @@ export namespace Prisma {
      * @deprecated Use RiskCountOutputTypeDefaultArgs instead
      */
     export type RiskCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = RiskCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use AuditPlanCountOutputTypeDefaultArgs instead
+     */
+    export type AuditPlanCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = AuditPlanCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use EngagementCountOutputTypeDefaultArgs instead
+     */
+    export type EngagementCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EngagementCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use UserDefaultArgs instead
      */
@@ -22196,6 +29147,14 @@ export namespace Prisma {
      * @deprecated Use AuditPlanDefaultArgs instead
      */
     export type AuditPlanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = AuditPlanDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use EngagementDefaultArgs instead
+     */
+    export type EngagementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EngagementDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use EngagementTeamMemberDefaultArgs instead
+     */
+    export type EngagementTeamMemberArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EngagementTeamMemberDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany
