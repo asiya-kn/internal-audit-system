@@ -400,3 +400,148 @@ export type UpdateRiskInput = UpdateRiskRequest;
 export type ListRiskInput = RiskFilters;
 export type CreateRiskActionInput = CreateRiskActionRequest;
 export type UpdateRiskActionInput = UpdateRiskActionRequest;
+
+// ---- Audit Planning ----
+
+export type AuditPlanStatus =
+  | 'DRAFT'
+  | 'IN_REVIEW'
+  | 'APPROVED'
+  | 'SCHEDULED'
+  | 'IN_PROGRESS'
+  | 'COMPLETED'
+  | 'CANCELLED';
+
+export type AuditPriority = 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW';
+
+export const AUDIT_PLAN_STATUSES: AuditPlanStatus[] = [
+  'DRAFT',
+  'IN_REVIEW',
+  'APPROVED',
+  'SCHEDULED',
+  'IN_PROGRESS',
+  'COMPLETED',
+  'CANCELLED',
+];
+
+export const AUDIT_PRIORITIES: AuditPriority[] = ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW'];
+
+// Valid status transitions for the audit plan workflow
+export const AUDIT_PLAN_TRANSITIONS: Record<AuditPlanStatus, AuditPlanStatus[]> = {
+  DRAFT: ['IN_REVIEW', 'CANCELLED'],
+  IN_REVIEW: ['APPROVED', 'DRAFT', 'CANCELLED'],
+  APPROVED: ['SCHEDULED', 'CANCELLED'],
+  SCHEDULED: ['IN_PROGRESS', 'CANCELLED'],
+  IN_PROGRESS: ['COMPLETED', 'CANCELLED'],
+  COMPLETED: [],
+  CANCELLED: [],
+};
+
+export function canTransition(from: AuditPlanStatus, to: AuditPlanStatus): boolean {
+  return AUDIT_PLAN_TRANSITIONS[from]?.includes(to) ?? false;
+}
+
+export interface AuditPlanSummaryDto {
+  id: string;
+  reference: string;
+  title: string;
+  fiscalYear: number;
+  auditEntityId: string;
+  auditEntityCode: string;
+  auditEntityName: string;
+  riskId: string | null;
+  riskTitle: string | null;
+  priority: AuditPriority;
+  status: AuditPlanStatus;
+  proposedStartDate: string | null;
+  proposedEndDate: string | null;
+  leadAuditorId: string | null;
+  leadAuditorName: string | null;
+  approvedById: string | null;
+  approvedByName: string | null;
+  approvedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface AuditPlanDetailDto extends AuditPlanSummaryDto {
+  objectives: string;
+  scope: string;
+  notes: string | null;
+  riskInherentLevel: string | null;
+  riskResidualLevel: string | null;
+}
+
+export interface CreateAuditPlanRequest {
+  title: string;
+  reference: string;
+  fiscalYear: number;
+  auditEntityId: string;
+  riskId?: string | null;
+  objectives: string;
+  scope: string;
+  priority?: AuditPriority;
+  proposedStartDate?: string | null;
+  proposedEndDate?: string | null;
+  leadAuditorId?: string | null;
+  notes?: string;
+}
+
+export interface UpdateAuditPlanRequest {
+  title?: string;
+  reference?: string;
+  fiscalYear?: number;
+  auditEntityId?: string;
+  riskId?: string | null;
+  objectives?: string;
+  scope?: string;
+  priority?: AuditPriority;
+  proposedStartDate?: string | null;
+  proposedEndDate?: string | null;
+  leadAuditorId?: string | null;
+  notes?: string | null;
+}
+
+export interface AuditPlanFilters {
+  search?: string;
+  fiscalYear?: number;
+  auditEntityId?: string;
+  riskId?: string;
+  status?: AuditPlanStatus;
+  priority?: AuditPriority;
+  leadAuditorId?: string;
+  page?: number;
+  pageSize?: number;
+  sortBy?: string;
+  sortOrder?: 'asc' | 'desc';
+}
+
+export interface AuditPlanListResponse {
+  items: AuditPlanSummaryDto[];
+  total: number;
+  page: number;
+  pageSize: number;
+}
+
+export interface TransitionAuditPlanRequest {
+  status: AuditPlanStatus;
+}
+
+export interface AuditPlanDashboardDto {
+  totalPlans: number;
+  byStatus: Record<AuditPlanStatus, number>;
+  byPriority: Record<AuditPriority, number>;
+  byFiscalYear: { fiscalYear: number; count: number }[];
+  entityCoverage: {
+    totalEntities: number;
+    entitiesWithPlan: number;
+    coveragePct: number;
+  };
+  upcomingAudits: AuditPlanSummaryDto[];
+  highPriorityCount: number;
+  pendingApprovalCount: number;
+}
+
+export type CreateAuditPlanInput = CreateAuditPlanRequest;
+export type UpdateAuditPlanInput = UpdateAuditPlanRequest;
+export type ListAuditPlanInput = AuditPlanFilters;

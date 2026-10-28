@@ -36,6 +36,11 @@ model User {
   updatedRisks    Risk[]       @relation("RiskUpdater")
   assignedActions RiskAction[] @relation("RiskActionAssignee")
 
+  approvedAuditPlans AuditPlan[] @relation("AuditPlanApprover")
+  leadAuditPlans     AuditPlan[] @relation("AuditPlanLeadAuditor")
+  createdAuditPlans  AuditPlan[] @relation("AuditPlanCreator")
+  updatedAuditPlans  AuditPlan[] @relation("AuditPlanUpdater")
+
   @@index([email])
   @@index([isActive])
 }
@@ -154,7 +159,8 @@ model AuditUniverse {
   createdBy User? @relation("AuditUniverseCreator", fields: [createdById], references: [id], onDelete: SetNull)
   updatedBy User? @relation("AuditUniverseUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
 
-  risks Risk[]
+  risks      Risk[]
+  auditPlans AuditPlan[]
 
   @@index([parentId])
   @@index([entityType])
@@ -223,7 +229,8 @@ model Risk {
   createdBy   User?         @relation("RiskCreator", fields: [createdById], references: [id], onDelete: SetNull)
   updatedBy   User?         @relation("RiskUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
 
-  actions RiskAction[]
+  actions    RiskAction[]
+  auditPlans AuditPlan[]  @relation("AuditPlanRisk")
 
   @@index([auditEntityId])
   @@index([status])
@@ -253,4 +260,66 @@ model RiskAction {
   @@index([status])
   @@index([dueDate])
   @@index([assigneeId])
+}
+
+// ---- Audit Planning ----
+
+enum AuditPlanStatus {
+  DRAFT
+  IN_REVIEW
+  APPROVED
+  SCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum AuditPriority {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+}
+
+model AuditPlan {
+  id            String  @id @default(uuid()) @db.Uuid
+  title         String
+  reference     String  @unique
+  fiscalYear    Int
+  auditEntityId String  @db.Uuid
+  riskId        String? @db.Uuid
+
+  objectives String
+  scope      String
+  priority   AuditPriority   @default(MEDIUM)
+  status     AuditPlanStatus @default(DRAFT)
+
+  proposedStartDate DateTime?
+  proposedEndDate   DateTime?
+  approvedAt        DateTime?
+  approvedById      String?   @db.Uuid
+
+  leadAuditorId String? @db.Uuid
+  notes         String?
+
+  createdById String? @db.Uuid
+  updatedById String? @db.Uuid
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  auditEntity AuditUniverse @relation(fields: [auditEntityId], references: [id], onDelete: Restrict)
+  risk        Risk?         @relation("AuditPlanRisk", fields: [riskId], references: [id], onDelete: SetNull)
+  approvedBy  User?         @relation("AuditPlanApprover", fields: [approvedById], references: [id], onDelete: SetNull)
+  leadAuditor User?         @relation("AuditPlanLeadAuditor", fields: [leadAuditorId], references: [id], onDelete: SetNull)
+  createdBy   User?         @relation("AuditPlanCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy   User?         @relation("AuditPlanUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
+
+  @@index([auditEntityId])
+  @@index([riskId])
+  @@index([status])
+  @@index([priority])
+  @@index([fiscalYear])
+  @@index([leadAuditorId])
+  @@index([title])
 }

@@ -229,6 +229,29 @@ exports.Prisma.RiskActionScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.AuditPlanScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  reference: 'reference',
+  fiscalYear: 'fiscalYear',
+  auditEntityId: 'auditEntityId',
+  riskId: 'riskId',
+  objectives: 'objectives',
+  scope: 'scope',
+  priority: 'priority',
+  status: 'status',
+  proposedStartDate: 'proposedStartDate',
+  proposedEndDate: 'proposedEndDate',
+  approvedAt: 'approvedAt',
+  approvedById: 'approvedById',
+  leadAuditorId: 'leadAuditorId',
+  notes: 'notes',
+  createdById: 'createdById',
+  updatedById: 'updatedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -294,6 +317,23 @@ exports.ActionStatus = exports.$Enums.ActionStatus = {
   CANCELLED: 'CANCELLED'
 };
 
+exports.AuditPriority = exports.$Enums.AuditPriority = {
+  CRITICAL: 'CRITICAL',
+  HIGH: 'HIGH',
+  MEDIUM: 'MEDIUM',
+  LOW: 'LOW'
+};
+
+exports.AuditPlanStatus = exports.$Enums.AuditPlanStatus = {
+  DRAFT: 'DRAFT',
+  IN_REVIEW: 'IN_REVIEW',
+  APPROVED: 'APPROVED',
+  SCHEDULED: 'SCHEDULED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Role: 'Role',
@@ -303,7 +343,8 @@ exports.Prisma.ModelName = {
   AuditLog: 'AuditLog',
   AuditUniverse: 'AuditUniverse',
   Risk: 'Risk',
-  RiskAction: 'RiskAction'
+  RiskAction: 'RiskAction',
+  AuditPlan: 'AuditPlan'
 };
 
 /**

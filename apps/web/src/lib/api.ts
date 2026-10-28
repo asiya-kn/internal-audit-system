@@ -20,6 +20,14 @@ import type {
   UpdateRiskRequest,
   CreateRiskActionRequest,
   UpdateRiskActionRequest,
+  AuditPlanListResponse,
+  AuditPlanDetailDto,
+  AuditPlanDashboardDto,
+  AuditPlanFilters,
+  CreateAuditPlanRequest,
+  UpdateAuditPlanRequest,
+  TransitionAuditPlanRequest,
+  AuditPlanStatus,
 } from '@iams/shared';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? '/api';
@@ -143,4 +151,33 @@ export const api = {
     request<RiskActionDto>(`/risks/${riskId}/actions/${actionId}`, { method: 'PUT', body: JSON.stringify(data) }),
   deleteRiskAction: (riskId: string, actionId: string) =>
     request<{ message: string }>(`/risks/${riskId}/actions/${actionId}`, { method: 'DELETE' }),
+
+  // ---- Audit Planning ----
+
+  listAuditPlans: (filters: AuditPlanFilters = {}) => {
+    const params = new URLSearchParams();
+    if (filters.search) params.set('search', filters.search);
+    if (filters.fiscalYear) params.set('fiscalYear', String(filters.fiscalYear));
+    if (filters.auditEntityId) params.set('auditEntityId', filters.auditEntityId);
+    if (filters.riskId) params.set('riskId', filters.riskId);
+    if (filters.status) params.set('status', filters.status);
+    if (filters.priority) params.set('priority', filters.priority);
+    if (filters.leadAuditorId) params.set('leadAuditorId', filters.leadAuditorId);
+    if (filters.page) params.set('page', String(filters.page));
+    if (filters.pageSize) params.set('pageSize', String(filters.pageSize));
+    if (filters.sortBy) params.set('sortBy', filters.sortBy);
+    if (filters.sortOrder) params.set('sortOrder', filters.sortOrder);
+    const qs = params.toString();
+    return request<AuditPlanListResponse>(`/audit-plans${qs ? `?${qs}` : ''}`);
+  },
+  getAuditPlan: (id: string) => request<AuditPlanDetailDto>(`/audit-plans/${id}`),
+  getAuditPlanDashboard: () => request<AuditPlanDashboardDto>('/audit-plans/dashboard'),
+  createAuditPlan: (data: CreateAuditPlanRequest) =>
+    request<AuditPlanDetailDto>('/audit-plans', { method: 'POST', body: JSON.stringify(data) }),
+  updateAuditPlan: (id: string, data: UpdateAuditPlanRequest) =>
+    request<AuditPlanDetailDto>(`/audit-plans/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  transitionAuditPlan: (id: string, status: AuditPlanStatus) =>
+    request<AuditPlanDetailDto>(`/audit-plans/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),
+  deleteAuditPlan: (id: string) =>
+    request<{ message: string }>(`/audit-plans/${id}`, { method: 'DELETE' }),
 };

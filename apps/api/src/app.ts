@@ -13,6 +13,7 @@ import adminRoutes from './routes/admin.routes.js';
 import dashboardRoutes from './routes/dashboard.routes.js';
 import auditUniverseRoutes from './routes/auditUniverse.routes.js';
 import riskRoutes from './routes/risk.routes.js';
+import auditPlanRoutes from './routes/auditPlan.routes.js';
 
 function buildHelmetConfig() {
   if (config.isProduction) {
@@ -82,6 +83,7 @@ export function createApp(): express.Express {
   app.use('/api/dashboard', dashboardRoutes);
   app.use('/api/audit-universe', auditUniverseRoutes);
   app.use('/api/risks', riskRoutes);
+  app.use('/api/audit-plans', auditPlanRoutes);
 
   // ---- 404 + error handling (must be last) ----
   app.use(notFoundHandler);
