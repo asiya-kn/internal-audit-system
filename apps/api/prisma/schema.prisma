@@ -47,6 +47,12 @@ model User {
   closedEngagements     Engagement[] @relation("EngagementClosedBy")
   engagementMemberships EngagementTeamMember[] @relation("EngagementTeamMember")
 
+  createdFindings   Finding[] @relation("FindingCreator")
+  updatedFindings   Finding[] @relation("FindingUpdater")
+  responsibleFindings Finding[] @relation("FindingResponsibleOwner")
+  managementResponseFindings Finding[] @relation("FindingManagementResponder")
+  verifiedFindings  Finding[] @relation("FindingVerifier")
+
   @@index([email])
   @@index([isActive])
 }
@@ -168,6 +174,7 @@ model AuditUniverse {
   risks           Risk[]
   auditPlans      AuditPlan[]
   engagements     Engagement[]
+  findings        Finding[]
 
   @@index([parentId])
   @@index([entityType])
@@ -396,6 +403,7 @@ model Engagement {
   updatedBy       User?         @relation("EngagementUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
 
   teamMembers     EngagementTeamMember[]
+  findings        Finding[]
 
   @@index([auditPlanId])
   @@index([auditEntityId])
@@ -425,4 +433,88 @@ model EngagementTeamMember {
 
   @@id([engagementId, userId])
   @@index([userId])
+}
+
+// ---- Audit Findings ----
+
+enum FindingCategory {
+  INTERNAL_CONTROL
+  COMPLIANCE
+  OPERATIONAL
+  FINANCIAL
+  IT_GENERAL_CONTROLS
+  DATA_QUALITY
+  GOVERNANCE
+  FRAUD
+  OTHER
+}
+
+enum FindingSeverity {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum FindingStatus {
+  DRAFT
+  OPEN
+  MANAGEMENT_RESPONSE
+  ACTION_PLAN
+  REMEDIATED
+  VERIFIED
+  CLOSED
+  CANCELLED
+}
+
+model Finding {
+  id              String   @id @default(uuid()) @db.Uuid
+  reference       String   @unique
+  title           String
+  engagementId    String?  @db.Uuid
+  auditEntityId   String   @db.Uuid
+
+  category        FindingCategory @default(OTHER)
+  severity        FindingSeverity @default(MEDIUM)
+  status          FindingStatus   @default(DRAFT)
+
+  condition       String
+  criteria        String?
+  cause           String?
+  impact          String?
+  recommendations String?
+  managementResponse String?
+  managementRespondedAt DateTime?
+  managementRespondedById String? @db.Uuid
+
+  responsibleOwnerId String?  @db.Uuid
+  targetResolutionDate DateTime?
+
+  closedAt        DateTime?
+  verifiedAt      DateTime?
+  verifiedById    String?  @db.Uuid
+  verificationNotes String?
+
+  createdById     String?  @db.Uuid
+  updatedById     String?  @db.Uuid
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  engagement      Engagement?  @relation(fields: [engagementId], references: [id], onDelete: SetNull)
+  auditEntity     AuditUniverse @relation(fields: [auditEntityId], references: [id], onDelete: Restrict)
+  responsibleOwner User?  @relation("FindingResponsibleOwner", fields: [responsibleOwnerId], references: [id], onDelete: SetNull)
+  managementRespondedBy User? @relation("FindingManagementResponder", fields: [managementRespondedById], references: [id], onDelete: SetNull)
+  verifiedBy      User?   @relation("FindingVerifier", fields: [verifiedById], references: [id], onDelete: SetNull)
+  createdBy       User?   @relation("FindingCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy       User?   @relation("FindingUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
+
+  @@index([engagementId])
+  @@index([auditEntityId])
+  @@index([category])
+  @@index([severity])
+  @@index([status])
+  @@index([responsibleOwnerId])
+  @@index([targetResolutionDate])
+  @@index([title])
 }

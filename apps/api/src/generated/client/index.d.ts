@@ -73,6 +73,11 @@ export type Engagement = $Result.DefaultSelection<Prisma.$EngagementPayload>
  * 
  */
 export type EngagementTeamMember = $Result.DefaultSelection<Prisma.$EngagementTeamMemberPayload>
+/**
+ * Model Finding
+ * 
+ */
+export type Finding = $Result.DefaultSelection<Prisma.$FindingPayload>
 
 /**
  * Enums
@@ -193,6 +198,45 @@ export const TeamMemberRole: {
 
 export type TeamMemberRole = (typeof TeamMemberRole)[keyof typeof TeamMemberRole]
 
+
+export const FindingCategory: {
+  INTERNAL_CONTROL: 'INTERNAL_CONTROL',
+  COMPLIANCE: 'COMPLIANCE',
+  OPERATIONAL: 'OPERATIONAL',
+  FINANCIAL: 'FINANCIAL',
+  IT_GENERAL_CONTROLS: 'IT_GENERAL_CONTROLS',
+  DATA_QUALITY: 'DATA_QUALITY',
+  GOVERNANCE: 'GOVERNANCE',
+  FRAUD: 'FRAUD',
+  OTHER: 'OTHER'
+};
+
+export type FindingCategory = (typeof FindingCategory)[keyof typeof FindingCategory]
+
+
+export const FindingSeverity: {
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH',
+  CRITICAL: 'CRITICAL'
+};
+
+export type FindingSeverity = (typeof FindingSeverity)[keyof typeof FindingSeverity]
+
+
+export const FindingStatus: {
+  DRAFT: 'DRAFT',
+  OPEN: 'OPEN',
+  MANAGEMENT_RESPONSE: 'MANAGEMENT_RESPONSE',
+  ACTION_PLAN: 'ACTION_PLAN',
+  REMEDIATED: 'REMEDIATED',
+  VERIFIED: 'VERIFIED',
+  CLOSED: 'CLOSED',
+  CANCELLED: 'CANCELLED'
+};
+
+export type FindingStatus = (typeof FindingStatus)[keyof typeof FindingStatus]
+
 }
 
 export type AuditEntityType = $Enums.AuditEntityType
@@ -234,6 +278,18 @@ export const EngagementStatus: typeof $Enums.EngagementStatus
 export type TeamMemberRole = $Enums.TeamMemberRole
 
 export const TeamMemberRole: typeof $Enums.TeamMemberRole
+
+export type FindingCategory = $Enums.FindingCategory
+
+export const FindingCategory: typeof $Enums.FindingCategory
+
+export type FindingSeverity = $Enums.FindingSeverity
+
+export const FindingSeverity: typeof $Enums.FindingSeverity
+
+export type FindingStatus = $Enums.FindingStatus
+
+export const FindingStatus: typeof $Enums.FindingStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -477,6 +533,16 @@ export class PrismaClient<
     * ```
     */
   get engagementTeamMember(): Prisma.EngagementTeamMemberDelegate<ExtArgs>;
+
+  /**
+   * `prisma.finding`: Exposes CRUD operations for the **Finding** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Findings
+    * const findings = await prisma.finding.findMany()
+    * ```
+    */
+  get finding(): Prisma.FindingDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -929,7 +995,8 @@ export namespace Prisma {
     RiskAction: 'RiskAction',
     AuditPlan: 'AuditPlan',
     Engagement: 'Engagement',
-    EngagementTeamMember: 'EngagementTeamMember'
+    EngagementTeamMember: 'EngagementTeamMember',
+    Finding: 'Finding'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -945,7 +1012,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "role" | "permission" | "userRole" | "rolePermission" | "auditLog" | "auditUniverse" | "risk" | "riskAction" | "auditPlan" | "engagement" | "engagementTeamMember"
+      modelProps: "user" | "role" | "permission" | "userRole" | "rolePermission" | "auditLog" | "auditUniverse" | "risk" | "riskAction" | "auditPlan" | "engagement" | "engagementTeamMember" | "finding"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1789,6 +1856,76 @@ export namespace Prisma {
           }
         }
       }
+      Finding: {
+        payload: Prisma.$FindingPayload<ExtArgs>
+        fields: Prisma.FindingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FindingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FindingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FindingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FindingPayload>
+          }
+          findFirst: {
+            args: Prisma.FindingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FindingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FindingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FindingPayload>
+          }
+          findMany: {
+            args: Prisma.FindingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FindingPayload>[]
+          }
+          create: {
+            args: Prisma.FindingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FindingPayload>
+          }
+          createMany: {
+            args: Prisma.FindingCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FindingCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FindingPayload>[]
+          }
+          delete: {
+            args: Prisma.FindingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FindingPayload>
+          }
+          update: {
+            args: Prisma.FindingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FindingPayload>
+          }
+          deleteMany: {
+            args: Prisma.FindingDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FindingUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.FindingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FindingPayload>
+          }
+          aggregate: {
+            args: Prisma.FindingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFinding>
+          }
+          groupBy: {
+            args: Prisma.FindingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FindingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FindingCountArgs<ExtArgs>
+            result: $Utils.Optional<FindingCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1967,6 +2104,11 @@ export namespace Prisma {
     updatedEngagements: number
     closedEngagements: number
     engagementMemberships: number
+    createdFindings: number
+    updatedFindings: number
+    responsibleFindings: number
+    managementResponseFindings: number
+    verifiedFindings: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1987,6 +2129,11 @@ export namespace Prisma {
     updatedEngagements?: boolean | UserCountOutputTypeCountUpdatedEngagementsArgs
     closedEngagements?: boolean | UserCountOutputTypeCountClosedEngagementsArgs
     engagementMemberships?: boolean | UserCountOutputTypeCountEngagementMembershipsArgs
+    createdFindings?: boolean | UserCountOutputTypeCountCreatedFindingsArgs
+    updatedFindings?: boolean | UserCountOutputTypeCountUpdatedFindingsArgs
+    responsibleFindings?: boolean | UserCountOutputTypeCountResponsibleFindingsArgs
+    managementResponseFindings?: boolean | UserCountOutputTypeCountManagementResponseFindingsArgs
+    verifiedFindings?: boolean | UserCountOutputTypeCountVerifiedFindingsArgs
   }
 
   // Custom InputTypes
@@ -2119,6 +2266,41 @@ export namespace Prisma {
     where?: EngagementTeamMemberWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCreatedFindingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FindingWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountUpdatedFindingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FindingWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountResponsibleFindingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FindingWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountManagementResponseFindingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FindingWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountVerifiedFindingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FindingWhereInput
+  }
+
 
   /**
    * Count Type RoleCountOutputType
@@ -2200,6 +2382,7 @@ export namespace Prisma {
     risks: number
     auditPlans: number
     engagements: number
+    findings: number
   }
 
   export type AuditUniverseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2207,6 +2390,7 @@ export namespace Prisma {
     risks?: boolean | AuditUniverseCountOutputTypeCountRisksArgs
     auditPlans?: boolean | AuditUniverseCountOutputTypeCountAuditPlansArgs
     engagements?: boolean | AuditUniverseCountOutputTypeCountEngagementsArgs
+    findings?: boolean | AuditUniverseCountOutputTypeCountFindingsArgs
   }
 
   // Custom InputTypes
@@ -2246,6 +2430,13 @@ export namespace Prisma {
    */
   export type AuditUniverseCountOutputTypeCountEngagementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EngagementWhereInput
+  }
+
+  /**
+   * AuditUniverseCountOutputType without action
+   */
+  export type AuditUniverseCountOutputTypeCountFindingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FindingWhereInput
   }
 
 
@@ -2335,10 +2526,12 @@ export namespace Prisma {
 
   export type EngagementCountOutputType = {
     teamMembers: number
+    findings: number
   }
 
   export type EngagementCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     teamMembers?: boolean | EngagementCountOutputTypeCountTeamMembersArgs
+    findings?: boolean | EngagementCountOutputTypeCountFindingsArgs
   }
 
   // Custom InputTypes
@@ -2357,6 +2550,13 @@ export namespace Prisma {
    */
   export type EngagementCountOutputTypeCountTeamMembersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EngagementTeamMemberWhereInput
+  }
+
+  /**
+   * EngagementCountOutputType without action
+   */
+  export type EngagementCountOutputTypeCountFindingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FindingWhereInput
   }
 
 
@@ -2577,6 +2777,11 @@ export namespace Prisma {
     updatedEngagements?: boolean | User$updatedEngagementsArgs<ExtArgs>
     closedEngagements?: boolean | User$closedEngagementsArgs<ExtArgs>
     engagementMemberships?: boolean | User$engagementMembershipsArgs<ExtArgs>
+    createdFindings?: boolean | User$createdFindingsArgs<ExtArgs>
+    updatedFindings?: boolean | User$updatedFindingsArgs<ExtArgs>
+    responsibleFindings?: boolean | User$responsibleFindingsArgs<ExtArgs>
+    managementResponseFindings?: boolean | User$managementResponseFindingsArgs<ExtArgs>
+    verifiedFindings?: boolean | User$verifiedFindingsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2622,6 +2827,11 @@ export namespace Prisma {
     updatedEngagements?: boolean | User$updatedEngagementsArgs<ExtArgs>
     closedEngagements?: boolean | User$closedEngagementsArgs<ExtArgs>
     engagementMemberships?: boolean | User$engagementMembershipsArgs<ExtArgs>
+    createdFindings?: boolean | User$createdFindingsArgs<ExtArgs>
+    updatedFindings?: boolean | User$updatedFindingsArgs<ExtArgs>
+    responsibleFindings?: boolean | User$responsibleFindingsArgs<ExtArgs>
+    managementResponseFindings?: boolean | User$managementResponseFindingsArgs<ExtArgs>
+    verifiedFindings?: boolean | User$verifiedFindingsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2646,6 +2856,11 @@ export namespace Prisma {
       updatedEngagements: Prisma.$EngagementPayload<ExtArgs>[]
       closedEngagements: Prisma.$EngagementPayload<ExtArgs>[]
       engagementMemberships: Prisma.$EngagementTeamMemberPayload<ExtArgs>[]
+      createdFindings: Prisma.$FindingPayload<ExtArgs>[]
+      updatedFindings: Prisma.$FindingPayload<ExtArgs>[]
+      responsibleFindings: Prisma.$FindingPayload<ExtArgs>[]
+      managementResponseFindings: Prisma.$FindingPayload<ExtArgs>[]
+      verifiedFindings: Prisma.$FindingPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3038,6 +3253,11 @@ export namespace Prisma {
     updatedEngagements<T extends User$updatedEngagementsArgs<ExtArgs> = {}>(args?: Subset<T, User$updatedEngagementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findMany"> | Null>
     closedEngagements<T extends User$closedEngagementsArgs<ExtArgs> = {}>(args?: Subset<T, User$closedEngagementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findMany"> | Null>
     engagementMemberships<T extends User$engagementMembershipsArgs<ExtArgs> = {}>(args?: Subset<T, User$engagementMembershipsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EngagementTeamMemberPayload<ExtArgs>, T, "findMany"> | Null>
+    createdFindings<T extends User$createdFindingsArgs<ExtArgs> = {}>(args?: Subset<T, User$createdFindingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FindingPayload<ExtArgs>, T, "findMany"> | Null>
+    updatedFindings<T extends User$updatedFindingsArgs<ExtArgs> = {}>(args?: Subset<T, User$updatedFindingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FindingPayload<ExtArgs>, T, "findMany"> | Null>
+    responsibleFindings<T extends User$responsibleFindingsArgs<ExtArgs> = {}>(args?: Subset<T, User$responsibleFindingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FindingPayload<ExtArgs>, T, "findMany"> | Null>
+    managementResponseFindings<T extends User$managementResponseFindingsArgs<ExtArgs> = {}>(args?: Subset<T, User$managementResponseFindingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FindingPayload<ExtArgs>, T, "findMany"> | Null>
+    verifiedFindings<T extends User$verifiedFindingsArgs<ExtArgs> = {}>(args?: Subset<T, User$verifiedFindingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FindingPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3727,6 +3947,106 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: EngagementTeamMemberScalarFieldEnum | EngagementTeamMemberScalarFieldEnum[]
+  }
+
+  /**
+   * User.createdFindings
+   */
+  export type User$createdFindingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Finding
+     */
+    select?: FindingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FindingInclude<ExtArgs> | null
+    where?: FindingWhereInput
+    orderBy?: FindingOrderByWithRelationInput | FindingOrderByWithRelationInput[]
+    cursor?: FindingWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FindingScalarFieldEnum | FindingScalarFieldEnum[]
+  }
+
+  /**
+   * User.updatedFindings
+   */
+  export type User$updatedFindingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Finding
+     */
+    select?: FindingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FindingInclude<ExtArgs> | null
+    where?: FindingWhereInput
+    orderBy?: FindingOrderByWithRelationInput | FindingOrderByWithRelationInput[]
+    cursor?: FindingWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FindingScalarFieldEnum | FindingScalarFieldEnum[]
+  }
+
+  /**
+   * User.responsibleFindings
+   */
+  export type User$responsibleFindingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Finding
+     */
+    select?: FindingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FindingInclude<ExtArgs> | null
+    where?: FindingWhereInput
+    orderBy?: FindingOrderByWithRelationInput | FindingOrderByWithRelationInput[]
+    cursor?: FindingWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FindingScalarFieldEnum | FindingScalarFieldEnum[]
+  }
+
+  /**
+   * User.managementResponseFindings
+   */
+  export type User$managementResponseFindingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Finding
+     */
+    select?: FindingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FindingInclude<ExtArgs> | null
+    where?: FindingWhereInput
+    orderBy?: FindingOrderByWithRelationInput | FindingOrderByWithRelationInput[]
+    cursor?: FindingWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FindingScalarFieldEnum | FindingScalarFieldEnum[]
+  }
+
+  /**
+   * User.verifiedFindings
+   */
+  export type User$verifiedFindingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Finding
+     */
+    select?: FindingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FindingInclude<ExtArgs> | null
+    where?: FindingWhereInput
+    orderBy?: FindingOrderByWithRelationInput | FindingOrderByWithRelationInput[]
+    cursor?: FindingWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FindingScalarFieldEnum | FindingScalarFieldEnum[]
   }
 
   /**
@@ -8676,6 +8996,7 @@ export namespace Prisma {
     risks?: boolean | AuditUniverse$risksArgs<ExtArgs>
     auditPlans?: boolean | AuditUniverse$auditPlansArgs<ExtArgs>
     engagements?: boolean | AuditUniverse$engagementsArgs<ExtArgs>
+    findings?: boolean | AuditUniverse$findingsArgs<ExtArgs>
     _count?: boolean | AuditUniverseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["auditUniverse"]>
 
@@ -8730,6 +9051,7 @@ export namespace Prisma {
     risks?: boolean | AuditUniverse$risksArgs<ExtArgs>
     auditPlans?: boolean | AuditUniverse$auditPlansArgs<ExtArgs>
     engagements?: boolean | AuditUniverse$engagementsArgs<ExtArgs>
+    findings?: boolean | AuditUniverse$findingsArgs<ExtArgs>
     _count?: boolean | AuditUniverseCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AuditUniverseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8750,6 +9072,7 @@ export namespace Prisma {
       risks: Prisma.$RiskPayload<ExtArgs>[]
       auditPlans: Prisma.$AuditPlanPayload<ExtArgs>[]
       engagements: Prisma.$EngagementPayload<ExtArgs>[]
+      findings: Prisma.$FindingPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -9140,6 +9463,7 @@ export namespace Prisma {
     risks<T extends AuditUniverse$risksArgs<ExtArgs> = {}>(args?: Subset<T, AuditUniverse$risksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "findMany"> | Null>
     auditPlans<T extends AuditUniverse$auditPlansArgs<ExtArgs> = {}>(args?: Subset<T, AuditUniverse$auditPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditPlanPayload<ExtArgs>, T, "findMany"> | Null>
     engagements<T extends AuditUniverse$engagementsArgs<ExtArgs> = {}>(args?: Subset<T, AuditUniverse$engagementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findMany"> | Null>
+    findings<T extends AuditUniverse$findingsArgs<ExtArgs> = {}>(args?: Subset<T, AuditUniverse$findingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FindingPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9640,6 +9964,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: EngagementScalarFieldEnum | EngagementScalarFieldEnum[]
+  }
+
+  /**
+   * AuditUniverse.findings
+   */
+  export type AuditUniverse$findingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Finding
+     */
+    select?: FindingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FindingInclude<ExtArgs> | null
+    where?: FindingWhereInput
+    orderBy?: FindingOrderByWithRelationInput | FindingOrderByWithRelationInput[]
+    cursor?: FindingWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FindingScalarFieldEnum | FindingScalarFieldEnum[]
   }
 
   /**
@@ -13565,6 +13909,7 @@ export namespace Prisma {
     createdBy?: boolean | Engagement$createdByArgs<ExtArgs>
     updatedBy?: boolean | Engagement$updatedByArgs<ExtArgs>
     teamMembers?: boolean | Engagement$teamMembersArgs<ExtArgs>
+    findings?: boolean | Engagement$findingsArgs<ExtArgs>
     _count?: boolean | EngagementCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["engagement"]>
 
@@ -13636,6 +13981,7 @@ export namespace Prisma {
     createdBy?: boolean | Engagement$createdByArgs<ExtArgs>
     updatedBy?: boolean | Engagement$updatedByArgs<ExtArgs>
     teamMembers?: boolean | Engagement$teamMembersArgs<ExtArgs>
+    findings?: boolean | Engagement$findingsArgs<ExtArgs>
     _count?: boolean | EngagementCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type EngagementIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -13659,6 +14005,7 @@ export namespace Prisma {
       createdBy: Prisma.$UserPayload<ExtArgs> | null
       updatedBy: Prisma.$UserPayload<ExtArgs> | null
       teamMembers: Prisma.$EngagementTeamMemberPayload<ExtArgs>[]
+      findings: Prisma.$FindingPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -14056,6 +14403,7 @@ export namespace Prisma {
     createdBy<T extends Engagement$createdByArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$createdByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     updatedBy<T extends Engagement$updatedByArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$updatedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     teamMembers<T extends Engagement$teamMembersArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$teamMembersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EngagementTeamMemberPayload<ExtArgs>, T, "findMany"> | Null>
+    findings<T extends Engagement$findingsArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$findingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FindingPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14533,6 +14881,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: EngagementTeamMemberScalarFieldEnum | EngagementTeamMemberScalarFieldEnum[]
+  }
+
+  /**
+   * Engagement.findings
+   */
+  export type Engagement$findingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Finding
+     */
+    select?: FindingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FindingInclude<ExtArgs> | null
+    where?: FindingWhereInput
+    orderBy?: FindingOrderByWithRelationInput | FindingOrderByWithRelationInput[]
+    cursor?: FindingWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FindingScalarFieldEnum | FindingScalarFieldEnum[]
   }
 
   /**
@@ -15478,6 +15846,1317 @@ export namespace Prisma {
 
 
   /**
+   * Model Finding
+   */
+
+  export type AggregateFinding = {
+    _count: FindingCountAggregateOutputType | null
+    _min: FindingMinAggregateOutputType | null
+    _max: FindingMaxAggregateOutputType | null
+  }
+
+  export type FindingMinAggregateOutputType = {
+    id: string | null
+    reference: string | null
+    title: string | null
+    engagementId: string | null
+    auditEntityId: string | null
+    category: $Enums.FindingCategory | null
+    severity: $Enums.FindingSeverity | null
+    status: $Enums.FindingStatus | null
+    condition: string | null
+    criteria: string | null
+    cause: string | null
+    impact: string | null
+    recommendations: string | null
+    managementResponse: string | null
+    managementRespondedAt: Date | null
+    managementRespondedById: string | null
+    responsibleOwnerId: string | null
+    targetResolutionDate: Date | null
+    closedAt: Date | null
+    verifiedAt: Date | null
+    verifiedById: string | null
+    verificationNotes: string | null
+    createdById: string | null
+    updatedById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type FindingMaxAggregateOutputType = {
+    id: string | null
+    reference: string | null
+    title: string | null
+    engagementId: string | null
+    auditEntityId: string | null
+    category: $Enums.FindingCategory | null
+    severity: $Enums.FindingSeverity | null
+    status: $Enums.FindingStatus | null
+    condition: string | null
+    criteria: string | null
+    cause: string | null
+    impact: string | null
+    recommendations: string | null
+    managementResponse: string | null
+    managementRespondedAt: Date | null
+    managementRespondedById: string | null
+    responsibleOwnerId: string | null
+    targetResolutionDate: Date | null
+    closedAt: Date | null
+    verifiedAt: Date | null
+    verifiedById: string | null
+    verificationNotes: string | null
+    createdById: string | null
+    updatedById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type FindingCountAggregateOutputType = {
+    id: number
+    reference: number
+    title: number
+    engagementId: number
+    auditEntityId: number
+    category: number
+    severity: number
+    status: number
+    condition: number
+    criteria: number
+    cause: number
+    impact: number
+    recommendations: number
+    managementResponse: number
+    managementRespondedAt: number
+    managementRespondedById: number
+    responsibleOwnerId: number
+    targetResolutionDate: number
+    closedAt: number
+    verifiedAt: number
+    verifiedById: number
+    verificationNotes: number
+    createdById: number
+    updatedById: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type FindingMinAggregateInputType = {
+    id?: true
+    reference?: true
+    title?: true
+    engagementId?: true
+    auditEntityId?: true
+    category?: true
+    severity?: true
+    status?: true
+    condition?: true
+    criteria?: true
+    cause?: true
+    impact?: true
+    recommendations?: true
+    managementResponse?: true
+    managementRespondedAt?: true
+    managementRespondedById?: true
+    responsibleOwnerId?: true
+    targetResolutionDate?: true
+    closedAt?: true
+    verifiedAt?: true
+    verifiedById?: true
+    verificationNotes?: true
+    createdById?: true
+    updatedById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type FindingMaxAggregateInputType = {
+    id?: true
+    reference?: true
+    title?: true
+    engagementId?: true
+    auditEntityId?: true
+    category?: true
+    severity?: true
+    status?: true
+    condition?: true
+    criteria?: true
+    cause?: true
+    impact?: true
+    recommendations?: true
+    managementResponse?: true
+    managementRespondedAt?: true
+    managementRespondedById?: true
+    responsibleOwnerId?: true
+    targetResolutionDate?: true
+    closedAt?: true
+    verifiedAt?: true
+    verifiedById?: true
+    verificationNotes?: true
+    createdById?: true
+    updatedById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type FindingCountAggregateInputType = {
+    id?: true
+    reference?: true
+    title?: true
+    engagementId?: true
+    auditEntityId?: true
+    category?: true
+    severity?: true
+    status?: true
+    condition?: true
+    criteria?: true
+    cause?: true
+    impact?: true
+    recommendations?: true
+    managementResponse?: true
+    managementRespondedAt?: true
+    managementRespondedById?: true
+    responsibleOwnerId?: true
+    targetResolutionDate?: true
+    closedAt?: true
+    verifiedAt?: true
+    verifiedById?: true
+    verificationNotes?: true
+    createdById?: true
+    updatedById?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type FindingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Finding to aggregate.
+     */
+    where?: FindingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Findings to fetch.
+     */
+    orderBy?: FindingOrderByWithRelationInput | FindingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FindingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Findings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Findings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Findings
+    **/
+    _count?: true | FindingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FindingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FindingMaxAggregateInputType
+  }
+
+  export type GetFindingAggregateType<T extends FindingAggregateArgs> = {
+        [P in keyof T & keyof AggregateFinding]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFinding[P]>
+      : GetScalarType<T[P], AggregateFinding[P]>
+  }
+
+
+
+
+  export type FindingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FindingWhereInput
+    orderBy?: FindingOrderByWithAggregationInput | FindingOrderByWithAggregationInput[]
+    by: FindingScalarFieldEnum[] | FindingScalarFieldEnum
+    having?: FindingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FindingCountAggregateInputType | true
+    _min?: FindingMinAggregateInputType
+    _max?: FindingMaxAggregateInputType
+  }
+
+  export type FindingGroupByOutputType = {
+    id: string
+    reference: string
+    title: string
+    engagementId: string | null
+    auditEntityId: string
+    category: $Enums.FindingCategory
+    severity: $Enums.FindingSeverity
+    status: $Enums.FindingStatus
+    condition: string
+    criteria: string | null
+    cause: string | null
+    impact: string | null
+    recommendations: string | null
+    managementResponse: string | null
+    managementRespondedAt: Date | null
+    managementRespondedById: string | null
+    responsibleOwnerId: string | null
+    targetResolutionDate: Date | null
+    closedAt: Date | null
+    verifiedAt: Date | null
+    verifiedById: string | null
+    verificationNotes: string | null
+    createdById: string | null
+    updatedById: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: FindingCountAggregateOutputType | null
+    _min: FindingMinAggregateOutputType | null
+    _max: FindingMaxAggregateOutputType | null
+  }
+
+  type GetFindingGroupByPayload<T extends FindingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FindingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FindingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FindingGroupByOutputType[P]>
+            : GetScalarType<T[P], FindingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FindingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reference?: boolean
+    title?: boolean
+    engagementId?: boolean
+    auditEntityId?: boolean
+    category?: boolean
+    severity?: boolean
+    status?: boolean
+    condition?: boolean
+    criteria?: boolean
+    cause?: boolean
+    impact?: boolean
+    recommendations?: boolean
+    managementResponse?: boolean
+    managementRespondedAt?: boolean
+    managementRespondedById?: boolean
+    responsibleOwnerId?: boolean
+    targetResolutionDate?: boolean
+    closedAt?: boolean
+    verifiedAt?: boolean
+    verifiedById?: boolean
+    verificationNotes?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    engagement?: boolean | Finding$engagementArgs<ExtArgs>
+    auditEntity?: boolean | AuditUniverseDefaultArgs<ExtArgs>
+    responsibleOwner?: boolean | Finding$responsibleOwnerArgs<ExtArgs>
+    managementRespondedBy?: boolean | Finding$managementRespondedByArgs<ExtArgs>
+    verifiedBy?: boolean | Finding$verifiedByArgs<ExtArgs>
+    createdBy?: boolean | Finding$createdByArgs<ExtArgs>
+    updatedBy?: boolean | Finding$updatedByArgs<ExtArgs>
+  }, ExtArgs["result"]["finding"]>
+
+  export type FindingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reference?: boolean
+    title?: boolean
+    engagementId?: boolean
+    auditEntityId?: boolean
+    category?: boolean
+    severity?: boolean
+    status?: boolean
+    condition?: boolean
+    criteria?: boolean
+    cause?: boolean
+    impact?: boolean
+    recommendations?: boolean
+    managementResponse?: boolean
+    managementRespondedAt?: boolean
+    managementRespondedById?: boolean
+    responsibleOwnerId?: boolean
+    targetResolutionDate?: boolean
+    closedAt?: boolean
+    verifiedAt?: boolean
+    verifiedById?: boolean
+    verificationNotes?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    engagement?: boolean | Finding$engagementArgs<ExtArgs>
+    auditEntity?: boolean | AuditUniverseDefaultArgs<ExtArgs>
+    responsibleOwner?: boolean | Finding$responsibleOwnerArgs<ExtArgs>
+    managementRespondedBy?: boolean | Finding$managementRespondedByArgs<ExtArgs>
+    verifiedBy?: boolean | Finding$verifiedByArgs<ExtArgs>
+    createdBy?: boolean | Finding$createdByArgs<ExtArgs>
+    updatedBy?: boolean | Finding$updatedByArgs<ExtArgs>
+  }, ExtArgs["result"]["finding"]>
+
+  export type FindingSelectScalar = {
+    id?: boolean
+    reference?: boolean
+    title?: boolean
+    engagementId?: boolean
+    auditEntityId?: boolean
+    category?: boolean
+    severity?: boolean
+    status?: boolean
+    condition?: boolean
+    criteria?: boolean
+    cause?: boolean
+    impact?: boolean
+    recommendations?: boolean
+    managementResponse?: boolean
+    managementRespondedAt?: boolean
+    managementRespondedById?: boolean
+    responsibleOwnerId?: boolean
+    targetResolutionDate?: boolean
+    closedAt?: boolean
+    verifiedAt?: boolean
+    verifiedById?: boolean
+    verificationNotes?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type FindingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    engagement?: boolean | Finding$engagementArgs<ExtArgs>
+    auditEntity?: boolean | AuditUniverseDefaultArgs<ExtArgs>
+    responsibleOwner?: boolean | Finding$responsibleOwnerArgs<ExtArgs>
+    managementRespondedBy?: boolean | Finding$managementRespondedByArgs<ExtArgs>
+    verifiedBy?: boolean | Finding$verifiedByArgs<ExtArgs>
+    createdBy?: boolean | Finding$createdByArgs<ExtArgs>
+    updatedBy?: boolean | Finding$updatedByArgs<ExtArgs>
+  }
+  export type FindingIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    engagement?: boolean | Finding$engagementArgs<ExtArgs>
+    auditEntity?: boolean | AuditUniverseDefaultArgs<ExtArgs>
+    responsibleOwner?: boolean | Finding$responsibleOwnerArgs<ExtArgs>
+    managementRespondedBy?: boolean | Finding$managementRespondedByArgs<ExtArgs>
+    verifiedBy?: boolean | Finding$verifiedByArgs<ExtArgs>
+    createdBy?: boolean | Finding$createdByArgs<ExtArgs>
+    updatedBy?: boolean | Finding$updatedByArgs<ExtArgs>
+  }
+
+  export type $FindingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Finding"
+    objects: {
+      engagement: Prisma.$EngagementPayload<ExtArgs> | null
+      auditEntity: Prisma.$AuditUniversePayload<ExtArgs>
+      responsibleOwner: Prisma.$UserPayload<ExtArgs> | null
+      managementRespondedBy: Prisma.$UserPayload<ExtArgs> | null
+      verifiedBy: Prisma.$UserPayload<ExtArgs> | null
+      createdBy: Prisma.$UserPayload<ExtArgs> | null
+      updatedBy: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      reference: string
+      title: string
+      engagementId: string | null
+      auditEntityId: string
+      category: $Enums.FindingCategory
+      severity: $Enums.FindingSeverity
+      status: $Enums.FindingStatus
+      condition: string
+      criteria: string | null
+      cause: string | null
+      impact: string | null
+      recommendations: string | null
+      managementResponse: string | null
+      managementRespondedAt: Date | null
+      managementRespondedById: string | null
+      responsibleOwnerId: string | null
+      targetResolutionDate: Date | null
+      closedAt: Date | null
+      verifiedAt: Date | null
+      verifiedById: string | null
+      verificationNotes: string | null
+      createdById: string | null
+      updatedById: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["finding"]>
+    composites: {}
+  }
+
+  type FindingGetPayload<S extends boolean | null | undefined | FindingDefaultArgs> = $Result.GetResult<Prisma.$FindingPayload, S>
+
+  type FindingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<FindingFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: FindingCountAggregateInputType | true
+    }
+
+  export interface FindingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Finding'], meta: { name: 'Finding' } }
+    /**
+     * Find zero or one Finding that matches the filter.
+     * @param {FindingFindUniqueArgs} args - Arguments to find a Finding
+     * @example
+     * // Get one Finding
+     * const finding = await prisma.finding.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FindingFindUniqueArgs>(args: SelectSubset<T, FindingFindUniqueArgs<ExtArgs>>): Prisma__FindingClient<$Result.GetResult<Prisma.$FindingPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Finding that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {FindingFindUniqueOrThrowArgs} args - Arguments to find a Finding
+     * @example
+     * // Get one Finding
+     * const finding = await prisma.finding.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FindingFindUniqueOrThrowArgs>(args: SelectSubset<T, FindingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FindingClient<$Result.GetResult<Prisma.$FindingPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Finding that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FindingFindFirstArgs} args - Arguments to find a Finding
+     * @example
+     * // Get one Finding
+     * const finding = await prisma.finding.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FindingFindFirstArgs>(args?: SelectSubset<T, FindingFindFirstArgs<ExtArgs>>): Prisma__FindingClient<$Result.GetResult<Prisma.$FindingPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Finding that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FindingFindFirstOrThrowArgs} args - Arguments to find a Finding
+     * @example
+     * // Get one Finding
+     * const finding = await prisma.finding.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FindingFindFirstOrThrowArgs>(args?: SelectSubset<T, FindingFindFirstOrThrowArgs<ExtArgs>>): Prisma__FindingClient<$Result.GetResult<Prisma.$FindingPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Findings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FindingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Findings
+     * const findings = await prisma.finding.findMany()
+     * 
+     * // Get first 10 Findings
+     * const findings = await prisma.finding.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const findingWithIdOnly = await prisma.finding.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FindingFindManyArgs>(args?: SelectSubset<T, FindingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FindingPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Finding.
+     * @param {FindingCreateArgs} args - Arguments to create a Finding.
+     * @example
+     * // Create one Finding
+     * const Finding = await prisma.finding.create({
+     *   data: {
+     *     // ... data to create a Finding
+     *   }
+     * })
+     * 
+     */
+    create<T extends FindingCreateArgs>(args: SelectSubset<T, FindingCreateArgs<ExtArgs>>): Prisma__FindingClient<$Result.GetResult<Prisma.$FindingPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Findings.
+     * @param {FindingCreateManyArgs} args - Arguments to create many Findings.
+     * @example
+     * // Create many Findings
+     * const finding = await prisma.finding.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FindingCreateManyArgs>(args?: SelectSubset<T, FindingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Findings and returns the data saved in the database.
+     * @param {FindingCreateManyAndReturnArgs} args - Arguments to create many Findings.
+     * @example
+     * // Create many Findings
+     * const finding = await prisma.finding.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Findings and only return the `id`
+     * const findingWithIdOnly = await prisma.finding.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FindingCreateManyAndReturnArgs>(args?: SelectSubset<T, FindingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FindingPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Finding.
+     * @param {FindingDeleteArgs} args - Arguments to delete one Finding.
+     * @example
+     * // Delete one Finding
+     * const Finding = await prisma.finding.delete({
+     *   where: {
+     *     // ... filter to delete one Finding
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FindingDeleteArgs>(args: SelectSubset<T, FindingDeleteArgs<ExtArgs>>): Prisma__FindingClient<$Result.GetResult<Prisma.$FindingPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Finding.
+     * @param {FindingUpdateArgs} args - Arguments to update one Finding.
+     * @example
+     * // Update one Finding
+     * const finding = await prisma.finding.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FindingUpdateArgs>(args: SelectSubset<T, FindingUpdateArgs<ExtArgs>>): Prisma__FindingClient<$Result.GetResult<Prisma.$FindingPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Findings.
+     * @param {FindingDeleteManyArgs} args - Arguments to filter Findings to delete.
+     * @example
+     * // Delete a few Findings
+     * const { count } = await prisma.finding.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FindingDeleteManyArgs>(args?: SelectSubset<T, FindingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Findings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FindingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Findings
+     * const finding = await prisma.finding.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FindingUpdateManyArgs>(args: SelectSubset<T, FindingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Finding.
+     * @param {FindingUpsertArgs} args - Arguments to update or create a Finding.
+     * @example
+     * // Update or create a Finding
+     * const finding = await prisma.finding.upsert({
+     *   create: {
+     *     // ... data to create a Finding
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Finding we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FindingUpsertArgs>(args: SelectSubset<T, FindingUpsertArgs<ExtArgs>>): Prisma__FindingClient<$Result.GetResult<Prisma.$FindingPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Findings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FindingCountArgs} args - Arguments to filter Findings to count.
+     * @example
+     * // Count the number of Findings
+     * const count = await prisma.finding.count({
+     *   where: {
+     *     // ... the filter for the Findings we want to count
+     *   }
+     * })
+    **/
+    count<T extends FindingCountArgs>(
+      args?: Subset<T, FindingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FindingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Finding.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FindingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FindingAggregateArgs>(args: Subset<T, FindingAggregateArgs>): Prisma.PrismaPromise<GetFindingAggregateType<T>>
+
+    /**
+     * Group by Finding.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FindingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FindingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FindingGroupByArgs['orderBy'] }
+        : { orderBy?: FindingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FindingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFindingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Finding model
+   */
+  readonly fields: FindingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Finding.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FindingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    engagement<T extends Finding$engagementArgs<ExtArgs> = {}>(args?: Subset<T, Finding$engagementArgs<ExtArgs>>): Prisma__EngagementClient<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    auditEntity<T extends AuditUniverseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AuditUniverseDefaultArgs<ExtArgs>>): Prisma__AuditUniverseClient<$Result.GetResult<Prisma.$AuditUniversePayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    responsibleOwner<T extends Finding$responsibleOwnerArgs<ExtArgs> = {}>(args?: Subset<T, Finding$responsibleOwnerArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    managementRespondedBy<T extends Finding$managementRespondedByArgs<ExtArgs> = {}>(args?: Subset<T, Finding$managementRespondedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    verifiedBy<T extends Finding$verifiedByArgs<ExtArgs> = {}>(args?: Subset<T, Finding$verifiedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    createdBy<T extends Finding$createdByArgs<ExtArgs> = {}>(args?: Subset<T, Finding$createdByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    updatedBy<T extends Finding$updatedByArgs<ExtArgs> = {}>(args?: Subset<T, Finding$updatedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Finding model
+   */ 
+  interface FindingFieldRefs {
+    readonly id: FieldRef<"Finding", 'String'>
+    readonly reference: FieldRef<"Finding", 'String'>
+    readonly title: FieldRef<"Finding", 'String'>
+    readonly engagementId: FieldRef<"Finding", 'String'>
+    readonly auditEntityId: FieldRef<"Finding", 'String'>
+    readonly category: FieldRef<"Finding", 'FindingCategory'>
+    readonly severity: FieldRef<"Finding", 'FindingSeverity'>
+    readonly status: FieldRef<"Finding", 'FindingStatus'>
+    readonly condition: FieldRef<"Finding", 'String'>
+    readonly criteria: FieldRef<"Finding", 'String'>
+    readonly cause: FieldRef<"Finding", 'String'>
+    readonly impact: FieldRef<"Finding", 'String'>
+    readonly recommendations: FieldRef<"Finding", 'String'>
+    readonly managementResponse: FieldRef<"Finding", 'String'>
+    readonly managementRespondedAt: FieldRef<"Finding", 'DateTime'>
+    readonly managementRespondedById: FieldRef<"Finding", 'String'>
+    readonly responsibleOwnerId: FieldRef<"Finding", 'String'>
+    readonly targetResolutionDate: FieldRef<"Finding", 'DateTime'>
+    readonly closedAt: FieldRef<"Finding", 'DateTime'>
+    readonly verifiedAt: FieldRef<"Finding", 'DateTime'>
+    readonly verifiedById: FieldRef<"Finding", 'String'>
+    readonly verificationNotes: FieldRef<"Finding", 'String'>
+    readonly createdById: FieldRef<"Finding", 'String'>
+    readonly updatedById: FieldRef<"Finding", 'String'>
+    readonly createdAt: FieldRef<"Finding", 'DateTime'>
+    readonly updatedAt: FieldRef<"Finding", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Finding findUnique
+   */
+  export type FindingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Finding
+     */
+    select?: FindingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FindingInclude<ExtArgs> | null
+    /**
+     * Filter, which Finding to fetch.
+     */
+    where: FindingWhereUniqueInput
+  }
+
+  /**
+   * Finding findUniqueOrThrow
+   */
+  export type FindingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Finding
+     */
+    select?: FindingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FindingInclude<ExtArgs> | null
+    /**
+     * Filter, which Finding to fetch.
+     */
+    where: FindingWhereUniqueInput
+  }
+
+  /**
+   * Finding findFirst
+   */
+  export type FindingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Finding
+     */
+    select?: FindingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FindingInclude<ExtArgs> | null
+    /**
+     * Filter, which Finding to fetch.
+     */
+    where?: FindingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Findings to fetch.
+     */
+    orderBy?: FindingOrderByWithRelationInput | FindingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Findings.
+     */
+    cursor?: FindingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Findings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Findings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Findings.
+     */
+    distinct?: FindingScalarFieldEnum | FindingScalarFieldEnum[]
+  }
+
+  /**
+   * Finding findFirstOrThrow
+   */
+  export type FindingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Finding
+     */
+    select?: FindingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FindingInclude<ExtArgs> | null
+    /**
+     * Filter, which Finding to fetch.
+     */
+    where?: FindingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Findings to fetch.
+     */
+    orderBy?: FindingOrderByWithRelationInput | FindingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Findings.
+     */
+    cursor?: FindingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Findings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Findings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Findings.
+     */
+    distinct?: FindingScalarFieldEnum | FindingScalarFieldEnum[]
+  }
+
+  /**
+   * Finding findMany
+   */
+  export type FindingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Finding
+     */
+    select?: FindingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FindingInclude<ExtArgs> | null
+    /**
+     * Filter, which Findings to fetch.
+     */
+    where?: FindingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Findings to fetch.
+     */
+    orderBy?: FindingOrderByWithRelationInput | FindingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Findings.
+     */
+    cursor?: FindingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Findings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Findings.
+     */
+    skip?: number
+    distinct?: FindingScalarFieldEnum | FindingScalarFieldEnum[]
+  }
+
+  /**
+   * Finding create
+   */
+  export type FindingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Finding
+     */
+    select?: FindingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FindingInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Finding.
+     */
+    data: XOR<FindingCreateInput, FindingUncheckedCreateInput>
+  }
+
+  /**
+   * Finding createMany
+   */
+  export type FindingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Findings.
+     */
+    data: FindingCreateManyInput | FindingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Finding createManyAndReturn
+   */
+  export type FindingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Finding
+     */
+    select?: FindingSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Findings.
+     */
+    data: FindingCreateManyInput | FindingCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FindingIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Finding update
+   */
+  export type FindingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Finding
+     */
+    select?: FindingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FindingInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Finding.
+     */
+    data: XOR<FindingUpdateInput, FindingUncheckedUpdateInput>
+    /**
+     * Choose, which Finding to update.
+     */
+    where: FindingWhereUniqueInput
+  }
+
+  /**
+   * Finding updateMany
+   */
+  export type FindingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Findings.
+     */
+    data: XOR<FindingUpdateManyMutationInput, FindingUncheckedUpdateManyInput>
+    /**
+     * Filter which Findings to update
+     */
+    where?: FindingWhereInput
+  }
+
+  /**
+   * Finding upsert
+   */
+  export type FindingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Finding
+     */
+    select?: FindingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FindingInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Finding to update in case it exists.
+     */
+    where: FindingWhereUniqueInput
+    /**
+     * In case the Finding found by the `where` argument doesn't exist, create a new Finding with this data.
+     */
+    create: XOR<FindingCreateInput, FindingUncheckedCreateInput>
+    /**
+     * In case the Finding was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FindingUpdateInput, FindingUncheckedUpdateInput>
+  }
+
+  /**
+   * Finding delete
+   */
+  export type FindingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Finding
+     */
+    select?: FindingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FindingInclude<ExtArgs> | null
+    /**
+     * Filter which Finding to delete.
+     */
+    where: FindingWhereUniqueInput
+  }
+
+  /**
+   * Finding deleteMany
+   */
+  export type FindingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Findings to delete
+     */
+    where?: FindingWhereInput
+  }
+
+  /**
+   * Finding.engagement
+   */
+  export type Finding$engagementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Engagement
+     */
+    select?: EngagementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementInclude<ExtArgs> | null
+    where?: EngagementWhereInput
+  }
+
+  /**
+   * Finding.responsibleOwner
+   */
+  export type Finding$responsibleOwnerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Finding.managementRespondedBy
+   */
+  export type Finding$managementRespondedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Finding.verifiedBy
+   */
+  export type Finding$verifiedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Finding.createdBy
+   */
+  export type Finding$createdByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Finding.updatedBy
+   */
+  export type Finding$updatedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Finding without action
+   */
+  export type FindingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Finding
+     */
+    select?: FindingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FindingInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -15688,6 +17367,38 @@ export namespace Prisma {
   };
 
   export type EngagementTeamMemberScalarFieldEnum = (typeof EngagementTeamMemberScalarFieldEnum)[keyof typeof EngagementTeamMemberScalarFieldEnum]
+
+
+  export const FindingScalarFieldEnum: {
+    id: 'id',
+    reference: 'reference',
+    title: 'title',
+    engagementId: 'engagementId',
+    auditEntityId: 'auditEntityId',
+    category: 'category',
+    severity: 'severity',
+    status: 'status',
+    condition: 'condition',
+    criteria: 'criteria',
+    cause: 'cause',
+    impact: 'impact',
+    recommendations: 'recommendations',
+    managementResponse: 'managementResponse',
+    managementRespondedAt: 'managementRespondedAt',
+    managementRespondedById: 'managementRespondedById',
+    responsibleOwnerId: 'responsibleOwnerId',
+    targetResolutionDate: 'targetResolutionDate',
+    closedAt: 'closedAt',
+    verifiedAt: 'verifiedAt',
+    verifiedById: 'verifiedById',
+    verificationNotes: 'verificationNotes',
+    createdById: 'createdById',
+    updatedById: 'updatedById',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type FindingScalarFieldEnum = (typeof FindingScalarFieldEnum)[keyof typeof FindingScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -15933,6 +17644,48 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'FindingCategory'
+   */
+  export type EnumFindingCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FindingCategory'>
+    
+
+
+  /**
+   * Reference to a field of type 'FindingCategory[]'
+   */
+  export type ListEnumFindingCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FindingCategory[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'FindingSeverity'
+   */
+  export type EnumFindingSeverityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FindingSeverity'>
+    
+
+
+  /**
+   * Reference to a field of type 'FindingSeverity[]'
+   */
+  export type ListEnumFindingSeverityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FindingSeverity[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'FindingStatus'
+   */
+  export type EnumFindingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FindingStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'FindingStatus[]'
+   */
+  export type ListEnumFindingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FindingStatus[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -15979,6 +17732,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementListRelationFilter
     closedEngagements?: EngagementListRelationFilter
     engagementMemberships?: EngagementTeamMemberListRelationFilter
+    createdFindings?: FindingListRelationFilter
+    updatedFindings?: FindingListRelationFilter
+    responsibleFindings?: FindingListRelationFilter
+    managementResponseFindings?: FindingListRelationFilter
+    verifiedFindings?: FindingListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -16008,6 +17766,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementOrderByRelationAggregateInput
     closedEngagements?: EngagementOrderByRelationAggregateInput
     engagementMemberships?: EngagementTeamMemberOrderByRelationAggregateInput
+    createdFindings?: FindingOrderByRelationAggregateInput
+    updatedFindings?: FindingOrderByRelationAggregateInput
+    responsibleFindings?: FindingOrderByRelationAggregateInput
+    managementResponseFindings?: FindingOrderByRelationAggregateInput
+    verifiedFindings?: FindingOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -16040,6 +17803,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementListRelationFilter
     closedEngagements?: EngagementListRelationFilter
     engagementMemberships?: EngagementTeamMemberListRelationFilter
+    createdFindings?: FindingListRelationFilter
+    updatedFindings?: FindingListRelationFilter
+    responsibleFindings?: FindingListRelationFilter
+    managementResponseFindings?: FindingListRelationFilter
+    verifiedFindings?: FindingListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -16383,6 +18151,7 @@ export namespace Prisma {
     risks?: RiskListRelationFilter
     auditPlans?: AuditPlanListRelationFilter
     engagements?: EngagementListRelationFilter
+    findings?: FindingListRelationFilter
   }
 
   export type AuditUniverseOrderByWithRelationInput = {
@@ -16410,6 +18179,7 @@ export namespace Prisma {
     risks?: RiskOrderByRelationAggregateInput
     auditPlans?: AuditPlanOrderByRelationAggregateInput
     engagements?: EngagementOrderByRelationAggregateInput
+    findings?: FindingOrderByRelationAggregateInput
   }
 
   export type AuditUniverseWhereUniqueInput = Prisma.AtLeast<{
@@ -16440,6 +18210,7 @@ export namespace Prisma {
     risks?: RiskListRelationFilter
     auditPlans?: AuditPlanListRelationFilter
     engagements?: EngagementListRelationFilter
+    findings?: FindingListRelationFilter
   }, "id" | "code">
 
   export type AuditUniverseOrderByWithAggregationInput = {
@@ -16904,6 +18675,7 @@ export namespace Prisma {
     createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     teamMembers?: EngagementTeamMemberListRelationFilter
+    findings?: FindingListRelationFilter
   }
 
   export type EngagementOrderByWithRelationInput = {
@@ -16938,6 +18710,7 @@ export namespace Prisma {
     createdBy?: UserOrderByWithRelationInput
     updatedBy?: UserOrderByWithRelationInput
     teamMembers?: EngagementTeamMemberOrderByRelationAggregateInput
+    findings?: FindingOrderByRelationAggregateInput
   }
 
   export type EngagementWhereUniqueInput = Prisma.AtLeast<{
@@ -16975,6 +18748,7 @@ export namespace Prisma {
     createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     teamMembers?: EngagementTeamMemberListRelationFilter
+    findings?: FindingListRelationFilter
   }, "id" | "reference">
 
   export type EngagementOrderByWithAggregationInput = {
@@ -17089,6 +18863,184 @@ export namespace Prisma {
     assignedAt?: DateTimeWithAggregatesFilter<"EngagementTeamMember"> | Date | string
   }
 
+  export type FindingWhereInput = {
+    AND?: FindingWhereInput | FindingWhereInput[]
+    OR?: FindingWhereInput[]
+    NOT?: FindingWhereInput | FindingWhereInput[]
+    id?: UuidFilter<"Finding"> | string
+    reference?: StringFilter<"Finding"> | string
+    title?: StringFilter<"Finding"> | string
+    engagementId?: UuidNullableFilter<"Finding"> | string | null
+    auditEntityId?: UuidFilter<"Finding"> | string
+    category?: EnumFindingCategoryFilter<"Finding"> | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFilter<"Finding"> | $Enums.FindingSeverity
+    status?: EnumFindingStatusFilter<"Finding"> | $Enums.FindingStatus
+    condition?: StringFilter<"Finding"> | string
+    criteria?: StringNullableFilter<"Finding"> | string | null
+    cause?: StringNullableFilter<"Finding"> | string | null
+    impact?: StringNullableFilter<"Finding"> | string | null
+    recommendations?: StringNullableFilter<"Finding"> | string | null
+    managementResponse?: StringNullableFilter<"Finding"> | string | null
+    managementRespondedAt?: DateTimeNullableFilter<"Finding"> | Date | string | null
+    managementRespondedById?: UuidNullableFilter<"Finding"> | string | null
+    responsibleOwnerId?: UuidNullableFilter<"Finding"> | string | null
+    targetResolutionDate?: DateTimeNullableFilter<"Finding"> | Date | string | null
+    closedAt?: DateTimeNullableFilter<"Finding"> | Date | string | null
+    verifiedAt?: DateTimeNullableFilter<"Finding"> | Date | string | null
+    verifiedById?: UuidNullableFilter<"Finding"> | string | null
+    verificationNotes?: StringNullableFilter<"Finding"> | string | null
+    createdById?: UuidNullableFilter<"Finding"> | string | null
+    updatedById?: UuidNullableFilter<"Finding"> | string | null
+    createdAt?: DateTimeFilter<"Finding"> | Date | string
+    updatedAt?: DateTimeFilter<"Finding"> | Date | string
+    engagement?: XOR<EngagementNullableRelationFilter, EngagementWhereInput> | null
+    auditEntity?: XOR<AuditUniverseRelationFilter, AuditUniverseWhereInput>
+    responsibleOwner?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    managementRespondedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    verifiedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+  }
+
+  export type FindingOrderByWithRelationInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    engagementId?: SortOrderInput | SortOrder
+    auditEntityId?: SortOrder
+    category?: SortOrder
+    severity?: SortOrder
+    status?: SortOrder
+    condition?: SortOrder
+    criteria?: SortOrderInput | SortOrder
+    cause?: SortOrderInput | SortOrder
+    impact?: SortOrderInput | SortOrder
+    recommendations?: SortOrderInput | SortOrder
+    managementResponse?: SortOrderInput | SortOrder
+    managementRespondedAt?: SortOrderInput | SortOrder
+    managementRespondedById?: SortOrderInput | SortOrder
+    responsibleOwnerId?: SortOrderInput | SortOrder
+    targetResolutionDate?: SortOrderInput | SortOrder
+    closedAt?: SortOrderInput | SortOrder
+    verifiedAt?: SortOrderInput | SortOrder
+    verifiedById?: SortOrderInput | SortOrder
+    verificationNotes?: SortOrderInput | SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    engagement?: EngagementOrderByWithRelationInput
+    auditEntity?: AuditUniverseOrderByWithRelationInput
+    responsibleOwner?: UserOrderByWithRelationInput
+    managementRespondedBy?: UserOrderByWithRelationInput
+    verifiedBy?: UserOrderByWithRelationInput
+    createdBy?: UserOrderByWithRelationInput
+    updatedBy?: UserOrderByWithRelationInput
+  }
+
+  export type FindingWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    reference?: string
+    AND?: FindingWhereInput | FindingWhereInput[]
+    OR?: FindingWhereInput[]
+    NOT?: FindingWhereInput | FindingWhereInput[]
+    title?: StringFilter<"Finding"> | string
+    engagementId?: UuidNullableFilter<"Finding"> | string | null
+    auditEntityId?: UuidFilter<"Finding"> | string
+    category?: EnumFindingCategoryFilter<"Finding"> | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFilter<"Finding"> | $Enums.FindingSeverity
+    status?: EnumFindingStatusFilter<"Finding"> | $Enums.FindingStatus
+    condition?: StringFilter<"Finding"> | string
+    criteria?: StringNullableFilter<"Finding"> | string | null
+    cause?: StringNullableFilter<"Finding"> | string | null
+    impact?: StringNullableFilter<"Finding"> | string | null
+    recommendations?: StringNullableFilter<"Finding"> | string | null
+    managementResponse?: StringNullableFilter<"Finding"> | string | null
+    managementRespondedAt?: DateTimeNullableFilter<"Finding"> | Date | string | null
+    managementRespondedById?: UuidNullableFilter<"Finding"> | string | null
+    responsibleOwnerId?: UuidNullableFilter<"Finding"> | string | null
+    targetResolutionDate?: DateTimeNullableFilter<"Finding"> | Date | string | null
+    closedAt?: DateTimeNullableFilter<"Finding"> | Date | string | null
+    verifiedAt?: DateTimeNullableFilter<"Finding"> | Date | string | null
+    verifiedById?: UuidNullableFilter<"Finding"> | string | null
+    verificationNotes?: StringNullableFilter<"Finding"> | string | null
+    createdById?: UuidNullableFilter<"Finding"> | string | null
+    updatedById?: UuidNullableFilter<"Finding"> | string | null
+    createdAt?: DateTimeFilter<"Finding"> | Date | string
+    updatedAt?: DateTimeFilter<"Finding"> | Date | string
+    engagement?: XOR<EngagementNullableRelationFilter, EngagementWhereInput> | null
+    auditEntity?: XOR<AuditUniverseRelationFilter, AuditUniverseWhereInput>
+    responsibleOwner?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    managementRespondedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    verifiedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+  }, "id" | "reference">
+
+  export type FindingOrderByWithAggregationInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    engagementId?: SortOrderInput | SortOrder
+    auditEntityId?: SortOrder
+    category?: SortOrder
+    severity?: SortOrder
+    status?: SortOrder
+    condition?: SortOrder
+    criteria?: SortOrderInput | SortOrder
+    cause?: SortOrderInput | SortOrder
+    impact?: SortOrderInput | SortOrder
+    recommendations?: SortOrderInput | SortOrder
+    managementResponse?: SortOrderInput | SortOrder
+    managementRespondedAt?: SortOrderInput | SortOrder
+    managementRespondedById?: SortOrderInput | SortOrder
+    responsibleOwnerId?: SortOrderInput | SortOrder
+    targetResolutionDate?: SortOrderInput | SortOrder
+    closedAt?: SortOrderInput | SortOrder
+    verifiedAt?: SortOrderInput | SortOrder
+    verifiedById?: SortOrderInput | SortOrder
+    verificationNotes?: SortOrderInput | SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: FindingCountOrderByAggregateInput
+    _max?: FindingMaxOrderByAggregateInput
+    _min?: FindingMinOrderByAggregateInput
+  }
+
+  export type FindingScalarWhereWithAggregatesInput = {
+    AND?: FindingScalarWhereWithAggregatesInput | FindingScalarWhereWithAggregatesInput[]
+    OR?: FindingScalarWhereWithAggregatesInput[]
+    NOT?: FindingScalarWhereWithAggregatesInput | FindingScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"Finding"> | string
+    reference?: StringWithAggregatesFilter<"Finding"> | string
+    title?: StringWithAggregatesFilter<"Finding"> | string
+    engagementId?: UuidNullableWithAggregatesFilter<"Finding"> | string | null
+    auditEntityId?: UuidWithAggregatesFilter<"Finding"> | string
+    category?: EnumFindingCategoryWithAggregatesFilter<"Finding"> | $Enums.FindingCategory
+    severity?: EnumFindingSeverityWithAggregatesFilter<"Finding"> | $Enums.FindingSeverity
+    status?: EnumFindingStatusWithAggregatesFilter<"Finding"> | $Enums.FindingStatus
+    condition?: StringWithAggregatesFilter<"Finding"> | string
+    criteria?: StringNullableWithAggregatesFilter<"Finding"> | string | null
+    cause?: StringNullableWithAggregatesFilter<"Finding"> | string | null
+    impact?: StringNullableWithAggregatesFilter<"Finding"> | string | null
+    recommendations?: StringNullableWithAggregatesFilter<"Finding"> | string | null
+    managementResponse?: StringNullableWithAggregatesFilter<"Finding"> | string | null
+    managementRespondedAt?: DateTimeNullableWithAggregatesFilter<"Finding"> | Date | string | null
+    managementRespondedById?: UuidNullableWithAggregatesFilter<"Finding"> | string | null
+    responsibleOwnerId?: UuidNullableWithAggregatesFilter<"Finding"> | string | null
+    targetResolutionDate?: DateTimeNullableWithAggregatesFilter<"Finding"> | Date | string | null
+    closedAt?: DateTimeNullableWithAggregatesFilter<"Finding"> | Date | string | null
+    verifiedAt?: DateTimeNullableWithAggregatesFilter<"Finding"> | Date | string | null
+    verifiedById?: UuidNullableWithAggregatesFilter<"Finding"> | string | null
+    verificationNotes?: StringNullableWithAggregatesFilter<"Finding"> | string | null
+    createdById?: UuidNullableWithAggregatesFilter<"Finding"> | string | null
+    updatedById?: UuidNullableWithAggregatesFilter<"Finding"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Finding"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Finding"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     firstName: string
@@ -17116,6 +19068,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -17145,6 +19102,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserUpdateInput = {
@@ -17174,6 +19136,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -17203,6 +19170,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -17550,6 +19522,7 @@ export namespace Prisma {
     risks?: RiskCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
+    findings?: FindingCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateInput = {
@@ -17573,6 +19546,7 @@ export namespace Prisma {
     risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
+    findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUpdateInput = {
@@ -17596,6 +19570,7 @@ export namespace Prisma {
     risks?: RiskUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
+    findings?: FindingUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateInput = {
@@ -17619,6 +19594,7 @@ export namespace Prisma {
     risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
+    findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseCreateManyInput = {
@@ -18116,6 +20092,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedEngagementsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
     teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
+    findings?: FindingCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateInput = {
@@ -18143,6 +20120,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
+    findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUpdateInput = {
@@ -18170,6 +20148,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedEngagementsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
     teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
+    findings?: FindingUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateInput = {
@@ -18197,6 +20176,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
+    findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementCreateManyInput = {
@@ -18317,6 +20297,202 @@ export namespace Prisma {
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type FindingCreateInput = {
+    id?: string
+    reference: string
+    title: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verificationNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutFindingsInput
+    auditEntity: AuditUniverseCreateNestedOneWithoutFindingsInput
+    responsibleOwner?: UserCreateNestedOneWithoutResponsibleFindingsInput
+    managementRespondedBy?: UserCreateNestedOneWithoutManagementResponseFindingsInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedFindingsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedFindingsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedFindingsInput
+  }
+
+  export type FindingUncheckedCreateInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    managementRespondedById?: string | null
+    responsibleOwnerId?: string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    verificationNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FindingUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutFindingsNestedInput
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutFindingsNestedInput
+    responsibleOwner?: UserUpdateOneWithoutResponsibleFindingsNestedInput
+    managementRespondedBy?: UserUpdateOneWithoutManagementResponseFindingsNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedFindingsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedFindingsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedFindingsNestedInput
+  }
+
+  export type FindingUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementRespondedById?: NullableStringFieldUpdateOperationsInput | string | null
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FindingCreateManyInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    managementRespondedById?: string | null
+    responsibleOwnerId?: string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    verificationNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FindingUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FindingUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementRespondedById?: NullableStringFieldUpdateOperationsInput | string | null
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UuidFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -18413,6 +20589,12 @@ export namespace Prisma {
     none?: EngagementTeamMemberWhereInput
   }
 
+  export type FindingListRelationFilter = {
+    every?: FindingWhereInput
+    some?: FindingWhereInput
+    none?: FindingWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -18443,6 +20625,10 @@ export namespace Prisma {
   }
 
   export type EngagementTeamMemberOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type FindingOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -19405,6 +21591,149 @@ export namespace Prisma {
     _max?: NestedEnumTeamMemberRoleFilter<$PrismaModel>
   }
 
+  export type EnumFindingCategoryFilter<$PrismaModel = never> = {
+    equals?: $Enums.FindingCategory | EnumFindingCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.FindingCategory[] | ListEnumFindingCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FindingCategory[] | ListEnumFindingCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumFindingCategoryFilter<$PrismaModel> | $Enums.FindingCategory
+  }
+
+  export type EnumFindingSeverityFilter<$PrismaModel = never> = {
+    equals?: $Enums.FindingSeverity | EnumFindingSeverityFieldRefInput<$PrismaModel>
+    in?: $Enums.FindingSeverity[] | ListEnumFindingSeverityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FindingSeverity[] | ListEnumFindingSeverityFieldRefInput<$PrismaModel>
+    not?: NestedEnumFindingSeverityFilter<$PrismaModel> | $Enums.FindingSeverity
+  }
+
+  export type EnumFindingStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.FindingStatus | EnumFindingStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.FindingStatus[] | ListEnumFindingStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FindingStatus[] | ListEnumFindingStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumFindingStatusFilter<$PrismaModel> | $Enums.FindingStatus
+  }
+
+  export type EngagementNullableRelationFilter = {
+    is?: EngagementWhereInput | null
+    isNot?: EngagementWhereInput | null
+  }
+
+  export type FindingCountOrderByAggregateInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    engagementId?: SortOrder
+    auditEntityId?: SortOrder
+    category?: SortOrder
+    severity?: SortOrder
+    status?: SortOrder
+    condition?: SortOrder
+    criteria?: SortOrder
+    cause?: SortOrder
+    impact?: SortOrder
+    recommendations?: SortOrder
+    managementResponse?: SortOrder
+    managementRespondedAt?: SortOrder
+    managementRespondedById?: SortOrder
+    responsibleOwnerId?: SortOrder
+    targetResolutionDate?: SortOrder
+    closedAt?: SortOrder
+    verifiedAt?: SortOrder
+    verifiedById?: SortOrder
+    verificationNotes?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FindingMaxOrderByAggregateInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    engagementId?: SortOrder
+    auditEntityId?: SortOrder
+    category?: SortOrder
+    severity?: SortOrder
+    status?: SortOrder
+    condition?: SortOrder
+    criteria?: SortOrder
+    cause?: SortOrder
+    impact?: SortOrder
+    recommendations?: SortOrder
+    managementResponse?: SortOrder
+    managementRespondedAt?: SortOrder
+    managementRespondedById?: SortOrder
+    responsibleOwnerId?: SortOrder
+    targetResolutionDate?: SortOrder
+    closedAt?: SortOrder
+    verifiedAt?: SortOrder
+    verifiedById?: SortOrder
+    verificationNotes?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FindingMinOrderByAggregateInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    engagementId?: SortOrder
+    auditEntityId?: SortOrder
+    category?: SortOrder
+    severity?: SortOrder
+    status?: SortOrder
+    condition?: SortOrder
+    criteria?: SortOrder
+    cause?: SortOrder
+    impact?: SortOrder
+    recommendations?: SortOrder
+    managementResponse?: SortOrder
+    managementRespondedAt?: SortOrder
+    managementRespondedById?: SortOrder
+    responsibleOwnerId?: SortOrder
+    targetResolutionDate?: SortOrder
+    closedAt?: SortOrder
+    verifiedAt?: SortOrder
+    verifiedById?: SortOrder
+    verificationNotes?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumFindingCategoryWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.FindingCategory | EnumFindingCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.FindingCategory[] | ListEnumFindingCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FindingCategory[] | ListEnumFindingCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumFindingCategoryWithAggregatesFilter<$PrismaModel> | $Enums.FindingCategory
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumFindingCategoryFilter<$PrismaModel>
+    _max?: NestedEnumFindingCategoryFilter<$PrismaModel>
+  }
+
+  export type EnumFindingSeverityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.FindingSeverity | EnumFindingSeverityFieldRefInput<$PrismaModel>
+    in?: $Enums.FindingSeverity[] | ListEnumFindingSeverityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FindingSeverity[] | ListEnumFindingSeverityFieldRefInput<$PrismaModel>
+    not?: NestedEnumFindingSeverityWithAggregatesFilter<$PrismaModel> | $Enums.FindingSeverity
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumFindingSeverityFilter<$PrismaModel>
+    _max?: NestedEnumFindingSeverityFilter<$PrismaModel>
+  }
+
+  export type EnumFindingStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.FindingStatus | EnumFindingStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.FindingStatus[] | ListEnumFindingStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FindingStatus[] | ListEnumFindingStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumFindingStatusWithAggregatesFilter<$PrismaModel> | $Enums.FindingStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumFindingStatusFilter<$PrismaModel>
+    _max?: NestedEnumFindingStatusFilter<$PrismaModel>
+  }
+
   export type UserRoleCreateNestedManyWithoutUserInput = {
     create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
@@ -19524,6 +21853,41 @@ export namespace Prisma {
     connect?: EngagementTeamMemberWhereUniqueInput | EngagementTeamMemberWhereUniqueInput[]
   }
 
+  export type FindingCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<FindingCreateWithoutCreatedByInput, FindingUncheckedCreateWithoutCreatedByInput> | FindingCreateWithoutCreatedByInput[] | FindingUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutCreatedByInput | FindingCreateOrConnectWithoutCreatedByInput[]
+    createMany?: FindingCreateManyCreatedByInputEnvelope
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+  }
+
+  export type FindingCreateNestedManyWithoutUpdatedByInput = {
+    create?: XOR<FindingCreateWithoutUpdatedByInput, FindingUncheckedCreateWithoutUpdatedByInput> | FindingCreateWithoutUpdatedByInput[] | FindingUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutUpdatedByInput | FindingCreateOrConnectWithoutUpdatedByInput[]
+    createMany?: FindingCreateManyUpdatedByInputEnvelope
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+  }
+
+  export type FindingCreateNestedManyWithoutResponsibleOwnerInput = {
+    create?: XOR<FindingCreateWithoutResponsibleOwnerInput, FindingUncheckedCreateWithoutResponsibleOwnerInput> | FindingCreateWithoutResponsibleOwnerInput[] | FindingUncheckedCreateWithoutResponsibleOwnerInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutResponsibleOwnerInput | FindingCreateOrConnectWithoutResponsibleOwnerInput[]
+    createMany?: FindingCreateManyResponsibleOwnerInputEnvelope
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+  }
+
+  export type FindingCreateNestedManyWithoutManagementRespondedByInput = {
+    create?: XOR<FindingCreateWithoutManagementRespondedByInput, FindingUncheckedCreateWithoutManagementRespondedByInput> | FindingCreateWithoutManagementRespondedByInput[] | FindingUncheckedCreateWithoutManagementRespondedByInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutManagementRespondedByInput | FindingCreateOrConnectWithoutManagementRespondedByInput[]
+    createMany?: FindingCreateManyManagementRespondedByInputEnvelope
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+  }
+
+  export type FindingCreateNestedManyWithoutVerifiedByInput = {
+    create?: XOR<FindingCreateWithoutVerifiedByInput, FindingUncheckedCreateWithoutVerifiedByInput> | FindingCreateWithoutVerifiedByInput[] | FindingUncheckedCreateWithoutVerifiedByInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutVerifiedByInput | FindingCreateOrConnectWithoutVerifiedByInput[]
+    createMany?: FindingCreateManyVerifiedByInputEnvelope
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+  }
+
   export type UserRoleUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
@@ -19641,6 +22005,41 @@ export namespace Prisma {
     connectOrCreate?: EngagementTeamMemberCreateOrConnectWithoutUserInput | EngagementTeamMemberCreateOrConnectWithoutUserInput[]
     createMany?: EngagementTeamMemberCreateManyUserInputEnvelope
     connect?: EngagementTeamMemberWhereUniqueInput | EngagementTeamMemberWhereUniqueInput[]
+  }
+
+  export type FindingUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<FindingCreateWithoutCreatedByInput, FindingUncheckedCreateWithoutCreatedByInput> | FindingCreateWithoutCreatedByInput[] | FindingUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutCreatedByInput | FindingCreateOrConnectWithoutCreatedByInput[]
+    createMany?: FindingCreateManyCreatedByInputEnvelope
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+  }
+
+  export type FindingUncheckedCreateNestedManyWithoutUpdatedByInput = {
+    create?: XOR<FindingCreateWithoutUpdatedByInput, FindingUncheckedCreateWithoutUpdatedByInput> | FindingCreateWithoutUpdatedByInput[] | FindingUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutUpdatedByInput | FindingCreateOrConnectWithoutUpdatedByInput[]
+    createMany?: FindingCreateManyUpdatedByInputEnvelope
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+  }
+
+  export type FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput = {
+    create?: XOR<FindingCreateWithoutResponsibleOwnerInput, FindingUncheckedCreateWithoutResponsibleOwnerInput> | FindingCreateWithoutResponsibleOwnerInput[] | FindingUncheckedCreateWithoutResponsibleOwnerInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutResponsibleOwnerInput | FindingCreateOrConnectWithoutResponsibleOwnerInput[]
+    createMany?: FindingCreateManyResponsibleOwnerInputEnvelope
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+  }
+
+  export type FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput = {
+    create?: XOR<FindingCreateWithoutManagementRespondedByInput, FindingUncheckedCreateWithoutManagementRespondedByInput> | FindingCreateWithoutManagementRespondedByInput[] | FindingUncheckedCreateWithoutManagementRespondedByInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutManagementRespondedByInput | FindingCreateOrConnectWithoutManagementRespondedByInput[]
+    createMany?: FindingCreateManyManagementRespondedByInputEnvelope
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+  }
+
+  export type FindingUncheckedCreateNestedManyWithoutVerifiedByInput = {
+    create?: XOR<FindingCreateWithoutVerifiedByInput, FindingUncheckedCreateWithoutVerifiedByInput> | FindingCreateWithoutVerifiedByInput[] | FindingUncheckedCreateWithoutVerifiedByInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutVerifiedByInput | FindingCreateOrConnectWithoutVerifiedByInput[]
+    createMany?: FindingCreateManyVerifiedByInputEnvelope
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -19897,6 +22296,76 @@ export namespace Prisma {
     deleteMany?: EngagementTeamMemberScalarWhereInput | EngagementTeamMemberScalarWhereInput[]
   }
 
+  export type FindingUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<FindingCreateWithoutCreatedByInput, FindingUncheckedCreateWithoutCreatedByInput> | FindingCreateWithoutCreatedByInput[] | FindingUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutCreatedByInput | FindingCreateOrConnectWithoutCreatedByInput[]
+    upsert?: FindingUpsertWithWhereUniqueWithoutCreatedByInput | FindingUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: FindingCreateManyCreatedByInputEnvelope
+    set?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    disconnect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    delete?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    update?: FindingUpdateWithWhereUniqueWithoutCreatedByInput | FindingUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: FindingUpdateManyWithWhereWithoutCreatedByInput | FindingUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: FindingScalarWhereInput | FindingScalarWhereInput[]
+  }
+
+  export type FindingUpdateManyWithoutUpdatedByNestedInput = {
+    create?: XOR<FindingCreateWithoutUpdatedByInput, FindingUncheckedCreateWithoutUpdatedByInput> | FindingCreateWithoutUpdatedByInput[] | FindingUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutUpdatedByInput | FindingCreateOrConnectWithoutUpdatedByInput[]
+    upsert?: FindingUpsertWithWhereUniqueWithoutUpdatedByInput | FindingUpsertWithWhereUniqueWithoutUpdatedByInput[]
+    createMany?: FindingCreateManyUpdatedByInputEnvelope
+    set?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    disconnect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    delete?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    update?: FindingUpdateWithWhereUniqueWithoutUpdatedByInput | FindingUpdateWithWhereUniqueWithoutUpdatedByInput[]
+    updateMany?: FindingUpdateManyWithWhereWithoutUpdatedByInput | FindingUpdateManyWithWhereWithoutUpdatedByInput[]
+    deleteMany?: FindingScalarWhereInput | FindingScalarWhereInput[]
+  }
+
+  export type FindingUpdateManyWithoutResponsibleOwnerNestedInput = {
+    create?: XOR<FindingCreateWithoutResponsibleOwnerInput, FindingUncheckedCreateWithoutResponsibleOwnerInput> | FindingCreateWithoutResponsibleOwnerInput[] | FindingUncheckedCreateWithoutResponsibleOwnerInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutResponsibleOwnerInput | FindingCreateOrConnectWithoutResponsibleOwnerInput[]
+    upsert?: FindingUpsertWithWhereUniqueWithoutResponsibleOwnerInput | FindingUpsertWithWhereUniqueWithoutResponsibleOwnerInput[]
+    createMany?: FindingCreateManyResponsibleOwnerInputEnvelope
+    set?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    disconnect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    delete?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    update?: FindingUpdateWithWhereUniqueWithoutResponsibleOwnerInput | FindingUpdateWithWhereUniqueWithoutResponsibleOwnerInput[]
+    updateMany?: FindingUpdateManyWithWhereWithoutResponsibleOwnerInput | FindingUpdateManyWithWhereWithoutResponsibleOwnerInput[]
+    deleteMany?: FindingScalarWhereInput | FindingScalarWhereInput[]
+  }
+
+  export type FindingUpdateManyWithoutManagementRespondedByNestedInput = {
+    create?: XOR<FindingCreateWithoutManagementRespondedByInput, FindingUncheckedCreateWithoutManagementRespondedByInput> | FindingCreateWithoutManagementRespondedByInput[] | FindingUncheckedCreateWithoutManagementRespondedByInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutManagementRespondedByInput | FindingCreateOrConnectWithoutManagementRespondedByInput[]
+    upsert?: FindingUpsertWithWhereUniqueWithoutManagementRespondedByInput | FindingUpsertWithWhereUniqueWithoutManagementRespondedByInput[]
+    createMany?: FindingCreateManyManagementRespondedByInputEnvelope
+    set?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    disconnect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    delete?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    update?: FindingUpdateWithWhereUniqueWithoutManagementRespondedByInput | FindingUpdateWithWhereUniqueWithoutManagementRespondedByInput[]
+    updateMany?: FindingUpdateManyWithWhereWithoutManagementRespondedByInput | FindingUpdateManyWithWhereWithoutManagementRespondedByInput[]
+    deleteMany?: FindingScalarWhereInput | FindingScalarWhereInput[]
+  }
+
+  export type FindingUpdateManyWithoutVerifiedByNestedInput = {
+    create?: XOR<FindingCreateWithoutVerifiedByInput, FindingUncheckedCreateWithoutVerifiedByInput> | FindingCreateWithoutVerifiedByInput[] | FindingUncheckedCreateWithoutVerifiedByInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutVerifiedByInput | FindingCreateOrConnectWithoutVerifiedByInput[]
+    upsert?: FindingUpsertWithWhereUniqueWithoutVerifiedByInput | FindingUpsertWithWhereUniqueWithoutVerifiedByInput[]
+    createMany?: FindingCreateManyVerifiedByInputEnvelope
+    set?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    disconnect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    delete?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    update?: FindingUpdateWithWhereUniqueWithoutVerifiedByInput | FindingUpdateWithWhereUniqueWithoutVerifiedByInput[]
+    updateMany?: FindingUpdateManyWithWhereWithoutVerifiedByInput | FindingUpdateManyWithWhereWithoutVerifiedByInput[]
+    deleteMany?: FindingScalarWhereInput | FindingScalarWhereInput[]
+  }
+
   export type UserRoleUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
@@ -20133,6 +22602,76 @@ export namespace Prisma {
     update?: EngagementTeamMemberUpdateWithWhereUniqueWithoutUserInput | EngagementTeamMemberUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: EngagementTeamMemberUpdateManyWithWhereWithoutUserInput | EngagementTeamMemberUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: EngagementTeamMemberScalarWhereInput | EngagementTeamMemberScalarWhereInput[]
+  }
+
+  export type FindingUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<FindingCreateWithoutCreatedByInput, FindingUncheckedCreateWithoutCreatedByInput> | FindingCreateWithoutCreatedByInput[] | FindingUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutCreatedByInput | FindingCreateOrConnectWithoutCreatedByInput[]
+    upsert?: FindingUpsertWithWhereUniqueWithoutCreatedByInput | FindingUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: FindingCreateManyCreatedByInputEnvelope
+    set?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    disconnect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    delete?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    update?: FindingUpdateWithWhereUniqueWithoutCreatedByInput | FindingUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: FindingUpdateManyWithWhereWithoutCreatedByInput | FindingUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: FindingScalarWhereInput | FindingScalarWhereInput[]
+  }
+
+  export type FindingUncheckedUpdateManyWithoutUpdatedByNestedInput = {
+    create?: XOR<FindingCreateWithoutUpdatedByInput, FindingUncheckedCreateWithoutUpdatedByInput> | FindingCreateWithoutUpdatedByInput[] | FindingUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutUpdatedByInput | FindingCreateOrConnectWithoutUpdatedByInput[]
+    upsert?: FindingUpsertWithWhereUniqueWithoutUpdatedByInput | FindingUpsertWithWhereUniqueWithoutUpdatedByInput[]
+    createMany?: FindingCreateManyUpdatedByInputEnvelope
+    set?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    disconnect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    delete?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    update?: FindingUpdateWithWhereUniqueWithoutUpdatedByInput | FindingUpdateWithWhereUniqueWithoutUpdatedByInput[]
+    updateMany?: FindingUpdateManyWithWhereWithoutUpdatedByInput | FindingUpdateManyWithWhereWithoutUpdatedByInput[]
+    deleteMany?: FindingScalarWhereInput | FindingScalarWhereInput[]
+  }
+
+  export type FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput = {
+    create?: XOR<FindingCreateWithoutResponsibleOwnerInput, FindingUncheckedCreateWithoutResponsibleOwnerInput> | FindingCreateWithoutResponsibleOwnerInput[] | FindingUncheckedCreateWithoutResponsibleOwnerInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutResponsibleOwnerInput | FindingCreateOrConnectWithoutResponsibleOwnerInput[]
+    upsert?: FindingUpsertWithWhereUniqueWithoutResponsibleOwnerInput | FindingUpsertWithWhereUniqueWithoutResponsibleOwnerInput[]
+    createMany?: FindingCreateManyResponsibleOwnerInputEnvelope
+    set?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    disconnect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    delete?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    update?: FindingUpdateWithWhereUniqueWithoutResponsibleOwnerInput | FindingUpdateWithWhereUniqueWithoutResponsibleOwnerInput[]
+    updateMany?: FindingUpdateManyWithWhereWithoutResponsibleOwnerInput | FindingUpdateManyWithWhereWithoutResponsibleOwnerInput[]
+    deleteMany?: FindingScalarWhereInput | FindingScalarWhereInput[]
+  }
+
+  export type FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput = {
+    create?: XOR<FindingCreateWithoutManagementRespondedByInput, FindingUncheckedCreateWithoutManagementRespondedByInput> | FindingCreateWithoutManagementRespondedByInput[] | FindingUncheckedCreateWithoutManagementRespondedByInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutManagementRespondedByInput | FindingCreateOrConnectWithoutManagementRespondedByInput[]
+    upsert?: FindingUpsertWithWhereUniqueWithoutManagementRespondedByInput | FindingUpsertWithWhereUniqueWithoutManagementRespondedByInput[]
+    createMany?: FindingCreateManyManagementRespondedByInputEnvelope
+    set?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    disconnect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    delete?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    update?: FindingUpdateWithWhereUniqueWithoutManagementRespondedByInput | FindingUpdateWithWhereUniqueWithoutManagementRespondedByInput[]
+    updateMany?: FindingUpdateManyWithWhereWithoutManagementRespondedByInput | FindingUpdateManyWithWhereWithoutManagementRespondedByInput[]
+    deleteMany?: FindingScalarWhereInput | FindingScalarWhereInput[]
+  }
+
+  export type FindingUncheckedUpdateManyWithoutVerifiedByNestedInput = {
+    create?: XOR<FindingCreateWithoutVerifiedByInput, FindingUncheckedCreateWithoutVerifiedByInput> | FindingCreateWithoutVerifiedByInput[] | FindingUncheckedCreateWithoutVerifiedByInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutVerifiedByInput | FindingCreateOrConnectWithoutVerifiedByInput[]
+    upsert?: FindingUpsertWithWhereUniqueWithoutVerifiedByInput | FindingUpsertWithWhereUniqueWithoutVerifiedByInput[]
+    createMany?: FindingCreateManyVerifiedByInputEnvelope
+    set?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    disconnect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    delete?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    update?: FindingUpdateWithWhereUniqueWithoutVerifiedByInput | FindingUpdateWithWhereUniqueWithoutVerifiedByInput[]
+    updateMany?: FindingUpdateManyWithWhereWithoutVerifiedByInput | FindingUpdateManyWithWhereWithoutVerifiedByInput[]
+    deleteMany?: FindingScalarWhereInput | FindingScalarWhereInput[]
   }
 
   export type UserRoleCreateNestedManyWithoutRoleInput = {
@@ -20373,6 +22912,13 @@ export namespace Prisma {
     connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
   }
 
+  export type FindingCreateNestedManyWithoutAuditEntityInput = {
+    create?: XOR<FindingCreateWithoutAuditEntityInput, FindingUncheckedCreateWithoutAuditEntityInput> | FindingCreateWithoutAuditEntityInput[] | FindingUncheckedCreateWithoutAuditEntityInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutAuditEntityInput | FindingCreateOrConnectWithoutAuditEntityInput[]
+    createMany?: FindingCreateManyAuditEntityInputEnvelope
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+  }
+
   export type AuditUniverseUncheckedCreateNestedManyWithoutParentInput = {
     create?: XOR<AuditUniverseCreateWithoutParentInput, AuditUniverseUncheckedCreateWithoutParentInput> | AuditUniverseCreateWithoutParentInput[] | AuditUniverseUncheckedCreateWithoutParentInput[]
     connectOrCreate?: AuditUniverseCreateOrConnectWithoutParentInput | AuditUniverseCreateOrConnectWithoutParentInput[]
@@ -20399,6 +22945,13 @@ export namespace Prisma {
     connectOrCreate?: EngagementCreateOrConnectWithoutAuditEntityInput | EngagementCreateOrConnectWithoutAuditEntityInput[]
     createMany?: EngagementCreateManyAuditEntityInputEnvelope
     connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+  }
+
+  export type FindingUncheckedCreateNestedManyWithoutAuditEntityInput = {
+    create?: XOR<FindingCreateWithoutAuditEntityInput, FindingUncheckedCreateWithoutAuditEntityInput> | FindingCreateWithoutAuditEntityInput[] | FindingUncheckedCreateWithoutAuditEntityInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutAuditEntityInput | FindingCreateOrConnectWithoutAuditEntityInput[]
+    createMany?: FindingCreateManyAuditEntityInputEnvelope
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
   }
 
   export type EnumAuditEntityTypeFieldUpdateOperationsInput = {
@@ -20505,6 +23058,20 @@ export namespace Prisma {
     deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
   }
 
+  export type FindingUpdateManyWithoutAuditEntityNestedInput = {
+    create?: XOR<FindingCreateWithoutAuditEntityInput, FindingUncheckedCreateWithoutAuditEntityInput> | FindingCreateWithoutAuditEntityInput[] | FindingUncheckedCreateWithoutAuditEntityInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutAuditEntityInput | FindingCreateOrConnectWithoutAuditEntityInput[]
+    upsert?: FindingUpsertWithWhereUniqueWithoutAuditEntityInput | FindingUpsertWithWhereUniqueWithoutAuditEntityInput[]
+    createMany?: FindingCreateManyAuditEntityInputEnvelope
+    set?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    disconnect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    delete?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    update?: FindingUpdateWithWhereUniqueWithoutAuditEntityInput | FindingUpdateWithWhereUniqueWithoutAuditEntityInput[]
+    updateMany?: FindingUpdateManyWithWhereWithoutAuditEntityInput | FindingUpdateManyWithWhereWithoutAuditEntityInput[]
+    deleteMany?: FindingScalarWhereInput | FindingScalarWhereInput[]
+  }
+
   export type AuditUniverseUncheckedUpdateManyWithoutParentNestedInput = {
     create?: XOR<AuditUniverseCreateWithoutParentInput, AuditUniverseUncheckedCreateWithoutParentInput> | AuditUniverseCreateWithoutParentInput[] | AuditUniverseUncheckedCreateWithoutParentInput[]
     connectOrCreate?: AuditUniverseCreateOrConnectWithoutParentInput | AuditUniverseCreateOrConnectWithoutParentInput[]
@@ -20559,6 +23126,20 @@ export namespace Prisma {
     update?: EngagementUpdateWithWhereUniqueWithoutAuditEntityInput | EngagementUpdateWithWhereUniqueWithoutAuditEntityInput[]
     updateMany?: EngagementUpdateManyWithWhereWithoutAuditEntityInput | EngagementUpdateManyWithWhereWithoutAuditEntityInput[]
     deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
+  }
+
+  export type FindingUncheckedUpdateManyWithoutAuditEntityNestedInput = {
+    create?: XOR<FindingCreateWithoutAuditEntityInput, FindingUncheckedCreateWithoutAuditEntityInput> | FindingCreateWithoutAuditEntityInput[] | FindingUncheckedCreateWithoutAuditEntityInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutAuditEntityInput | FindingCreateOrConnectWithoutAuditEntityInput[]
+    upsert?: FindingUpsertWithWhereUniqueWithoutAuditEntityInput | FindingUpsertWithWhereUniqueWithoutAuditEntityInput[]
+    createMany?: FindingCreateManyAuditEntityInputEnvelope
+    set?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    disconnect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    delete?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    update?: FindingUpdateWithWhereUniqueWithoutAuditEntityInput | FindingUpdateWithWhereUniqueWithoutAuditEntityInput[]
+    updateMany?: FindingUpdateManyWithWhereWithoutAuditEntityInput | FindingUpdateManyWithWhereWithoutAuditEntityInput[]
+    deleteMany?: FindingScalarWhereInput | FindingScalarWhereInput[]
   }
 
   export type AuditUniverseCreateNestedOneWithoutRisksInput = {
@@ -20992,11 +23573,25 @@ export namespace Prisma {
     connect?: EngagementTeamMemberWhereUniqueInput | EngagementTeamMemberWhereUniqueInput[]
   }
 
+  export type FindingCreateNestedManyWithoutEngagementInput = {
+    create?: XOR<FindingCreateWithoutEngagementInput, FindingUncheckedCreateWithoutEngagementInput> | FindingCreateWithoutEngagementInput[] | FindingUncheckedCreateWithoutEngagementInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutEngagementInput | FindingCreateOrConnectWithoutEngagementInput[]
+    createMany?: FindingCreateManyEngagementInputEnvelope
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+  }
+
   export type EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput = {
     create?: XOR<EngagementTeamMemberCreateWithoutEngagementInput, EngagementTeamMemberUncheckedCreateWithoutEngagementInput> | EngagementTeamMemberCreateWithoutEngagementInput[] | EngagementTeamMemberUncheckedCreateWithoutEngagementInput[]
     connectOrCreate?: EngagementTeamMemberCreateOrConnectWithoutEngagementInput | EngagementTeamMemberCreateOrConnectWithoutEngagementInput[]
     createMany?: EngagementTeamMemberCreateManyEngagementInputEnvelope
     connect?: EngagementTeamMemberWhereUniqueInput | EngagementTeamMemberWhereUniqueInput[]
+  }
+
+  export type FindingUncheckedCreateNestedManyWithoutEngagementInput = {
+    create?: XOR<FindingCreateWithoutEngagementInput, FindingUncheckedCreateWithoutEngagementInput> | FindingCreateWithoutEngagementInput[] | FindingUncheckedCreateWithoutEngagementInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutEngagementInput | FindingCreateOrConnectWithoutEngagementInput[]
+    createMany?: FindingCreateManyEngagementInputEnvelope
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
   }
 
   export type EnumEngagementTypeFieldUpdateOperationsInput = {
@@ -21089,6 +23684,20 @@ export namespace Prisma {
     deleteMany?: EngagementTeamMemberScalarWhereInput | EngagementTeamMemberScalarWhereInput[]
   }
 
+  export type FindingUpdateManyWithoutEngagementNestedInput = {
+    create?: XOR<FindingCreateWithoutEngagementInput, FindingUncheckedCreateWithoutEngagementInput> | FindingCreateWithoutEngagementInput[] | FindingUncheckedCreateWithoutEngagementInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutEngagementInput | FindingCreateOrConnectWithoutEngagementInput[]
+    upsert?: FindingUpsertWithWhereUniqueWithoutEngagementInput | FindingUpsertWithWhereUniqueWithoutEngagementInput[]
+    createMany?: FindingCreateManyEngagementInputEnvelope
+    set?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    disconnect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    delete?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    update?: FindingUpdateWithWhereUniqueWithoutEngagementInput | FindingUpdateWithWhereUniqueWithoutEngagementInput[]
+    updateMany?: FindingUpdateManyWithWhereWithoutEngagementInput | FindingUpdateManyWithWhereWithoutEngagementInput[]
+    deleteMany?: FindingScalarWhereInput | FindingScalarWhereInput[]
+  }
+
   export type EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput = {
     create?: XOR<EngagementTeamMemberCreateWithoutEngagementInput, EngagementTeamMemberUncheckedCreateWithoutEngagementInput> | EngagementTeamMemberCreateWithoutEngagementInput[] | EngagementTeamMemberUncheckedCreateWithoutEngagementInput[]
     connectOrCreate?: EngagementTeamMemberCreateOrConnectWithoutEngagementInput | EngagementTeamMemberCreateOrConnectWithoutEngagementInput[]
@@ -21101,6 +23710,20 @@ export namespace Prisma {
     update?: EngagementTeamMemberUpdateWithWhereUniqueWithoutEngagementInput | EngagementTeamMemberUpdateWithWhereUniqueWithoutEngagementInput[]
     updateMany?: EngagementTeamMemberUpdateManyWithWhereWithoutEngagementInput | EngagementTeamMemberUpdateManyWithWhereWithoutEngagementInput[]
     deleteMany?: EngagementTeamMemberScalarWhereInput | EngagementTeamMemberScalarWhereInput[]
+  }
+
+  export type FindingUncheckedUpdateManyWithoutEngagementNestedInput = {
+    create?: XOR<FindingCreateWithoutEngagementInput, FindingUncheckedCreateWithoutEngagementInput> | FindingCreateWithoutEngagementInput[] | FindingUncheckedCreateWithoutEngagementInput[]
+    connectOrCreate?: FindingCreateOrConnectWithoutEngagementInput | FindingCreateOrConnectWithoutEngagementInput[]
+    upsert?: FindingUpsertWithWhereUniqueWithoutEngagementInput | FindingUpsertWithWhereUniqueWithoutEngagementInput[]
+    createMany?: FindingCreateManyEngagementInputEnvelope
+    set?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    disconnect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    delete?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+    update?: FindingUpdateWithWhereUniqueWithoutEngagementInput | FindingUpdateWithWhereUniqueWithoutEngagementInput[]
+    updateMany?: FindingUpdateManyWithWhereWithoutEngagementInput | FindingUpdateManyWithWhereWithoutEngagementInput[]
+    deleteMany?: FindingScalarWhereInput | FindingScalarWhereInput[]
   }
 
   export type EngagementCreateNestedOneWithoutTeamMembersInput = {
@@ -21133,6 +23756,128 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutEngagementMembershipsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEngagementMembershipsInput, UserUpdateWithoutEngagementMembershipsInput>, UserUncheckedUpdateWithoutEngagementMembershipsInput>
+  }
+
+  export type EngagementCreateNestedOneWithoutFindingsInput = {
+    create?: XOR<EngagementCreateWithoutFindingsInput, EngagementUncheckedCreateWithoutFindingsInput>
+    connectOrCreate?: EngagementCreateOrConnectWithoutFindingsInput
+    connect?: EngagementWhereUniqueInput
+  }
+
+  export type AuditUniverseCreateNestedOneWithoutFindingsInput = {
+    create?: XOR<AuditUniverseCreateWithoutFindingsInput, AuditUniverseUncheckedCreateWithoutFindingsInput>
+    connectOrCreate?: AuditUniverseCreateOrConnectWithoutFindingsInput
+    connect?: AuditUniverseWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutResponsibleFindingsInput = {
+    create?: XOR<UserCreateWithoutResponsibleFindingsInput, UserUncheckedCreateWithoutResponsibleFindingsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutResponsibleFindingsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutManagementResponseFindingsInput = {
+    create?: XOR<UserCreateWithoutManagementResponseFindingsInput, UserUncheckedCreateWithoutManagementResponseFindingsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutManagementResponseFindingsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutVerifiedFindingsInput = {
+    create?: XOR<UserCreateWithoutVerifiedFindingsInput, UserUncheckedCreateWithoutVerifiedFindingsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutVerifiedFindingsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutCreatedFindingsInput = {
+    create?: XOR<UserCreateWithoutCreatedFindingsInput, UserUncheckedCreateWithoutCreatedFindingsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedFindingsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutUpdatedFindingsInput = {
+    create?: XOR<UserCreateWithoutUpdatedFindingsInput, UserUncheckedCreateWithoutUpdatedFindingsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUpdatedFindingsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumFindingCategoryFieldUpdateOperationsInput = {
+    set?: $Enums.FindingCategory
+  }
+
+  export type EnumFindingSeverityFieldUpdateOperationsInput = {
+    set?: $Enums.FindingSeverity
+  }
+
+  export type EnumFindingStatusFieldUpdateOperationsInput = {
+    set?: $Enums.FindingStatus
+  }
+
+  export type EngagementUpdateOneWithoutFindingsNestedInput = {
+    create?: XOR<EngagementCreateWithoutFindingsInput, EngagementUncheckedCreateWithoutFindingsInput>
+    connectOrCreate?: EngagementCreateOrConnectWithoutFindingsInput
+    upsert?: EngagementUpsertWithoutFindingsInput
+    disconnect?: EngagementWhereInput | boolean
+    delete?: EngagementWhereInput | boolean
+    connect?: EngagementWhereUniqueInput
+    update?: XOR<XOR<EngagementUpdateToOneWithWhereWithoutFindingsInput, EngagementUpdateWithoutFindingsInput>, EngagementUncheckedUpdateWithoutFindingsInput>
+  }
+
+  export type AuditUniverseUpdateOneRequiredWithoutFindingsNestedInput = {
+    create?: XOR<AuditUniverseCreateWithoutFindingsInput, AuditUniverseUncheckedCreateWithoutFindingsInput>
+    connectOrCreate?: AuditUniverseCreateOrConnectWithoutFindingsInput
+    upsert?: AuditUniverseUpsertWithoutFindingsInput
+    connect?: AuditUniverseWhereUniqueInput
+    update?: XOR<XOR<AuditUniverseUpdateToOneWithWhereWithoutFindingsInput, AuditUniverseUpdateWithoutFindingsInput>, AuditUniverseUncheckedUpdateWithoutFindingsInput>
+  }
+
+  export type UserUpdateOneWithoutResponsibleFindingsNestedInput = {
+    create?: XOR<UserCreateWithoutResponsibleFindingsInput, UserUncheckedCreateWithoutResponsibleFindingsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutResponsibleFindingsInput
+    upsert?: UserUpsertWithoutResponsibleFindingsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutResponsibleFindingsInput, UserUpdateWithoutResponsibleFindingsInput>, UserUncheckedUpdateWithoutResponsibleFindingsInput>
+  }
+
+  export type UserUpdateOneWithoutManagementResponseFindingsNestedInput = {
+    create?: XOR<UserCreateWithoutManagementResponseFindingsInput, UserUncheckedCreateWithoutManagementResponseFindingsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutManagementResponseFindingsInput
+    upsert?: UserUpsertWithoutManagementResponseFindingsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutManagementResponseFindingsInput, UserUpdateWithoutManagementResponseFindingsInput>, UserUncheckedUpdateWithoutManagementResponseFindingsInput>
+  }
+
+  export type UserUpdateOneWithoutVerifiedFindingsNestedInput = {
+    create?: XOR<UserCreateWithoutVerifiedFindingsInput, UserUncheckedCreateWithoutVerifiedFindingsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutVerifiedFindingsInput
+    upsert?: UserUpsertWithoutVerifiedFindingsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutVerifiedFindingsInput, UserUpdateWithoutVerifiedFindingsInput>, UserUncheckedUpdateWithoutVerifiedFindingsInput>
+  }
+
+  export type UserUpdateOneWithoutCreatedFindingsNestedInput = {
+    create?: XOR<UserCreateWithoutCreatedFindingsInput, UserUncheckedCreateWithoutCreatedFindingsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedFindingsInput
+    upsert?: UserUpsertWithoutCreatedFindingsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedFindingsInput, UserUpdateWithoutCreatedFindingsInput>, UserUncheckedUpdateWithoutCreatedFindingsInput>
+  }
+
+  export type UserUpdateOneWithoutUpdatedFindingsNestedInput = {
+    create?: XOR<UserCreateWithoutUpdatedFindingsInput, UserUncheckedCreateWithoutUpdatedFindingsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUpdatedFindingsInput
+    upsert?: UserUpsertWithoutUpdatedFindingsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUpdatedFindingsInput, UserUpdateWithoutUpdatedFindingsInput>, UserUncheckedUpdateWithoutUpdatedFindingsInput>
   }
 
   export type NestedUuidFilter<$PrismaModel = never> = {
@@ -21551,6 +24296,57 @@ export namespace Prisma {
     _max?: NestedEnumTeamMemberRoleFilter<$PrismaModel>
   }
 
+  export type NestedEnumFindingCategoryFilter<$PrismaModel = never> = {
+    equals?: $Enums.FindingCategory | EnumFindingCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.FindingCategory[] | ListEnumFindingCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FindingCategory[] | ListEnumFindingCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumFindingCategoryFilter<$PrismaModel> | $Enums.FindingCategory
+  }
+
+  export type NestedEnumFindingSeverityFilter<$PrismaModel = never> = {
+    equals?: $Enums.FindingSeverity | EnumFindingSeverityFieldRefInput<$PrismaModel>
+    in?: $Enums.FindingSeverity[] | ListEnumFindingSeverityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FindingSeverity[] | ListEnumFindingSeverityFieldRefInput<$PrismaModel>
+    not?: NestedEnumFindingSeverityFilter<$PrismaModel> | $Enums.FindingSeverity
+  }
+
+  export type NestedEnumFindingStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.FindingStatus | EnumFindingStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.FindingStatus[] | ListEnumFindingStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FindingStatus[] | ListEnumFindingStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumFindingStatusFilter<$PrismaModel> | $Enums.FindingStatus
+  }
+
+  export type NestedEnumFindingCategoryWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.FindingCategory | EnumFindingCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.FindingCategory[] | ListEnumFindingCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FindingCategory[] | ListEnumFindingCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumFindingCategoryWithAggregatesFilter<$PrismaModel> | $Enums.FindingCategory
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumFindingCategoryFilter<$PrismaModel>
+    _max?: NestedEnumFindingCategoryFilter<$PrismaModel>
+  }
+
+  export type NestedEnumFindingSeverityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.FindingSeverity | EnumFindingSeverityFieldRefInput<$PrismaModel>
+    in?: $Enums.FindingSeverity[] | ListEnumFindingSeverityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FindingSeverity[] | ListEnumFindingSeverityFieldRefInput<$PrismaModel>
+    not?: NestedEnumFindingSeverityWithAggregatesFilter<$PrismaModel> | $Enums.FindingSeverity
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumFindingSeverityFilter<$PrismaModel>
+    _max?: NestedEnumFindingSeverityFilter<$PrismaModel>
+  }
+
+  export type NestedEnumFindingStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.FindingStatus | EnumFindingStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.FindingStatus[] | ListEnumFindingStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FindingStatus[] | ListEnumFindingStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumFindingStatusWithAggregatesFilter<$PrismaModel> | $Enums.FindingStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumFindingStatusFilter<$PrismaModel>
+    _max?: NestedEnumFindingStatusFilter<$PrismaModel>
+  }
+
   export type UserRoleCreateWithoutUserInput = {
     assignedAt?: Date | string
     role: RoleCreateNestedOneWithoutUserRolesInput
@@ -21591,6 +24387,7 @@ export namespace Prisma {
     risks?: RiskCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
+    findings?: FindingCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutOwnerInput = {
@@ -21613,6 +24410,7 @@ export namespace Prisma {
     risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
+    findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutOwnerInput = {
@@ -21645,6 +24443,7 @@ export namespace Prisma {
     risks?: RiskCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
+    findings?: FindingCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutCreatedByInput = {
@@ -21667,6 +24466,7 @@ export namespace Prisma {
     risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
+    findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutCreatedByInput = {
@@ -21699,6 +24499,7 @@ export namespace Prisma {
     risks?: RiskCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
+    findings?: FindingCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutUpdatedByInput = {
@@ -21721,6 +24522,7 @@ export namespace Prisma {
     risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
+    findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutUpdatedByInput = {
@@ -22195,6 +24997,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedEngagementsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
     teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
+    findings?: FindingCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutLeadAuditorInput = {
@@ -22221,6 +25024,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
+    findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutLeadAuditorInput = {
@@ -22257,6 +25061,7 @@ export namespace Prisma {
     closedBy?: UserCreateNestedOneWithoutClosedEngagementsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
     teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
+    findings?: FindingCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutCreatedByInput = {
@@ -22283,6 +25088,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
+    findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutCreatedByInput = {
@@ -22319,6 +25125,7 @@ export namespace Prisma {
     closedBy?: UserCreateNestedOneWithoutClosedEngagementsInput
     createdBy?: UserCreateNestedOneWithoutCreatedEngagementsInput
     teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
+    findings?: FindingCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutUpdatedByInput = {
@@ -22345,6 +25152,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
+    findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutUpdatedByInput = {
@@ -22381,6 +25189,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedEngagementsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
     teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
+    findings?: FindingCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutClosedByInput = {
@@ -22407,6 +25216,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
+    findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutClosedByInput = {
@@ -22438,6 +25248,336 @@ export namespace Prisma {
 
   export type EngagementTeamMemberCreateManyUserInputEnvelope = {
     data: EngagementTeamMemberCreateManyUserInput | EngagementTeamMemberCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FindingCreateWithoutCreatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verificationNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutFindingsInput
+    auditEntity: AuditUniverseCreateNestedOneWithoutFindingsInput
+    responsibleOwner?: UserCreateNestedOneWithoutResponsibleFindingsInput
+    managementRespondedBy?: UserCreateNestedOneWithoutManagementResponseFindingsInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedFindingsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedFindingsInput
+  }
+
+  export type FindingUncheckedCreateWithoutCreatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    managementRespondedById?: string | null
+    responsibleOwnerId?: string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    verificationNotes?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FindingCreateOrConnectWithoutCreatedByInput = {
+    where: FindingWhereUniqueInput
+    create: XOR<FindingCreateWithoutCreatedByInput, FindingUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type FindingCreateManyCreatedByInputEnvelope = {
+    data: FindingCreateManyCreatedByInput | FindingCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FindingCreateWithoutUpdatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verificationNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutFindingsInput
+    auditEntity: AuditUniverseCreateNestedOneWithoutFindingsInput
+    responsibleOwner?: UserCreateNestedOneWithoutResponsibleFindingsInput
+    managementRespondedBy?: UserCreateNestedOneWithoutManagementResponseFindingsInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedFindingsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedFindingsInput
+  }
+
+  export type FindingUncheckedCreateWithoutUpdatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    managementRespondedById?: string | null
+    responsibleOwnerId?: string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    verificationNotes?: string | null
+    createdById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FindingCreateOrConnectWithoutUpdatedByInput = {
+    where: FindingWhereUniqueInput
+    create: XOR<FindingCreateWithoutUpdatedByInput, FindingUncheckedCreateWithoutUpdatedByInput>
+  }
+
+  export type FindingCreateManyUpdatedByInputEnvelope = {
+    data: FindingCreateManyUpdatedByInput | FindingCreateManyUpdatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FindingCreateWithoutResponsibleOwnerInput = {
+    id?: string
+    reference: string
+    title: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verificationNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutFindingsInput
+    auditEntity: AuditUniverseCreateNestedOneWithoutFindingsInput
+    managementRespondedBy?: UserCreateNestedOneWithoutManagementResponseFindingsInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedFindingsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedFindingsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedFindingsInput
+  }
+
+  export type FindingUncheckedCreateWithoutResponsibleOwnerInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    managementRespondedById?: string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    verificationNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FindingCreateOrConnectWithoutResponsibleOwnerInput = {
+    where: FindingWhereUniqueInput
+    create: XOR<FindingCreateWithoutResponsibleOwnerInput, FindingUncheckedCreateWithoutResponsibleOwnerInput>
+  }
+
+  export type FindingCreateManyResponsibleOwnerInputEnvelope = {
+    data: FindingCreateManyResponsibleOwnerInput | FindingCreateManyResponsibleOwnerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FindingCreateWithoutManagementRespondedByInput = {
+    id?: string
+    reference: string
+    title: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verificationNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutFindingsInput
+    auditEntity: AuditUniverseCreateNestedOneWithoutFindingsInput
+    responsibleOwner?: UserCreateNestedOneWithoutResponsibleFindingsInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedFindingsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedFindingsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedFindingsInput
+  }
+
+  export type FindingUncheckedCreateWithoutManagementRespondedByInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    responsibleOwnerId?: string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    verificationNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FindingCreateOrConnectWithoutManagementRespondedByInput = {
+    where: FindingWhereUniqueInput
+    create: XOR<FindingCreateWithoutManagementRespondedByInput, FindingUncheckedCreateWithoutManagementRespondedByInput>
+  }
+
+  export type FindingCreateManyManagementRespondedByInputEnvelope = {
+    data: FindingCreateManyManagementRespondedByInput | FindingCreateManyManagementRespondedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FindingCreateWithoutVerifiedByInput = {
+    id?: string
+    reference: string
+    title: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verificationNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutFindingsInput
+    auditEntity: AuditUniverseCreateNestedOneWithoutFindingsInput
+    responsibleOwner?: UserCreateNestedOneWithoutResponsibleFindingsInput
+    managementRespondedBy?: UserCreateNestedOneWithoutManagementResponseFindingsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedFindingsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedFindingsInput
+  }
+
+  export type FindingUncheckedCreateWithoutVerifiedByInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    managementRespondedById?: string | null
+    responsibleOwnerId?: string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verificationNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FindingCreateOrConnectWithoutVerifiedByInput = {
+    where: FindingWhereUniqueInput
+    create: XOR<FindingCreateWithoutVerifiedByInput, FindingUncheckedCreateWithoutVerifiedByInput>
+  }
+
+  export type FindingCreateManyVerifiedByInputEnvelope = {
+    data: FindingCreateManyVerifiedByInput | FindingCreateManyVerifiedByInput[]
     skipDuplicates?: boolean
   }
 
@@ -22851,6 +25991,118 @@ export namespace Prisma {
     assignedAt?: DateTimeFilter<"EngagementTeamMember"> | Date | string
   }
 
+  export type FindingUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: FindingWhereUniqueInput
+    update: XOR<FindingUpdateWithoutCreatedByInput, FindingUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<FindingCreateWithoutCreatedByInput, FindingUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type FindingUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: FindingWhereUniqueInput
+    data: XOR<FindingUpdateWithoutCreatedByInput, FindingUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type FindingUpdateManyWithWhereWithoutCreatedByInput = {
+    where: FindingScalarWhereInput
+    data: XOR<FindingUpdateManyMutationInput, FindingUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type FindingScalarWhereInput = {
+    AND?: FindingScalarWhereInput | FindingScalarWhereInput[]
+    OR?: FindingScalarWhereInput[]
+    NOT?: FindingScalarWhereInput | FindingScalarWhereInput[]
+    id?: UuidFilter<"Finding"> | string
+    reference?: StringFilter<"Finding"> | string
+    title?: StringFilter<"Finding"> | string
+    engagementId?: UuidNullableFilter<"Finding"> | string | null
+    auditEntityId?: UuidFilter<"Finding"> | string
+    category?: EnumFindingCategoryFilter<"Finding"> | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFilter<"Finding"> | $Enums.FindingSeverity
+    status?: EnumFindingStatusFilter<"Finding"> | $Enums.FindingStatus
+    condition?: StringFilter<"Finding"> | string
+    criteria?: StringNullableFilter<"Finding"> | string | null
+    cause?: StringNullableFilter<"Finding"> | string | null
+    impact?: StringNullableFilter<"Finding"> | string | null
+    recommendations?: StringNullableFilter<"Finding"> | string | null
+    managementResponse?: StringNullableFilter<"Finding"> | string | null
+    managementRespondedAt?: DateTimeNullableFilter<"Finding"> | Date | string | null
+    managementRespondedById?: UuidNullableFilter<"Finding"> | string | null
+    responsibleOwnerId?: UuidNullableFilter<"Finding"> | string | null
+    targetResolutionDate?: DateTimeNullableFilter<"Finding"> | Date | string | null
+    closedAt?: DateTimeNullableFilter<"Finding"> | Date | string | null
+    verifiedAt?: DateTimeNullableFilter<"Finding"> | Date | string | null
+    verifiedById?: UuidNullableFilter<"Finding"> | string | null
+    verificationNotes?: StringNullableFilter<"Finding"> | string | null
+    createdById?: UuidNullableFilter<"Finding"> | string | null
+    updatedById?: UuidNullableFilter<"Finding"> | string | null
+    createdAt?: DateTimeFilter<"Finding"> | Date | string
+    updatedAt?: DateTimeFilter<"Finding"> | Date | string
+  }
+
+  export type FindingUpsertWithWhereUniqueWithoutUpdatedByInput = {
+    where: FindingWhereUniqueInput
+    update: XOR<FindingUpdateWithoutUpdatedByInput, FindingUncheckedUpdateWithoutUpdatedByInput>
+    create: XOR<FindingCreateWithoutUpdatedByInput, FindingUncheckedCreateWithoutUpdatedByInput>
+  }
+
+  export type FindingUpdateWithWhereUniqueWithoutUpdatedByInput = {
+    where: FindingWhereUniqueInput
+    data: XOR<FindingUpdateWithoutUpdatedByInput, FindingUncheckedUpdateWithoutUpdatedByInput>
+  }
+
+  export type FindingUpdateManyWithWhereWithoutUpdatedByInput = {
+    where: FindingScalarWhereInput
+    data: XOR<FindingUpdateManyMutationInput, FindingUncheckedUpdateManyWithoutUpdatedByInput>
+  }
+
+  export type FindingUpsertWithWhereUniqueWithoutResponsibleOwnerInput = {
+    where: FindingWhereUniqueInput
+    update: XOR<FindingUpdateWithoutResponsibleOwnerInput, FindingUncheckedUpdateWithoutResponsibleOwnerInput>
+    create: XOR<FindingCreateWithoutResponsibleOwnerInput, FindingUncheckedCreateWithoutResponsibleOwnerInput>
+  }
+
+  export type FindingUpdateWithWhereUniqueWithoutResponsibleOwnerInput = {
+    where: FindingWhereUniqueInput
+    data: XOR<FindingUpdateWithoutResponsibleOwnerInput, FindingUncheckedUpdateWithoutResponsibleOwnerInput>
+  }
+
+  export type FindingUpdateManyWithWhereWithoutResponsibleOwnerInput = {
+    where: FindingScalarWhereInput
+    data: XOR<FindingUpdateManyMutationInput, FindingUncheckedUpdateManyWithoutResponsibleOwnerInput>
+  }
+
+  export type FindingUpsertWithWhereUniqueWithoutManagementRespondedByInput = {
+    where: FindingWhereUniqueInput
+    update: XOR<FindingUpdateWithoutManagementRespondedByInput, FindingUncheckedUpdateWithoutManagementRespondedByInput>
+    create: XOR<FindingCreateWithoutManagementRespondedByInput, FindingUncheckedCreateWithoutManagementRespondedByInput>
+  }
+
+  export type FindingUpdateWithWhereUniqueWithoutManagementRespondedByInput = {
+    where: FindingWhereUniqueInput
+    data: XOR<FindingUpdateWithoutManagementRespondedByInput, FindingUncheckedUpdateWithoutManagementRespondedByInput>
+  }
+
+  export type FindingUpdateManyWithWhereWithoutManagementRespondedByInput = {
+    where: FindingScalarWhereInput
+    data: XOR<FindingUpdateManyMutationInput, FindingUncheckedUpdateManyWithoutManagementRespondedByInput>
+  }
+
+  export type FindingUpsertWithWhereUniqueWithoutVerifiedByInput = {
+    where: FindingWhereUniqueInput
+    update: XOR<FindingUpdateWithoutVerifiedByInput, FindingUncheckedUpdateWithoutVerifiedByInput>
+    create: XOR<FindingCreateWithoutVerifiedByInput, FindingUncheckedCreateWithoutVerifiedByInput>
+  }
+
+  export type FindingUpdateWithWhereUniqueWithoutVerifiedByInput = {
+    where: FindingWhereUniqueInput
+    data: XOR<FindingUpdateWithoutVerifiedByInput, FindingUncheckedUpdateWithoutVerifiedByInput>
+  }
+
+  export type FindingUpdateManyWithWhereWithoutVerifiedByInput = {
+    where: FindingScalarWhereInput
+    data: XOR<FindingUpdateManyMutationInput, FindingUncheckedUpdateManyWithoutVerifiedByInput>
+  }
+
   export type UserRoleCreateWithoutRoleInput = {
     assignedAt?: Date | string
     user: UserCreateNestedOneWithoutUserRolesInput
@@ -22994,6 +26246,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserUncheckedCreateWithoutUserRolesInput = {
@@ -23022,6 +26279,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserCreateOrConnectWithoutUserRolesInput = {
@@ -23089,6 +26351,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUserRolesInput = {
@@ -23117,6 +26384,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type RoleUpsertWithoutUserRolesInput = {
@@ -23268,6 +26540,7 @@ export namespace Prisma {
     risks?: RiskCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
+    findings?: FindingCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutChildrenInput = {
@@ -23290,6 +26563,7 @@ export namespace Prisma {
     risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
+    findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutChildrenInput = {
@@ -23317,6 +26591,7 @@ export namespace Prisma {
     risks?: RiskCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
+    findings?: FindingCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutParentInput = {
@@ -23339,6 +26614,7 @@ export namespace Prisma {
     risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
+    findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutParentInput = {
@@ -23377,6 +26653,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserUncheckedCreateWithoutOwnedAuditEntitiesInput = {
@@ -23405,6 +26686,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserCreateOrConnectWithoutOwnedAuditEntitiesInput = {
@@ -23438,6 +26724,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedAuditEntitiesInput = {
@@ -23466,6 +26757,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedAuditEntitiesInput = {
@@ -23499,6 +26795,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserUncheckedCreateWithoutUpdatedAuditEntitiesInput = {
@@ -23527,6 +26828,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserCreateOrConnectWithoutUpdatedAuditEntitiesInput = {
@@ -23674,6 +26980,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedEngagementsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
     teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
+    findings?: FindingCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutAuditEntityInput = {
@@ -23700,6 +27007,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
+    findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutAuditEntityInput = {
@@ -23709,6 +27017,72 @@ export namespace Prisma {
 
   export type EngagementCreateManyAuditEntityInputEnvelope = {
     data: EngagementCreateManyAuditEntityInput | EngagementCreateManyAuditEntityInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FindingCreateWithoutAuditEntityInput = {
+    id?: string
+    reference: string
+    title: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verificationNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutFindingsInput
+    responsibleOwner?: UserCreateNestedOneWithoutResponsibleFindingsInput
+    managementRespondedBy?: UserCreateNestedOneWithoutManagementResponseFindingsInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedFindingsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedFindingsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedFindingsInput
+  }
+
+  export type FindingUncheckedCreateWithoutAuditEntityInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    managementRespondedById?: string | null
+    responsibleOwnerId?: string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    verificationNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FindingCreateOrConnectWithoutAuditEntityInput = {
+    where: FindingWhereUniqueInput
+    create: XOR<FindingCreateWithoutAuditEntityInput, FindingUncheckedCreateWithoutAuditEntityInput>
+  }
+
+  export type FindingCreateManyAuditEntityInputEnvelope = {
+    data: FindingCreateManyAuditEntityInput | FindingCreateManyAuditEntityInput[]
     skipDuplicates?: boolean
   }
 
@@ -23743,6 +27117,7 @@ export namespace Prisma {
     risks?: RiskUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
+    findings?: FindingUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutChildrenInput = {
@@ -23765,6 +27140,7 @@ export namespace Prisma {
     risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
+    findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUpsertWithWhereUniqueWithoutParentInput = {
@@ -23820,6 +27196,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOwnedAuditEntitiesInput = {
@@ -23848,6 +27229,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUpsertWithoutCreatedAuditEntitiesInput = {
@@ -23887,6 +27273,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedAuditEntitiesInput = {
@@ -23915,6 +27306,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUpsertWithoutUpdatedAuditEntitiesInput = {
@@ -23954,6 +27350,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUpdatedAuditEntitiesInput = {
@@ -23982,6 +27383,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type RiskUpsertWithWhereUniqueWithoutAuditEntityInput = {
@@ -24032,6 +27438,22 @@ export namespace Prisma {
     data: XOR<EngagementUpdateManyMutationInput, EngagementUncheckedUpdateManyWithoutAuditEntityInput>
   }
 
+  export type FindingUpsertWithWhereUniqueWithoutAuditEntityInput = {
+    where: FindingWhereUniqueInput
+    update: XOR<FindingUpdateWithoutAuditEntityInput, FindingUncheckedUpdateWithoutAuditEntityInput>
+    create: XOR<FindingCreateWithoutAuditEntityInput, FindingUncheckedCreateWithoutAuditEntityInput>
+  }
+
+  export type FindingUpdateWithWhereUniqueWithoutAuditEntityInput = {
+    where: FindingWhereUniqueInput
+    data: XOR<FindingUpdateWithoutAuditEntityInput, FindingUncheckedUpdateWithoutAuditEntityInput>
+  }
+
+  export type FindingUpdateManyWithWhereWithoutAuditEntityInput = {
+    where: FindingScalarWhereInput
+    data: XOR<FindingUpdateManyMutationInput, FindingUncheckedUpdateManyWithoutAuditEntityInput>
+  }
+
   export type AuditUniverseCreateWithoutRisksInput = {
     id?: string
     code: string
@@ -24052,6 +27474,7 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedAuditEntitiesInput
     auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
+    findings?: FindingCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutRisksInput = {
@@ -24074,6 +27497,7 @@ export namespace Prisma {
     children?: AuditUniverseUncheckedCreateNestedManyWithoutParentInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
+    findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutRisksInput = {
@@ -24107,6 +27531,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserUncheckedCreateWithoutOwnedRisksInput = {
@@ -24135,6 +27564,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserCreateOrConnectWithoutOwnedRisksInput = {
@@ -24168,6 +27602,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedRisksInput = {
@@ -24196,6 +27635,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedRisksInput = {
@@ -24229,6 +27673,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserUncheckedCreateWithoutUpdatedRisksInput = {
@@ -24257,6 +27706,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserCreateOrConnectWithoutUpdatedRisksInput = {
@@ -24378,6 +27832,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedEngagementsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
     teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
+    findings?: FindingCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutRiskInput = {
@@ -24404,6 +27859,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
+    findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutRiskInput = {
@@ -24447,6 +27903,7 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedAuditEntitiesNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
+    findings?: FindingUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutRisksInput = {
@@ -24469,6 +27926,7 @@ export namespace Prisma {
     children?: AuditUniverseUncheckedUpdateManyWithoutParentNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
+    findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type UserUpsertWithoutOwnedRisksInput = {
@@ -24508,6 +27966,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOwnedRisksInput = {
@@ -24536,6 +27999,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUpsertWithoutCreatedRisksInput = {
@@ -24575,6 +28043,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedRisksInput = {
@@ -24603,6 +28076,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUpsertWithoutUpdatedRisksInput = {
@@ -24642,6 +28120,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUpdatedRisksInput = {
@@ -24670,6 +28153,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type RiskActionUpsertWithWhereUniqueWithoutRiskInput = {
@@ -24801,6 +28289,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserUncheckedCreateWithoutAssignedActionsInput = {
@@ -24829,6 +28322,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserCreateOrConnectWithoutAssignedActionsInput = {
@@ -24934,6 +28432,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssignedActionsInput = {
@@ -24962,6 +28465,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type AuditUniverseCreateWithoutAuditPlansInput = {
@@ -24984,6 +28492,7 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedAuditEntitiesInput
     risks?: RiskCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
+    findings?: FindingCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutAuditPlansInput = {
@@ -25006,6 +28515,7 @@ export namespace Prisma {
     children?: AuditUniverseUncheckedCreateNestedManyWithoutParentInput
     risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
+    findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutAuditPlansInput = {
@@ -25094,6 +28604,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserUncheckedCreateWithoutApprovedAuditPlansInput = {
@@ -25122,6 +28637,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserCreateOrConnectWithoutApprovedAuditPlansInput = {
@@ -25155,6 +28675,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserUncheckedCreateWithoutLeadAuditPlansInput = {
@@ -25183,6 +28708,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserCreateOrConnectWithoutLeadAuditPlansInput = {
@@ -25216,6 +28746,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedAuditPlansInput = {
@@ -25244,6 +28779,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedAuditPlansInput = {
@@ -25277,6 +28817,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserUncheckedCreateWithoutUpdatedAuditPlansInput = {
@@ -25305,6 +28850,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserCreateOrConnectWithoutUpdatedAuditPlansInput = {
@@ -25336,6 +28886,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedEngagementsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
     teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
+    findings?: FindingCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutAuditPlanInput = {
@@ -25362,6 +28913,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
+    findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutAuditPlanInput = {
@@ -25405,6 +28957,7 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedAuditEntitiesNestedInput
     risks?: RiskUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
+    findings?: FindingUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutAuditPlansInput = {
@@ -25427,6 +28980,7 @@ export namespace Prisma {
     children?: AuditUniverseUncheckedUpdateManyWithoutParentNestedInput
     risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
+    findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type RiskUpsertWithoutAuditPlansInput = {
@@ -25527,6 +29081,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovedAuditPlansInput = {
@@ -25555,6 +29114,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUpsertWithoutLeadAuditPlansInput = {
@@ -25594,6 +29158,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLeadAuditPlansInput = {
@@ -25622,6 +29191,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUpsertWithoutCreatedAuditPlansInput = {
@@ -25661,6 +29235,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedAuditPlansInput = {
@@ -25689,6 +29268,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUpsertWithoutUpdatedAuditPlansInput = {
@@ -25728,6 +29312,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUpdatedAuditPlansInput = {
@@ -25756,6 +29345,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type EngagementUpsertWithWhereUniqueWithoutAuditPlanInput = {
@@ -25845,6 +29439,7 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedAuditEntitiesInput
     risks?: RiskCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
+    findings?: FindingCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutEngagementsInput = {
@@ -25867,6 +29462,7 @@ export namespace Prisma {
     children?: AuditUniverseUncheckedCreateNestedManyWithoutParentInput
     risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
+    findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutEngagementsInput = {
@@ -25955,6 +29551,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserUncheckedCreateWithoutLeadEngagementsInput = {
@@ -25983,6 +29584,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserCreateOrConnectWithoutLeadEngagementsInput = {
@@ -26016,6 +29622,11 @@ export namespace Prisma {
     createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
     updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
     engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserUncheckedCreateWithoutClosedEngagementsInput = {
@@ -26044,6 +29655,11 @@ export namespace Prisma {
     createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
     updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
     engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserCreateOrConnectWithoutClosedEngagementsInput = {
@@ -26077,6 +29693,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedEngagementsInput = {
@@ -26105,6 +29726,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedEngagementsInput = {
@@ -26138,6 +29764,11 @@ export namespace Prisma {
     createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
     closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserUncheckedCreateWithoutUpdatedEngagementsInput = {
@@ -26166,6 +29797,11 @@ export namespace Prisma {
     createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
     closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
     engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserCreateOrConnectWithoutUpdatedEngagementsInput = {
@@ -26192,6 +29828,72 @@ export namespace Prisma {
 
   export type EngagementTeamMemberCreateManyEngagementInputEnvelope = {
     data: EngagementTeamMemberCreateManyEngagementInput | EngagementTeamMemberCreateManyEngagementInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FindingCreateWithoutEngagementInput = {
+    id?: string
+    reference: string
+    title: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verificationNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auditEntity: AuditUniverseCreateNestedOneWithoutFindingsInput
+    responsibleOwner?: UserCreateNestedOneWithoutResponsibleFindingsInput
+    managementRespondedBy?: UserCreateNestedOneWithoutManagementResponseFindingsInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedFindingsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedFindingsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedFindingsInput
+  }
+
+  export type FindingUncheckedCreateWithoutEngagementInput = {
+    id?: string
+    reference: string
+    title: string
+    auditEntityId: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    managementRespondedById?: string | null
+    responsibleOwnerId?: string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    verificationNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FindingCreateOrConnectWithoutEngagementInput = {
+    where: FindingWhereUniqueInput
+    create: XOR<FindingCreateWithoutEngagementInput, FindingUncheckedCreateWithoutEngagementInput>
+  }
+
+  export type FindingCreateManyEngagementInputEnvelope = {
+    data: FindingCreateManyEngagementInput | FindingCreateManyEngagementInput[]
     skipDuplicates?: boolean
   }
 
@@ -26283,6 +29985,7 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedAuditEntitiesNestedInput
     risks?: RiskUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
+    findings?: FindingUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutEngagementsInput = {
@@ -26305,6 +30008,7 @@ export namespace Prisma {
     children?: AuditUniverseUncheckedUpdateManyWithoutParentNestedInput
     risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
+    findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type RiskUpsertWithoutEngagementsInput = {
@@ -26405,6 +30109,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLeadEngagementsInput = {
@@ -26433,6 +30142,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUpsertWithoutClosedEngagementsInput = {
@@ -26472,6 +30186,11 @@ export namespace Prisma {
     createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
     updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
     engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutClosedEngagementsInput = {
@@ -26500,6 +30219,11 @@ export namespace Prisma {
     createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
     updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
     engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUpsertWithoutCreatedEngagementsInput = {
@@ -26539,6 +30263,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedEngagementsInput = {
@@ -26567,6 +30296,11 @@ export namespace Prisma {
     updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUpsertWithoutUpdatedEngagementsInput = {
@@ -26606,6 +30340,11 @@ export namespace Prisma {
     createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
     closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUpdatedEngagementsInput = {
@@ -26634,6 +30373,11 @@ export namespace Prisma {
     createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
     closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
     engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type EngagementTeamMemberUpsertWithWhereUniqueWithoutEngagementInput = {
@@ -26650,6 +30394,22 @@ export namespace Prisma {
   export type EngagementTeamMemberUpdateManyWithWhereWithoutEngagementInput = {
     where: EngagementTeamMemberScalarWhereInput
     data: XOR<EngagementTeamMemberUpdateManyMutationInput, EngagementTeamMemberUncheckedUpdateManyWithoutEngagementInput>
+  }
+
+  export type FindingUpsertWithWhereUniqueWithoutEngagementInput = {
+    where: FindingWhereUniqueInput
+    update: XOR<FindingUpdateWithoutEngagementInput, FindingUncheckedUpdateWithoutEngagementInput>
+    create: XOR<FindingCreateWithoutEngagementInput, FindingUncheckedCreateWithoutEngagementInput>
+  }
+
+  export type FindingUpdateWithWhereUniqueWithoutEngagementInput = {
+    where: FindingWhereUniqueInput
+    data: XOR<FindingUpdateWithoutEngagementInput, FindingUncheckedUpdateWithoutEngagementInput>
+  }
+
+  export type FindingUpdateManyWithWhereWithoutEngagementInput = {
+    where: FindingScalarWhereInput
+    data: XOR<FindingUpdateManyMutationInput, FindingUncheckedUpdateManyWithoutEngagementInput>
   }
 
   export type EngagementCreateWithoutTeamMembersInput = {
@@ -26676,6 +30436,7 @@ export namespace Prisma {
     closedBy?: UserCreateNestedOneWithoutClosedEngagementsInput
     createdBy?: UserCreateNestedOneWithoutCreatedEngagementsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
+    findings?: FindingCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutTeamMembersInput = {
@@ -26702,6 +30463,7 @@ export namespace Prisma {
     updatedById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutTeamMembersInput = {
@@ -26735,6 +30497,11 @@ export namespace Prisma {
     createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
     updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserUncheckedCreateWithoutEngagementMembershipsInput = {
@@ -26763,6 +30530,11 @@ export namespace Prisma {
     createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
     updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
     closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
   }
 
   export type UserCreateOrConnectWithoutEngagementMembershipsInput = {
@@ -26805,6 +30577,7 @@ export namespace Prisma {
     closedBy?: UserUpdateOneWithoutClosedEngagementsNestedInput
     createdBy?: UserUpdateOneWithoutCreatedEngagementsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
+    findings?: FindingUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutTeamMembersInput = {
@@ -26831,6 +30604,7 @@ export namespace Prisma {
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type UserUpsertWithoutEngagementMembershipsInput = {
@@ -26870,6 +30644,11 @@ export namespace Prisma {
     createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
     updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEngagementMembershipsInput = {
@@ -26898,6 +30677,983 @@ export namespace Prisma {
     createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
     updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
     closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+  }
+
+  export type EngagementCreateWithoutFindingsInput = {
+    id?: string
+    reference: string
+    title: string
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closureNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auditPlan?: AuditPlanCreateNestedOneWithoutEngagementsInput
+    auditEntity: AuditUniverseCreateNestedOneWithoutEngagementsInput
+    risk?: RiskCreateNestedOneWithoutEngagementsInput
+    leadAuditor?: UserCreateNestedOneWithoutLeadEngagementsInput
+    closedBy?: UserCreateNestedOneWithoutClosedEngagementsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedEngagementsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
+    teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
+  }
+
+  export type EngagementUncheckedCreateWithoutFindingsInput = {
+    id?: string
+    reference: string
+    title: string
+    auditPlanId?: string | null
+    auditEntityId: string
+    riskId?: string | null
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    leadAuditorId?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closedById?: string | null
+    closureNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
+  }
+
+  export type EngagementCreateOrConnectWithoutFindingsInput = {
+    where: EngagementWhereUniqueInput
+    create: XOR<EngagementCreateWithoutFindingsInput, EngagementUncheckedCreateWithoutFindingsInput>
+  }
+
+  export type AuditUniverseCreateWithoutFindingsInput = {
+    id?: string
+    code: string
+    name: string
+    description?: string | null
+    entityType: $Enums.AuditEntityType
+    status?: $Enums.AuditEntityStatus
+    businessProcess?: string | null
+    department?: string | null
+    riskRating?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    parent?: AuditUniverseCreateNestedOneWithoutChildrenInput
+    children?: AuditUniverseCreateNestedManyWithoutParentInput
+    owner?: UserCreateNestedOneWithoutOwnedAuditEntitiesInput
+    createdBy?: UserCreateNestedOneWithoutCreatedAuditEntitiesInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedAuditEntitiesInput
+    risks?: RiskCreateNestedManyWithoutAuditEntityInput
+    auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
+    engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
+  }
+
+  export type AuditUniverseUncheckedCreateWithoutFindingsInput = {
+    id?: string
+    code: string
+    name: string
+    description?: string | null
+    entityType: $Enums.AuditEntityType
+    status?: $Enums.AuditEntityStatus
+    parentId?: string | null
+    businessProcess?: string | null
+    department?: string | null
+    riskRating?: string | null
+    notes?: string | null
+    ownerId?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    children?: AuditUniverseUncheckedCreateNestedManyWithoutParentInput
+    risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
+    auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
+    engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
+  }
+
+  export type AuditUniverseCreateOrConnectWithoutFindingsInput = {
+    where: AuditUniverseWhereUniqueInput
+    create: XOR<AuditUniverseCreateWithoutFindingsInput, AuditUniverseUncheckedCreateWithoutFindingsInput>
+  }
+
+  export type UserCreateWithoutResponsibleFindingsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+  }
+
+  export type UserUncheckedCreateWithoutResponsibleFindingsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+  }
+
+  export type UserCreateOrConnectWithoutResponsibleFindingsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutResponsibleFindingsInput, UserUncheckedCreateWithoutResponsibleFindingsInput>
+  }
+
+  export type UserCreateWithoutManagementResponseFindingsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+  }
+
+  export type UserUncheckedCreateWithoutManagementResponseFindingsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+  }
+
+  export type UserCreateOrConnectWithoutManagementResponseFindingsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutManagementResponseFindingsInput, UserUncheckedCreateWithoutManagementResponseFindingsInput>
+  }
+
+  export type UserCreateWithoutVerifiedFindingsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+  }
+
+  export type UserUncheckedCreateWithoutVerifiedFindingsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+  }
+
+  export type UserCreateOrConnectWithoutVerifiedFindingsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutVerifiedFindingsInput, UserUncheckedCreateWithoutVerifiedFindingsInput>
+  }
+
+  export type UserCreateWithoutCreatedFindingsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+  }
+
+  export type UserUncheckedCreateWithoutCreatedFindingsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+  }
+
+  export type UserCreateOrConnectWithoutCreatedFindingsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCreatedFindingsInput, UserUncheckedCreateWithoutCreatedFindingsInput>
+  }
+
+  export type UserCreateWithoutUpdatedFindingsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+  }
+
+  export type UserUncheckedCreateWithoutUpdatedFindingsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+  }
+
+  export type UserCreateOrConnectWithoutUpdatedFindingsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUpdatedFindingsInput, UserUncheckedCreateWithoutUpdatedFindingsInput>
+  }
+
+  export type EngagementUpsertWithoutFindingsInput = {
+    update: XOR<EngagementUpdateWithoutFindingsInput, EngagementUncheckedUpdateWithoutFindingsInput>
+    create: XOR<EngagementCreateWithoutFindingsInput, EngagementUncheckedCreateWithoutFindingsInput>
+    where?: EngagementWhereInput
+  }
+
+  export type EngagementUpdateToOneWithWhereWithoutFindingsInput = {
+    where?: EngagementWhereInput
+    data: XOR<EngagementUpdateWithoutFindingsInput, EngagementUncheckedUpdateWithoutFindingsInput>
+  }
+
+  export type EngagementUpdateWithoutFindingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auditPlan?: AuditPlanUpdateOneWithoutEngagementsNestedInput
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutEngagementsNestedInput
+    risk?: RiskUpdateOneWithoutEngagementsNestedInput
+    leadAuditor?: UserUpdateOneWithoutLeadEngagementsNestedInput
+    closedBy?: UserUpdateOneWithoutClosedEngagementsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedEngagementsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
+    teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
+  }
+
+  export type EngagementUncheckedUpdateWithoutFindingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    auditPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedById?: NullableStringFieldUpdateOperationsInput | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
+  }
+
+  export type AuditUniverseUpsertWithoutFindingsInput = {
+    update: XOR<AuditUniverseUpdateWithoutFindingsInput, AuditUniverseUncheckedUpdateWithoutFindingsInput>
+    create: XOR<AuditUniverseCreateWithoutFindingsInput, AuditUniverseUncheckedCreateWithoutFindingsInput>
+    where?: AuditUniverseWhereInput
+  }
+
+  export type AuditUniverseUpdateToOneWithWhereWithoutFindingsInput = {
+    where?: AuditUniverseWhereInput
+    data: XOR<AuditUniverseUpdateWithoutFindingsInput, AuditUniverseUncheckedUpdateWithoutFindingsInput>
+  }
+
+  export type AuditUniverseUpdateWithoutFindingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    entityType?: EnumAuditEntityTypeFieldUpdateOperationsInput | $Enums.AuditEntityType
+    status?: EnumAuditEntityStatusFieldUpdateOperationsInput | $Enums.AuditEntityStatus
+    businessProcess?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    riskRating?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    parent?: AuditUniverseUpdateOneWithoutChildrenNestedInput
+    children?: AuditUniverseUpdateManyWithoutParentNestedInput
+    owner?: UserUpdateOneWithoutOwnedAuditEntitiesNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedAuditEntitiesNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedAuditEntitiesNestedInput
+    risks?: RiskUpdateManyWithoutAuditEntityNestedInput
+    auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
+    engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
+  }
+
+  export type AuditUniverseUncheckedUpdateWithoutFindingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    entityType?: EnumAuditEntityTypeFieldUpdateOperationsInput | $Enums.AuditEntityType
+    status?: EnumAuditEntityStatusFieldUpdateOperationsInput | $Enums.AuditEntityStatus
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    businessProcess?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    riskRating?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    children?: AuditUniverseUncheckedUpdateManyWithoutParentNestedInput
+    risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
+    auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
+    engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
+  }
+
+  export type UserUpsertWithoutResponsibleFindingsInput = {
+    update: XOR<UserUpdateWithoutResponsibleFindingsInput, UserUncheckedUpdateWithoutResponsibleFindingsInput>
+    create: XOR<UserCreateWithoutResponsibleFindingsInput, UserUncheckedCreateWithoutResponsibleFindingsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutResponsibleFindingsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutResponsibleFindingsInput, UserUncheckedUpdateWithoutResponsibleFindingsInput>
+  }
+
+  export type UserUpdateWithoutResponsibleFindingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutResponsibleFindingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+  }
+
+  export type UserUpsertWithoutManagementResponseFindingsInput = {
+    update: XOR<UserUpdateWithoutManagementResponseFindingsInput, UserUncheckedUpdateWithoutManagementResponseFindingsInput>
+    create: XOR<UserCreateWithoutManagementResponseFindingsInput, UserUncheckedCreateWithoutManagementResponseFindingsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutManagementResponseFindingsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutManagementResponseFindingsInput, UserUncheckedUpdateWithoutManagementResponseFindingsInput>
+  }
+
+  export type UserUpdateWithoutManagementResponseFindingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutManagementResponseFindingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+  }
+
+  export type UserUpsertWithoutVerifiedFindingsInput = {
+    update: XOR<UserUpdateWithoutVerifiedFindingsInput, UserUncheckedUpdateWithoutVerifiedFindingsInput>
+    create: XOR<UserCreateWithoutVerifiedFindingsInput, UserUncheckedCreateWithoutVerifiedFindingsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutVerifiedFindingsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutVerifiedFindingsInput, UserUncheckedUpdateWithoutVerifiedFindingsInput>
+  }
+
+  export type UserUpdateWithoutVerifiedFindingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutVerifiedFindingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+  }
+
+  export type UserUpsertWithoutCreatedFindingsInput = {
+    update: XOR<UserUpdateWithoutCreatedFindingsInput, UserUncheckedUpdateWithoutCreatedFindingsInput>
+    create: XOR<UserCreateWithoutCreatedFindingsInput, UserUncheckedCreateWithoutCreatedFindingsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCreatedFindingsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCreatedFindingsInput, UserUncheckedUpdateWithoutCreatedFindingsInput>
+  }
+
+  export type UserUpdateWithoutCreatedFindingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCreatedFindingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+  }
+
+  export type UserUpsertWithoutUpdatedFindingsInput = {
+    update: XOR<UserUpdateWithoutUpdatedFindingsInput, UserUncheckedUpdateWithoutUpdatedFindingsInput>
+    create: XOR<UserCreateWithoutUpdatedFindingsInput, UserUncheckedCreateWithoutUpdatedFindingsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUpdatedFindingsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUpdatedFindingsInput, UserUncheckedUpdateWithoutUpdatedFindingsInput>
+  }
+
+  export type UserUpdateWithoutUpdatedFindingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUpdatedFindingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserRoleCreateManyUserInput = {
@@ -27231,6 +31987,146 @@ export namespace Prisma {
     assignedAt?: Date | string
   }
 
+  export type FindingCreateManyCreatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    managementRespondedById?: string | null
+    responsibleOwnerId?: string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    verificationNotes?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FindingCreateManyUpdatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    managementRespondedById?: string | null
+    responsibleOwnerId?: string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    verificationNotes?: string | null
+    createdById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FindingCreateManyResponsibleOwnerInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    managementRespondedById?: string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    verificationNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FindingCreateManyManagementRespondedByInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    responsibleOwnerId?: string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    verificationNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FindingCreateManyVerifiedByInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    managementRespondedById?: string | null
+    responsibleOwnerId?: string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verificationNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type UserRoleUpdateWithoutUserInput = {
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUserRolesNestedInput
@@ -27266,6 +32162,7 @@ export namespace Prisma {
     risks?: RiskUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
+    findings?: FindingUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutOwnerInput = {
@@ -27288,6 +32185,7 @@ export namespace Prisma {
     risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
+    findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateManyWithoutOwnerInput = {
@@ -27328,6 +32226,7 @@ export namespace Prisma {
     risks?: RiskUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
+    findings?: FindingUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutCreatedByInput = {
@@ -27350,6 +32249,7 @@ export namespace Prisma {
     risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
+    findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateManyWithoutCreatedByInput = {
@@ -27390,6 +32290,7 @@ export namespace Prisma {
     risks?: RiskUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
+    findings?: FindingUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutUpdatedByInput = {
@@ -27412,6 +32313,7 @@ export namespace Prisma {
     risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
+    findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -27980,6 +32882,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedEngagementsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
     teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
+    findings?: FindingUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutLeadAuditorInput = {
@@ -28006,6 +32909,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
+    findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateManyWithoutLeadAuditorInput = {
@@ -28057,6 +32961,7 @@ export namespace Prisma {
     closedBy?: UserUpdateOneWithoutClosedEngagementsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
     teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
+    findings?: FindingUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutCreatedByInput = {
@@ -28083,6 +32988,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
+    findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateManyWithoutCreatedByInput = {
@@ -28134,6 +33040,7 @@ export namespace Prisma {
     closedBy?: UserUpdateOneWithoutClosedEngagementsNestedInput
     createdBy?: UserUpdateOneWithoutCreatedEngagementsNestedInput
     teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
+    findings?: FindingUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutUpdatedByInput = {
@@ -28160,6 +33067,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
+    findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -28211,6 +33119,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedEngagementsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
     teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
+    findings?: FindingUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutClosedByInput = {
@@ -28237,6 +33146,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
+    findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateManyWithoutClosedByInput = {
@@ -28280,6 +33190,426 @@ export namespace Prisma {
     engagementId?: StringFieldUpdateOperationsInput | string
     role?: EnumTeamMemberRoleFieldUpdateOperationsInput | $Enums.TeamMemberRole
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FindingUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutFindingsNestedInput
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutFindingsNestedInput
+    responsibleOwner?: UserUpdateOneWithoutResponsibleFindingsNestedInput
+    managementRespondedBy?: UserUpdateOneWithoutManagementResponseFindingsNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedFindingsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedFindingsNestedInput
+  }
+
+  export type FindingUncheckedUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementRespondedById?: NullableStringFieldUpdateOperationsInput | string | null
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FindingUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementRespondedById?: NullableStringFieldUpdateOperationsInput | string | null
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FindingUpdateWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutFindingsNestedInput
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutFindingsNestedInput
+    responsibleOwner?: UserUpdateOneWithoutResponsibleFindingsNestedInput
+    managementRespondedBy?: UserUpdateOneWithoutManagementResponseFindingsNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedFindingsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedFindingsNestedInput
+  }
+
+  export type FindingUncheckedUpdateWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementRespondedById?: NullableStringFieldUpdateOperationsInput | string | null
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FindingUncheckedUpdateManyWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementRespondedById?: NullableStringFieldUpdateOperationsInput | string | null
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FindingUpdateWithoutResponsibleOwnerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutFindingsNestedInput
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutFindingsNestedInput
+    managementRespondedBy?: UserUpdateOneWithoutManagementResponseFindingsNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedFindingsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedFindingsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedFindingsNestedInput
+  }
+
+  export type FindingUncheckedUpdateWithoutResponsibleOwnerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementRespondedById?: NullableStringFieldUpdateOperationsInput | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FindingUncheckedUpdateManyWithoutResponsibleOwnerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementRespondedById?: NullableStringFieldUpdateOperationsInput | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FindingUpdateWithoutManagementRespondedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutFindingsNestedInput
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutFindingsNestedInput
+    responsibleOwner?: UserUpdateOneWithoutResponsibleFindingsNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedFindingsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedFindingsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedFindingsNestedInput
+  }
+
+  export type FindingUncheckedUpdateWithoutManagementRespondedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FindingUncheckedUpdateManyWithoutManagementRespondedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FindingUpdateWithoutVerifiedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutFindingsNestedInput
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutFindingsNestedInput
+    responsibleOwner?: UserUpdateOneWithoutResponsibleFindingsNestedInput
+    managementRespondedBy?: UserUpdateOneWithoutManagementResponseFindingsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedFindingsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedFindingsNestedInput
+  }
+
+  export type FindingUncheckedUpdateWithoutVerifiedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementRespondedById?: NullableStringFieldUpdateOperationsInput | string | null
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FindingUncheckedUpdateManyWithoutVerifiedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementRespondedById?: NullableStringFieldUpdateOperationsInput | string | null
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserRoleCreateManyRoleInput = {
@@ -28429,6 +33759,34 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type FindingCreateManyAuditEntityInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    managementRespondedById?: string | null
+    responsibleOwnerId?: string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    verificationNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type AuditUniverseUpdateWithoutParentInput = {
     id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
@@ -28449,6 +33807,7 @@ export namespace Prisma {
     risks?: RiskUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
+    findings?: FindingUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutParentInput = {
@@ -28471,6 +33830,7 @@ export namespace Prisma {
     risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
+    findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateManyWithoutParentInput = {
@@ -28655,6 +34015,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedEngagementsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
     teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
+    findings?: FindingUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutAuditEntityInput = {
@@ -28681,6 +34042,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
+    findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateManyWithoutAuditEntityInput = {
@@ -28702,6 +34064,90 @@ export namespace Prisma {
     closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     closedById?: NullableStringFieldUpdateOperationsInput | string | null
     closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FindingUpdateWithoutAuditEntityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutFindingsNestedInput
+    responsibleOwner?: UserUpdateOneWithoutResponsibleFindingsNestedInput
+    managementRespondedBy?: UserUpdateOneWithoutManagementResponseFindingsNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedFindingsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedFindingsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedFindingsNestedInput
+  }
+
+  export type FindingUncheckedUpdateWithoutAuditEntityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementRespondedById?: NullableStringFieldUpdateOperationsInput | string | null
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FindingUncheckedUpdateManyWithoutAuditEntityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementRespondedById?: NullableStringFieldUpdateOperationsInput | string | null
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28895,6 +34341,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedEngagementsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
     teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
+    findings?: FindingUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutRiskInput = {
@@ -28921,6 +34368,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
+    findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateManyWithoutRiskInput = {
@@ -28997,6 +34445,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedEngagementsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
     teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
+    findings?: FindingUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutAuditPlanInput = {
@@ -29023,6 +34472,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
+    findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateManyWithoutAuditPlanInput = {
@@ -29056,6 +34506,34 @@ export namespace Prisma {
     assignedAt?: Date | string
   }
 
+  export type FindingCreateManyEngagementInput = {
+    id?: string
+    reference: string
+    title: string
+    auditEntityId: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    managementRespondedById?: string | null
+    responsibleOwnerId?: string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    verificationNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type EngagementTeamMemberUpdateWithoutEngagementInput = {
     role?: EnumTeamMemberRoleFieldUpdateOperationsInput | $Enums.TeamMemberRole
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29072,6 +34550,90 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     role?: EnumTeamMemberRoleFieldUpdateOperationsInput | $Enums.TeamMemberRole
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FindingUpdateWithoutEngagementInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutFindingsNestedInput
+    responsibleOwner?: UserUpdateOneWithoutResponsibleFindingsNestedInput
+    managementRespondedBy?: UserUpdateOneWithoutManagementResponseFindingsNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedFindingsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedFindingsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedFindingsNestedInput
+  }
+
+  export type FindingUncheckedUpdateWithoutEngagementInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementRespondedById?: NullableStringFieldUpdateOperationsInput | string | null
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FindingUncheckedUpdateManyWithoutEngagementInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementRespondedById?: NullableStringFieldUpdateOperationsInput | string | null
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
@@ -29155,6 +34717,10 @@ export namespace Prisma {
      * @deprecated Use EngagementTeamMemberDefaultArgs instead
      */
     export type EngagementTeamMemberArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EngagementTeamMemberDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use FindingDefaultArgs instead
+     */
+    export type FindingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = FindingDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

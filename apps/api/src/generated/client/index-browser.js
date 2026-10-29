@@ -285,6 +285,35 @@ exports.Prisma.EngagementTeamMemberScalarFieldEnum = {
   assignedAt: 'assignedAt'
 };
 
+exports.Prisma.FindingScalarFieldEnum = {
+  id: 'id',
+  reference: 'reference',
+  title: 'title',
+  engagementId: 'engagementId',
+  auditEntityId: 'auditEntityId',
+  category: 'category',
+  severity: 'severity',
+  status: 'status',
+  condition: 'condition',
+  criteria: 'criteria',
+  cause: 'cause',
+  impact: 'impact',
+  recommendations: 'recommendations',
+  managementResponse: 'managementResponse',
+  managementRespondedAt: 'managementRespondedAt',
+  managementRespondedById: 'managementRespondedById',
+  responsibleOwnerId: 'responsibleOwnerId',
+  targetResolutionDate: 'targetResolutionDate',
+  closedAt: 'closedAt',
+  verifiedAt: 'verifiedAt',
+  verifiedById: 'verifiedById',
+  verificationNotes: 'verificationNotes',
+  createdById: 'createdById',
+  updatedById: 'updatedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -396,6 +425,36 @@ exports.TeamMemberRole = exports.$Enums.TeamMemberRole = {
   REVIEWER: 'REVIEWER'
 };
 
+exports.FindingCategory = exports.$Enums.FindingCategory = {
+  INTERNAL_CONTROL: 'INTERNAL_CONTROL',
+  COMPLIANCE: 'COMPLIANCE',
+  OPERATIONAL: 'OPERATIONAL',
+  FINANCIAL: 'FINANCIAL',
+  IT_GENERAL_CONTROLS: 'IT_GENERAL_CONTROLS',
+  DATA_QUALITY: 'DATA_QUALITY',
+  GOVERNANCE: 'GOVERNANCE',
+  FRAUD: 'FRAUD',
+  OTHER: 'OTHER'
+};
+
+exports.FindingSeverity = exports.$Enums.FindingSeverity = {
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH',
+  CRITICAL: 'CRITICAL'
+};
+
+exports.FindingStatus = exports.$Enums.FindingStatus = {
+  DRAFT: 'DRAFT',
+  OPEN: 'OPEN',
+  MANAGEMENT_RESPONSE: 'MANAGEMENT_RESPONSE',
+  ACTION_PLAN: 'ACTION_PLAN',
+  REMEDIATED: 'REMEDIATED',
+  VERIFIED: 'VERIFIED',
+  CLOSED: 'CLOSED',
+  CANCELLED: 'CANCELLED'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Role: 'Role',
@@ -408,7 +467,8 @@ exports.Prisma.ModelName = {
   RiskAction: 'RiskAction',
   AuditPlan: 'AuditPlan',
   Engagement: 'Engagement',
-  EngagementTeamMember: 'EngagementTeamMember'
+  EngagementTeamMember: 'EngagementTeamMember',
+  Finding: 'Finding'
 };
 
 /**

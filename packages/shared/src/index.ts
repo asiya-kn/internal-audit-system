@@ -743,3 +743,183 @@ export interface EngagementDashboardDto {
 export type CreateEngagementInput = CreateEngagementRequest;
 export type UpdateEngagementInput = UpdateEngagementRequest;
 export type ListEngagementInput = EngagementFilters;
+
+// ---- Audit Findings ----
+
+export type FindingCategory =
+  | 'INTERNAL_CONTROL'
+  | 'COMPLIANCE'
+  | 'OPERATIONAL'
+  | 'FINANCIAL'
+  | 'IT_GENERAL_CONTROLS'
+  | 'DATA_QUALITY'
+  | 'GOVERNANCE'
+  | 'FRAUD'
+  | 'OTHER';
+
+export type FindingSeverity = 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
+
+export type FindingStatus =
+  | 'DRAFT'
+  | 'OPEN'
+  | 'MANAGEMENT_RESPONSE'
+  | 'ACTION_PLAN'
+  | 'REMEDIATED'
+  | 'VERIFIED'
+  | 'CLOSED'
+  | 'CANCELLED';
+
+export const FINDING_CATEGORIES: FindingCategory[] = [
+  'INTERNAL_CONTROL',
+  'COMPLIANCE',
+  'OPERATIONAL',
+  'FINANCIAL',
+  'IT_GENERAL_CONTROLS',
+  'DATA_QUALITY',
+  'GOVERNANCE',
+  'FRAUD',
+  'OTHER',
+];
+
+export const FINDING_SEVERITIES: FindingSeverity[] = ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'];
+
+export const FINDING_STATUSES: FindingStatus[] = [
+  'DRAFT',
+  'OPEN',
+  'MANAGEMENT_RESPONSE',
+  'ACTION_PLAN',
+  'REMEDIATED',
+  'VERIFIED',
+  'CLOSED',
+  'CANCELLED',
+];
+
+export const FINDING_TRANSITIONS: Record<FindingStatus, FindingStatus[]> = {
+  DRAFT: ['OPEN', 'CANCELLED'],
+  OPEN: ['MANAGEMENT_RESPONSE', 'ACTION_PLAN', 'CANCELLED'],
+  MANAGEMENT_RESPONSE: ['ACTION_PLAN', 'OPEN', 'CANCELLED'],
+  ACTION_PLAN: ['REMEDIATED', 'OPEN', 'CANCELLED'],
+  REMEDIATED: ['VERIFIED', 'ACTION_PLAN'],
+  VERIFIED: ['CLOSED', 'REMEDIATED'],
+  CLOSED: [],
+  CANCELLED: [],
+};
+
+export function canTransitionFinding(from: FindingStatus, to: FindingStatus): boolean {
+  return FINDING_TRANSITIONS[from]?.includes(to) ?? false;
+}
+
+export interface FindingSummaryDto {
+  id: string;
+  reference: string;
+  title: string;
+  engagementId: string | null;
+  engagementReference: string | null;
+  auditEntityId: string;
+  auditEntityCode: string;
+  auditEntityName: string;
+  category: FindingCategory;
+  severity: FindingSeverity;
+  status: FindingStatus;
+  responsibleOwnerId: string | null;
+  responsibleOwnerName: string | null;
+  targetResolutionDate: string | null;
+  isOverdue: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface FindingDetailDto extends FindingSummaryDto {
+  condition: string;
+  criteria: string | null;
+  cause: string | null;
+  impact: string | null;
+  recommendations: string | null;
+  managementResponse: string | null;
+  managementRespondedAt: string | null;
+  managementRespondedById: string | null;
+  managementRespondedByName: string | null;
+  closedAt: string | null;
+  verifiedAt: string | null;
+  verifiedById: string | null;
+  verifiedByName: string | null;
+  verificationNotes: string | null;
+  createdById: string | null;
+  createdByName: string | null;
+}
+
+export interface CreateFindingRequest {
+  reference: string;
+  title: string;
+  engagementId?: string | null;
+  auditEntityId: string;
+  category?: FindingCategory;
+  severity?: FindingSeverity;
+  condition: string;
+  criteria?: string;
+  cause?: string;
+  impact?: string;
+  recommendations?: string;
+  responsibleOwnerId?: string | null;
+  targetResolutionDate?: string | null;
+}
+
+export interface UpdateFindingRequest {
+  title?: string;
+  engagementId?: string | null;
+  auditEntityId?: string;
+  category?: FindingCategory;
+  severity?: FindingSeverity;
+  condition?: string;
+  criteria?: string | null;
+  cause?: string | null;
+  impact?: string | null;
+  recommendations?: string | null;
+  responsibleOwnerId?: string | null;
+  targetResolutionDate?: string | null;
+}
+
+export interface TransitionFindingRequest {
+  status: FindingStatus;
+  managementResponse?: string;
+  verificationNotes?: string;
+}
+
+export interface FindingFilters {
+  search?: string;
+  engagementId?: string;
+  auditEntityId?: string;
+  category?: FindingCategory;
+  severity?: FindingSeverity;
+  status?: FindingStatus;
+  responsibleOwnerId?: string;
+  overdue?: boolean | 'true' | 'false';
+  page?: number;
+  pageSize?: number;
+  sortBy?: string;
+  sortOrder?: 'asc' | 'desc';
+}
+
+export interface FindingListResponse {
+  items: FindingSummaryDto[];
+  total: number;
+  page: number;
+  pageSize: number;
+}
+
+export interface FindingDashboardDto {
+  totalFindings: number;
+  bySeverity: Record<FindingSeverity, number>;
+  byStatus: Record<FindingStatus, number>;
+  byCategory: Partial<Record<FindingCategory, number>>;
+  openCount: number;
+  overdueCount: number;
+  remediatedCount: number;
+  verifiedCount: number;
+  closedCount: number;
+  recentFindings: FindingSummaryDto[];
+}
+
+export type CreateFindingInput = CreateFindingRequest;
+export type UpdateFindingInput = UpdateFindingRequest;
+export type ListFindingInput = FindingFilters;

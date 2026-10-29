@@ -39,6 +39,14 @@ import type {
   EngagementTeamMemberDto,
   AddTeamMemberRequest,
   UpdateTeamMemberRequest,
+  FindingListResponse,
+  FindingDetailDto,
+  FindingDashboardDto,
+  FindingFilters,
+  CreateFindingRequest,
+  UpdateFindingRequest,
+  TransitionFindingRequest,
+  FindingStatus,
 } from '@iams/shared';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? '/api';
@@ -226,4 +234,34 @@ export const api = {
     request<EngagementTeamMemberDto>(`/engagements/${id}/team-members/${userId}`, { method: 'PUT', body: JSON.stringify(data) }),
   removeEngagementTeamMember: (id: string, userId: string) =>
     request<{ message: string }>(`/engagements/${id}/team-members/${userId}`, { method: 'DELETE' }),
+
+  // ---- Audit Findings ----
+
+  listFindings: (filters: FindingFilters = {}) => {
+    const params = new URLSearchParams();
+    if (filters.search) params.set('search', filters.search);
+    if (filters.engagementId) params.set('engagementId', filters.engagementId);
+    if (filters.auditEntityId) params.set('auditEntityId', filters.auditEntityId);
+    if (filters.category) params.set('category', filters.category);
+    if (filters.severity) params.set('severity', filters.severity);
+    if (filters.status) params.set('status', filters.status);
+    if (filters.responsibleOwnerId) params.set('responsibleOwnerId', filters.responsibleOwnerId);
+    if (filters.overdue) params.set('overdue', filters.overdue ? 'true' : 'false');
+    if (filters.page) params.set('page', String(filters.page));
+    if (filters.pageSize) params.set('pageSize', String(filters.pageSize));
+    if (filters.sortBy) params.set('sortBy', filters.sortBy);
+    if (filters.sortOrder) params.set('sortOrder', filters.sortOrder);
+    const qs = params.toString();
+    return request<FindingListResponse>(`/findings${qs ? `?${qs}` : ''}`);
+  },
+  getFinding: (id: string) => request<FindingDetailDto>(`/findings/${id}`),
+  getFindingDashboard: () => request<FindingDashboardDto>('/findings/dashboard'),
+  createFinding: (data: CreateFindingRequest) =>
+    request<FindingDetailDto>('/findings', { method: 'POST', body: JSON.stringify(data) }),
+  updateFinding: (id: string, data: UpdateFindingRequest) =>
+    request<FindingDetailDto>(`/findings/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  transitionFinding: (id: string, status: FindingStatus, managementResponse?: string, verificationNotes?: string) =>
+    request<FindingDetailDto>(`/findings/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status, managementResponse, verificationNotes }) }),
+  deleteFinding: (id: string) =>
+    request<{ message: string }>(`/findings/${id}`, { method: 'DELETE' }),
 };
